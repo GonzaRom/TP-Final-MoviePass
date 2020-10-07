@@ -1,9 +1,9 @@
 <?php
     namespace DAO;
-    use Models\MovieTheater as MovieTheater;
+    use Models\Cinema as Cinema;
 
-    interface IMovieTheaterDAO{
-        public function Add(MovieTheater $movietheater);
+    interface ICinemaDAO{
+        public function Add(Cinema $cinema);
         public function GetAll();
         public function Get($id);
         public function Delete($key);
