@@ -12,23 +12,32 @@
             $this->cinemadao=new CinemaDAO;
         }
 
+        public function ShowAddView($message=""){
 
-                /* La funcion Add nos permite agregar un nuevocine(movietheater) a nuestro DAO,
-                donde tenemos persistidos nuestra info*/
+            require_once(VIEWS_PATH."add-Cinema.php");
+        }
+
+        /* La funcion Add nos permite agregar un nuevocine(cinema) a nuestro DAO,
+        donde tenemos persistidos nuestra info*/
         public function Add($name,$adress,$phonenumber){
             $message="El cine ya existe";
             $cinemalist=$this->cinemadao->GetAll();/* variable donde guardamos la lista de cines traida desde json. */
-            $flag=false;
+            $flag=false; /*seteamos esta variable en falso para q nos permita agregar un cine*/
             foreach($cinemalist as $cinema){
                 if($cinema->GetName()==$name && $cinema->GetAdress()==$adress){
-                    $flag=true;
+                    $flag=true;  /* seteamos a true flag para q no nos permita agregar */
                 }
             }
             if(!$flag){
                 $message="Cine agregao exitosamente";
                 $newcinema=new Cinema;
-                $newcinema->SetId();
+                $newcinema->SetId(count($cinemalist));
+                $newcinema->SetName($name);
+                $newcinema->SetAdress($adress);
+                $newcinema->SetPhoneNumber($phonenumber);
+                $this->cinemadao->add($newcinema);;/* pusheamos el nuevo cinema dentro del DAO */
             }
+            $this->ShowAddView($message);
         }
     }
 ?>
