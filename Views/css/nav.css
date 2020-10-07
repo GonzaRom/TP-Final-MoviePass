@@ -35,16 +35,16 @@ img{
 
 
 .menu{
-    grid-column: 9/13;
+    grid-column: 8/13;
     grid-row: 1;
     display: grid;
-    grid-template-columns: repeat(8,1fr);
+    grid-template-columns: repeat(10,1fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(80px , 80px);
 }
 
 .menu nav{
-    grid-column: 1/9;
+    grid-column: 1/11;
     grid-row: 1;
 
     display: flex;
@@ -55,14 +55,14 @@ img{
     width: 100%;
     list-style:none;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(5,1fr);
     grid-template-rows: minmax(80px , 80px);
 }
 
 .menu nav ul li{ 
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     text-align: center;
     color: #Fff;
     cursor: pointer;

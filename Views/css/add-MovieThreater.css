@@ -1,0 +1,86 @@
+.Add-cinema{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(14,1fr);
+    grid-template-rows: 100vh;
+    background: url("../img/64710.jpg");
+    background-position: center;
+    background-size: cover;
+
+}
+
+.grid-content-add-cinema{
+    grid-column: 2/14;
+}
+
+.content-add-cimena{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+.content-form{
+    width: 50%;
+    padding: 40px;
+    background: rgba(0, 0, 0, .8);
+    border:2px solid rgb(255, 0, 0);
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #fff,-5px 5px 5px #fff,5px -5px 5px #fff,-5px -5px 5px #fff;
+}
+
+.tittle-add-cinema{
+    width: 70%;
+    text-align: start;
+    color: #fff;
+    font-size: 40px;
+    text-shadow: 1px 1px 5px #fff;
+    
+}
+
+
+
+
+.form-add-cinema{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+
+
+.input-cinema{
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-cinema span{
+    font-size: 22px;
+    margin-right: 20px;
+    color: #fff;
+    letter-spacing: .2em;
+}
+
+.input-cinema input{
+    width: 50%;
+    padding: 10px;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(236, 5, 5), -5px 5px 5px rgb(236, 5, 5);
+    outline: none;
+    transition: .5s;
+}
+
+.input-cinema input:focus{
+    width: 50%;
+    padding: 10px;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(85, 85, 85), -5px 5px 5px rgb(85, 85, 85);
+    outline: none;
+    transition: .5s;
+}

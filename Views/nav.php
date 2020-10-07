@@ -7,6 +7,7 @@
                     <li> <a href="">Home</a> </li>
                     <li><a href="">Estrenos</a> </li>
                     <li><a href="">Generos</a> </li>
+                    <li><a href="">Cines</a> </li>
                     <li><a href="">Cerrar Sesion</a> </li>
                 </ul>
             </nav>

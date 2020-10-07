@@ -49,7 +49,7 @@
     </aside>
     <section class="peliculas">
       <div class="movie"><a href=""><img src="<?php echo MOVIE_PATH; ?>/598cbd9d31af07d62c81e75f6c2e925b.jpg" alt=""></a></div>
-      <div class="movie"><a href=""><img src="<?php echo MOVIE_PATH; ?>/C_20107.jpg" alt=""></a></div>
+      <div class="movie"><a href=""><img src="<?php echo MOVIE_PATH; ?>/C_20107.jpg" alt=""></a> </div>
       <div class="movie"><a href=""><img src="<?php echo MOVIE_PATH; ?>/descarga.jpg" alt=""></a></div>
       <div class="movie"><a href=""><img src="<?php echo MOVIE_PATH; ?>/resize_1541386116.jpg" alt=""></a></div>
 
