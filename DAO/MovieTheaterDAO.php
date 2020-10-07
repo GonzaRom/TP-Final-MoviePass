@@ -9,7 +9,7 @@
         private $filename;
 
         public function __Construct(){
-            $this->filename=dirname(__dir__)."/Data/MovieTheaters.json";
+            $this->filename=dirname(__DIR__)."/Data/MovieTheaters.json";
         }
 
         public function Get($id){

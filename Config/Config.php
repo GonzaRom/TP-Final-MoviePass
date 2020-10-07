@@ -2,11 +2,15 @@
 
 define("ROOT", dirname(__DIR__) . "/");
 //Path to your project's root folder
-define("FRONT_ROOT", "/ExerciseThree/");
+define("FRONT_ROOT", "Projects/TP-Final-MoviePass/");
 define("VIEWS_PATH", "Views/");
-define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "css/");
-define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "js/");
+define("CSS_PATH", VIEWS_PATH . "css/");
+define("JS_PATH", VIEWS_PATH . "js/");
 define("IMG_PATH", VIEWS_PATH . "img/");
+define("SLIDER_PATH", VIEWS_PATH . "Slider/");
+define("MOVIE_PATH", VIEWS_PATH . "peliculas/");
+define("SLICK", VIEWS_PATH . "slick/");
+
 ?>
 
 
