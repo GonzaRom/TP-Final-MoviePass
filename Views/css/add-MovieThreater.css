@@ -1,3 +1,5 @@
+
+
 .Add-cinema{
     width: 100%;
     display: grid;
@@ -83,4 +85,23 @@
     box-shadow: 5px 5px 5px rgb(85, 85, 85), -5px 5px 5px rgb(85, 85, 85);
     outline: none;
     transition: .5s;
+}
+ .submit-add-cinema{
+    width: 20%;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    background: #fff;
+    color:#000;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, .0), -3px 3px 3px rgba(0, 0, 0, .0),3px -3px 3px rgba(0, 0, 0, .0), -3px -3px 3px rgba(0, 0, 0, .0);
+    transition: .3s;
+}
+
+ .submit-add-cinema:hover{
+    background: #000;
+    color: #fff;
+    transition: .5s;
+    box-shadow: 3px 3px 3px #fff, -3px 3px 3px #fff, 3px -3px 3px #fff, -3px -3px 3px #fff;
+    border-radius: 50px;
 }
