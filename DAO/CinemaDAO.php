@@ -22,7 +22,7 @@
             return $this->cinemalist;
         }
 
-        public function Add(Cinema $newcinema){
+        public function Add($newcinema){
             $this->RetrieveData();
             array_push($this->cinemalist,$newcinema);
             $this->SaveData();

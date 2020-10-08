@@ -25,7 +25,7 @@
         /* La funcion Add nos permite agregar un nuevocine(cinema) a nuestro DAO,
         donde tenemos persistidos nuestra info*/
         public function Add($name,$adress,$phonenumber){
-            $message="El cine ya existe.";
+            $message=2;
             $cinemalist=$this->cinemadao->GetAll();/* variable donde guardamos la lista de cines traida desde json. */
             $flag=false; /*seteamos esta variable en falso para q nos permita agregar un cine*/
             foreach($cinemalist as $cinema){
@@ -34,7 +34,7 @@
                 }
             }
             if(!$flag){
-                $message="Cine agregado exitosamente.";
+                $message=1;
                 $newcinema=new Cinema;
                 $newcinema->SetId(count($cinemalist));
                 $newcinema->SetName($name);
@@ -47,7 +47,7 @@
 
         /* La funcion delete elimina un cinema recibiendo como parametro el id del cinema */
         public function Delete($id){
-            $message="Cine no eliminado.";
+            $message=1;
             $cinemalist=$this->cinemadao->GetAll();
             foreach($cinemalist as $key => $cinema){
                 if($cinema->GetId()==$id){

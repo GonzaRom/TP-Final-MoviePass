@@ -1,8 +1,14 @@
 [
     {
         "id": 0,
-        "name": "Cine Ambassador",
-        "adress": "Cordoba 1673",
-        "phonenumber": "4999200"
+        "name": "Isaias Emanuel Calfin",
+        "adress": "Brasil 1265",
+        "phonenumber": "2236745133"
+    },
+    {
+        "id": 1,
+        "name": "Ambasador",
+        "adress": "Cordoba 1236",
+        "phonenumber": "2234546"
     }
 ]
