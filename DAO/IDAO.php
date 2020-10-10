@@ -1,8 +1,7 @@
 <?php
     namespace DAO;
-    use Models\Cinema as Cinema;
 
-    interface ICinemaDAO{
+    interface IDAO{
         public function Add($cinema);
         public function GetAll();
         public function Get($id);

@@ -2,9 +2,9 @@
     namespace DAO;
 
     use Models\Cinema as Cinema;
-    use DAO\ICinema as ICinema;
-
-    class CinemaDAO implements ICinemaDAO{
+    use DAO\IDAO as IDAO;
+    
+    class CinemaDAO implements IDAO{
         private $cinemalist=array();
         private $filename;
 
