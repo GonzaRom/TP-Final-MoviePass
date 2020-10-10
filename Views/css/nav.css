@@ -29,8 +29,8 @@ header{
     align-items: center;
 }
 
-img{
-    width: 100%;
+.logo img{
+    width: 70%;
 }
 
 
@@ -54,9 +54,9 @@ img{
 .menu nav ul{
     width: 100%;
     list-style:none;
-    display: grid;
-    grid-template-columns: repeat(5,1fr);
-    grid-template-rows: minmax(80px , 80px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .menu nav ul li{ 

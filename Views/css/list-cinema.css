@@ -1,0 +1,96 @@
+.content-cinema-list{
+    width: 100%;
+    height: 100vh;
+    background-image: url(../img/3389522.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.content-rgba-cinema-list{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.3);
+}
+
+.section-cinema-list{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(14,1fr);
+
+}
+
+
+.form-list-cinema{
+    grid-column: 4/12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    overflow-y: scroll;
+}
+
+.table-list-cinema{
+    width: 100%;
+    background: rgba(55, 56, 58,.0);
+    border-spacing: 0px;
+}
+
+.thead-list-cinema{
+    width: 100%;
+}
+
+.tr-list-cinema{
+    width: 100%;
+    background: rgb(55, 56, 58);
+    color: #fff;
+}
+
+.tr-list-cinema th{
+    padding: 10px;
+}
+
+.tbody-list-cinema {
+    width: 100%;
+    background: #fff;
+    color: #000;
+    
+}
+
+.scoll-bar{
+    overflow-y: scroll;
+}
+.tr-list-information-cinema{
+    border-radius: 10px;
+}
+
+
+.tr-list-information-cinema:hover{
+    background: rgb(207, 207, 207);
+}
+.tr-list-information-cinema td{
+    padding: 10px;
+    text-align: center;
+    font-size: 19px;
+}
+
+.tr-list-information-cinema td i{
+    color: rgb(248, 7, 7);
+    text-shadow:3px 3px 3px #000;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+.button-remove-cinema{
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 18px;
+    background:  rgb(55, 56, 58);
+    color: #Fff;
+}
+
+.button-remove-cinema:hover{
+    background: rgb(133, 12, 12);
+}

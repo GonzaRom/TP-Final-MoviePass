@@ -8,6 +8,7 @@
                     <li><a href="">Estrenos</a> </li>
                     <li><a href="">Generos</a> </li>
                     <li><a href="<?php echo FRONT_ROOT;?>Cinema/ShowAddView">Cines</a> </li>
+                    <li><a href="<?php echo FRONT_ROOT;?>Cinema/ShowAddView">Agregar Cine</a> </li>
                     <li><a href="">Cerrar Sesion</a> </li>
                 </ul>
             </nav>

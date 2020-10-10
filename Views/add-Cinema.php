@@ -25,12 +25,6 @@
                             </span>
                             <input type="text" name="phonenumber" id="" required>
                         </div>
-                        <div class="input-cinema">
-                            <span>
-                                <b>Cantidad de Salas:</b>
-                            </span>
-                            <input type="number" name="rooms" id="" required>
-                        </div>
                         <div class="contentButton">
                             <button class="button" type="submit">Agregar</button>
                         </div>

@@ -30,19 +30,16 @@
 .content-form{
     width: 50%;
     padding: 40px;
+    padding-top: 35px;
     background: rgba(0, 0, 0, .8);
-    border:2px solid rgb(255, 0, 0);
     border-radius: 20px;
-    box-shadow: 5px 5px 5px #fff,-5px 5px 5px #fff,5px -5px 5px #fff,-5px -5px 5px #fff;
 }
 
 .tittle-add-cinema{
-    width: 70%;
-    text-align: start;
+    width: 100%;
+    text-align: center;
     color: #fff;
     font-size: 40px;
-    text-shadow: 1px 1px 5px #fff;
-    
 }
 
 
@@ -54,6 +51,7 @@
     align-items: center;
     justify-content: center;
     flex-flow: column;
+    margin-top: 50px;
 }
 
 
@@ -67,8 +65,8 @@
 .input-cinema span{
     font-size: 22px;
     margin-right: 20px;
-    color: #fff;
-    letter-spacing: .2em;
+    color: rgb(163, 163, 163);
+    /*letter-spacing: .2em;*/
 }
 
 .input-cinema input{
@@ -76,7 +74,7 @@
     padding: 10px;
     border:none;
     border-radius: 20px;
-    box-shadow: 5px 5px 5px rgb(236, 5, 5), -5px 5px 5px rgb(236, 5, 5);
+    box-shadow: 3px 3px 5px rgb(145, 13, 13), -3px 3px 5px rgb(145, 13, 13);
     outline: none;
     transition: .5s;
 }
@@ -107,6 +105,10 @@
     font-size: 18px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, .0);
     transition: .5s;
+    border-radius: 40px;
+    margin-top: 10px;
+    background: rgb(21, 83, 163);
+    color: #fff;
 }
 
 
