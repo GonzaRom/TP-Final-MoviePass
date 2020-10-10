@@ -1,0 +1,137 @@
+
+
+.Add-cinema{
+    width: 100%;
+    background: url("../img/64710.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+
+.content-grid-cinema{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(14,1fr);
+}
+.grid-content-add-cinema{
+    grid-column: 2/14;
+}
+
+.content-add-cimena{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin: 5% auto;
+}
+.content-form{
+    width: 50%;
+    padding: 40px;
+    padding-top: 35px;
+    background: rgba(0, 0, 0, .8);
+    border-radius: 20px;
+}
+
+.tittle-add-cinema{
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 40px;
+}
+
+
+
+
+.form-add-cinema{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin-top: 50px;
+}
+
+
+.input-cinema{
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-cinema span{
+    font-size: 22px;
+    margin-right: 20px;
+    color: rgb(163, 163, 163);
+    /*letter-spacing: .2em;*/
+}
+
+.input-cinema input{
+    width: 50%;
+    padding: 10px;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 3px 3px 5px rgb(145, 13, 13), -3px 3px 5px rgb(145, 13, 13);
+    outline: none;
+    transition: .5s;
+}
+
+.input-cinema input:focus{
+    width: 50%;
+    padding: 10px;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(85, 85, 85), -5px 5px 5px rgb(85, 85, 85);
+    outline: none;
+    transition: .5s;
+}
+
+.contentButton{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 20px;
+}
+
+.contentButton .button{
+    width: 20%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .0);
+    transition: .5s;
+    border-radius: 40px;
+    margin-top: 10px;
+    background: rgb(21, 83, 163);
+    color: #fff;
+}
+
+
+.contentButton .button:hover{
+    background: #000;
+    color: #fff;
+    border-radius: 50px;
+    box-shadow: 2px 2px 2px #fff;
+    transition: .5s;
+}
+
+.affirmative{
+    width: 30%;
+    padding: 20px;
+    background: rgb(8, 194, 51);
+    margin: 30px;
+    color: #fff;
+}
+
+.negative{
+    width: 30%;
+    padding: 20px;
+    background: rgb(197, 14, 14);
+    margin: 30px;
+    color: #fff;
+}
