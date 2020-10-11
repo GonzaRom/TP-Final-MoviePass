@@ -1,0 +1,154 @@
+.Add-Room{
+    width: 100%;
+    background: url("../img/addroom.jpeg");
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+
+.content-grid-room{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(14,1fr);
+}
+.grid-content-add-room{
+    grid-column: 2/14;
+}
+
+.content-add-room{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin: 5% auto;
+}
+.content-form{
+    width: 50%;
+    padding: 40px;
+    padding-top: 35px;
+    background: rgba(0, 0, 0, .8);
+    border-radius: 20px;
+}
+
+.tittle-add-room{
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 40px;
+}
+
+
+
+
+.form-add-room{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin-top: 50px;
+}
+
+.input-room{
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-room span{
+    font-size: 22px;
+    margin-right: 20px;
+    color: rgb(163, 163, 163);
+    /*letter-spacing: .2em;*/
+}
+
+.input-room input{
+    width: 50%;
+    padding: 10px;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 3px 3px 5px rgb(145, 13, 13), -3px 3px 5px rgb(145, 13, 13);
+    outline: none;
+    transition: .5s;
+}
+
+.input-room input:focus{
+    width: 50%;
+    padding: 10px;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(85, 85, 85), -5px 5px 5px rgb(85, 85, 85);
+    outline: none;
+    transition: .5s;
+}
+
+.select-room{
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.select-room span{
+    font-size: 22px;
+    margin-right: 20px;
+    color: rgb(163, 163, 163);
+    /*letter-spacing: .2em;*/
+}
+
+.select-room select{
+    width: 50%;
+    padding: 10px;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 3px 3px 5px rgb(145, 13, 13), -3px 3px 5px rgb(145, 13, 13);
+    outline: none;
+    transition: .5s;
+    font-size: 18px;
+}
+
+
+.select-room select:focus{
+    width: 50%;
+    padding: 10px;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(85, 85, 85), -5px 5px 5px rgb(85, 85, 85);
+    outline: none;
+    transition: .5s;
+}
+
+.contentButton{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 20px;
+}
+
+.contentButton .button{
+    width: 20%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .0);
+    transition: .5s;
+    border-radius: 40px;
+    margin-top: 10px;
+    background: rgb(21, 83, 163);
+    color: #fff;
+}
+
+
+.contentButton .button:hover{
+    background: #000;
+    color: #fff;
+    border-radius: 50px;
+    box-shadow: 2px 2px 2px #fff;
+    transition: .5s;
+}

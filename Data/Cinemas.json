@@ -1,0 +1,20 @@
+[
+    {
+        "id": 0,
+        "name": "Cine Ambassador",
+        "adress": "1673",
+        "phonenumber": "4999200"
+    },
+    {
+        "id": 1,
+        "name": "Cines paseo Aldrey",
+        "adress": "Sarmiento 2685",
+        "phonenumber": "4999201"
+    },
+    {
+        "id": 2,
+        "name": "Cines del Paseo",
+        "adress": "D. Pueyrred\u00f3n 3058\t",
+        "phonenumber": "4999202"
+    }
+]

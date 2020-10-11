@@ -1,0 +1,14 @@
+[
+    {
+        "id": 0,
+        "name": "Sala Standard"
+    },
+    {
+        "id": 1,
+        "name": "Sala Senior"
+    },
+    {
+        "id": 2,
+        "name": "Sala Premium"
+    }
+]
