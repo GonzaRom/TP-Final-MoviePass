@@ -1,24 +1,22 @@
-
-
-.Add-cinema{
+.Add-Room{
     width: 100%;
-    background: url("../img/cine.jpg");
+    background: url("../img/addroom.jpeg");
     background-position: center;
     background-size: cover;
     height: 100vh;
 }
 
 
-.content-grid-cinema{
+.content-grid-room{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(14,1fr);
 }
-.grid-content-add-cinema{
+.grid-content-add-room{
     grid-column: 2/14;
 }
 
-.content-add-cimena{
+.content-add-room{
     width: 100%;
     height: 100%;
     display: flex;
@@ -35,7 +33,7 @@
     border-radius: 20px;
 }
 
-.tittle-add-cinema{
+.tittle-add-room{
     width: 100%;
     text-align: center;
     color: #fff;
@@ -45,7 +43,7 @@
 
 
 
-.form-add-cinema{
+.form-add-room{
     width: 100%;
     display: flex;
     align-items: center;
@@ -54,22 +52,21 @@
     margin-top: 50px;
 }
 
-
-.input-cinema{
+.input-room{
     width: 100%;
     margin: 10px;
     display: flex;
     justify-content: space-between;
 }
 
-.input-cinema span{
+.input-room span{
     font-size: 22px;
     margin-right: 20px;
     color: rgb(163, 163, 163);
     /*letter-spacing: .2em;*/
 }
 
-.input-cinema input{
+.input-room input{
     width: 50%;
     padding: 10px;
     border:none;
@@ -79,7 +76,41 @@
     transition: .5s;
 }
 
-.input-cinema input:focus{
+.input-room input:focus{
+    width: 50%;
+    padding: 10px;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgb(85, 85, 85), -5px 5px 5px rgb(85, 85, 85);
+    outline: none;
+    transition: .5s;
+}
+
+.select-room{
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.select-room span{
+    font-size: 22px;
+    margin-right: 20px;
+    color: rgb(163, 163, 163);
+    /*letter-spacing: .2em;*/
+}
+
+.select-room select{
+    width: 50%;
+    padding: 10px;
+    border:none;
+    border-radius: 20px;
+    box-shadow: 3px 3px 5px rgb(145, 13, 13), -3px 3px 5px rgb(145, 13, 13);
+    outline: none;
+    transition: .5s;
+}
+
+.select-room select:focus{
     width: 50%;
     padding: 10px;
     border:none;
@@ -118,20 +149,4 @@
     border-radius: 50px;
     box-shadow: 2px 2px 2px #fff;
     transition: .5s;
-}
-
-.affirmative{
-    width: 30%;
-    padding: 20px;
-    background: rgb(8, 194, 51);
-    margin: 30px;
-    color: #fff;
-}
-
-.negative{
-    width: 30%;
-    padding: 20px;
-    background: rgb(197, 14, 14);
-    margin: 30px;
-    color: #fff;
 }

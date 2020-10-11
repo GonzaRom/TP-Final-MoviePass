@@ -8,37 +8,37 @@ class Rooms{
     private $name;
     private $capacity;
     private $typeRoom;
-    private $Cinema;
+    private $idcinema;
 
-    public function set_id($id){
+    public function Set_Id($id){
         $this->id = $id;
     }
-    public function set_name($name){
+    public function Set_Name($name){
         $this->name = $name;
     }
-    public function set_capacity($capacity){
+    public function Set_Capacity($capacity){
         $this->capacity = $capacity;
     }
-    public function set_typeRoom($typeRoom){
-        $this->typeRoom = $typeRoom;
+    public function Set_TypeRoom($typeroom){
+        $this->typeroom = $typeroom;
     }
-    public function set_Cinema($idCinema){
-        $this->idCinema = $idCinema;
+    public function Set_Cinema($idcinema){
+        $this->idcinema = $idcinema;
     }
-    public function get_id(){
+    public function Get_Id(){
         return $this->id;
     }
-    public function get_name(){
+    public function Get_Name(){
         return $this->name;
     }
-    public function get_capacity(){
+    public function Get_Capacity(){
         return $this->capacity;
     }
-    public function get_typeRoom(){
-        return $this->typeRoom;
+    public function Get_TypeRoom(){
+        return $this->typeroom;
     }
-    public function get_Cinema(){
-        return $this->idCinema;
+    public function Get_Cinema(){
+        return $this->idcinema;
     }
 
 }

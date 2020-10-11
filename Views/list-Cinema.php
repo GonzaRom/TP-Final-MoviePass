@@ -4,7 +4,7 @@
 
         <section class="section-cinema-list">
 
-            <form action="" class="form-list-cinema">
+            <form action="<?php echo FRONT_ROOT?>Cinema/Delete" method="POST"class="form-list-cinema">
                 <table class="table-list-cinema">
                     <thead class="thead-list-cinema">
                         <tr class="tr-list-cinema">
@@ -16,46 +16,18 @@
                         </tr>
                     </thead>
                     <tbody class="tbody-list-cinema">
+                            <?php
+                                foreach($cinemalist as $cinema):
+                            ?>
                             <tr class="tr-list-information-cinema" >
-                                <td>Ambasador</td>
-                                <td>Cordoba 1245</td>
-                                <td>2236745133</td>
+                                <td><?php echo $cinema->GetName();?></td>
+                                <td><?php echo $cinema->GetAdress();?></td>
+                                <td><?php echo $cinema->GetPhonenumber();?></td>
                                 <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
                                         class="far fa-star"></i><i class="far fa-star"></i></td>
-                                <td><button class="button-remove-cinema" type="submit"> Remove </button></td>
+                                <td><button class="button-remove-cinema" type="submit" name="id" value="<?php echo $cinema->GetId();?>"> Remove </button></td>
                             </tr>
-                            <tr class="tr-list-information-cinema">
-                                <td>Ambasador</td>
-                                <td>Cordoba 1245</td>
-                                <td>2236745133</td>
-                                <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
-                                        class="far fa-star"></i><i class="far fa-star"></i></td>
-                                <td><button class="button-remove-cinema" type="submit"> Remove </button></td>
-                            </tr>
-                            <tr class="tr-list-information-cinema">
-                                <td>Ambasador</td>
-                                <td>Cordoba 1245</td>
-                                <td>2236745133</td>
-                                <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
-                                        class="far fa-star"></i><i class="far fa-star"></i></td>
-                                <td><button class="button-remove-cinema" type="submit"> Remove </button></td>
-                            </tr>
-                            <tr class="tr-list-information-cinema">
-                                <td>Ambasador</td>
-                                <td>Cordoba 1245</td>
-                                <td>2236745133</td>
-                                <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
-                                        class="far fa-star"></i><i class="far fa-star"></i></td>
-                                <td><button class="button-remove-cinema" type="submit"> Remove </button></td>
-                            </tr>
-                            <tr class="tr-list-information-cinema">
-                                <td>Ambasador</td>
-                                <td>Cordoba 1245</td>
-                                <td>2236745133</td>
-                                <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
-                                        class="far fa-star"></i><i class="far fa-star"></i></td>
-                                <td><button class="button-remove-cinema" type="submit"> Remove </button></td>
-                            </tr>
+                            <?php endforeach;?>
                     </tbody>
                 </table>
             </form>
