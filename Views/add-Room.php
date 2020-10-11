@@ -24,9 +24,9 @@
                             </span>
                             <select name="typeroom" id="" required>
                                 <option value="">Seleccione una opcion</option>
-                                <option value="2">Sala Premium</option>
-                                <option value="3">Sala Senior</option>
-                                <option value="4">Sala Nativa</option>
+                                <?php foreach($listtyperoom as $typeroom):?>
+                                    <option value="<?php echo $typeroom->GetId();?>"><?php echo $typeroom->GetName();?></option>
+                                <?php endforeach;?>
                             </select>
                         </div>                        
                         <div class="input-room">
