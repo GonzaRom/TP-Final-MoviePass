@@ -1,0 +1,30 @@
+[
+    {
+        "id": null,
+        "name": "Sala 1",
+        "capacity": "5",
+        "typeRoom": "2",
+        "Cinema": "0"
+    },
+    {
+        "id": null,
+        "name": "Sala 2",
+        "capacity": "5",
+        "typeRoom": "4",
+        "Cinema": "1"
+    },
+    {
+        "id": null,
+        "name": "Sala 3",
+        "capacity": "5",
+        "typeRoom": "2",
+        "Cinema": "0"
+    },
+    {
+        "id": null,
+        "name": "Sala 4",
+        "capacity": "5",
+        "typeRoom": "2",
+        "Cinema": "2"
+    }
+]

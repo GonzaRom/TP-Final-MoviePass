@@ -7,22 +7,36 @@ use DAO\CinemaDAO as CinemaDAO;
 
 class RoomController {
     private  $roomDao; /* Contiene las funciones para control de repositorios de rooms y bdd*/
-    private  $cinemaDao;
+    private  $cinemaDao;/* Contienes las funciones de control de repositorios de cinema y bdd ,  las utilizaremos adjuntar los objetos tipo cinema, en los atributos cinema de cada room*/ 
     public function __Construct()
     {
         $this->roomDao= new RoomDAO(); 
         $this->cinemaDao = new CinemaDAO();
     }
-
-    public function ShowAddView(){
+    
+    /* se le proporcionara una lista de cinemas , para utilizar en un select, de esta manera la carga de salas dependera de que un cine exista en la bdd o json*/
+    public function ShowAddView($message=""){/* se encarga de las vistas para agregar una nueva room*/
         $listcinema = $this->cinemaDao->GetAll();
         require_once(VIEWS_PATH."add-Room.php");
     }
-
-    public function ShowLisView(){
+    /* se le proporcionara una lista de objetos rooms con objetos cinema ya cargado en su atributo correspondiente */
+    public function ShowLisView(){/*se encargara de listar y mostrar todos las rooms */
         $listRooms = $this->AlterCinemaRooms();
         require_once(VIEWS_PATH."list-room");
         
+    }
+
+    public function addRooms($cinema, $typeroom ,$capacity ){
+
+        $newroom= new Rooms;
+        $newroom->set_name($this->nameRoom());
+        $newroom->set_capacity($capacity);
+        $newroom->set_typeRoom($typeroom);
+        $newroom->set_Cinema($cinema);
+
+        $this->roomDao->Add($newroom);
+
+        $this->showAddView(1);
     }
 
     
@@ -38,6 +52,27 @@ class RoomController {
         }
 
     return $listcinemarooms;
+    }
+
+    private function nameRoom(){
+        $listRooms=$this->roomDao->GetAll();
+        $lastRoom= end($listRooms);
+        $id=0;
+        if($lastRoom){
+            $id = $lastRoom->get_name();
+            $arrayExplode=explode('Sala ',$id);
+            $id = $arrayExplode[1];
+        }
+
+        $id++;
+        $name = "Sala ".$id;
+
+    return $name;
+    }
+
+
+    private function GetRoomsCinema($id){
+        $listCinema=$this->cinemaDao->GetAll();
     }
 
 }
