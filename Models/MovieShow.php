@@ -10,7 +10,7 @@
         private $datetime;
 
         public function __Construct(){
-            $soldseats=aray();
+            $soldseats=array();
 
         }
         public function GetId()
