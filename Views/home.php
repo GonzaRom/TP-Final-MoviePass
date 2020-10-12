@@ -1,12 +1,15 @@
-<div class="content-home">
+<div class="content-home ">
   <?php require_once("nav.php"); ?>
 
   <section class="slider">
     <div class="your-class">
-      <div class="img-slider"><img class="img" src="<?php echo SLIDER_PATH; ?>/bds_first-class_poster-091.jpg" alt=""></div>
-      <div class="img-slider"><img class="img" src="<?php echo SLIDER_PATH; ?>/guardians-of-the-galaxy_banner.jpg" alt=""></div>
-      <div class="img-slider"><img class="img" src="<?php echo SLIDER_PATH; ?>/Maléfica_Banner_Oficial_Latino_b_JPosters.jpg" alt=""></div>
-    </div>
+      <?php for ($i=0; $i < count($nowPlayingMoviesList); $i++) : 
+        $movie = $nowPlayingMoviesList[$i];
+        $imgPath = $movie->getBackground();
+        ?>
+      <div class="img-slider"><img class="img" src="<?php echo $imgPath; ?>" alt=""></div>
+    <?php endfor?>
+  </div>
 
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
