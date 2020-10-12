@@ -2,9 +2,10 @@
 
 namespace Controllers;
 
+use Models\Movie as Movie;
 use DAO\MovieDAO as MovieDAO;
 
-class HomeController
+class MovieController
 {
     private $movieDAO;
 
@@ -12,17 +13,17 @@ class HomeController
     {
         $this->movieDAO = new MovieDAO();
     }
-    public function Index($message = "")
+
+    public function Getall($message = "")
     {
         $nowPlayingMoviesList = array();
         try {
-            $nowPlayingMoviesList = $this->movieDAO->GetAllBackground();
-            require_once(VIEWS_PATH . "home.php");
+            $nowPlayingMoviesList = $this->movieDAO->GetAll();
+            require_once(VIEWS_PATH . "list-movies.php");
         } catch (\Exception $e) {
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");
             echo $e->getMessage();
         }
-        
     }
 }
