@@ -3,13 +3,27 @@
 
   <section class="slider">
     <div class="your-class">
-      <?php for ($i=0; $i < count($nowPlayingMoviesList); $i++) : 
+      <?php for ($i = 0; $i < count($nowPlayingMoviesList); $i++) :
         $movie = $nowPlayingMoviesList[$i];
         $imgPath = $movie->getBackground();
-        ?>
-      <div class="img-slider"><img class="img" src="<?php echo $imgPath; ?>" alt=""></div>
-    <?php endfor?>
-  </div>
+        $nombre = $movie->getName();
+        $imgPoster = $movie->getPoster();
+      ?>
+        <div class="img-slider" style="background-image: url('<?php echo $imgPath; ?>')" ;>
+          <div class="background-img">
+            <div class="content-movie-poster">
+              <div class="img-poster">
+                <img src="<?php echo $imgPoster; ?>" alt="">
+              </div>
+              <div class="content-movie-info">
+                <h2><?php echo $nombre; ?></h2>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      <?php endfor ?>
+    </div>
 
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -21,7 +35,7 @@
           slidesToShow: 1,
           slidesToScroll: 1,
           autoplay: true,
-          autoplaySpeed: 4000,
+          autoplaySpeed: 3000,
           dots: true,
           infinite: true,
           speed: 300,
@@ -51,11 +65,12 @@
       </ul>
     </aside>
     <section class="peliculas">
-      <div class="movie"><a href=""><img src="<?php echo MOVIE_PATH; ?>/598cbd9d31af07d62c81e75f6c2e925b.jpg" alt=""></a></div>
-      <div class="movie"><a href=""><img src="<?php echo MOVIE_PATH; ?>/C_20107.jpg" alt=""></a> </div>
-      <div class="movie"><a href=""><img src="<?php echo MOVIE_PATH; ?>/descarga.jpg" alt=""></a></div>
-      <div class="movie"><a href=""><img src="<?php echo MOVIE_PATH; ?>/resize_1541386116.jpg" alt=""></a></div>
-
+      <?php for ($i = 0; $i < count($nowPlayingMoviesList); $i++) :
+        $movie = $nowPlayingMoviesList[$i];
+        $imgPath = $movie->getPoster();
+      ?>
+        <div class="movie"><a href=""><img src="<?php echo $imgPath; ?>" alt=""></a></div>
+      <?php endfor ?>
     </section>
 
   </section>

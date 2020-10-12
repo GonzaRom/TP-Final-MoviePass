@@ -20,7 +20,9 @@
         public function GetAll(){
             $this->RetrieveData();
             return $this->cinemalist;
-        }
+        }   
+
+
 
         public function Add($newcinema){
             $this->RetrieveData();

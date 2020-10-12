@@ -79,6 +79,8 @@ class MovieDAO implements IDAO
             for ($i = 0; $i < count($apiMovieList); $i++) {
                 $apiMovieData = $apiMovieList[$i];
                 $movie = new Movie();
+                $movie->setName($apiMovieData["title"]);
+                $movie->setPoster("http://image.tmdb.org/t/p/original" . $apiMovieData["poster_path"]);
                 $movie->setBackground("http://image.tmdb.org/t/p/original" . $apiMovieData["backdrop_path"]);
                 $movie->setImdbID($apiMovieData["id"]);
                 array_push($backgroundFromApi, $movie);

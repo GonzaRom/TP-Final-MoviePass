@@ -29,6 +29,17 @@
             return $this->roomsList[$id];
 
         }
+
+        public function GetAllId($id){
+            $this->RetriveData();
+            $roomsList=array();
+            foreach($this->roomsList as $room){
+                if($room->Get_Cinema() == $id){
+                    array_push($roomsList,$room);
+                }
+            }
+        return $roomsList;
+        }
         public function Delete($key){
             $this->RetriveData();
             unset($this->roomsList[$key]);
