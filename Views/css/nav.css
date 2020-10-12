@@ -10,7 +10,7 @@ header {
     display: grid;
     grid-template-columns: repeat(14, 1fr);
     grid-gap: 10px;
-    grid-auto-rows: minmax(80x, 80px);
+    grid-auto-rows: minmax(80px, 80px);
 }
 
 .content-header {
@@ -27,6 +27,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10px;
 }
 
 .logo img {

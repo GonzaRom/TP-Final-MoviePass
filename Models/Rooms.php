@@ -26,8 +26,8 @@
             $this->capacity = $capacity;
         }
 
-        public function Set_TypeRoom($typeroom){
-            $this->typeroom = $typeroom;
+        public function Set_TypeRoom($typeRoom){
+            $this->typeRoom = $typeRoom;
         }
         
         public function Set_Cinema($idcinema){
@@ -47,7 +47,7 @@
         }
 
         public function Get_TypeRoom(){
-            return $this->typeroom;
+            return $this->typeRoom;
         }
 
         public function Get_Cinema(){

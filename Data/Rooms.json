@@ -1,9 +1,37 @@
 [
     {
-        "id": null,
+        "id": 1,
         "name": "Sala 1",
-        "capacity": "30",
-        "typeRoom": "4",
+        "capacity": "5",
+        "typeRoom": "0",
+        "Cinema": "0"
+    },
+    {
+        "id": 2,
+        "name": "Sala 2",
+        "capacity": "5",
+        "typeRoom": "0",
+        "Cinema": "0"
+    },
+    {
+        "id": 3,
+        "name": "Sala 1",
+        "capacity": "5",
+        "typeRoom": "0",
+        "Cinema": "1"
+    },
+    {
+        "id": 4,
+        "name": "Sala 2",
+        "capacity": "5",
+        "typeRoom": "0",
+        "Cinema": "1"
+    },
+    {
+        "id": 5,
+        "name": "Sala 3",
+        "capacity": "5",
+        "typeRoom": "0",
         "Cinema": "0"
     }
 ]

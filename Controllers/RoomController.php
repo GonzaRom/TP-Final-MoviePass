@@ -27,17 +27,18 @@ class RoomController {
     /* se le proporcionara una lista de objetos rooms con objetos cinema ya cargado en su atributo correspondiente */
     public function ShowLisView(){/*se encargara de listar y mostrar todos las rooms */
         $listRooms = $this->AlterCinemaRooms();
-        require_once(VIEWS_PATH."list-room");
+        require_once(VIEWS_PATH."list-room.php");
         
     }
 
-    public function addRooms($cinema, $typeroom ,$capacity ){
+    public function AddRooms($cinema, $typeroom ,$capacity ){
 
         $newroom= new Rooms;
-        $newroom->set_name($this->nameRoom());
-        $newroom->set_capacity($capacity);
-        $newroom->set_typeRoom($typeroom);
-        $newroom->set_Cinema($cinema);
+        $newroom->Set_Id($this->IdRoom());
+        $newroom->Set_Name($this->NameRoom($cinema));
+        $newroom->Set_Capacity($capacity);
+        $newroom->Set_TypeRoom($typeroom);
+        $newroom->Set_Cinema($cinema);
 
         $this->roomDao->Add($newroom);
 
@@ -59,8 +60,8 @@ class RoomController {
     return $listcinemarooms;
     }
 
-    private function nameRoom(){
-        $listRooms=$this->roomDao->GetAll();
+    private function NameRoom($idCinema){
+        $listRooms=$this->roomDao->GetAllId($idCinema);
         $lastRoom= end($listRooms);
         $id=0;
         if($lastRoom){
@@ -68,15 +69,20 @@ class RoomController {
             $arrayExplode=explode('Sala ',$id);
             $id = $arrayExplode[1];
         }
-
         $id++;
         $name = "Sala ".$id;
     return $name;
     }
 
-
-    private function GetRoomsCinema($id){
-        $listCinema=$this->cinemaDao->GetAll();
+    private function IdRoom(){
+        $listRooms=$this->roomDao->GetAll();
+        $lastRoom=end($listRooms);
+        $id=0;
+        if($lastRoom){
+            $id = $lastRoom->Get_Id();
+        }
+        $id++;
+        return $id;
     }
 
 }
