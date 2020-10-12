@@ -1,10 +1,8 @@
 <header>
     <div class="content-header">
-        <a class="logo" href="<?php echo FRONT_ROOT; ?>Home/Index">
-            <img src="<?php echo IMG_PATH; ?>multiflex.png" alt="">
-        </a>
+        <div class="logo"><img src="<?php echo IMG_PATH; ?>multiflex.png" alt=""></div>
         <div class="menu">
-            <nav class="navbar">
+            <nav>
                 <ul>
                     <li><a href="<?php echo FRONT_ROOT; ?>Home/Index">Home</a> </li>
                     <li><a href="">Estrenos</a> </li>
