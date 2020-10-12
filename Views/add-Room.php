@@ -6,7 +6,7 @@
             <div class="content-add-room">
                 <div class="content-form">
                     <h1 class="tittle-add-room">Add room</h1>
-                    <form action="<?php echo FRONT_ROOT; ?>Room/addRooms" method="POST" class="form-add-room">
+                    <form action="<?php echo FRONT_ROOT; ?>Room/AddRooms" method="POST" class="form-add-room">
                         <div class="select-room">
                             <span>
                                 <b>Cine:</b>
