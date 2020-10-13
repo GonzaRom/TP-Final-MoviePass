@@ -1,36 +1,34 @@
 <?php 
     namespace Models;
+    use Models\Ticket as Ticket;
 
     class MovieShow{
         private $id;
         private $movie;
         private $ticketcost;
         private $room;
-        private $soldseats;
+        private $soldtickets;
         private $datetime;
 
         public function __Construct(){
-            $soldseats=array();
-
+            $soldtickets=array();
         }
+
         public function GetId()
         {
             return $this->id;
         }
-
         
         public function SetId($id)
         {
             $this->id = $id;
             return $this;
         }
-
     
         public function GetMovie()
         {
             return $this->movie;
         }
-
         
         public function SetMovie($movie)
         {
@@ -39,55 +37,58 @@
         }
 
         
-        public function GetTicketcost()
+        public function GetTicketCost()
         {
             return $this->ticketcost;
         }
-
         
-        public function SetTicketcost($ticketcost)
+        public function SetTicketCost($ticketcost)
         {
             $this->ticketcost = $ticketcost;
             return $this;
         }
-
         
         public function GetRoom()
         {
             return $this->room;
         }
-
         
         public function SetRoom($room)
         {
             $this->room = $room;
             return $this;
         }
-
         
-        public function GetSoldseats()
+        public function GetSoldTickets()
         {
-            return $this->soldseats;
+            return $this->soldtickets;
         }
-
     
-        public function SetSoldseats($soldseats)
+        public function SetSoldTickets($soldtickets)
         {
-            $this->soldseats = $soldseats;
+            $this->soldtickets = $soldtickets;
             return $this;
         }
-
         
         public function GetDatetime()
         {
             return $this->datetime;
         }
-
     
         public function SetDatetime($datetime)
         {
             $this->datetime = $datetime;
             return $this;
+        }   
+
+        /* funcion q devuelve el dinero recaudado */
+        public function GetRisedMoney(){
+            $risedmoney=0;//variable donde almacenaremos al dinero q se va acumulando para luego retornarla como parametro
+            foreach($this->soldtickets as $ticket){   
+                $price=$this->ticketcost*$ticket->GetDiscount();//la variable $price va a obtener el valor de la entradaindividual ya con el descuento aplicado
+                $risedmoney=$risedmoney+($price*count($ticket->GetSeats()));
+            }
+            return$risedmoney;
         }
     }
 ?>
