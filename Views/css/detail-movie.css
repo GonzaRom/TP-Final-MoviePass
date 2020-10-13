@@ -1,0 +1,48 @@
+.jumbotron-image {
+    background-position: center center;
+    background-repeat: round;
+    background-size: cover;
+    filter: contrast(.7) brightness(.7);
+}
+
+.jumbotron {
+    margin-bottom: 0rem !important;
+    text-shadow: #444 0 1px 1px;
+    color: white;
+}
+
+.jumbotron container{
+    filter: none;
+}
+
+.content-detail-movie {
+    width: 100%;
+    height: 100vh !important;
+    background-image: url(../img/3389522.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.content-rgba-detail-movie {
+    background: rgba(0, 0, 0, .3);
+}
+
+.section-cinema-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+}
+
+.button-remove {
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 18px;
+    background: rgb(55, 56, 58);
+    color: #Fff;
+}
+
+.button-remove:hover {
+    background: rgb(133, 12, 12);
+}
