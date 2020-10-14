@@ -9,7 +9,7 @@
         $nombre = $movie->getName();
         $imgPoster = $movie->getPoster();
       ?>
-        <div class="img-slider" style="background-image: url('<?php echo $imgPath; ?>')" ;>
+        <div class="img-slider" style="background:url('<?php echo $imgPath; ?>');" >
           <div class="background-img">
             <div class="content-movie-poster">
               <div class="img-poster">
@@ -27,6 +27,7 @@
 
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo SLICK; ?>/slick.js"></script>
     <script type="text/javascript" src="<?php echo SLICK; ?>/slick.min.js"></script>
 
     <script type="text/javascript">

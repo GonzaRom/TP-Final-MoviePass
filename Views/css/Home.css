@@ -3,6 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    min-width: 0;
+    min-height: 0;
 }
 
 .content-home{
@@ -25,13 +27,12 @@
     box-shadow: 10px 10px 10px #000;
 }
 
-.your-class div{
+.your-class .img-slider{
     height: 100%;
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 700px;
-
 }
 
 .img-slider .background-img{
