@@ -78,7 +78,6 @@
                                     <button type="submit" class="btn btn-secondary btn-sm" name="movieId" value="<?php echo $movie->getImdbID(); ?>">Reservar</button>
                                 </div>
                             </div>
-
                         </div>
                     <?php endfor; ?>
                 </div>
