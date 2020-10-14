@@ -70,7 +70,7 @@
                 pauseOnFocus: true,
                 pauseOnDotsHover: false,
                 respondTo: 'window',
-                responsive: 1000,
+                responsive: null,
                 rows: 1,
                 rtl: false,
                 slide: '',
@@ -141,7 +141,7 @@
             _.transformType = null;
             _.transitionType = null;
             _.visibilityChange = 'visibilitychange';
-            _.windowWidth = null;
+            _.windowWidth = 0;
             _.windowTimer = null;
 
             dataSettings = $(element).data('slick') || {};

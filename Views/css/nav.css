@@ -1,36 +1,36 @@
-*{
+* {
     padding: 0;
     margin: 0px;
     box-sizing: border-box;
 }
 
-header{
+header {
     width: 100%;
-    background:rgba(0, 0,0, .2);
+    background: rgba(0, 0, 0, .2);
     display: grid;
-    grid-template-columns: repeat(14,1fr);
+    grid-template-columns: repeat(14, 1fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(80px, 80px);
 }
 
-.content-header{
+.content-header {
     grid-column: 2 / 14;
     grid-row: 1;
     display: grid;
-    grid-template-columns: repeat(12,1fr);
+    grid-template-columns: repeat(12, 1fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(80px, 80px);
 }
 
-.content-header .logo{
-    grid-column: 2/4;
+.logo {
+    grid-column: 1/3;
     display: flex;
     justify-content: start;
     align-items: center;
     z-index: 10px;
 }
 
-.logo img{
+.logo img {
     width: 70%;
 }
 
@@ -38,25 +38,26 @@ header{
     grid-column: 8/12;
     grid-row: 1;
     display: grid;
-    grid-template-columns: repeat(10,1fr);
+    grid-template-columns: repeat(10, 1fr);
     grid-gap: 10px;
-    grid-auto-rows: minmax(80px , 80px);
+    grid-auto-rows: minmax(80px, 80px);
 }
 
-.menu nav{
+.menu nav {
     grid-column: 1/11;
     grid-row: 1;
     display: flex;
     align-items: center;
 }
 
-.menu nav ul{
+.menu nav ul {
     width: 100%;
-    list-style:none;
+    list-style: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .menu nav ul li {
     display: block;
     transition-duration: 0.5s;
@@ -68,39 +69,41 @@ header{
     padding-bottom: 10px;
     margin-left: 1px;
     margin-right: 1px;
-   }
-   
+}
+
 .menu nav ul li:hover {
-     cursor: pointer;
-     background: rgba(0, 0,0, .5);
-   }
-   .menu nav ul li a{
-       text-decoration: none;
-       color: #fff;
-   }
-.menu nav  ul li ul {
-     visibility: hidden;
-     opacity: 0;
-     position: absolute;
-     transition: all 0.5s ease;
-     display: none;
-     z-index: 10;
-     width: 100px;
-     margin-top: 10px;
-   }
-   
-.menu nav ul li:hover > ul,ul li ul:hover {
-     visibility: visible;
-     opacity: 1;
-     display: block;
-     background: rgba(0, 0,0, .8);
-   }
-   
+    cursor: pointer;
+    background: rgba(0, 0, 0, .5);
+}
+
+.menu nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.menu nav ul li ul {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transition: all 0.5s ease;
+    display: none;
+    z-index: 10;
+    width: 100px;
+    margin-top: 10px;
+}
+
+.menu nav ul li:hover>ul, ul li ul:hover {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    background: rgba(0, 0, 0, .8);
+}
+
 .menu nav ul li ul li {
-     clear: both;
-     width: 100%;
-     padding-top: 10px;
-     padding-bottom: 10px;
-     background: #333;
-     text-align: center;
-   }
+    clear: both;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #333;
+    text-align: center;
+}
