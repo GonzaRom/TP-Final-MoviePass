@@ -1,8 +1,7 @@
 .jumbotron-image {
     background-position: center center;
-    background-repeat: round;
+    background-repeat:  no-repeat;
     background-size: cover;
-    filter: contrast(.7) brightness(.7);
 }
 
 .jumbotron {
@@ -12,9 +11,12 @@
 }
 
 .jumbotron container{
-    filter: none;
+    background: rgba(0, 0, 0, .7);
 }
 
+.back{
+    background: rgba(0, 0, 0, .7);
+}
 .content-detail-movie {
     width: 100%;
     height: 100vh !important;
