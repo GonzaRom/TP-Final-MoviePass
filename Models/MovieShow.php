@@ -87,8 +87,7 @@
             foreach($this->soldtickets as $ticket){   
                 $price=$this->ticketcost*$ticket->GetDiscount();//la variable $price va a obtener el valor de la entradaindividual ya con el descuento aplicado
                 $risedmoney=$risedmoney+($price*count($ticket->GetSeats()));
-            }
+            }   
             return$risedmoney;
         }
     }
-?>

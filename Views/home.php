@@ -1,7 +1,7 @@
 <div class="content-home ">
   <?php require_once("nav.php"); ?>
 
-  <section class="slider">
+  <section class="slider d-flex">
     <div class="your-class">
       <?php for ($i = 0; $i < count($nowPlayingMoviesList); $i++) :
         $movie = $nowPlayingMoviesList[$i];
@@ -25,8 +25,8 @@
       <?php endfor ?>
     </div>
 
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="<?php echo SLICK; ?>/slick.min.js"></script>
 
     <script type="text/javascript">

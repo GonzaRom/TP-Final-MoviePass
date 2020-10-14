@@ -32,7 +32,6 @@ class RoomController {
     }
 
     public function AddRooms($cinema, $typeroom ,$capacity ){
-
         $newroom= new Rooms;
         $newroom->Set_Id($this->IdRoom());
         $newroom->Set_Name($this->NameRoom($cinema));
@@ -86,4 +85,3 @@ class RoomController {
     }
 
 }
-?>
