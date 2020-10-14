@@ -9,7 +9,7 @@
         $nombre = $movie->getName();
         $imgPoster = $movie->getPoster();
       ?>
-        <div class="img-slider" style="background:url('<?php echo $imgPath; ?>');" >
+        <div class="img-slider" style="background-image:url('<?php echo $imgPath; ?>');" >
           <div class="background-img">
             <div class="content-movie-poster">
               <div class="img-poster">
