@@ -12,7 +12,6 @@
             <div class="enlace">
                 <a href=""><b>Sign Up</b></a>
             </div>
-
         </div>
     </section>
 </div>

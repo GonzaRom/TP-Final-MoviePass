@@ -31,8 +31,8 @@
         </div>
     </div>
 </header-->
-<header class="d-flex sticky-top justify-content-center bg-dark">
-    <nav class="navbar navbar-dark  bg-dark navbar-expand-lg " style="width:1700px ;">
+<header class="d-flex justify-content-center bg-dark">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg " style="width:1700px ;">
         <a class="navbar-brand" href="<?php echo FRONT_ROOT; ?>Home/Index">
             <img src="<?php echo IMG_PATH; ?>multiflex.png" width="200" height="30" class="d-inline-block align-top img-fluid height" alt="">
         </a>
