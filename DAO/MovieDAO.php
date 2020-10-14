@@ -25,7 +25,7 @@ class MovieDAO implements IDAO
         try {
             $this->RetriveNowPlayingFromApi();
             return $this->NowPlayingMovieList;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }

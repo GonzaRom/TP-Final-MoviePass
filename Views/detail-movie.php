@@ -2,7 +2,7 @@
     <div class="content-rgba-detail-movie">
         <?php include("nav.php"); ?>
         <div class="container">
-            <div class="jumbotron jumbotron-image jumbotron-fluid" style="background-image: url(<?php echo $movieDTO->background; ?>" );">
+            <div class="jumbotron jumbotron-image " style="background-image: url(<?php echo $movieDTO->background; ?>" );">
                 <div class="container">
                     <h1 class="display-3 font-weight-bold">
                         <?php echo $movieDTO->title; ?>
@@ -10,7 +10,7 @@
                     <h4 class="display-4">
                         <?php echo $movieDTO->originalTitle; ?>
                     </h4>
-                    <p>
+                    <p class="back">
                         <?php echo $movieDTO->overview; ?>
                     </p>
                     <hr class="my-4">

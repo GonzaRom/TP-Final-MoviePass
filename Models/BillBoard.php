@@ -6,7 +6,7 @@
         private $idcinema;
         private $movieshows;
 
-        public function __Construct(){
+        public function __construct(){
             $this->movieshows=array();
         }
 
