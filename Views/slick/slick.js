@@ -46,7 +46,7 @@
                 asNavFor: null,
                 prevArrow: '<button class="slick-prev" aria-label="Previous" type="button">Previous</button>',
                 nextArrow: '<button class="slick-next" aria-label="Next" type="button">Next</button>',
-                autoplay: false,
+                autoplay: true,
                 autoplaySpeed: 3000,
                 centerMode: false,
                 centerPadding: '50px',
@@ -70,7 +70,7 @@
                 pauseOnFocus: true,
                 pauseOnDotsHover: false,
                 respondTo: 'window',
-                responsive: null,
+                responsive: 1000,
                 rows: 1,
                 rtl: false,
                 slide: '',
@@ -141,7 +141,7 @@
             _.transformType = null;
             _.transitionType = null;
             _.visibilityChange = 'visibilitychange';
-            _.windowWidth = 0;
+            _.windowWidth = null;
             _.windowTimer = null;
 
             dataSettings = $(element).data('slick') || {};

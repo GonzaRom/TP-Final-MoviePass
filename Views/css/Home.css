@@ -4,6 +4,8 @@
     min-height: 0;
     min-width: 0;
     box-sizing: border-box;
+    min-width: 0;
+    min-height: 0;
 }
 
 .content-home {
@@ -25,7 +27,11 @@
     box-shadow: 10px 10px 10px #000;
 }
 
+<<<<<<< HEAD
 .your-class div {
+=======
+.your-class .img-slider{
+>>>>>>> origin/Isaias
     height: 100%;
     width: 100%;
     background-position: center;
