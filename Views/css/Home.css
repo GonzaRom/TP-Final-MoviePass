@@ -27,16 +27,12 @@
     box-shadow: 10px 10px 10px #000;
 }
 
-<<<<<<< HEAD
 .your-class div {
-=======
-.your-class .img-slider{
->>>>>>> origin/Isaias
     height: 100%;
     width: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100% 700px;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 700px !important;
 }
 
 .img-slider .background-img {
