@@ -23,6 +23,8 @@ class HomeController
             //return require_once(VIEWS_PATH."error_404.php");
             echo $e->getMessage();
         }
-        
+    }
+    public function Login(){
+        require_once(VIEWS_PATH . "login.php");
     }
 }

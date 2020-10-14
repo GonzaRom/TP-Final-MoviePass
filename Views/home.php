@@ -68,8 +68,9 @@
       <?php for ($i = 0; $i < count($nowPlayingMoviesList); $i++) :
         $movie = $nowPlayingMoviesList[$i];
         $imgPath = $movie->getPoster();
+        $id = $movie->getImdbID();
       ?>
-        <div class="movie"><a href=""><img src="<?php echo $imgPath; ?>" alt=""></a></div>
+        <div class="movie"><a href="<?php echo FRONT_ROOT."Movie/Get/" . $id; ?>" ><img src="<?php echo $imgPath; ?>" alt=""></a></div>
       <?php endfor ?>
     </section>
 
