@@ -14,6 +14,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Estrenos</a>
                 </li>
+
+                <?php if ($_SESSION['userType'] == 2):?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Generos
@@ -23,8 +25,6 @@
                         <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Genre/ShowListView">Listar</a>
                     </div>
                 </li>
-
-                <?php if ($_SESSION['userType'] == 2):?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Cines
@@ -47,6 +47,9 @@
                     <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/showSingInView">Agregar Admin</a>
                 </li>
                 <?php elseif ($_SESSION['userType'] == 1): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT; ?>Genre/ShowListView">Generos</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
                 </li>
