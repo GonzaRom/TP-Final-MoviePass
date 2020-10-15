@@ -13,8 +13,8 @@
                                 <th>Telefono</th>
                                 <th>Ranking</th>
                                 <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "2") : ?>
-                                    <th>Remove</th>
-                                    <th>Update</th>
+                                    <th>Eliminar</th>
+                                    <th>Actualizar</th>
                                 <?php endif; ?>
                             </tr>
                         </thead>
@@ -29,11 +29,11 @@
                                     <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></td>
                                     <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "2") : ?>
                                         <td>
-                                            <button class="button-remove-cinema" type="submit" name="id" value="<?php echo $cinema->getId(); ?>"> Remove </button>
+                                            <button class="button-remove-cinema" type="submit" name="id" value="<?php echo $cinema->getId(); ?>"> Eliminar </button>
                                         </td>
                                         <!--UPDATE-->
                                         <td>
-                                            <a href="<?php echo FRONT_ROOT. "Cinema/showUpdateView/" . $cinema->getId();?>" >Actualizar</a>
+                                            <a class="button-remove-cinema" href="<?php echo FRONT_ROOT. "Cinema/showUpdateView/" . $cinema->getId();?>" >Actualizar</a>
                                         </td>
                                     <?php endif; ?>
                                 </tr>

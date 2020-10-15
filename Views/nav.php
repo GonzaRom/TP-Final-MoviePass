@@ -12,7 +12,7 @@
                     <a class="nav-link" href="<?php echo FRONT_ROOT; ?>Home/Index">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Estrenos</a>
+                    <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Movie/GetAll" tabindex="-1" aria-disabled="true">Estrenos</a>
                 </li>
 
                 <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] == 2) : ?>
@@ -54,9 +54,7 @@
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
                     </li>
                 <?php endif; ?>
-                <li class="nav-item">
-                    <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Movie/GetAll" tabindex="-1" aria-disabled="true">Peliculas</a>
-                </li>
+               
                 <?php if (isset($_SESSION['loggedUser'])) : ?>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/logout" tabindex="-1" aria-disabled="true">Logout</a>
