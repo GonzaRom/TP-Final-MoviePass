@@ -21,7 +21,7 @@
                 $this->controller = ucwords(array_shift($urlArray));
 
             if(empty($urlArray))
-                $this->method = "Index";
+                $this->method = "Login";
             else
                 $this->method = array_shift($urlArray);
 

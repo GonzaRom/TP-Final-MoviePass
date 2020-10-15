@@ -38,6 +38,9 @@
                 <li class="nav-item">
                     <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Movie/GetAll" tabindex="-1" aria-disabled="true">Peliculas</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Movie/GetAll" tabindex="-1" aria-disabled="true">Logout</a>
+                </li>
             </ul>
         </div>
     </nav>

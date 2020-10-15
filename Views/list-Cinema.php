@@ -4,7 +4,7 @@
 
         <section class="section-cinema-list">
 
-            <form action="<?php echo FRONT_ROOT?>Cinema/Delete" method="POST"class="form-list-cinema">
+            <form action="<?php echo FRONT_ROOT?>Cinema/Delete" method="POST" class="form-list-cinema">
                 <table class="table-list-cinema">
                     <thead class="thead-list-cinema">
                         <tr class="tr-list-cinema">
