@@ -37,14 +37,12 @@ class UserController
             if ($user->getUsername() == $userName) {
 
                 if (password_verify($password, $user->getPassword())) {
-                    session_start();
                     $_SESSION['loggedUser'] = $user->getId();
                     $_SESSION['userType'] = $user->getUsertype();
-                    header('Location:' . FRONT_ROOT . 'Home/Index');
+                    header('Location:' . FRONT_ROOT . '/');
                 } else {
-                    
                     $message = "Contraseña Incorrecta";
-                    
+
                     $this->showLoginView($message);
                 }
             }
@@ -54,7 +52,7 @@ class UserController
         $this->showLoginView($message);
     }
 
-    public function signIn($firstName, $lastName, $userName, $email, $password , $userType = 1)
+    public function signIn($firstName, $lastName, $userName, $email, $password, $userType = 1)
     {
         $userList = $this->userDAO->getAll();
         foreach ($userList as $user) {
@@ -74,16 +72,15 @@ class UserController
         $newUser->setPassword($password);
         $newUser->setUsertype($userType);
         $this->userDAO->add($newUser);
-        if(isset($_SESSION['loggedUser'])){
+        if (isset($_SESSION['loggedUser'])) {
             $this->showSingInView();
-        }else{
-          $this->showLoginView();  
+        } else {
+            $this->showLoginView();
         }
-        
     }
 
-    public function logout(){
-        
+    public function logout()
+    {
         session_destroy();
         $_SESSION['loggedUser'] = array();
         $_SESSION['userType'] = array();
@@ -105,5 +102,4 @@ class UserController
 
         return $id;
     }
-
 }

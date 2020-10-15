@@ -17,9 +17,9 @@ class MovieDAO implements IMovieDAO
         $this->KEY_PATH = "75dfe3da15b955043c881c4089025e7c";
     }
 
-    public function add($value)
-    {
+    public function add(Movie $movie){
     }
+    
     public function getAll()
     {
         try {
