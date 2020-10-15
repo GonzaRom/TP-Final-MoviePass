@@ -5,6 +5,7 @@
         private $id;
         private $firstname;
         private $lastname;
+        private $userName;
         private $email;
         private $password;
         private $usertype;
@@ -77,6 +78,15 @@
         {
             $this->usertype = $usertype;
             return $this;
+        }
+
+        public function setUserName($userName){
+            $this->userName = $userName;
+
+        }
+
+        public function getUserName(){
+            return $this->userName;
         }
     }
 ?>

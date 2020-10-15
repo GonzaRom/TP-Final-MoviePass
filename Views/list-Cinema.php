@@ -12,7 +12,9 @@
                             <th>Direccion</th>
                             <th>Telefono</th>
                             <th>Ranking</th>
-                            <th>Remove</th>
+                            <?php if(isset($_SESSION['userType']) && $_SESSION['userType'] == "2"):?>
+                                   <th>Remove</th> 
+                            <?php endif;?>
                         </tr>
                     </thead>
                     <tbody class="tbody-list-cinema">
@@ -25,7 +27,9 @@
                                 <td><?php echo $cinema->getPhonenumber();?></td>
                                 <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
                                         class="far fa-star"></i><i class="far fa-star"></i></td>
-                                <td><button class="button-remove-cinema" type="submit" name="id" value="<?php echo $cinema->GetId();?>"> Remove </button></td>
+                                <?php if(isset($_SESSION['userType']) && $_SESSION['userType'] == "2"):?>
+                                    <td><button class="button-remove-cinema" type="submit" name="id" value="<?php echo $cinema->GetId();?>"> Remove </button></td>
+                                <?php endif;?>
                             </tr>
                             <?php endforeach;?>
                     </tbody>

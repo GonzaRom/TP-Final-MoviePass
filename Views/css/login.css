@@ -14,6 +14,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-flow: column;
     height: 100vh;
 
 }
@@ -104,10 +105,18 @@
 }
 
 .enlace a{
-    font-size: 18px;
+    font-size: 20px;
     color: #fff;
     text-decoration: none;
     letter-spacing: 0.1em;
+    transition: .5s;
+}
+
+.enlace a:hover{
+    transition: .5s;
+    color: rgb(2, 177, 139);
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #FFf;
 }
 
 
