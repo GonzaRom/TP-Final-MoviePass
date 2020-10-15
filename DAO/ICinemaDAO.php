@@ -7,5 +7,6 @@
         public function getAll();
         public function get($id);
         public function delete($key);
+        public function update($key, Cinema $cinema);
     }
 ?>
