@@ -2,9 +2,9 @@
     namespace DAO;
 
     interface IDAO{
-        public function Add($value);
-        public function GetAll();
-        public function Get($id);
-        public function Delete($key);
+        public function add($value);
+        public function getAll();
+        public function get($id);
+        public function delete($key);
     }
 ?>

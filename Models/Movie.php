@@ -14,7 +14,7 @@ class Movie
     private $background;
     private $voteAverage;
 
-    public function __Construct()
+    public function __construct()
     {
     }
 

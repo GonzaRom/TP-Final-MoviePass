@@ -8,15 +8,15 @@ class HomeController
 {
     private $movieDAO;
 
-    public function __Construct()
+    public function __construct()
     {
         $this->movieDAO = new MovieDAO();
     }
-    public function Index($message = "")
+    public function index($message = "")
     {
         $nowPlayingMoviesList = array();
         try {
-            $nowPlayingMoviesList = $this->movieDAO->GetAllBackground();
+            $nowPlayingMoviesList = $this->movieDAO->getAllBackground();
             require_once(VIEWS_PATH . "home.php");
         } catch (\Exception $e) {
             //Por hacer:
@@ -24,7 +24,7 @@ class HomeController
             echo $e->getMessage();
         }
     }
-    public function Login(){
+    public function login(){
         require_once(VIEWS_PATH . "login.php");
     }
 }

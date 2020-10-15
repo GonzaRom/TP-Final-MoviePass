@@ -10,19 +10,19 @@ class MovieController
     private $movieDAO;
     private $GenreDAO;
 
-    public function __Construct()
+    public function __construct()
     {
         $this->movieDAO = new MovieDAO();
         $this->GenreDAO = new GenreDAO();
     }
 
-    public function Getall($message = "")
+    public function getall($message = "")
     {
         $nowPlayingMoviesList = array();
         $genreList = array();
         try {
-            $nowPlayingMoviesList = $this->movieDAO->GetAll();
-            $genresList = $this->GenreDAO->GetAll();
+            $nowPlayingMoviesList = $this->movieDAO->getAll();
+            $genresList = $this->GenreDAO->getAll();
             foreach ($nowPlayingMoviesList as $movie) {
                 $movieGenders = $movie->getGenreId();
                 foreach ($genresList as $genreApi) {
@@ -40,10 +40,10 @@ class MovieController
         }
     }
 
-    public function Get($movieId)
+    public function get($movieId)
     {
         try {
-            $movieDTO = $this->movieDAO->Get($movieId);
+            $movieDTO = $this->movieDAO->get($movieId);
             require_once(VIEWS_PATH . "detail-movie.php");
         } catch (\Exception $e) {
             //Por hacer:

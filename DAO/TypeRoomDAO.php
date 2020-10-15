@@ -8,38 +8,38 @@
         private $typeroomlist=array();
         private $filename;
 
-        public function __Construct(){
+        public function __construct(){
             $this->filename=dirname(__DIR__)."/Data/Typerooms.json";
         }
 
-        public function Get($id){
-            $this->RetrieveData();
+        public function get($id){
+            $this->retrieveData();
             return $this->typeroomlist[$id];
         }
 
-        public function GetAll(){
-            $this->RetrieveData();
+        public function getAll(){
+            $this->retrieveData();
             return $this->typeroomlist;
         }
 
-        public function Add($newtyperoom){
-            $this->RetrieveData();
+        public function add($newtyperoom){
+            $this->retrieveData();
             array_push($this->typeroomlist,$newtyperoom);
-            $this->SaveData();
+            $this->saveData();
         } 
 
-        public function Delete($key){
-            $this->RetrieveData();
+        public function delete($key){
+            $this->retrieveData();
             unset($this->typeroomlist[$key]);
-            $this->SaveData();                       
+            $this->saveData();                       
         }
         
-        private function SaveData(){
+        private function saveData(){
             $arrayToEncode=array();
     
             foreach($this->typeroomlist as $typeroom){
-                $valuesArray["id"]=$typeroom->GetId();
-                $valuesArray["name"]=$typeroom->GetName();
+                $valuesArray["id"]=$typeroom->getId();
+                $valuesArray["name"]=$typeroom->getName();
                 array_push($arrayToEncode,$valuesArray);
             }
             $jsonContent=json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -47,7 +47,7 @@
             file_put_contents($this->filename,$jsonContent);
         }
 
-        private function RetrieveData(){
+        private function retrieveData(){
             $this->typeroomlist=array();
 
             if(file_exists($this->filename)){
@@ -56,8 +56,8 @@
 
                 foreach($arrayToDecode as $valuesArray){
                     $newtyperoom=new TypeRoom();
-                    $newtyperoom->SetId($valuesArray["id"]);
-                    $newtyperoom->SetName($valuesArray["name"]);                    
+                    $newtyperoom->setId($valuesArray["id"]);
+                    $newtyperoom->setName($valuesArray["name"]);                    
                     array_push($this->typeroomlist,$newtyperoom);
                 }
             }

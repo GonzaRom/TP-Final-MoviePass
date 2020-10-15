@@ -14,7 +14,7 @@
                             <select name="cinema" id="" required>
                                 <option value="">Seleccione una opcion</option>
                                 <?php foreach($listcinema as $cinema):?>
-                                    <option value="<?php echo $cinema->GetId();?>"><?php echo $cinema->GetName();?></option>
+                                    <option value="<?php echo $cinema->getId();?>"><?php echo $cinema->getName();?></option>
                                 <?php endforeach;?>
                             </select>
                         </div>
@@ -25,7 +25,7 @@
                             <select name="typeroom" id="" required>
                                 <option value="">Seleccione una opcion</option>
                                 <?php foreach($listtyperoom as $typeroom):?>
-                                    <option value="<?php echo $typeroom->GetId();?>"><?php echo $typeroom->GetName();?></option>
+                                    <option value="<?php echo $typeroom->getId();?>"><?php echo $typeroom->getName();?></option>
                                 <?php endforeach;?>
                             </select>
                         </div>                        

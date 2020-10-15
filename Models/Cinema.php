@@ -8,61 +8,61 @@
         private $phonenumber;
         private $rooms;
         
-        public function __Construct(){
+        public function __construct(){
 
         }
 
-        public function GetId()
+        public function getId()
         {
             return $this->id;
         }
 
-        public function GetName()
+        public function getName()
         {
             return $this->name;
         }
 
-        public function GetAdress()
+        public function getAdress()
         {
             return $this->adress;
         }
  
-        public function GetPhonenumber()
+        public function getPhonenumber()
         {
             return $this->phonenumber;
         }
 
-        public function SetId($id)
+        public function setId($id)
         {
             $this->id = $id;
             return $this;
         }
 
-        public function SetName($name)
+        public function setName($name)
         {
             $this->name = $name;
             return $this;
         }
 
-        public function SetAdress($adress)
+        public function setAdress($adress)
         {
             $this->adress = $adress;
             return $this;
         }
 
-        public function SetPhonenumber($phonenumber)
+        public function setPhonenumber($phonenumber)
         {
             $this->phonenumber = $phonenumber;
             return $this;
         }
 
         
-        public function GetRooms()
+        public function getRooms()
         {
             return $this->rooms;
         }
  
-        public function SetRooms($rooms)
+        public function setRooms($rooms)
         {
             $this->rooms = $rooms;
             return $this;
