@@ -14,7 +14,13 @@
 
         public function get($id){
             $this->retrieveData();
-            return $this->cinemalist[$id];
+            $getCinema=null;
+            foreach($this->cinemalist as $cinema){
+                if($cinema->getId() == $id){
+                    $getCinema = $cinema;
+                }
+            }
+        return $getCinema;
         }
 
         public function getAll(){

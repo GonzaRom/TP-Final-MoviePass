@@ -3,7 +3,7 @@
     namespace Models;
 
 
-    class Rooms{
+    class Room{
         private $id;
         private $name;
         private $capacity;

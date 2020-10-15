@@ -16,5 +16,14 @@
         "email": "isaiasemanuelcalfin@hotmail.com",
         "usertype": 1,
         "password": "$2y$12$k0NR.RDXshLAI1KytIK2hOkm8mZ.EImEVs22lI3BMgw12hgmLo0be"
+    },
+    {
+        "id": 3,
+        "firstname": "",
+        "lastname": "",
+        "username": "",
+        "email": "",
+        "usertype": 1,
+        "password": "$2y$12$yQpVNqbSijcFOLkwmt6C1OR8PPZ7f0YdmqIBKUCMVTmR.rFb4Ga8S"
     }
 ]
