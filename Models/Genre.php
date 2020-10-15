@@ -7,6 +7,9 @@ class Genre
     private $id;
     private $name;
     
+    public function __construct(){
+        
+    }
 
     public function getId()
     {

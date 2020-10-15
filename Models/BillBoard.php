@@ -10,34 +10,34 @@
             $this->movieshows=array();
         }
 
-        public function GetId()
+        public function getId()
         {
             return $this->id;
         }
  
-        public function SetId($id)
+        public function setId($id)
         {
             $this->id = $id;
             return $this;
         }
 
-        public function GetIdCinema()
+        public function getIdCinema()
         {
             return $this->idcinema;
         }
 
-        public function SetIdCinema($idcinema)
+        public function setIdCinema($idcinema)
         {
             $this->idcinema = $idcinema;
             return $this;
         }
 
-        public function GetMovieShows()
+        public function getMovieShows()
         {
             return $this->movieshows;
         }
 
-        public function SetMovieShows($movieshows)
+        public function setMovieShows($movieshows)
         {
             $this->movieshows = $movieshows;
             return $this;

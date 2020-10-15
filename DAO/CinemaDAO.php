@@ -8,42 +8,42 @@
         private $cinemalist=array();
         private $filename;
 
-        public function __Construct(){
+        public function __construct(){
             $this->filename=dirname(__DIR__)."/Data/Cinemas.json";
         }
 
-        public function Get($id){
-            $this->RetrieveData();
+        public function get($id){
+            $this->retrieveData();
             return $this->cinemalist[$id];
         }
 
-        public function GetAll(){
-            $this->RetrieveData();
+        public function getAll(){
+            $this->retrieveData();
             return $this->cinemalist;
         }   
 
 
 
-        public function Add($newcinema){
-            $this->RetrieveData();
+        public function add($newcinema){
+            $this->retrieveData();
             array_push($this->cinemalist,$newcinema);
-            $this->SaveData();
+            $this->saveData();
         } 
 
-        public function Delete($key){
-            $this->RetrieveData();
+        public function delete($key){
+            $this->retrieveData();
             unset($this->cinemalist[$key]);
-            $this->SaveData();                       
+            $this->saveData();                       
         }
 
-        private function SaveData(){
+        private function saveData(){
             $arrayToEncode=array();
     
             foreach($this->cinemalist as $cinema){
-                $valuesArray["id"]=$cinema->GetId();
-                $valuesArray["name"]=$cinema->GetName();
-                $valuesArray["adress"]=$cinema->GetAdress();
-                $valuesArray["phonenumber"]=$cinema->GetPhonenumber();
+                $valuesArray["id"]=$cinema->getId();
+                $valuesArray["name"]=$cinema->getName();
+                $valuesArray["adress"]=$cinema->getAdress();
+                $valuesArray["phonenumber"]=$cinema->getPhonenumber();
                 array_push($arrayToEncode,$valuesArray);
             }
             $jsonContent=json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -51,7 +51,7 @@
             file_put_contents($this->filename,$jsonContent);
         }
 
-        private function RetrieveData(){
+        private function retrieveData(){
             $this->cinemalist=array();
 
             if(file_exists($this->filename)){
@@ -60,10 +60,10 @@
 
                 foreach($arrayToDecode as $valuesArray){
                     $cinema=new Cinema();
-                    $cinema->SetId($valuesArray["id"]);
-                    $cinema->SetName($valuesArray["name"]);
-                    $cinema->SetAdress($valuesArray["adress"]);
-                    $cinema->SetPhonenumber($valuesArray["phonenumber"]);                    
+                    $cinema->setId($valuesArray["id"]);
+                    $cinema->setName($valuesArray["name"]);
+                    $cinema->setAdress($valuesArray["adress"]);
+                    $cinema->setPhonenumber($valuesArray["phonenumber"]);                    
                     array_push($this->cinemalist,$cinema);
                 }
             }

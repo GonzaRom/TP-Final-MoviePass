@@ -11,7 +11,7 @@ class RoomController {
     private  $cinemaDao;/* Contienes las funciones de control de repositorios de cinema y bdd ,  las utilizaremos adjuntar los objetos tipo cinema, en los atributos cinema de cada room*/ 
     private  $typeroomDao;
 
-    public function __Construct()
+    public function __construct()
     {
         $this->roomDao= new RoomDAO(); 
         $this->cinemaDao = new CinemaDAO();
@@ -19,52 +19,52 @@ class RoomController {
     }
     
     /* se le proporcionara una lista de cinemas , para utilizar en un select, de esta manera la carga de salas dependera de que un cine exista en la bdd o json*/
-    public function ShowAddView($message=""){/* se encarga de las vistas para agregar una nueva room*/
-        $listcinema = $this->cinemaDao->GetAll();
-        $listtyperoom= $this->typeroomDao->GetAll();;
+    public function showAddView($message=""){/* se encarga de las vistas para agregar una nueva room*/
+        $listcinema = $this->cinemaDao->getAll();
+        $listtyperoom= $this->typeroomDao->getAll();;
         require_once(VIEWS_PATH."add-Room.php");
     }
     /* se le proporcionara una lista de objetos rooms con objetos cinema ya cargado en su atributo correspondiente */
-    public function ShowLisView(){/*se encargara de listar y mostrar todos las rooms */
-        $listRooms = $this->AlterCinemaRooms();
+    public function showLisView(){/*se encargara de listar y mostrar todos las rooms */
+        $listRooms = $this->alterCinemaRooms();
         require_once(VIEWS_PATH."list-room.php");
         
     }
 
-    public function AddRooms($cinema, $typeroom ,$capacity ){
+    public function addRooms($cinema, $typeroom ,$capacity ){
         $newroom= new Rooms;
-        $newroom->Set_Id($this->IdRoom());
-        $newroom->Set_Name($this->NameRoom($cinema));
-        $newroom->Set_Capacity($capacity);
-        $newroom->Set_TypeRoom($typeroom);
-        $newroom->Set_Cinema($cinema);
+        $newroom->setId($this->idRoom());
+        $newroom->setName($this->nameRoom($cinema));
+        $newroom->setCapacity($capacity);
+        $newroom->setTypeRoom($typeroom);
+        $newroom->setCinema($cinema);
 
-        $this->roomDao->Add($newroom);
+        $this->roomDao->add($newroom);
 
         $this->showAddView(1);
     }
 
     
 
-    private function AlterCinemaRooms(){
+    private function alterCinemaRooms(){
         $listrooms = $this->roomDao->GetAll();
         $listcinema = $this->cinemaDao->GetAll();
         $listcinemarooms=array();
         foreach($listrooms as $room){
-            $cinemaname = ($listcinema[$room->Get_Cinema()]) ? $listcinema[$room->Get_Cinema()]->GetName() : "";
-            $room->Set_Cinema($cinemaname);
+            $cinemaname = ($listcinema[$room->getCinema()]) ? $listcinema[$room->getCinema()]->getName() : "";
+            $room->setCinema($cinemaname);
             array_push($listcinemarooms , $room);
         }
 
     return $listcinemarooms;
     }
 
-    private function NameRoom($idCinema){
-        $listRooms=$this->roomDao->GetAllId($idCinema);
+    private function nameRoom($idCinema){
+        $listRooms=$this->roomDao->getAllId($idCinema);
         $lastRoom= end($listRooms);
         $id=0;
         if($lastRoom){
-            $id = $lastRoom->get_name();
+            $id = $lastRoom->getName();
             $arrayExplode=explode('Sala ',$id);
             $id = $arrayExplode[1];
         }
@@ -73,12 +73,12 @@ class RoomController {
     return $name;
     }
 
-    private function IdRoom(){
-        $listRooms=$this->roomDao->GetAll();
+    private function idRoom(){
+        $listRooms=$this->roomDao->getAll();
         $lastRoom=end($listRooms);
         $id=0;
         if($lastRoom){
-            $id = $lastRoom->Get_Id();
+            $id = $lastRoom->getId();
         }
         $id++;
         return $id;

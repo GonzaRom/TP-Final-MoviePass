@@ -8,54 +8,54 @@
         private $cinemadao;   /*DAO con el cual vamos a gestionar la informacion persistida
                                     momentaneamente en json*/
         
-        public function __Construct(){
+        public function __construct(){
             $this->cinemadao=new CinemaDAO;
         }
 
         /* funcion q llama a la vista de agregado de cinema */
-        public function ShowAddView($message=""){
+        public function showAddView($message=""){
             require_once(VIEWS_PATH."add-Cinema.php");
         }
         /* funcion q llama a la vista de listado de cinema */
-        public function ShowListView($message=""){
+        public function showListView($message=""){
             $cinemalist=$this->cinemadao->GetAll();/* lista q almacena nuestros cinemas para luego mostrarlos */
             require_once(VIEWS_PATH."list-Cinema.php");
         }
 
         /* La funcion Add nos permite agregar un nuevocine(cinema) a nuestro DAO,
         donde tenemos persistidos nuestra info*/
-        public function Add($name,$adress,$phonenumber){
+        public function add($name,$adress,$phonenumber){
             $message=2;//variable q se va a usar como retorno para informar exito o no
-            $cinemalist=$this->cinemadao->GetAll();/* variable donde guardamos la lista de cines traida desde json. */
+            $cinemalist=$this->cinemadao->getAll();/* variable donde guardamos la lista de cines traida desde json. */
             $flag=false; /*seteamos esta variable en falso para q nos permita agregar un cine*/
             foreach($cinemalist as $cinema){
-                if($cinema->GetName()==$name && $cinema->GetAdress()==$adress){
+                if($cinema->getName()==$name && $cinema->getAdress()==$adress){
                     $flag=true;  /* seteamos a true flag para q no nos permita agregar */
                 }
             }
             if(!$flag){
                 $message=1;
                 $newcinema=new Cinema;//  cinema nuevo q se usara para agregar al DAO
-                $newcinema->SetId(end($cinemalist)->GetId()+1);
-                $newcinema->SetName($name);
-                $newcinema->SetAdress($adress);
-                $newcinema->SetPhoneNumber($phonenumber);
-                $this->cinemadao->Add($newcinema);;/* pusheamos el nuevo cinema dentro del DAO */
+                $newcinema->setId(end($cinemalist)->getId()+1);
+                $newcinema->setName($name);
+                $newcinema->setAdress($adress);
+                $newcinema->setPhoneNumber($phonenumber);
+                $this->cinemadao->add($newcinema);;/* pusheamos el nuevo cinema dentro del DAO */
             }
-            $this->ShowAddView($message);//invocamos la vista enviandole como parametro el mensaje correspondiente.
+            $this->showAddView($message);//invocamos la vista enviandole como parametro el mensaje correspondiente.
         }
 
         /* La funcion delete elimina un cinema recibiendo como parametro el id del cinema */
-        public function Delete($id){
+        public function delete($id){
             $message=2;//variable q se va a usar como retorno para informar exito o no
-            $cinemalist=$this->cinemadao->GetAll();
+            $cinemalist=$this->cinemadao->getAll();
             foreach($cinemalist as $key => $cinema){
-                if($cinema->GetId()==$id){
-                    $this->cinemadao->Delete($key);
+                if($cinema->getId()==$id){
+                    $this->cinemadao->delete($key);
                     $message=1;
                 }
             }
-            $this->ShowListView($message);//invocamos la vista enviandole como parametro el mensaje correspondiente.
+            $this->showListView($message);//invocamos la vista enviandole como parametro el mensaje correspondiente.
         }
     }
 ?>

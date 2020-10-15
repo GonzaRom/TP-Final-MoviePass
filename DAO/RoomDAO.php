@@ -8,45 +8,45 @@
         private $roomsList=array();
         private $fileName;
 
-        public function __Construct()
+        public function __construct()
         {
             $this->fileName =dirname(__DIR__)."/Data/Rooms.json";
         }
 
-        public function Add($room){
-            $this->RetriveData();
+        public function add($room){
+            $this->retriveData();
             array_push($this->roomsList , $room);
             $this->saveData();
         }
 
-        public function GetAll(){
-            $this->RetriveData();
+        public function getAll(){
+            $this->retriveData();
             return $this->roomsList;
 
         }
-        public function Get($id){
-            $this->RetriveData();
+        public function get($id){
+            $this->retriveData();
             return $this->roomsList[$id];
 
         }
 
-        public function GetAllId($id){
-            $this->RetriveData();
+        public function getAllId($id){
+            $this->retriveData();
             $roomsList=array();
             foreach($this->roomsList as $room){
-                if($room->Get_Cinema() == $id){
+                if($room->getCinema() == $id){
                     array_push($roomsList,$room);
                 }
             }
         return $roomsList;
         }
-        public function Delete($key){
-            $this->RetriveData();
+        public function delete($key){
+            $this->retriveData();
             unset($this->roomsList[$key]);
-            $this->SaveData();
+            $this->saveData();
         }
 
-        private function RetriveData(){
+        private function retriveData(){
             $this->roomsList= array();
             if(file_exists($this->fileName)){
 
@@ -56,26 +56,26 @@
 
                 foreach($jsonDecode as $room){
                     $newRoom = new Room;
-                    $newRoom->Set_Id($room['id']);
-                    $newRoom->Set_Name($room['name']);
-                    $newRoom->Set_Capacity($room['capacity']);
-                    $newRoom->Set_Cinema($room['Cinema']);
-                    $newRoom->Set_TypeRoom($room['typeRoom']);
+                    $newRoom->setId($room['id']);
+                    $newRoom->setName($room['name']);
+                    $newRoom->setCapacity($room['capacity']);
+                    $newRoom->setCinema($room['Cinema']);
+                    $newRoom->setTypeRoom($room['typeRoom']);
                     array_push($this->roomsList , $newRoom);            
                 }
             }
         }
 
-        private function SaveData(){
+        private function saveData(){
             $jsonEncode = array();
 
             foreach ($this->roomsList as $room){
                 $valuesRoom=array();
-                $valuesRoom['id'] = $room->get_id();
-                $valuesRoom['name'] = $room->get_name();
-                $valuesRoom['capacity'] = $room->get_capacity();
-                $valuesRoom['typeRoom'] = $room->get_typeRoom();
-                $valuesRoom['Cinema'] = $room->get_Cinema();
+                $valuesRoom['id'] = $room->getId();
+                $valuesRoom['name'] = $room->getName();
+                $valuesRoom['capacity'] = $room->getCapacity();
+                $valuesRoom['typeRoom'] = $room->getTypeRoom();
+                $valuesRoom['Cinema'] = $room->getCinema();
 
                 array_push($jsonEncode , $valuesRoom);
             }

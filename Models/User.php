@@ -9,71 +9,71 @@
         private $password;
         private $usertype;
 
-        public function __Construct(){
+        public function __construct(){
 
         }
         
-        public function GetId()
+        public function getId()
         {
             return $this->id;
         }
  
-        public function SetId($id)
+        public function setId($id)
         {
             $this->id = $id;
             return $this;
         }
 
-        public function GetFirstname()
+        public function getFirstname()
         {
             return $this->firstname;
         }
  
-        public function SetFirstname($firstname)
+        public function setFirstname($firstname)
         {
             $this->firstname = $firstname;
             return $this;
         }
 
-        public function GetLastname()
+        public function getLastname()
         {
             return $this->lastname;
         }
 
-        public function SetLastname($lastname)
+        public function setLastname($lastname)
         {
             $this->lastname = $lastname;
             return $this;
         }
 
-        public function GetEmail()
+        public function getEmail()
         {
             return $this->email;
         }
 
-        public function SetEmail($email)
+        public function setEmail($email)
         {
             $this->email = $email;
             return $this;
         }
  
-        public function GetPassword()
+        public function getPassword()
         {
             return $this->password;
         }
 
-        public function SetPassword($password)
+        public function setPassword($password)
         {
             $this->password = $password;                
             return $this;
         }
         
-        public function GetUsertype()
+        public function getUsertype()
         {
             return $this->usertype;
         }
         
-        public function SetUsertype($usertype)
+        public function setUsertype($usertype)
         {
             $this->usertype = $usertype;
             return $this;

@@ -10,7 +10,7 @@ class MovieDTO{
     public $originalLanguage;
     public $voteAverage;
     public $background;
-    public function __Construct()
+    public function __construct()
     {
     }
     

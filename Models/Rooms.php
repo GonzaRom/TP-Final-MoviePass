@@ -10,49 +10,48 @@
         private $typeRoom;
         private $idcinema;
 
-        public function __Construct(){
+        public function __construct(){
             
         }
 
-        public function Set_Id($id){
+        public function setId($id){
             $this->id = $id;
         }
 
-        public function Set_Name($name){
+        public function setName($name){
             $this->name = $name;
         }
 
-        public function Set_Capacity($capacity){
+        public function setCapacity($capacity){
             $this->capacity = $capacity;
         }
 
-        public function Set_TypeRoom($typeRoom){
+        public function setTypeRoom($typeRoom){
             $this->typeRoom = $typeRoom;
         }
         
-        public function Set_Cinema($idcinema){
+        public function setCinema($idcinema){
             $this->idcinema = $idcinema;
         }
 
-        public function Get_Id(){
+        public function getId(){
             return $this->id;
         }
 
-        public function Get_Name(){
+        public function getName(){
             return $this->name;
         }
 
-        public function Get_Capacity(){
+        public function getCapacity(){
             return $this->capacity;
         }
 
-        public function Get_TypeRoom(){
+        public function getTypeRoom(){
             return $this->typeRoom;
         }
 
-        public function Get_Cinema(){
+        public function getCinema(){
             return $this->idcinema;
         }
-
     }
 ?>
