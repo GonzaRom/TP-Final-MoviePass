@@ -50,18 +50,9 @@
   <section class="content-peliculas-generos">
     <aside class="generos">
       <ul>
-        <li>Accion</li>
-        <li>Comedia</li>
-        <li>Aventuras</li>
-        <li>Animadas</li>
-        <li>Accion</li>
-        <li>Comedia</li>
-        <li>Aventuras</li>
-        <li>Animadas</li>
-        <li>Accion</li>
-        <li>Comedia</li>
-        <li>Aventuras</li>
-        <li>Animadas</li>
+        <?php foreach($genreList as $genre):?>
+        <li><?php echo $genre->getName();?></li>
+          <?php endforeach;?>
       </ul>
     </aside>
     <section class="peliculas">
