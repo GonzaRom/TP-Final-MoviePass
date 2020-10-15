@@ -35,6 +35,13 @@
     background:rgba(0, 0,0, .8);
     padding: 50px;
 }
+
+.content-login a{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .logo-img{
     width: 40%;
     margin: 20px;
