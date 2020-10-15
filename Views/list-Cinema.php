@@ -33,7 +33,7 @@
                                         </td>
                                         <!--UPDATE-->
                                         <td>
-                                            <a type="submit" href="<?php echo FRONT_ROOT; ?>Cinema/update"<?php echo "?id=" . $cinema->getId();?> >Actualizar</a>
+                                            <a href="<?php echo FRONT_ROOT. "Cinema/showUpdateView/" . $cinema->getId();?>" >Actualizar</a>
                                         </td>
                                     <?php endif; ?>
                                 </tr>

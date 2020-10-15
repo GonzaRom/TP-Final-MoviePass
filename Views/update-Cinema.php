@@ -6,6 +6,12 @@
                 <div class="content-form">
                     <h1 class="tittle-add-cinema">Actualizar Cinema</h1>
                     <form action="<?php echo FRONT_ROOT; ?>Cinema/update" method="PUT" class="form-add-cinema">
+                    <div class="input-cinema" style="display: none;">
+                            <span>
+                                <b>Id</b>
+                            </span>
+                            <input type="num" name="id" value="<?php echo $cinema->getId();?>" required>
+                        </div>
                         <div class="input-cinema">
                             <span>
                                 <b>Nombre de cine:</b>

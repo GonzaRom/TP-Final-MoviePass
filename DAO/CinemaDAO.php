@@ -32,14 +32,16 @@
             $this->retrieveData();
             $flag = false;
             foreach ($this->cinemalist as $value) {
-                if($key === $value->getId()){
+                if($key == $value->getId()){
                     $value->setName($cinema->getName());
                     $value->setAdress($cinema->getAdress());
                     $value->setPhonenumber($cinema->getPhonenumber());
                     $flag=true;
                 }
             }
-            if ($flag)$this->saveData();
+            if ($flag) {
+              $this->saveData();  
+            }
             return $flag;
         }
 
