@@ -10,7 +10,7 @@
                             <th scope="col">Name</th>
                         </tr>
                     </thead>
-                    <tbody><?php foreach ($genresList as $genre) : ?>
+                    <tbody><?php foreach ($genreslist as $genre) : ?>
                         <tr>
                             <th scope="row">1</th>
                             <td><?php echo $genre->getId(); ?></td>

@@ -14,8 +14,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Estrenos</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Generos</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Generos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Genre/Update">Update</a>
+                        <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Genre/ShowListView">Listar</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
