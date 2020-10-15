@@ -37,7 +37,6 @@ class UserController
             if ($user->getUsername() == $userName) {
 
                 if (password_verify($password, $user->getPassword())) {
-                    session_start();
                     $_SESSION['loggedUser'] = $user->getId();
                     $_SESSION['userType'] = $user->getUsertype();
                     header('Location:' . FRONT_ROOT . 'Home/Index');

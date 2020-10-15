@@ -102,6 +102,11 @@
     color: #ffffff;
 }
 
+.submit-login:active{
+    outline: none;
+    border:0px
+}
+
 .enlace{
     width: 100%;
     border-top: 2px solid #fff;
