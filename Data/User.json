@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "firstname": "Isaias Emanuel",
+        "lastname": "Calfin",
+        "username": "Soler",
+        "email": "isaiasemanuelcalfin@hotmail.com",
+        "usertype": "2",
+        "password": "$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG"
+    },
+    {
+        "id": 2,
+        "firstname": "Isaias Emanuel",
+        "lastname": "Calfin",
+        "username": "Cosme Fulatino",
+        "email": "isaiasemanuelcalfin@hotmail.com",
+        "usertype": 1,
+        "password": "$2y$12$k0NR.RDXshLAI1KytIK2hOkm8mZ.EImEVs22lI3BMgw12hgmLo0be"
+    }
+]

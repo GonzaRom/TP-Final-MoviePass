@@ -4,10 +4,10 @@ namespace DAO;
 
 use Models\Movie as Movie;
 use Models\MovieDTO as MovieDTO;
-use DAO\IDAO as IDAO;
+use DAO\IMovieDAO as IMovieDAO;
 use Exception;
 
-class MovieDAO implements IDAO
+class MovieDAO implements IMovieDAO
 {
     private $KEY_PATH;
     private $NowPlayingMovieList = array();

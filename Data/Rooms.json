@@ -1,37 +1,56 @@
 [
     {
         "id": 1,
-        "name": "Sala 1",
-        "capacity": "5",
-        "typeRoom": "0",
-        "Cinema": "0"
+        "firstName": null,
+        "lastName": null,
+        "userName": null,
+        "email": null,
+        "usertype": null,
+        "password": null
     },
     {
         "id": 2,
-        "name": "Sala 2",
-        "capacity": "5",
-        "typeRoom": "0",
-        "Cinema": "0"
+        "firstName": null,
+        "lastName": null,
+        "userName": null,
+        "email": null,
+        "usertype": null,
+        "password": null
     },
     {
         "id": 3,
-        "name": "Sala 1",
-        "capacity": "5",
-        "typeRoom": "0",
-        "Cinema": "1"
+        "firstName": null,
+        "lastName": null,
+        "userName": null,
+        "email": null,
+        "usertype": null,
+        "password": null
     },
     {
         "id": 4,
-        "name": "Sala 2",
-        "capacity": "5",
-        "typeRoom": "0",
-        "Cinema": "1"
+        "firstName": null,
+        "lastName": null,
+        "userName": null,
+        "email": null,
+        "usertype": null,
+        "password": null
     },
     {
         "id": 5,
-        "name": "Sala 3",
-        "capacity": "5",
-        "typeRoom": "0",
-        "Cinema": "0"
+        "firstName": null,
+        "lastName": null,
+        "userName": null,
+        "email": null,
+        "usertype": null,
+        "password": null
+    },
+    {
+        "id": 6,
+        "firstName": "Isaias Emanuel",
+        "lastName": "Calfin",
+        "userName": "Soler",
+        "email": "isaiasemanuelcalfin@hotmail.com",
+        "usertype": 1,
+        "password": "$2y$12$eR.K\/BD0.CpOyScX74oQEOxq97w\/9JWi.n0ZLMkB3EpYEnrrbOScK"
     }
 ]
