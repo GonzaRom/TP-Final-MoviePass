@@ -2,9 +2,9 @@
     namespace DAO;
 
     use Models\TypeRoom as TypeRoom;
-    use DAO\IDAO as IDAO;
+    use DAO\ITypeRoomDAO as ITypeRoomDAO;
     
-    class TypeRoomDAO implements IDAO{
+    class TypeRoomDAO implements ITypeRoomDAO{
         private $typeroomlist=array();
         private $filename;
 

@@ -2,9 +2,9 @@
 
     namespace DAO;
     use Models\Rooms as Room;
-    use DAO\IDAO as IDAO;
+    use DAO\IRoomDAO as IRoomDAO;
 
-    class RoomDAO implements IDAO{
+    class RoomDAO implements IRoomDAO{
         private $roomsList=array();
         private $fileName;
 
@@ -30,6 +30,8 @@
 
         }
 
+
+        //funcion q devuelve todos las salas de un cine
         public function getAllId($id){
             $this->retriveData();
             $roomsList=array();
