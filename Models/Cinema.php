@@ -22,6 +22,12 @@
             return $this->name;
         }
 
+        
+        public function GetName()
+        {
+            return $this->name;
+        }
+        
         public function GetAdress()
         {
             return $this->adress;
