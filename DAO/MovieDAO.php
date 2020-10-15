@@ -12,29 +12,29 @@ class MovieDAO implements IDAO
     private $KEY_PATH;
     private $NowPlayingMovieList = array();
 
-    public function __Construct()
+    public function __construct()
     {
         $this->KEY_PATH = "75dfe3da15b955043c881c4089025e7c";
     }
 
-    public function Add($value)
+    public function add($value)
     {
     }
-    public function GetAll()
+    public function getAll()
     {
         try {
-            $this->RetriveNowPlayingFromApi();
+            $this->retriveNowPlayingFromApi();
             return $this->NowPlayingMovieList;
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
-    public function GetAllBackground()
+    public function getAllBackground()
     {
-        return $this->RetriveAllBackgroundFromApi();
+        return $this->retriveAllBackgroundFromApi();
     }
 
-    public function Get($id)
+    public function get($id)
     {
         $endPointMovieApi = "https://api.themoviedb.org/3/movie/" . $id . "?api_key=" . $this->KEY_PATH . "&language=es-ES&append_to_response=videos";
         $apiMovieContent = file_get_contents($endPointMovieApi);
@@ -56,11 +56,11 @@ class MovieDAO implements IDAO
             return $movieDTO;
         }
     }
-    public function Delete($key)
+    public function delete($key)
     {
     }
 
-    public function RetriveNowPlayingFromApi()
+    public function retriveNowPlayingFromApi()
     {
         $this->NowPlayingMovieList = array();
         $endpointNowPlayingApi = "https://api.themoviedb.org/3/movie/now_playing?api_key=" . $this->KEY_PATH . "&language=es-ES&page=1";
@@ -85,7 +85,7 @@ class MovieDAO implements IDAO
             }
         }
     }
-    public function RetriveAllBackgroundFromApi()
+    public function retriveAllBackgroundFromApi()
     {
         $backgroundFromApi = array();
         $nowPlayingPath = "https://api.themoviedb.org/3/movie/now_playing?api_key=" . $this->KEY_PATH . "&language=es-ES&page=1";

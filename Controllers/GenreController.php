@@ -8,16 +8,16 @@ class GenreController
 {
     private $GenreDAO;
 
-    public function __Construct()
+    public function __construct()
     {
         $this->GenreDAO = new GenreDAO();
     }
 
-    public function Getall($message = "")
+    public function getAll($message = "")
     {
         $genresList = array();
         try {
-            $genresList = $this->GenreDAO->GetAll();
+            $genresList = $this->GenreDAO->getAll();
             require_once(VIEWS_PATH . "list-genres.php");
         } catch (\Exception $e) {
             echo $e->getMessage();

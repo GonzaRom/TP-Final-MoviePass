@@ -20,9 +20,9 @@
                                 foreach($cinemalist as $cinema):
                             ?>
                             <tr class="tr-list-information-cinema" >
-                                <td><?php echo $cinema->GetName();?></td>
-                                <td><?php echo $cinema->GetAdress();?></td>
-                                <td><?php echo $cinema->GetPhonenumber();?></td>
+                                <td><?php echo $cinema->getName();?></td>
+                                <td><?php echo $cinema->getAdress();?></td>
+                                <td><?php echo $cinema->getPhonenumber();?></td>
                                 <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
                                         class="far fa-star"></i><i class="far fa-star"></i></td>
                                 <td><button class="button-remove-cinema" type="submit" name="id" value="<?php echo $cinema->GetId();?>"> Remove </button></td>

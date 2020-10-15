@@ -5,29 +5,29 @@
         private $id;
         private $name;
 
-        public function __Construct(){
+        public function __construct(){
 
         }
  
-        public function GetId()
+        public function getId()
         {
             return $this->id;
         }
 
-        public function SetId($id)
+        public function setId($id)
         {
             $this->id = $id;
             return $this;
         }
 
         
-        public function GetName()
+        public function getName()
         {
             return $this->name;
         }
 
        
-        public function SetName($name)
+        public function setName($name)
         {
             $this->name = $name;
             return $this;

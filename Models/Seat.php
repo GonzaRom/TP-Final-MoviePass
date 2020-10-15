@@ -5,27 +5,27 @@
         private $id;
         private $occupied;
 
-        public function __Construct(){
+        public function __construct(){
             $this->occupied=false;
         }
 
-        public function GetId()
+        public function getId()
         {
             return $this->id;
         }
 
-        public function SetId($id)
+        public function setId($id)
         {
             $this->id = $id;
             return $this;
         }
  
-        public function GetOccupied()
+        public function getOccupied()
         {
             return $this->occupied;
         }
 
-        public function SetOccupied($occupied)
+        public function setOccupied($occupied)
         {
             $this->occupied = $occupied;
             return $this;
