@@ -1,11 +1,12 @@
 .content-movie-list{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-image: url(../img/3389522.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    
 }
 
 
@@ -13,6 +14,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,.3);
+    overflow-y: scroll;
 }
 
 
