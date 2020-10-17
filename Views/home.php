@@ -1,6 +1,5 @@
 <div class="content-home ">
-  <?php require_once("nav.php"); ?>
-
+  <?php require_once('nav.php');?>
   <section class="slider d-flex">
     <div class="your-class">
       <?php for ($i = 0; $i < count($nowPlayingMoviesList); $i++) :

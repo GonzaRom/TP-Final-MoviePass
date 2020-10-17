@@ -6,12 +6,14 @@
 	
 	require "Config/Autoload.php";
 	require "Config/Config.php";
+	require "Controllers/GenreController.php";
 
 	use Config\Autoload as Autoload;
 	use Config\Router 	as Router;
 	use Config\Request 	as Request;
-		
+
 	Autoload::start();
+
 
 	session_start();
 
