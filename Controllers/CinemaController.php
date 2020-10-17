@@ -42,7 +42,7 @@ class CinemaController
         if (!$flag) {
             $message = 1;
             $newcinema = new Cinema; //  cinema nuevo q se usara para agregar al DAO
-            $newcinema->setId(end($cinemalist)->getId() + 1);
+            $newcinema->setId($this->idCinema());
             $newcinema->setName($name);
             $newcinema->setAdress($adress);
             $newcinema->setPhoneNumber($phonenumber);
@@ -65,6 +65,17 @@ class CinemaController
         $this->showListView($message); //invocamos la vista enviandole como parametro el mensaje correspondiente.
     }
 
+    private function idCinema(){
+        $cinemaList = $this->cinemadao->getAll();
+        $id =0;
+        $lastCinema = end($cinemaList);
+        if($lastCinema){
+            $id = $lastCinema->getId();
+        }
+
+        $id++;
+    return $id;
+    }
 
     public function showUpdateView($id){
         $message = ""; 

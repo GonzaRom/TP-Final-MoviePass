@@ -4,18 +4,20 @@ namespace Controllers;
 
 use DAO\UserDAO;
 use DAO\UserTypeDAO;
+use DAO\MovieDAO as MovieDAO;
 use Models\User;
 
 class UserController
 {
     private $userDAO;
     private $userTypeDAO;
-
+    private $movieDAO;
 
     public  function __construct()
     {
         $this->userDAO = new UserDAO();
         $this->userTypeDAO = new UserTypeDAO();
+        $this->movieDAO = new MovieDAO();
     }
     public function showLoginView($message = "")
     {
@@ -26,6 +28,19 @@ class UserController
     {
         $userTypeList = $this->userTypeDAO->getAll();
         require_once(VIEWS_PATH . "sign-in.php");
+    }
+
+    public function showHomeView($message = "")
+    {
+        $nowPlayingMoviesList = array();
+        try {
+            $nowPlayingMoviesList = $this->movieDAO->getAllBackground();
+            require_once(VIEWS_PATH . "home.php");
+        } catch (\Exception $e) {
+            //Por hacer:
+            //return require_once(VIEWS_PATH."error_404.php");
+            echo $e->getMessage();
+        }
     }
 
     public function login($userName = "", $password = "")
@@ -39,7 +54,7 @@ class UserController
                 if (password_verify($password, $user->getPassword())) {
                     $_SESSION['loggedUser'] = $user->getId();
                     $_SESSION['userType'] = $user->getUsertype();
-                    header('Location:' . FRONT_ROOT . '/');
+                    $this->showHomeView();
                 } else {
                     $message = "Contraseña Incorrecta";
 

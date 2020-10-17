@@ -2,7 +2,6 @@
     <section class="login">
         <div class="content-login">
             <a href="<?php echo FRONT_ROOT; ?>Home/Index"><img class="logo-img" src="<?php echo IMG_PATH; ?>/multiflex.png" alt=""></a>
-
             <p class="Tittle">Ingresar</p>
             <form class="form-login" action="<?php echo FRONT_ROOT; ?>User/login" method="POST">
                 <input class="input-login" type="text" name="userName" id="" placeholder="Nombre de usuario">

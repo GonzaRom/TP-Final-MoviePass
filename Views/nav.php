@@ -1,7 +1,7 @@
 <header class="d-flex justify-content-center bg-dark">
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg " style="width:1700px ;">
         <a class="navbar-brand" href="<?php echo FRONT_ROOT; ?>Home/Index">
-            <img src="<?php echo IMG_PATH; ?>multiflex.png" width="200" height="30" class="d-inline-block align-top img-fluid height" alt="">
+            <img src="<?php echo IMG_PATH; ?>multiflex.png" width="150px" height="30px" class="d-inline-block align-top" alt="" loading="lazy">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

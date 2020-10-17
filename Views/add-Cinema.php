@@ -6,7 +6,7 @@
             <div class="content-add-cimena">
                 <div class="content-form">
                     <h1 class="tittle-add-cinema">Add Cinema</h1>
-                    <form action="<?php echo FRONT_ROOT; ?>Cinema/Add" method="POST" class="form-add-cinema">
+                    <form action="<?php echo FRONT_ROOT; ?>Cinema/add" method="POST" class="form-add-cinema">
                         <div class="input-cinema">
                             <span>
                                 <b>Nombre de cine:</b>

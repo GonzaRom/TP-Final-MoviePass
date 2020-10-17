@@ -89,12 +89,22 @@
 }
 
 .peliculas .movie {
-    background: cornflowerblue;
+    background: rgba(0, 0, 0, 0);
+    transition: .5s;
 }
 
-.movie img {
+.peliculas .movie a{
+    width: 100%;
+    height: 100%; 
+}
+.movie a img {
     width: 100%;
     height: 100%;
+}
+
+.peliculas .movie:hover{
+    opacity: .4;
+    transition: .5s;
 }
 
 .generos {
@@ -106,17 +116,17 @@
 }
 
 .generos ul {
-    width: 50%;
+    width: 80%;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 5px;
-    grid-template-rows: 30px;
+    grid-template-rows: 40px;
     grid-auto-rows: 40px;
 }
 
 .generos ul li {
     width: 100%;
-    font-size: 18px;
+    font-size: 1.2em;
     color: #fff;
     text-align: center;
     cursor: pointer;
@@ -129,4 +139,280 @@
 .generos ul li:hover {
     transition: .5s;
     background: rgba(255, 255, 255, .1);
+    font-size: 1.4em;
+    text-shadow: 0px 10px 5px #000;
 }
+
+@media only screen and (max-width: 1200px){
+    * {
+        margin: 0;
+        padding: 0;
+        min-height: 0;
+        min-width: 0;
+        box-sizing: border-box;
+        min-width: 0;
+        min-height: 0;
+    }
+    
+    .content-home {
+        width: 100%;
+        background: #333;
+        height: auto;
+    }
+    
+    .slider {
+        display: grid;
+        grid-template-columns: repeat(14, 1fr);
+        grid-template-rows: minmax(400px, 400px);
+        width: 100%;
+    }
+    
+    .your-class {
+        grid-column: 1/15;
+        height: 400px;
+        box-shadow: 10px 10px 10px #000;
+    }
+    
+    .your-class div {
+        height: 100%;
+        width: 100%;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: 100% 400px !important;
+    }
+    
+    .img-slider .background-img {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .background-img .content-movie-poster {
+        width: 70%;
+        height: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .content-movie-poster .img-poster {
+        width: 30%;
+        height: 250px;
+        background: #ccc;
+    }
+    
+    .img-poster img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .content-movie-poster .content-movie-info {
+        width: 68%;
+        height: 250px;
+        display: flex;
+        flex-flow: column;
+        justify-content: start;
+        color: #fff;
+    }
+
+    .content-movie-poster .content-movie-info h2{
+        font-size: 19px;
+    }
+    
+    .content-peliculas-generos {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(14, 1fr);
+        margin-top: 50px;
+        grid-gap: 10px;
+    }
+    
+    .peliculas {
+        grid-column:5/14 ;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px 20px;
+        grid-auto-rows: 350px;
+    }
+    
+    .peliculas .movie {
+        background: rgba(0, 0, 0, 0);
+        transition: .5s;
+    }
+    
+    .peliculas .movie a{
+        width: 100%;
+        height: 100%; 
+    }
+    .movie a img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .peliculas .movie:hover{
+        opacity: .4;
+        transition: .5s;
+    }
+    
+    .generos {
+        grid-column: 2/5;
+        background: rgb(14, 25, 44);
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    .generos ul {
+        width: 80%;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 5px;
+        grid-template-rows: 40px;
+        grid-auto-rows: 40px;
+    }
+    
+    .generos ul li {
+        width: 100%;
+        font-size: 1em;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .5s;
+    }
+    
+    .generos ul li:hover {
+        transition: .5s;
+        background: rgba(255, 255, 255, .1);
+        font-size: 1.2em;
+        text-shadow: 0px 10px 5px #000;
+    }
+    
+}
+
+@media only screen and (max-width: 800px){
+    * {
+        margin: 0;
+        padding: 0;
+        min-height: 0;
+        min-width: 0;
+        box-sizing: border-box;
+        min-width: 0;
+        min-height: 0;
+    }
+    
+    .content-home {
+        width: 100%;
+        background: #333;
+        height: auto;
+    }
+    
+    .slider {
+        display: grid;
+        grid-template-columns: repeat(14, 1fr);
+        grid-template-rows: minmax(200px, 200px);
+        width: 100%;
+    }
+    
+    .your-class {
+        grid-column: 1/15;
+        height: 200px;
+        box-shadow: 10px 10px 10px #000;
+    }
+    
+    .your-class div {
+        height: 100%;
+        width: 100%;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: 100% 200px !important;
+    }
+    
+    .img-slider .background-img {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .background-img .content-movie-poster {
+        width: 70%;
+        height: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .content-movie-poster .img-poster {
+        width: 30%;
+        height: 100px;
+        background: #ccc;
+    }
+    
+    .img-poster img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .content-movie-poster .content-movie-info {
+        width: 68%;
+        height: 100px;
+        display: flex;
+        flex-flow: column;
+        justify-content: start;
+        color: #fff;
+    }
+
+    .content-movie-poster .content-movie-info h2{
+        font-size: 15px;
+    }
+    
+    .content-peliculas-generos {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(14, 1fr);
+        margin-top: 50px;
+        grid-gap: 10px;
+    }
+    
+    .peliculas {
+        grid-column:2/14 ;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px 20px;
+        grid-auto-rows: 200px;
+    }
+    
+    .peliculas .movie {
+        background: rgba(0, 0, 0, 0);
+        transition: .5s;
+    }
+    
+    .peliculas .movie a{
+        width: 100%;
+        height: 100%; 
+    }
+    .movie a img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .peliculas .movie:hover{
+        opacity: .4;
+        transition: .5s;
+    }
+    
+    .generos {
+        display: none;
+    }
+    
+    
+}
+

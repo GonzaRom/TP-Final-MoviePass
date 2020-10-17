@@ -1,7 +1,7 @@
 <?php
 
     namespace DAO;
-    use Models\Rooms as Room;
+    use Models\Room as Room;
     use DAO\IRoomDAO as IRoomDAO;
 
     class RoomDAO implements IRoomDAO{
@@ -13,7 +13,7 @@
             $this->fileName =dirname(__DIR__)."/Data/Rooms.json";
         }
 
-        public function add($room){
+        public function add(Room $room){
             $this->retriveData();
             array_push($this->roomsList , $room);
             $this->saveData();
