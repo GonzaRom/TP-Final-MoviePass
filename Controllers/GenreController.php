@@ -36,4 +36,9 @@ class GenreController
             $message = $e->getMessage();
         }
     }
+
+    public function getListGenre(){
+        $genresList = $this->genreDAO->getAll();
+        return $genresList;
+    }
 }

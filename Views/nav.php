@@ -1,3 +1,12 @@
+<?php
+
+use DAO\GenreDAO;
+
+$genreDAO = new GenreDAO();
+
+$listGenre = $genreDAO->getAll();
+
+?>
 <header class="d-flex justify-content-center bg-dark">
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg " style="width:1700px ;">
         <a class="navbar-brand" href="<?php echo FRONT_ROOT; ?>Home/Index">
@@ -16,15 +25,17 @@
                 </li>
 
                 <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] == 2) : ?>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Generos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Genre/Update">Update</a>
-                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Genre/ShowListView">Listar</a>
+                            <?php foreach ($listGenre as $genre) : ?>
+                                <a class="dropdown-item" href="#"><?php echo $genre->getName(); ?></a>
+                            <?php endforeach; ?>
                         </div>
-                    </li>
+                    </li>                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Cines
@@ -46,22 +57,36 @@
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/showSingInView">Agregar Admin</a>
                     </li>
-                <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == 1 ) : ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo FRONT_ROOT; ?>Genre/ShowListView">Generos</a>
+                <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == 1) : ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Generos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <?php foreach ($listGenre as $genre) : ?>
+                                <a class="dropdown-item" href="#"><?php echo $genre->getName(); ?></a>
+                            <?php endforeach; ?>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
                     </li>
                 <?php endif; ?>
-               
+
                 <?php if (isset($_SESSION['loggedUser'])) : ?>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/logout" tabindex="-1" aria-disabled="true">Logout</a>
                     </li>
                 <?php else : ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo FRONT_ROOT; ?>Genre/ShowListView">Generos</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Generos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <?php foreach ($listGenre as $genre) : ?>
+                                <a class="dropdown-item" href="#"><?php echo $genre->getName(); ?></a>
+                            <?php endforeach; ?>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
