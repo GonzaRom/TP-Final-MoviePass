@@ -1,12 +1,4 @@
-<?php
-
-use DAO\GenreDAO;
-
-$genreDAO = new GenreDAO();
-
-$listGenre = $genreDAO->getAll();
-
-?>
+<?php require_once (HELPERS_PATH . "helper-nav.php")?>
 <header class="d-flex justify-content-center bg-dark">
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg " style="width:1700px ;">
         <a class="navbar-brand" href="<?php echo FRONT_ROOT; ?>Home/Index">
@@ -51,7 +43,7 @@ $listGenre = $genreDAO->getAll();
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Room/ShowAddView">Agregar</a>
-                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Room/ShowListView">Listar</a>
+                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Room/showListView">Listar</a>
                         </div>
                     </li>
                     <li class="nav-item">

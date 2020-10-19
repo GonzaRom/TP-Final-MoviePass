@@ -2,15 +2,22 @@
 
     namespace DAO;
     use Models\Room as Room;
+    use Models\RoomDTO as RoomDTO;
     use DAO\IRoomDAO as IRoomDAO;
+    use DAO\TypeRoomDAO as TypeRoomDAO;
+    use DAO\CinemaDAO as CinemaDAO;
 
-    class RoomDAO implements IRoomDAO{
+class RoomDAO implements IRoomDAO{
         private $roomsList=array();
         private $fileName;
+        private $typeRoomDAO;
+        private $cinemaDAO;
 
         public function __construct()
         {
             $this->fileName =dirname(__DIR__)."/Data/Rooms.json";
+            $this->typeRoomDAO = new TypeRoomDAO();
+            $this->cinemaDAO = new CinemaDAO(); 
         }
 
         public function add(Room $room){
@@ -29,7 +36,6 @@
             return $this->roomsList[$id];
 
         }
-
 
         //funcion q devuelve todos las salas de un cine
         public function getAllId($id){
@@ -88,4 +94,3 @@
         }
 
     }
-?>

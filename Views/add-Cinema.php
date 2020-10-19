@@ -21,7 +21,7 @@
                         </div>
                         <div class="input-cinema">
                             <span>
-                                <b>Telfono:</b>
+                                <b>Telefono:</b>
                             </span>
                             <input type="text" name="phonenumber" id="" required>
                         </div>

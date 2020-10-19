@@ -4,5 +4,11 @@
         "name": "Cine Ambasador",
         "adress": "Cordoba 1236",
         "phonenumber": "2236745133"
+    },
+    {
+        "id": 2,
+        "name": "Cine del Paseo",
+        "adress": "Diagonal pueyrredon",
+        "phonenumber": "+542234895625"
     }
 ]
