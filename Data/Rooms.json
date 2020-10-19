@@ -1,57 +1,36 @@
 [
     {
-        "id": 7,
+        "id": 1,
         "name": "Sala 1",
         "capacity": "40",
         "typeRoom": "0",
         "Cinema": "1"
     },
     {
-        "id": 8,
+        "id": 2,
         "name": "Sala 2",
-        "capacity": "40",
-        "typeRoom": "0",
-        "Cinema": "1"
-    },
-    {
-        "id": 9,
-        "name": "Sala 3",
-        "capacity": "40",
-        "typeRoom": "0",
-        "Cinema": "1"
-    },
-    {
-        "id": 10,
-        "name": "Sala 1",
-        "capacity": "40",
-        "typeRoom": "1",
-        "Cinema": "3"
-    },
-    {
-        "id": 11,
-        "name": "Sala 4",
-        "capacity": "5",
-        "typeRoom": "1",
-        "Cinema": "1"
-    },
-    {
-        "id": 12,
-        "name": "Sala 5",
         "capacity": "45",
         "typeRoom": "0",
         "Cinema": "1"
     },
     {
-        "id": 13,
-        "name": "Sala 1",
-        "capacity": "5",
+        "id": 3,
+        "name": "Sala 3",
+        "capacity": "40",
         "typeRoom": "2",
+        "Cinema": "1"
+    },
+    {
+        "id": 4,
+        "name": "Sala 1",
+        "capacity": "40",
+        "typeRoom": "0",
         "Cinema": "2"
     },
     {
-        "id": 14,
-        "name": "Sala 6",
-        "capacity": "5",
+        "id": 5,
+        "name": "Sala 4",
+        "capacity": "40",
         "typeRoom": "0",
         "Cinema": "1"
     }

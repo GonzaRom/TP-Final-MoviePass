@@ -1,0 +1,20 @@
+[
+    {
+        "Id": 1,
+        "Movie": "726739",
+        "Cinema": "1",
+        "Room": "2",
+        "Date": "2020-10-19",
+        "Time": "01:51",
+        "typeMovieShow": "1"
+    },
+    {
+        "Id": 2,
+        "Movie": "446893",
+        "Cinema": "1",
+        "Room": "2",
+        "Date": "2020-10-30",
+        "Time": "23:55",
+        "typeMovieShow": "1"
+    }
+]

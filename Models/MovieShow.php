@@ -1,18 +1,15 @@
 <?php 
     namespace Models;
-    use Models\Ticket as Ticket;
 
     class MovieShow{
         private $id;
         private $movie;
-        private $ticketcost;
+        private $cinema;
+        private $typeMovieShow;
         private $room;
-        private $soldtickets;
-        private $datetime;
+        private $date;
+        private $time;
 
-        public function __construct(){
-            $soldtickets=array();
-        }
 
         public function getId()
         {
@@ -22,7 +19,7 @@
         public function setId($id)
         {
             $this->id = $id;
-            return $this;
+            
         }
     
         public function getMovie()
@@ -33,20 +30,9 @@
         public function setMovie($movie)
         {
             $this->movie = $movie;
-            return $this;
+            
         }
 
-        
-        public function getTicketCost()
-        {
-            return $this->ticketcost;
-        }
-        
-        public function setTicketCost($ticketcost)
-        {
-            $this->ticketcost = $ticketcost;
-            return $this;
-        }
         
         public function getRoom()
         {
@@ -56,30 +42,49 @@
         public function setRoom($room)
         {
             $this->room = $room;
-            return $this;
+            
         }
         
-        public function getSoldTickets()
+        public function getDate()
         {
-            return $this->soldtickets;
+            return $this->date;
         }
     
-        public function setSoldTickets($soldtickets)
+        public function setDate($date)
         {
-            $this->soldtickets = $soldtickets;
-            return $this;
-        }
-        
-        public function getDatetime()
-        {
-            return $this->datetime;
-        }
-    
-        public function setDatetime($datetime)
-        {
-            $this->datetime = $datetime;
-            return $this;
+            $this->date = $date;
+            
         }   
+        public function getTime()
+        {
+            return $this->time;
+        }
+    
+        public function setTime($time)
+        {
+            $this->time = $time;
+        }
+
+        public function setListSeat($listSeat){
+            $this->listSeat = $listSeat;
+        }
+
+
+        public function getCinema(){
+            return $this->cinema;
+        }
+
+        public function setCinema($cinema){
+            $this->cinema = $cinema;
+        }
+
+        public function setTypeMovieShow($typeMovieShow){
+            $this->typeMovieShow = $typeMovieShow;
+        }
+
+        public function getTypeMovieShow(){
+            return $this->typeMovieShow;
+        }
 
         /* funcion q devuelve el dinero recaudado */
         public function getRisedMoney(){

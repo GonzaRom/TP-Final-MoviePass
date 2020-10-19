@@ -1,0 +1,13 @@
+[
+    {
+        "id": 1,
+        "name": "2D",
+        "costTicket":"200"
+    },
+    {
+        "id": 2,
+        "name": "3D",
+        "costTicket":"400"
+    }
+
+]
