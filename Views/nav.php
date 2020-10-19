@@ -49,6 +49,9 @@
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/showSingInView">Agregar Admin</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>MovieShow/showAddMovieShowView">Funcion</a>
+                    </li>
                 <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == 1) : ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -82,6 +85,10 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>MovieShow/showAddMovieShowView">Funcion</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/showLoginView" tabindex="-1" aria-disabled="true">Login</a>

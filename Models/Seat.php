@@ -4,6 +4,7 @@
     class Seat{
         private $id;
         private $occupied;
+        private $movieShow;
 
         public function __construct(){
             $this->occupied=false;
@@ -29,6 +30,14 @@
         {
             $this->occupied = $occupied;
             return $this;
+        }
+
+        public function setMovieShow($movieShow){
+            $this->movieShow = $movieShow;
+        }
+
+        public function getMovieShow(){
+            return $this->movieShow;
         }
     }
 ?>

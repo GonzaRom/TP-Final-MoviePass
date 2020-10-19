@@ -29,8 +29,7 @@ class RoomController
         require_once(VIEWS_PATH . "add-Room.php");
     }
     /* se le proporcionara una lista de objetos rooms con objetos cinema ya cargado en su atributo correspondiente */
-    public function showListView()
-    {/*se encargara de listar y mostrar todos las rooms */
+    public function showListView(){/*se encargara de listar y mostrar todos las rooms */
         $listRooms = $this->alterCinemaRooms();
         require_once(VIEWS_PATH . "list-rooms.php");
     }
