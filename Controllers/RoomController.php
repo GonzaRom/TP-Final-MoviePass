@@ -30,7 +30,7 @@ class RoomController
     }
     /* se le proporcionara una lista de objetos rooms con objetos cinema ya cargado en su atributo correspondiente */
     public function showListView(){/*se encargara de listar y mostrar todos las rooms */
-        $listRooms = $this->alterCinemaRooms();
+        $listRooms = $this->showAllRooms();
         require_once(VIEWS_PATH . "list-rooms.php");
     }
 
@@ -48,19 +48,23 @@ class RoomController
         $this->showAddView(1);
     }
 
-    private function alterCinemaRooms()
+    private function showAllRooms()
     {
-        $listrooms = $this->roomDao->GetAll();
-        $listcinemarooms = array();
-        foreach ($listrooms as $room) {
+        $roomsList = $this->roomDao->GetAll();
+        $roomsDTOList = array();
+        foreach ($roomsList as $room) {
+            $roomDTO = new RoomDTO();
+            $roomDTO->setId($room->getId());
+            $roomDTO->setName($room->getName());
+            $roomDTO->setCapacity($room->getCapacity());
+            $typeRoom = $this->typeroomDao->get($room->getTypeRoom());
             $cinema = $this->cinemaDao->get($room->getCinema());
-            $typeRoom =  $this->typeroomDao->get(($room->getTypeRoom()));
-            $room->setCinema(($cinema) ? $cinema->getName() : "");
-            $room->setTypeRoom(($typeRoom) ? $typeRoom->getName() : "");
-            array_push($listcinemarooms, $room);
+            $roomDTO->setCinemaName(($cinema) ? $cinema->getName() : "");
+            $roomDTO->setTypeRoomName($typeRoom->getName());
+            array_push($roomsDTOList, $roomDTO);
         }
-
-        return $listcinemarooms;
+        if (count($roomsDTOList > 0)) return $roomsDTOList;
+        return null;
     }
 
     private function nameRoom($idCinema)

@@ -1,28 +1,25 @@
 <div class="content-detail-movie ">
-    <div class="content-rgba-detail-movie">
-        <?php include("nav.php"); ?>
-        <div class="container">
-            <div class="jumbotron jumbotron-image " style="background-image: url(<?php echo $movieDTO->background; ?>" );">
-                <div class="container">
-                    <h1 class="display-3 font-weight-bold">
-                        <?php echo $movieDTO->title; ?>
-                    </h1>
-                    <h4 class="display-4">
-                        <?php echo $movieDTO->originalTitle; ?>
-                    </h4>
-                    <p class="back">
-                        <?php echo $movieDTO->overview; ?>
-                    </p>
-                    <hr class="my-4">
-                    <p class="lead">
-                        <?php for ($i = 0; $i < count($movieDTO->genres); $i++) : ?>
-                            <span class="badge badge-info"><?php echo $movieDTO->genres[$i]["name"]; ?> </span>
-                        <?php endfor; ?>
-                        <span class="badge badge-info"><?php echo $movieDTO->releaseDate; ?> </span>
-                        <span class="badge badge-info"><?php echo $movieDTO->originalLanguage; ?> </span>
-                        <span class="badge badge-info"><?php echo $movieDTO->voteAverage; ?> </span>
-                    </p>
-                </div>
+    <?php include("nav.php"); ?>
+    <div class="container">
+        <div class="jumbotron jumbotron-image " style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.2)), url(<?php echo $movieDTO->getBackground(); ?>)">
+            <div class="container">
+                <h1 class="display-3 font-weight-bold">
+                    <?php echo $movieDTO->getTitle(); ?>
+                </h1>
+                <h4 class="display-4">
+                    <?php echo $movieDTO->getOriginalTitle(); ?>
+                </h4>
+                <p class="back">
+                    <?php echo $movieDTO->getOverview(); ?>
+                </p>
+                <hr class="my-4">
+                <p class="lead">
+                    <?php for ($i = 0; $i < count($genres); $i++) : ?>
+                        <span class="badge badge-info"><?php echo $genres[$i]["name"]; ?> </span>
+                    <?php endfor; ?>
+                    <span class="badge badge-info"><?php echo $movieDTO->getReleaseDate(); ?> </span>
+                    <span class="badge badge-info"><?php echo $movieDTO->getVoteAverage(); ?> </span>
+                </p>
             </div>
         </div>
     </div>
