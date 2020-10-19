@@ -1,4 +1,5 @@
-<div class="content-body">
+<div class="vhSignIn">
+    <div class="content-body">
     <section class="login">
         <div class="content-login">
             <a href="<?php echo FRONT_ROOT; ?>Home/Index"><img class="logo-img" src="<?php echo IMG_PATH; ?>/multiflex.png" alt=""></a>
@@ -17,4 +18,5 @@
             <?php endif; ?>
         </div>
     </section>
+</div>
 </div>
