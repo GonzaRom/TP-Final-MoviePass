@@ -65,38 +65,37 @@ class CinemaController
         $this->showListView($message); //invocamos la vista enviandole como parametro el mensaje correspondiente.
     }
 
-    private function idCinema(){
+    private function idCinema()
+    {
         $cinemaList = $this->cinemadao->getAll();
-        $id =0;
+        $id = 0;
         $lastCinema = end($cinemaList);
-        if($lastCinema){
+        if ($lastCinema) {
             $id = $lastCinema->getId();
         }
 
         $id++;
-    return $id;
+        return $id;
     }
 
-    public function showUpdateView($id){
-        $message = ""; 
-        $cinema = $this->cinemadao->get($id);   
+    public function showUpdateView($id)
+    {
+        $message = "";
+        $cinema = $this->cinemadao->get($id);
         if ($cinema == null) {
             $message = "Error, cinema no encontrado";
             require_once(VIEWS_PATH . "list-Cinema.php");
-        }
-        else{
+        } else {
             require_once(VIEWS_PATH . "update-Cinema.php");
         }
-        
     }
-    public function update($id ,$name , $adress , $phonenumber)
-    {       
-            $cinema = new Cinema();
-            $cinema->setName($name);
-            $cinema->setAdress($adress);
-            $cinema->setPhonenumber($phonenumber);
-            $flag = $this->cinemadao->update($id, $cinema);
-            ($flag) ? $this->showListView($message = "Actualizacion exitosa!") : $this->showListView($message = "Falla en actualizacion!");
-    
+    public function update($id, $name, $adress, $phonenumber)
+    {
+        $cinema = new Cinema();
+        $cinema->setName($name);
+        $cinema->setAdress($adress);
+        $cinema->setPhonenumber($phonenumber);
+        $flag = $this->cinemadao->update($id, $cinema);
+        ($flag) ? $this->showListView($message = "Actualizacion exitosa!") : $this->showListView($message = "Falla en actualizacion!");
     }
 }

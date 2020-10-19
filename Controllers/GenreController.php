@@ -14,12 +14,14 @@ class GenreController
     }
 
     /* funcion q llama a la vista de listado de generos */
-    public function showListView($message=""){
-        $genreslist=$this->genreDAO->getAll();/* lista q almacena nuestros generos para luego mostrarlos */
-        require_once(VIEWS_PATH."list-genres.php");
+    public function showListView($message = "")
+    {
+        $genreslist = $this->genreDAO->getAll();/* lista q almacena nuestros generos para luego mostrarlos */
+        require_once(VIEWS_PATH . "list-genres.php");
     }
 
-    public function update(){//funcion q hace un update en nuestra base de dato de generos
+    public function update()
+    { //funcion q hace un update en nuestra base de dato de generos
         $this->genreDAO->updateFromApi();
         $this->showListView();
     }
@@ -31,7 +33,7 @@ class GenreController
             $genresList = $this->genreDAO->getAll();
             $this->showListView();
         } catch (\Exception $e) {
-            echo $e->getMessage();
+            $message = $e->getMessage();
         }
     }
 
