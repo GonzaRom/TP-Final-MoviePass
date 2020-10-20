@@ -10,6 +10,7 @@ use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\SeatDAO as SeatDAO;
 use Models\Seat as Seat;
 use Models\MovieShow as MovieShow;
+use Models\MovieShowDTO as MovieShowDTO;
 
 class MovieShowController
 {
@@ -41,9 +42,7 @@ class MovieShowController
 
     public function salas()
     {
-
         $listRoom = $this->roomDAO->getAll();
-
         echo 'Sala:<select name="room" id="">';
         echo '<option value="">Seleccione una sala</option> ';
         if (isset($_GET['cinema'])) {
@@ -53,7 +52,6 @@ class MovieShowController
                 }
             }
         }
-
         echo '</select>';
     }
 
@@ -103,27 +101,39 @@ class MovieShowController
 
     public function getAll()
     {
-        $listMovie = $this->movieDAO->getAll();
-        $listMovieShow = $this->movieShowDAO->getAll();
-        require_once(VIEWS_PATH . "list-movies.php");
+        $movieShows = $this->getMovieShowList();
+        if (empty($movieShows))
+            //Por hacer:
+            //return require_once(VIEWS_PATH."error_404.php");  
+            $message = "E R R O R, No existen funciones pendientes.";
+        else {
+            require_once(VIEWS_PATH . "list-movies.php");
+        }
     }
+
     public function showListMovieShowView()
     {
         $listSeat = $this->seatDAO->GetAll();
-        $listMovieShow = $this->movieShowDAO->getAll();
+        $movieShows = $this->movieShowDAO->getAll();
         $listCinema = $this->cinemaDAO->getAll();
         $listSeatMovieShow = array();
         $listRoom = $this->roomDAO->getAll();
-        $listMovie = $this->movieDAO->getAll();
-        foreach ($listMovieShow as $movieShow) {
+
+        $listMovieShow = array();
+        foreach ($movieShows as $movieShow) {
+            $movieShowDTO = new MovieShowDTO();
+            $movieShowDTO->setId($movieShow->getId());
+            $movieShowDTO->setDate($movieShow->getDate());
+            $movieShowDTO->setTime($movieShow->getTime());
 
             foreach ($listCinema as $cinema) {
                 if ($cinema->getId() == $movieShow->getCinema()) {
-                    $movieShow->setCinema($cinema->getName());
+                    $movieShowDTO->setNameCinema($cinema->getName());
                     foreach ($listRoom as $room) {
 
                         if ($room->getId() == $movieShow->getRoom()) {
-                            $movieShow->setRoom($room->getName());
+                            $movieShowDTO->setRoomName($room->getName());
+                            $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow()));
                             $listSeatMovieShow = $this->create_array($room->getCapacity());
                             $id = 1;
                             $newArray = array();
@@ -149,7 +159,8 @@ class MovieShowController
                     }
                 }
             }
-            $movieShow->setSeat($listSeatMovieShow);
+            $movieShowDTO->setSeats($listSeatMovieShow);
+            array_push($listMovieShow, $movieShowDTO);
         }
 
         require_once(VIEWS_PATH . "list-movieShow.php");
@@ -185,5 +196,33 @@ class MovieShowController
             }
         }
         return $capacity;
+    }
+    private function getMovieShowList()
+    {
+        $movieShows = $this->movieShowDAO->getAll();
+        $listCinema = $this->cinemaDAO->getAll();
+        $listRoom = $this->roomDAO->getAll();
+        $listMovieShow = array();
+        foreach ($movieShows as $movieShow) {
+            $movieShowDTO = new MovieShowDTO();
+            $movieShowDTO->setId($movieShow->getId());
+            $movieShowDTO->setDate($movieShow->getDate());
+            $movieShowDTO->setTime($movieShow->getTime());
+            $movieShowDTO->setMovie($this->movieDAO->get($movieShow->getMovie()));
+            foreach ($listCinema as $cinema) {
+                if ($cinema->getId() == $movieShow->getCinema()) {
+                    $movieShowDTO->setNameCinema($cinema->getName());
+                    foreach ($listRoom as $room) {
+
+                        if ($room->getId() == $movieShow->getRoom()) {
+                            $movieShowDTO->setRoomName($room->getName());
+                            $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow()));
+                        }
+                    }
+                }
+            }
+            array_push($listMovieShow, $movieShowDTO);
+        }
+        return $listMovieShow;
     }
 }

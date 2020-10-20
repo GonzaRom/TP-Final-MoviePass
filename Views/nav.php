@@ -13,7 +13,7 @@
                     <a class="nav-link" href="<?php echo FRONT_ROOT; ?>Home/Index">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="<?php echo FRONT_ROOT; ?>MovieShow/getAll" tabindex="-1" aria-disabled="true">Estrenos</a>
+                    <a class="nav-link " href="<?php echo FRONT_ROOT; ?>MovieShow/getAll" tabindex="-1" aria-disabled="true">Cartelera</a>
                 </li>
 
                 <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] == 2) : ?>

@@ -43,13 +43,15 @@ class MovieDAO implements IMovieDAO
             $movieDTO = new MovieDTO();
             $movieDTO->setId($apiMovieDecode["id"]);
             $movieDTO->setOriginalTitle($apiMovieDecode["original_title"]);
-            $movieDTO->setOverview($apiMovieDecode["overview"]);
+            $movieDTO->setSynopsis($apiMovieDecode["overview"]);
+            $movieDTO->setShortSynopsis($apiMovieDecode["tagline"]);
             $movieDTO->setReleaseDate($apiMovieDecode["release_date"]);
             $movieDTO->setTitle($apiMovieDecode["title"]);
             $movieDTO->setOriginalLanguage($apiMovieDecode["original_language"]);
             $movieDTO->setVoteAverage($apiMovieDecode["vote_average"]);
             $movieDTO->setGenres($apiMovieDecode["genres"]);
             $movieDTO->setBackground("http://image.tmdb.org/t/p/original" . $apiMovieDecode["backdrop_path"]);
+            $movieDTO->setPoster("http://image.tmdb.org/t/p/original" . $apiMovieDecode["poster_path"]);
 
             return $movieDTO;
         }

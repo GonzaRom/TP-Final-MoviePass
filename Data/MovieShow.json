@@ -52,5 +52,14 @@
         "date": "31\/10\/2020",
         "time": "22:30",
         "typeMovieShow": "1"
+    },
+    {
+        "id": 7,
+        "movie": "592350",
+        "cinema": "1",
+        "room": "1",
+        "date": "21\/10\/2020",
+        "time": "11:11",
+        "typeMovieShow": "1"
     }
 ]
