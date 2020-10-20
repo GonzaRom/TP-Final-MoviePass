@@ -94,9 +94,6 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>MovieShow/showAddMovieShowView">Funcion</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/showLoginView" tabindex="-1" aria-disabled="true">Login</a>
                     </li>
                 <?php endif; ?>

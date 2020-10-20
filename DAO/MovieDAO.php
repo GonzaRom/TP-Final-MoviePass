@@ -52,6 +52,7 @@ class MovieDAO implements IMovieDAO
             $movieDTO->setGenres($apiMovieDecode["genres"]);
             $movieDTO->setBackground("http://image.tmdb.org/t/p/original" . $apiMovieDecode["backdrop_path"]);
             $movieDTO->setPoster("http://image.tmdb.org/t/p/original" . $apiMovieDecode["poster_path"]);
+            $movieDTO->setRunTime($apiMovieDecode["runtime"]);
 
             return $movieDTO;
         }
@@ -81,6 +82,7 @@ class MovieDAO implements IMovieDAO
                 $movie->setBackground("http://image.tmdb.org/t/p/original" . $apiMovieData["backdrop_path"]);
                 $movie->setVoteAverage($apiMovieData["vote_average"]);
                 $movie->setImdbID($apiMovieData["id"]);
+                
                 array_push($this->NowPlayingMovieList, $movie);
             }
         }

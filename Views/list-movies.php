@@ -2,12 +2,13 @@
     <div class="content-rgba-movie-list">
         <?php include("nav.php"); ?>
         <div class="container">
-            <form action="<?php echo FRONT_ROOT ?>Movie/Get" method="GET">
+            <form action="<?php echo FRONT_ROOT ?>Movie/Get" method="POST">
                 <div class="card mb-3" style="max-width: 100%;">
                     <?php for ($j = 0; $j < count($movieShows); $j++) :
                         $movie = $movieShows[$j]->getMovie();
                         $nombre = $movie->getTitle();
                         $genres = $movie->getGenres();
+                        $duration =$movie->getRunTime();
                     ?>
                     <div class="row no-gutters">
                         <!--IMAGEN-->
@@ -37,13 +38,15 @@
                                             <?php echo $movieShows[$i]->getRoomName(); ?></span>
                                         <span><strong>Proxima funcion:
                                             </strong><?php echo $movieShows[$i]->getDate() . " " . $movieShows[$i]->getTime(); ?></span>
+                                        <span><strong>Duracion: 
+                                            </strong><?php echo $duration." min"; ?></span>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <!--Valoracion mas botones-->
                         <div class="col-md-2">
-                            <div class="d-flex align-content-sm-around flex-column">
+                            <div class="list-reserv">
                                 <small class="card-text">
                                     <i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
                                         class="far fa-star"></i><i class="far fa-star"></i>

@@ -13,6 +13,7 @@ class Movie
     private $poster;
     private $background;
     private $voteAverage;
+    private $runtime;
 
     public function __construct()
     {
@@ -106,5 +107,12 @@ class Movie
     public function setGenreName($genreName)
     {
         $this->genreName = $genreName;
+    }
+
+    public function setRunTime($runtime){
+        $this->runtime = $runtime;
+    }
+    public function getRunTime(){
+        return $this->runtime ;
     }
 }

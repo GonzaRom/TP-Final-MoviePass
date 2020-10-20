@@ -12,6 +12,7 @@ class MovieDTO{
     private $voteAverage;
     private $background;
     private $poster;
+    private $runtime;
     
     public function __construct()
     {
@@ -125,5 +126,11 @@ class MovieDTO{
     public function setSynopsis($synopsis)
     {
         $this->synopsis = $synopsis;
+    }
+    public function setRunTime($runtime){
+        $this->runtime = $runtime;
+    }
+    public function getRunTime(){
+        return $this->runtime ;
     }
 }
