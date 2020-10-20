@@ -6,9 +6,7 @@
         private $occupied;
         private $movieShow;
 
-        public function __construct(){
-            $this->occupied=false;
-        }
+
 
         public function getId()
         {
@@ -29,7 +27,7 @@
         public function setOccupied($occupied)
         {
             $this->occupied = $occupied;
-            return $this;
+            
         }
 
         public function setMovieShow($movieShow){

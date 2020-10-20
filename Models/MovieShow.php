@@ -1,6 +1,8 @@
 <?php 
     namespace Models;
 
+    use Models\Seat as Seat;
+
     class MovieShow{
         private $id;
         private $movie;
@@ -9,7 +11,7 @@
         private $room;
         private $date;
         private $time;
-
+        
 
         public function getId()
         {
@@ -84,6 +86,15 @@
 
         public function getTypeMovieShow(){
             return $this->typeMovieShow;
+        }
+
+        public function setSeat($seat){
+            $this->seat = array();
+            $this->seat = $seat;
+        }
+
+        public function getSeat(){
+            return $this->seat;
         }
 
         /* funcion q devuelve el dinero recaudado */
