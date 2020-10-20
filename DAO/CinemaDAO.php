@@ -14,21 +14,42 @@
 
         public function get($id){
             $this->retrieveData();
-            return $this->cinemalist[$id];
+            $getCinema=null;
+            foreach($this->cinemalist as $cinema){
+                if($cinema->getId() == $id){
+                    $getCinema = $cinema;
+                }
+            }
+        return $getCinema;
         }
 
         public function getAll(){
             $this->retrieveData();
             return $this->cinemalist;
         }   
-
-
-
-        public function add($newcinema){
+        
+        public function add(Cinema $cinema){
             $this->retrieveData();
-            array_push($this->cinemalist,$newcinema);
+            array_push($this->cinemalist,$cinema);
             $this->saveData();
         } 
+
+        public function update($key, Cinema $cinema){
+            $this->retrieveData();
+            $flag = false;
+            foreach ($this->cinemalist as $value) {
+                if($key == $value->getId()){
+                    $value->setName($cinema->getName());
+                    $value->setAdress($cinema->getAdress());
+                    $value->setPhonenumber($cinema->getPhonenumber());
+                    $flag=true;
+                }
+            }
+            if ($flag) {
+              $this->saveData();  
+            }
+            return $flag;
+        }
 
         public function delete($key){
             $this->retrieveData();
@@ -69,4 +90,3 @@
             }
         }
     }
-?>

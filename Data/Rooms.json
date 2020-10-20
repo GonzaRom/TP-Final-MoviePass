@@ -1,56 +1,58 @@
 [
     {
-        "id": 1,
-        "firstName": null,
-        "lastName": null,
-        "userName": null,
-        "email": null,
-        "usertype": null,
-        "password": null
+        "id": 7,
+        "name": "Sala 1",
+        "capacity": "40",
+        "typeRoom": "0",
+        "Cinema": "1"
     },
     {
-        "id": 2,
-        "firstName": null,
-        "lastName": null,
-        "userName": null,
-        "email": null,
-        "usertype": null,
-        "password": null
+        "id": 8,
+        "name": "Sala 2",
+        "capacity": "40",
+        "typeRoom": "0",
+        "Cinema": "1"
     },
     {
-        "id": 3,
-        "firstName": null,
-        "lastName": null,
-        "userName": null,
-        "email": null,
-        "usertype": null,
-        "password": null
+        "id": 9,
+        "name": "Sala 3",
+        "capacity": "40",
+        "typeRoom": "0",
+        "Cinema": "1"
     },
     {
-        "id": 4,
-        "firstName": null,
-        "lastName": null,
-        "userName": null,
-        "email": null,
-        "usertype": null,
-        "password": null
+        "id": 10,
+        "name": "Sala 1",
+        "capacity": "40",
+        "typeRoom": "1",
+        "Cinema": "3"
     },
     {
-        "id": 5,
-        "firstName": null,
-        "lastName": null,
-        "userName": null,
-        "email": null,
-        "usertype": null,
-        "password": null
+        "id": 11,
+        "name": "Sala 4",
+        "capacity": "5",
+        "typeRoom": "1",
+        "Cinema": "1"
     },
     {
-        "id": 6,
-        "firstName": "Isaias Emanuel",
-        "lastName": "Calfin",
-        "userName": "Soler",
-        "email": "isaiasemanuelcalfin@hotmail.com",
-        "usertype": 1,
-        "password": "$2y$12$eR.K\/BD0.CpOyScX74oQEOxq97w\/9JWi.n0ZLMkB3EpYEnrrbOScK"
+        "id": 12,
+        "name": "Sala 5",
+        "capacity": "45",
+        "typeRoom": "0",
+        "Cinema": "1"
+    },
+    {
+        "id": 13,
+        "name": "Sala 1",
+        "capacity": "5",
+        "typeRoom": "2",
+        "Cinema": "2"
+    },
+    {
+        "id": 14,
+        "name": "Sala 6",
+        "capacity": "5",
+        "typeRoom": "0",
+        "Cinema": "1"
     }
 ]

@@ -94,4 +94,7 @@
 
 .button-remove-cinema:hover{
     background: rgb(133, 12, 12);
+    color: #fff;
+    text-decoration: none;
 }
+

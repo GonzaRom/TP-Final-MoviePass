@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use DAO\RoomDAO as RoomDAO;
-use Models\Rooms as Rooms;
+use Models\Room as Room;
 use DAO\CinemaDAO as CinemaDAO;
 use DAO\TypeRoomDAO as TypeRoomDAO;
 
@@ -32,7 +32,7 @@ class RoomController {
     }
 
     public function addRooms($cinema, $typeroom ,$capacity ){
-        $newroom= new Rooms;
+        $newroom= new Room;
         $newroom->setId($this->idRoom());
         $newroom->setName($this->nameRoom($cinema));
         $newroom->setCapacity($capacity);

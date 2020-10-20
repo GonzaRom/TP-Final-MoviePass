@@ -1,6 +1,5 @@
 <div class="content-home ">
-  <?php require_once("nav.php"); ?>
-
+  <?php require_once('nav.php');?>
   <section class="slider d-flex">
     <div class="your-class">
       <?php for ($i = 0; $i < count($nowPlayingMoviesList); $i++) :
@@ -50,18 +49,9 @@
   <section class="content-peliculas-generos">
     <aside class="generos">
       <ul>
-        <li>Accion</li>
-        <li>Comedia</li>
-        <li>Aventuras</li>
-        <li>Animadas</li>
-        <li>Accion</li>
-        <li>Comedia</li>
-        <li>Aventuras</li>
-        <li>Animadas</li>
-        <li>Accion</li>
-        <li>Comedia</li>
-        <li>Aventuras</li>
-        <li>Animadas</li>
+        <?php foreach($genreList as $genre):?>
+        <li><?php echo $genre->getName();?></li>
+          <?php endforeach;?>
       </ul>
     </aside>
     <section class="peliculas">
