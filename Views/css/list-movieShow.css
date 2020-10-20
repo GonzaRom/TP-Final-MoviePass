@@ -1,0 +1,67 @@
+.listMovieShow{
+    width: 100%;
+    height: 100vh;
+    background: url(../img/still-life-of-cinema-seats.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-y: scroll;
+   
+}
+
+.rgba-content-listMovieShow{
+    width: 100%;
+    background: rgba(0,0,0,.5);
+    
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: center;
+    
+}
+
+.rgba-content-listMovieShow .infoMovieShow{
+    width: 80%;
+    height: 300px;
+    display: flex;
+    color: #fff;
+    justify-content: space-between;
+    background-color:rgba(0, 0, 0, 0.5);
+    margin: 20px;
+    border-radius: 20px;
+    box-shadow: 7px 7px 7px #000,-7px -7px 7px #000;
+}
+
+.infoLocation{
+    width: 50%;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+
+.infoLocation .tituloMovie h2{
+    font-size: 30px;
+    text-shadow: 2px 2px 1px #aaa;
+}
+
+.seatMovieShow{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+}
+
+.seatMovieShow ul{
+    width: 100%;
+}
+
+.seatMovieShow ul li{
+    display: inline-block;
+    margin: 10px;
+}
+

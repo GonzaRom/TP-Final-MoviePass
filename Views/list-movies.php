@@ -5,18 +5,16 @@
             <form action="<?php echo FRONT_ROOT ?>Movie/Get" method="GET">
                 <div class="card mb-3" style="max-width: 100%;">
                     <?php
-                    $var = count($nowPlayingMoviesList);
-                    $var = $var / 4;
-
-                    for ($i = 0; $i < $var; $i++) :
+                        foreach($listMovieShow as $movieShow):
+                            foreach($listMovie as $movie):
+                                if($movieShow->getMovie() == $movie->getImdbID()):
                     ?>
                         <div class="row no-gutters">
                             <!--IMAGEN-->
-                            <?php $movie = $nowPlayingMoviesList[$i]; ?>
-
+                           
                             <div class="col-md-2">
                                 <img src="
-                                    <?php echo $movie->getPoster() ?>
+                                    <?php echo $movie->getPoster(); ?>
                                     " alt="..." class="card-img" width="100%" height="250" />
                             </div>
                             <!--Texto-->
@@ -42,10 +40,10 @@
                             </div>
 
                         </div>
-                    <?php endfor; ?>
+                                <?php endif; endforeach; endforeach; ?>
                 </div>
-                <div class="card mb-3" style="max-width: 100%;">
-                    <?php
+                <!--div class="card mb-3" style="max-width: 100%;">
+                    <?php /*
                     for ($i = $var * 2; $i < $var * 3; $i++) :
                     ?>
                         <div class="row no-gutters">
@@ -117,8 +115,8 @@
                             </div>
 
                         </div>
-                    <?php endfor; ?>
-                </div>
+                    <?php endfor;*/ ?>
+                </div-->
             </form>
         </div>
     </div>

@@ -10,5 +10,11 @@
         "name": "Gallegos",
         "adress": "Sarmiento 2665",
         "phonenumber": "2236745133"
+    },
+    {
+        "id": 3,
+        "name": "Aldrey",
+        "adress": "Sarmiento 2665",
+        "phonenumber": "2236745133"
     }
 ]

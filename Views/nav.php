@@ -21,7 +21,7 @@ $listGenre = $genreDAO->getAll();
                     <a class="nav-link" href="<?php echo FRONT_ROOT; ?>Home/Index">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Movie/GetAll" tabindex="-1" aria-disabled="true">Estrenos</a>
+                    <a class="nav-link " href="<?php echo FRONT_ROOT; ?>MovieShow/getAll" tabindex="-1" aria-disabled="true">Estrenos</a>
                 </li>
 
                 <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] == 2) : ?>
@@ -57,8 +57,14 @@ $listGenre = $genreDAO->getAll();
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/showSingInView">Agregar Admin</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>MovieShow/showAddMovieShowView">Funcion</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Funcion
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>MovieShow/showAddMovieShowView">Agregar</a>
+                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>MovieShow/ShowListMovieShowView">Listar</a>
+                        </div>
                     </li>
                 <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == 1) : ?>
                     <li class="nav-item dropdown">

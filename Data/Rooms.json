@@ -33,5 +33,12 @@
         "capacity": "40",
         "typeRoom": "0",
         "Cinema": "1"
+    },
+    {
+        "id": 6,
+        "name": "Sala 2",
+        "capacity": "5",
+        "typeRoom": "0",
+        "Cinema": "2"
     }
 ]
