@@ -1,0 +1,163 @@
+.content-add-movieShow{
+    width: 100%;
+    height: 100vh;
+    background: url(../img/popcorn-composition-on-red-background-with-copy-space.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rgba-content{
+    width: 100%;
+    height: 94.5vh;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dflex-form{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,.6);
+    border-radius: 20px;
+}
+
+.dflex-form form{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.dflex-form form h2{
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 2px rgb(250, 2, 2);
+    padding: 20px;
+}
+
+.dflex-form form label {
+   width: 90%;
+   margin: 20px;
+    font-size: 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;   
+}
+
+.dflex-form form label select{
+   width: 60%; 
+   border-radius: 20px;
+    padding: 10px;
+    outline: none;
+    text-align: center;
+
+    
+}
+
+
+.dflex-form form label select option{
+    border-radius: 20px;
+    text-align: center;
+}
+
+.dflex-form form label .div-checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 60%;
+}
+
+.dflex-form form label .div-checkbox .input-checkbox{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.input-checkbox .radio{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}  
+
+.dflex-form form label .inputDateTime{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+
+.dflex-form form label .inputDateTime .input-date{
+    width: 100%;
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+
+}
+
+.dflex-form form label .inputDateTime .input-time{
+    width: 100%;
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px;
+
+}
+.dflex-form form label .inputDateTime .input-date input{
+    width: 60%
+
+}
+
+
+.dflex-form form label .inputDateTime .input-time input{
+    width: 60%;
+    outline: none;
+}
+
+
+.submit-add-movieShow{
+    margin: 10px;
+    width: 30%;
+    padding: 5px;
+    border-radius: 30px;
+    background: #333;
+    outline: none;
+    border: 0;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 1px;
+    box-shadow: 5px 5px 5px #000;
+    transition: .5s;
+}
+
+.submit-add-movieShow:active{
+    border: none;
+    background: #db0c0c;
+    outline: none;
+}
+
+.submit-add-movieShow:hover{
+    border: none;
+    background: #db0c0c;
+}
+
+.submit-add-movieShow:focus{
+    border: none;
+    background: #db0c0c;
+    outline: none;
+    box-shadow: none;
+    transform: translateY(4px);
+    transition: .5s;
+}

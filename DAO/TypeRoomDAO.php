@@ -22,7 +22,7 @@
             return $this->typeroomlist;
         }
 
-        public function add($newtyperoom){
+        public function add(TypeRoom $newtyperoom){
             $this->retrieveData();
             array_push($this->typeroomlist,$newtyperoom);
             $this->saveData();

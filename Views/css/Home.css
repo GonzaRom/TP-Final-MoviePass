@@ -91,6 +91,7 @@
 .peliculas .movie {
     background: rgba(0, 0, 0, 0);
     transition: .5s;
+    display: flex !important;
 }
 
 .peliculas .movie a{

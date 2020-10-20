@@ -31,12 +31,11 @@ class MovieController
                     }
                 }
             }
-
             require_once(VIEWS_PATH . "list-movies.php");
         } catch (\Exception $e) {
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");
-            echo $e->getMessage();
+            $message = $e->getMessage();
         }
     }
 
@@ -44,6 +43,7 @@ class MovieController
     {
         try {
             $movieDTO = $this->movieDAO->get($movieId);
+            $genres = $movieDTO->getGenres();
             require_once(VIEWS_PATH . "detail-movie.php");
         } catch (\Exception $e) {
             //Por hacer:

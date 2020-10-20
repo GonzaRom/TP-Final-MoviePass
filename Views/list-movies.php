@@ -4,119 +4,56 @@
         <div class="container">
             <form action="<?php echo FRONT_ROOT ?>Movie/Get" method="GET">
                 <div class="card mb-3" style="max-width: 100%;">
-                    <?php
-                    $var = count($nowPlayingMoviesList);
-                    $var = $var / 4;
-
-                    for ($i = 0; $i < $var; $i++) :
+                    <?php for ($j = 0; $j < count($movieShows); $j++) :
+                        $movie = $movieShows[$j]->getMovie();
+                        $nombre = $movie->getTitle();
+                        $genres = $movie->getGenres();
                     ?>
-                        <div class="row no-gutters">
-                            <!--IMAGEN-->
-                            <?php $movie = $nowPlayingMoviesList[$i]; ?>
-
-                            <div class="col-md-2">
-                                <img src="
-                                    <?php echo $movie->getPoster() ?>
-                                    " alt="..." class="card-img" width="100%" height="250" />
-                            </div>
-                            <!--Texto-->
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center "><strong><?php echo $movie->getName(); ?></strong></h5>
-                                    <p class="card-text badge badge-info"><?php echo $movie->getGenreName(); ?>
-                                    </p>
-                                    <p class="card-text">
-                                        <?php echo $movie->getSynopsis(); ?></td>
-
-                                    </p>
-                                </div>
-                            </div>
-                            <!--Valoracion mas botones-->
-                            <div class="col-md-2">
-                                <div class="d-flex align-content-sm-around flex-column">
-                                    <small class="card-text">
-                                        <i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                                    </small>
-                                    <button type="submit" class="btn btn-secondary btn-sm" name="movieId" value="<?php echo $movie->getImdbID(); ?>">Reservar</button>
-                                </div>
-                            </div>
-
+                    <div class="row no-gutters">
+                        <!--IMAGEN-->
+                        <div class="col-md-2">
+                            <img src="
+                                    <?php echo $movie->getPoster(); ?>
+                                    " alt="..." class="card-img h-100" />
                         </div>
-                    <?php endfor; ?>
-                </div>
-                <div class="card mb-3" style="max-width: 100%;">
-                    <?php
-                    for ($i = $var * 2; $i < $var * 3; $i++) :
-                    ?>
-                        <div class="row no-gutters">
-                            <!--IMAGEN-->
-                            <?php $movie = $nowPlayingMoviesList[$i]; ?>
-
-                            <div class="col-md-2">
-                                <img src="
-                                    <?php echo $movie->getPoster() ?>
-                                    " alt="..." class="card-img" width="100%" height="250" />
-                            </div>
-                            <!--Texto-->
-                            <div class="col-md-8">
+                        <!--Texto-->
+                        <div class="col-md-8">
+                            <div class="card h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center "><strong><?php echo $movie->getName(); ?></strong></h5>
-                                    <p class="card-text badge badge-info"><?php echo $movie->getGenreName(); ?>
-                                    </p>
+                                    <h5 class="card-title text-center ">
+                                        <strong><?php echo $movie->getTitle(); ?></strong>
+                                    </h5>
+                                    <?php for ($i = 0; $i < count($genres); $i++) : ?>
+                                    <span class="badge badge-info"><?php echo $genres[$i]["name"]; ?> </span>
+                                    <?php endfor; ?>
                                     <p class="card-text">
                                         <?php echo $movie->getSynopsis(); ?></td>
-
                                     </p>
                                 </div>
-                            </div>
-                            <!--Valoracion mas botones-->
-                            <div class="col-md-2">
-                                <div class="d-flex align-content-sm-around flex-column">
-                                    <small class="card-text">
-                                        <i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                                    </small>
-                                    <button type="submit" class="btn btn-secondary btn-sm" name="movieId" value="<?php echo $movie->getImdbID(); ?>">Reservar</button>
+                                <div class="card-footer text-light bg-secondary">
+                                    <p><span><strong>Cine:</strong>
+                                            <?php echo $movieShows[$i]->getNameCinema(); ?></span>
+                                        <span><strong>Sala:</strong>
+                                            <?php echo $movieShows[$i]->getRoomName(); ?></span>
+                                        <span><strong>Proxima funcion:
+                                            </strong><?php echo $movieShows[$i]->getDate() . " " . $movieShows[$i]->getTime(); ?></span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                    <?php endfor; ?>
-                </div>
-                <div class="card mb-3" style="max-width: 100%;">
-                    <?php
-                    for ($i = $var * 3; $i < $var * 4; $i++) :
-                    ?>
-                        <div class="row no-gutters">
-                            <!--IMAGEN-->
-                            <?php $movie = $nowPlayingMoviesList[$i]; ?>
-
-                            <div class="col-md-2">
-                                <img src="
-                                    <?php echo $movie->getPoster() ?>
-                                    " alt="..." class="card-img" width="100%" height="250" />
+                        <!--Valoracion mas botones-->
+                        <div class="col-md-2">
+                            <div class="d-flex align-content-sm-around flex-column">
+                                <small class="card-text">
+                                    <i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i
+                                        class="far fa-star"></i><i class="far fa-star"></i>
+                                </small>
+                                <button type="submit" class="btn btn-secondary btn-sm" name="movieId"
+                                    value="<?php echo $movie->getId(); ?>">Reservar</button>
                             </div>
-                            <!--Texto-->
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center "><strong><?php echo $movie->getName(); ?></strong></h5>
-                                    <p class="card-text badge badge-info"><?php echo $movie->getGenreName(); ?>
-                                    </p>
-                                    <p class="card-text">
-                                        <?php echo $movie->getSynopsis(); ?></td>
-
-                                    </p>
-                                </div>
-                            </div>
-                            <!--Valoracion mas botones-->
-                            <div class="col-md-2">
-                                <div class="d-flex align-content-sm-around flex-column">
-                                    <small class="card-text">
-                                        <i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                                    </small>
-                                    <button type="submit" class="btn btn-secondary btn-sm" name="movieId" value="<?php echo $movie->getImdbID(); ?>">Reservar</button>
-                                </div>
-                            </div>
-
                         </div>
+
+                    </div>
                     <?php endfor; ?>
                 </div>
             </form>

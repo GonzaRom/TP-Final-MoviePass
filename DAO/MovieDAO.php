@@ -17,9 +17,6 @@ class MovieDAO implements IMovieDAO
         $this->KEY_PATH = "75dfe3da15b955043c881c4089025e7c";
     }
 
-    public function add(Movie $movie){
-    }
-    
     public function getAll()
     {
         try {
@@ -29,6 +26,7 @@ class MovieDAO implements IMovieDAO
             echo $e->getMessage();
         }
     }
+
     public function getAllBackground()
     {
         return $this->retriveAllBackgroundFromApi();
@@ -43,15 +41,17 @@ class MovieDAO implements IMovieDAO
             throw new Exception("Failed retriving data from api.");
         } else {
             $movieDTO = new MovieDTO();
-            $movieDTO->id = $apiMovieDecode["id"];
-            $movieDTO->originalTitle = $apiMovieDecode["original_title"];
-            $movieDTO->overview = $apiMovieDecode["overview"];
-            $movieDTO->releaseDate = $apiMovieDecode["release_date"];
-            $movieDTO->title = $apiMovieDecode["title"];
-            $movieDTO->originalLanguage = $apiMovieDecode["original_language"];
-            $movieDTO->voteAverage = $apiMovieDecode["vote_average"];
-            $movieDTO->genres = $apiMovieDecode["genres"];
-            $movieDTO->background = "http://image.tmdb.org/t/p/original" . $apiMovieDecode["backdrop_path"];
+            $movieDTO->setId($apiMovieDecode["id"]);
+            $movieDTO->setOriginalTitle($apiMovieDecode["original_title"]);
+            $movieDTO->setSynopsis($apiMovieDecode["overview"]);
+            $movieDTO->setShortSynopsis($apiMovieDecode["tagline"]);
+            $movieDTO->setReleaseDate($apiMovieDecode["release_date"]);
+            $movieDTO->setTitle($apiMovieDecode["title"]);
+            $movieDTO->setOriginalLanguage($apiMovieDecode["original_language"]);
+            $movieDTO->setVoteAverage($apiMovieDecode["vote_average"]);
+            $movieDTO->setGenres($apiMovieDecode["genres"]);
+            $movieDTO->setBackground("http://image.tmdb.org/t/p/original" . $apiMovieDecode["backdrop_path"]);
+            $movieDTO->setPoster("http://image.tmdb.org/t/p/original" . $apiMovieDecode["poster_path"]);
 
             return $movieDTO;
         }
