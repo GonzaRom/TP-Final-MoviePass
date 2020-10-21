@@ -8,6 +8,7 @@ use DAO\MovieShowDAO as MovieShowDAO;
 use DAO\CinemaDAO as CinemaDAO;
 use DAO\RoomDAO as RoomDAO;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
+use DAO\BillBoardDAO as BillBoardDAO;
 use Models\MovieShowDTO as MovieShowDTO;
 
 class HomeController
@@ -18,6 +19,7 @@ class HomeController
     private $cinemaDAO;
     private $roomDAO;
     private $typeMovieShowDAO;
+    private $billBoardDAO;
 
     public function __construct()
     {
@@ -28,6 +30,7 @@ class HomeController
         $this->movieDAO = new MovieDAO();
         $this->roomDAO = new RoomDAO();
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
+        $this->billBoardDAO = new BillBoardDAO();
     }
     public function index($message = "")
     {
@@ -58,8 +61,10 @@ class HomeController
             $movieShowDTO->setDate($movieShow->getDate());
             $movieShowDTO->setTime($movieShow->getTime());
             $movieShowDTO->setMovie($this->movieDAO->get($movieShow->getMovie()));
+            $billBoard = $this->billBoardDAO->get($movieShow->getBillBoard());
+
             foreach ($listCinema as $cinema) {
-                if ($cinema->getId() == $movieShow->getCinema()) {
+                if ($cinema->getId() == $billBoard->getIdCinema()) {
                     $movieShowDTO->setNameCinema($cinema->getName());
                     foreach ($listRoom as $room) {
 

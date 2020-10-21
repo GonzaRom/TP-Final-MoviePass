@@ -10,8 +10,6 @@
 class RoomDAO implements IRoomDAO{
         private $roomsList=array();
         private $fileName;
-        private $typeRoomDAO;
-        private $cinemaDAO;
 
         public function __construct()
         {
@@ -36,18 +34,18 @@ class RoomDAO implements IRoomDAO{
             return $this->roomsList[$id];
 
         }
-
         //funcion q devuelve todos las salas de un cine
-        public function getAllId($id){
+        public function getCinema($id)
+        {   $listCinemaRoom = array();
             $this->retriveData();
-            $roomsList=array();
             foreach($this->roomsList as $room){
                 if($room->getCinema() == $id){
-                    array_push($roomsList,$room);
+                    array_push($listCinemaRoom , $room);
                 }
             }
-        return $roomsList;
+        return $listCinemaRoom;
         }
+        
         public function delete($key){
             $this->retriveData();
             unset($this->roomsList[$key]);
@@ -93,4 +91,5 @@ class RoomDAO implements IRoomDAO{
             file_put_contents($this->fileName , $jsonContent);
         }
 
+        
     }

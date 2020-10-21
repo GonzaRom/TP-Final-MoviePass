@@ -11,7 +11,3 @@ interface IMovieShowDAO {
     public function get($id);
     
 }
-
-
-
-?>

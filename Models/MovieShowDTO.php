@@ -11,6 +11,7 @@ class MovieShowDTO{
     private $date;
     private $time;
 
+
     public function __construct()
     {
     }

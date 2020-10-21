@@ -11,6 +11,7 @@ use DAO\SeatDAO as SeatDAO;
 use Models\Seat as Seat;
 use Models\MovieShow as MovieShow;
 use Models\MovieShowDTO as MovieShowDTO;
+use DAO\BillBoardDAO as BillBoardDAO;
 
 class MovieShowController
 {
@@ -21,6 +22,7 @@ class MovieShowController
     private $roomDAO;
     private $typeMovieShowDAO;
     private $seatDAO;
+    private $billBoardDAO;
 
     public function __construct()
     {
@@ -30,6 +32,7 @@ class MovieShowController
         $this->roomDAO = new RoomDAO();
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
         $this->seatDAO = new SeatDAO();
+        $this->billBoardDAO = new BillBoardDAO();
     }
 
     public function showAddMovieShowView($message = "")
@@ -42,17 +45,16 @@ class MovieShowController
 
     public function salas()
     {
-        $listRoom = $this->roomDAO->getAll();
-        echo 'Sala:<select name="room" id="">';
-        echo '<option value="">Seleccione una sala</option> ';
         if (isset($_GET['cinema'])) {
+            $listRoom = $this->roomDAO->getCinema($_GET['cinema']);
+            echo 'Sala:<select name="room" id="">';
+            echo '<option value="">Seleccione una sala</option> ';
             foreach ($listRoom as $room) {
-                if ($room->getCinema() == $_GET['cinema']) {
-                    echo '<option value="' . $room->getId() . '">' . $room->getName()  . '</option> ';
-                }
+
+                echo '<option value="' . $room->getId() . '">' . $room->getName()  . '</option> ';
             }
+            echo '</select>';
         }
-        echo '</select>';
     }
 
     public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)
@@ -75,13 +77,16 @@ class MovieShowController
                     }
                 }
             }
+            ///validar que la pelicula no se este emitiendo el mismo dia en otro cine
         }
 
         if ($today <  $date) {
             if (!$exist) {
+                $billBoard = $this->billBoardDAO->getByIdCinema($cinema);
+
                 $newMovieShow->setId($this->movieShowId());
                 $newMovieShow->setMovie($movie);
-                $newMovieShow->setCinema($cinema);
+                $newMovieShow->setBillBoard($billBoard->getId());
                 $newMovieShow->setRoom($room);
                 $newMovieShow->setTypeMovieShow($typeMovieShow);
                 $objeto_DateTime = date_create_from_format('Y-m-d', $date);
@@ -125,12 +130,12 @@ class MovieShowController
             $movieShowDTO->setId($movieShow->getId());
             $movieShowDTO->setDate($movieShow->getDate());
             $movieShowDTO->setTime($movieShow->getTime());
+            $billBoard = $this->billBoardDAO->get($movieShow->getBillBoard());
 
             foreach ($listCinema as $cinema) {
-                if ($cinema->getId() == $movieShow->getCinema()) {
+                if ($cinema->getId() == $billBoard->getIdCinema()) {
                     $movieShowDTO->setNameCinema($cinema->getName());
                     foreach ($listRoom as $room) {
-
                         if ($room->getId() == $movieShow->getRoom()) {
                             $movieShowDTO->setRoomName($room->getName());
                             $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow()));
@@ -145,9 +150,7 @@ class MovieShowController
                                 $id++;
                                 array_push($newArray, $seat);
                             }
-
                             $listSeatMovieShow = $newArray;
-
 
                             foreach ($listSeat as $seat) {
 
@@ -172,6 +175,7 @@ class MovieShowController
         $seat->setOccupied(false);
         return array_fill(0, $num_elements, $seat);
     }
+
     private function movieShowId()
     {
         $listMovieShow = $this->movieShowDAO->getAll();
@@ -197,6 +201,7 @@ class MovieShowController
         }
         return $capacity;
     }
+
     private function getMovieShowList()
     {
         $movieShows = $this->movieShowDAO->getAll();
@@ -209,11 +214,12 @@ class MovieShowController
             $movieShowDTO->setDate($movieShow->getDate());
             $movieShowDTO->setTime($movieShow->getTime());
             $movieShowDTO->setMovie($this->movieDAO->get($movieShow->getMovie()));
+            $billBoard = $this->billBoardDAO->get($movieShow->getBillBoard());
+
             foreach ($listCinema as $cinema) {
-                if ($cinema->getId() == $movieShow->getCinema()) {
+                if ($cinema->getId() == $billBoard->getIdCinema()) {
                     $movieShowDTO->setNameCinema($cinema->getName());
                     foreach ($listRoom as $room) {
-
                         if ($room->getId() == $movieShow->getRoom()) {
                             $movieShowDTO->setRoomName($room->getName());
                             $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow()));

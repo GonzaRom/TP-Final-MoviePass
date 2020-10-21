@@ -4,13 +4,10 @@
 
     class Ticket{
         private $id;
-        private $datetime;
         private $discount;
-        private $seats;
-
-        public function __construct(){
-            $this->seats=array();
-        }
+        private $seat;
+        private $movieShow;
+        private $idUser;
 
         public function getId()
         {
@@ -20,17 +17,6 @@
         public function setId($id)
         {
             $this->id = $id;
-            return $this;
-        }
-
-        public function getDateTime()
-        {
-            return $this->datetime;
-        }
-
-        public function setDateTime($datetime)
-        {
-            $this->datetime = $datetime;
             return $this;
         }
  
@@ -45,15 +31,31 @@
             return $this;
         }
 
-        public function getSeats()
+        public function getSeat()
         {
-            return $this->seats;
+            return $this->seat;
         }
 
-        public function setSeats($seats)
+        public function setSeat($seat)
         {
-            $this->seats = $seats;
+            $this->seat = $seat;
             return $this;
+        }
+
+        public function setMovieShow($movieShow){
+            $this->movieShow = $movieShow;
+        }
+
+        public function getMovieShow(){
+            return $this->movieShow;
+        }
+
+        public function setUser($user){
+            $this->idUser = $user;
+        }
+
+        public function getUser($user){
+            $this->idUser;
         }
     }
 ?>

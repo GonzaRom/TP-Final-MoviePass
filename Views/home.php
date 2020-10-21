@@ -7,8 +7,7 @@
         $imgPath = $movie->getBackground();
         $nombre = $movie->getTitle();
         $imgPoster = $movie->getPoster();
-        $duration = $movie->getRunTime();
-        
+        $duration = $movie->getRunTime(); 
         $id = $movie->getId();
       ?>
         <div class="img-slider" style="background:url('<?php echo $imgPath; ?>');">
@@ -20,8 +19,8 @@
               <div class="content-movie-info">
                 <h1><?php echo $nombre; ?></h1>
                 <h3><?php echo $movie->getSynopsis(); ?></h3>
-                <br><br>
-                
+                <br>
+                <br>
                 <h3><span class="badge badge-light"> <?php echo "Proxima funcion: ". $movieShows[$i]->getDate() . " " . $movieShows[$i]->getTime(); ?></span></h3>
                 <h3><span class="badge badge-light"> <?php echo "Duracion: ". $duration." min"; ?></span></h3>
           

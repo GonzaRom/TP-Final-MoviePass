@@ -69,7 +69,7 @@ class RoomController
 
     private function nameRoom($idCinema)
     {
-        $listRooms = $this->roomDao->getAllId($idCinema);
+        $listRooms = $this->roomDao->getCinema($idCinema);
         $lastRoom = end($listRooms);
         $id = 0;
         if ($lastRoom) {
