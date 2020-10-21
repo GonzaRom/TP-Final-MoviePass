@@ -28,5 +28,10 @@
         "id": 34,
         "occupied":true,
         "movieShow":1
+    },
+    {
+        "id": 39,
+        "occupied":true,
+        "movieShow":7
     }
 ]

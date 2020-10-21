@@ -52,17 +52,13 @@
                         </div>
 
                     </div>
-
-
                 </label>
-
-
 
                 <button class="submit-add-movieShow" type="submit">Guardar</button>
                 <?php if ($message == 1) : ?>
                     <div class="negative">
 
-                        <p>Ingrese una fecha uperior a la actual.</p>
+                        <p>Ingrese una fecha superior a la actual.</p>
 
                     </div>
 

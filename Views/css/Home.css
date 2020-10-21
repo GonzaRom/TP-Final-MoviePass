@@ -17,13 +17,13 @@
 .slider {
     display: grid;
     grid-template-columns: repeat(14, 1fr);
-    grid-template-rows: minmax(700px, 700px);
+    grid-template-rows: minmax(800px, 800px);
     width: 100%;
 }
 
 .your-class {
     grid-column: 1/15;
-    height: 700px;
+    height: 800px;
     box-shadow: 10px 10px 10px #000;
 }
 
@@ -32,7 +32,7 @@
     width: 100%;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-size: 100% 700px !important;
+    background-size: 100% 800px !important;
 }
 
 .img-slider .background-img {
@@ -91,6 +91,7 @@
 .peliculas .movie {
     background: rgba(0, 0, 0, 0);
     transition: .5s;
+    display: flex !important;
 }
 
 .peliculas .movie a{

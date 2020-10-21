@@ -39,6 +39,7 @@ class UserController
         try {
             $nowPlayingMoviesList = $this->movieDAO->getAllBackground();
             $genreList = $this->genreDAO->getAll();
+
             require_once(VIEWS_PATH . "home.php");
         } catch (\Exception $e) {
             //Por hacer:
@@ -58,7 +59,7 @@ class UserController
                 if (password_verify($password, $user->getPassword())) {
                     $_SESSION['loggedUser'] = $user->getId();
                     $_SESSION['userType'] = $user->getUsertype();
-                    $this->showHomeView();
+                    require_once(VIEWS_PATH.'validate-session.php');
                 } else {
                     $message = "Contraseña Incorrecta";
 

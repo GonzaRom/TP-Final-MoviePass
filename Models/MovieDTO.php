@@ -3,13 +3,16 @@ namespace Models;
 class MovieDTO{
     private $id;
     private $originalTitle;
-    private $overview;
+    private $synopsis;
+    private $shortSynopsis;
     private $releaseDate;
     private $title;
     private $genres;
     private $originalLanguage;
     private $voteAverage;
     private $background;
+    private $poster;
+    private $runtime;
     
     public function __construct()
     {
@@ -33,16 +36,6 @@ class MovieDTO{
     public function setOriginalTitle($originalTitle)
     {
         $this->originalTitle = $originalTitle;
-    }
-
-    public function getOverview()
-    {
-        return $this->overview;
-    }
-
-    public function setOverview($overview)
-    {
-        $this->overview = $overview;
     }
 
     public function getReleaseDate()
@@ -103,5 +96,41 @@ class MovieDTO{
     public function setBackground($background)
     {
         $this->background = $background;
+    }
+
+    public function getPoster()
+    {
+        return $this->poster;
+    }
+
+    public function setPoster($poster)
+    {
+        $this->poster = $poster;
+    }
+
+    public function getShortSynopsis()
+    {
+        return $this->shortSynopsis;
+    }
+
+    public function setShortSynopsis($shortSynopsis)
+    {
+        $this->shortSynopsis = $shortSynopsis;
+    }
+
+    public function getSynopsis()
+    {
+        return $this->synopsis;
+    }
+
+    public function setSynopsis($synopsis)
+    {
+        $this->synopsis = $synopsis;
+    }
+    public function setRunTime($runtime){
+        $this->runtime = $runtime;
+    }
+    public function getRunTime(){
+        return $this->runtime ;
     }
 }

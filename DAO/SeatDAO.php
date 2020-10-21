@@ -63,7 +63,6 @@ class SeatDAO implements ISeatDAO{
 
         foreach($this->listSeat as $seat){
             $valuesSeat = array();
-
             $valuesSeat['id']=$seat->getId();
             $valuesSeat['occupied']=$seat->getOccupied();
             $valuesSeat['movieShow']=$seat->getMovieShow();
