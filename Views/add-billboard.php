@@ -4,8 +4,8 @@
         <div class="grid-content-add-room">
             <div class="content-add-room">
                 <div class="content-form">
-                    <h1 class="tittle-add-room">Add room</h1>
-                    <form action="<?php echo FRONT_ROOT; ?>BillBoard/Add" method="GET" >
+                    <h1 class="tittle-add-room">Add Cartelera</h1>
+                    <form action="<?php echo FRONT_ROOT; ?>BillBoard/addBillBoard" method="POST" >
                         <div class="select-room">
                             <span>
                                 <b>Cine:</b>
@@ -23,7 +23,19 @@
                     </form>
                 </div>
 
-                <p> <?php echo var_dump($message) ?></p>
+                <?php if ($message == 2) : ?>
+                    <div class="negative">
+
+                        <p>Falla en creacion de Cartelera.</p>
+
+                    </div>
+                <?php elseif ($message == 1) : ?>
+                    <div class="affirmative">
+
+                        <p>Creacion exitosamente.</p>
+
+                    </div>
+                <?php endif; ?>
                    
             </div>
 

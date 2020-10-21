@@ -30,7 +30,7 @@ class BillBoardController
         echo $idCinema;
         $billBoard = new BillBoard();
         $billBoard->setId(1);
-        $billBoard->setIdCinema(1);
+        $billBoard->setIdCinema($idCinema);
         $this->billBoardDAO->add($billBoard);
         
     }
