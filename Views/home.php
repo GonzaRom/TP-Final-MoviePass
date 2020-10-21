@@ -19,10 +19,9 @@
               </div>
               <div class="content-movie-info">
                 <h1><?php echo $nombre; ?></h1>
-                <h3><?php echo $movie->getShortSynopsis(); ?></h3>
+                <h3><?php echo $movie->getSynopsis(); ?></h3>
                 <br><br>
-                <h3><span class="badge badge-light"> <?php echo $movieShows[$i]->getNameCinema(); ?></span></h3>
-                <h3><span class="badge badge-light"> <?php echo $movieShows[$i]->getRoomName(); ?></span></h3>
+                
                 <h3><span class="badge badge-light"> <?php echo "Proxima funcion: ". $movieShows[$i]->getDate() . " " . $movieShows[$i]->getTime(); ?></span></h3>
                 <h3><span class="badge badge-light"> <?php echo "Duracion: ". $duration." min"; ?></span></h3>
           
