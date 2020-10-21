@@ -12,6 +12,8 @@ class MovieShow
     private $date;
     private $time;
 
+    
+
     public function getId()
     {
         return $this->id;

@@ -45,17 +45,16 @@ class MovieShowController
 
     public function salas()
     {
-        $listRoom = $this->roomDAO->getAll();
-        echo 'Sala:<select name="room" id="">';
-        echo '<option value="">Seleccione una sala</option> ';
         if (isset($_GET['cinema'])) {
+            $listRoom = $this->roomDAO->getCinema($_GET['cinema']);
+            echo 'Sala:<select name="room" id="">';
+            echo '<option value="">Seleccione una sala</option> ';
             foreach ($listRoom as $room) {
-                if ($room->getCinema() == $_GET['cinema']) {
-                    echo '<option value="' . $room->getId() . '">' . $room->getName()  . '</option> ';
-                }
+
+                echo '<option value="' . $room->getId() . '">' . $room->getName()  . '</option> ';
             }
+            echo '</select>';
         }
-        echo '</select>';
     }
 
     public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)

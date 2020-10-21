@@ -12,7 +12,7 @@ class BillBoardDAO implements IBillBoardDAO
 
     public function __construct()
     {
-        $this->fileName = dirname(__DIR__) . "/Data/BillBoard.json";
+        $this->fileName = dirname(__DIR__) ."/Data/BillBoard.json";
     }
 
     public function add(BillBoard $newBillBoard)
@@ -41,7 +41,8 @@ class BillBoardDAO implements IBillBoardDAO
         }
         return null;
     }
-    public function getByIdCinema($id)
+
+    public function getByIdCinema($id = 0)
     {
         if ($id == null || empty($id)) return null;
 
