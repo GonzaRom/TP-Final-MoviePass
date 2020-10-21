@@ -59,6 +59,10 @@
                         </div>
                     </li>
                 <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == 1) : ?>
+  
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
+                    </li>    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Generos
@@ -68,9 +72,6 @@
                                 <a class="dropdown-item" href="#"><?php echo $genre->getName(); ?></a>
                             <?php endforeach; ?>
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
                     </li>
                 <?php endif; ?>
 
