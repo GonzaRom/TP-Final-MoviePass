@@ -45,7 +45,7 @@
 }
 
 .background-img .content-movie-poster {
-    width: 70%;
+    width: 85%;
     height: 90%;
     display: flex;
     align-items: center;
@@ -53,8 +53,8 @@
 }
 
 .content-movie-poster .img-poster {
-    width: 30%;
-    height: 450px;
+    width: 25%;
+    height: 550px;
     background: #ccc;
 }
 
@@ -64,7 +64,7 @@
 }
 
 .content-movie-poster .content-movie-info {
-    width: 68%;
+    width: 70%;
     height: 450px;
     display: flex;
     flex-flow: column;
@@ -89,25 +89,46 @@
 }
 
 .peliculas .movie {
-    background: rgba(0, 0, 0, 0);
-    transition: .5s;
-    display: flex !important;
-}
-
-.peliculas .movie a{
-    width: 100%;
-    height: 100%; 
-}
-.movie a img {
     width: 100%;
     height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.movie .img-poster-movie{
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+.img-poster-movie img {
+    display: block;
+    width: 100%;
+    height: 100%;
+
 }
 
-.peliculas .movie:hover{
-    opacity: .4;
+.peliculas .movie .detalles{
+    position: absolute;
+    width: 100%;
+    bottom: -200px;
+    background: #000;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
     transition: .5s;
 }
 
+.detalles h2{
+    color: #fff;
+}
+
+.peliculas .movie:hover .detalles{
+    bottom: 0;
+    transition: .5s;
+}
+.peliculas .movie:hover .img-poster-movie{
+    opacity: .5;
+    transition: .5s;
+}
 .generos {
     grid-column: 2/4;
     background: rgb(14, 25, 44);

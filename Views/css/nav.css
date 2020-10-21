@@ -4,14 +4,22 @@
     box-sizing: border-box;
 }
 .dropdown-menu.show{
-    background: #444;
+    background: rgb(78, 0, 0);
     padding: 0;
+    border-radius: 20px;
+    height: 200px;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    display: block;
 }
 .dropdown-menu .dropdown-item{
-    background: #444;
+    background: rgb(78, 0, 0);
     font-size: 1em;
     transition: .5s;
     width: 200px;
+    color: #fff;
+    border-radius: 20px;
 }
 .dropdown-menu  .dropdown-item:hover{
     background: #fff ;

@@ -68,10 +68,20 @@
       <?php for ($i = 0; $i < count($movieShows); $i++) :
         $movie = $movieShows[$i]->getMovie();
         $imgPath = $movie->getPoster();
+        $name =  $movie->getTitle();
         $id = $movie->getId();
       ?>
        
-        <div class="movie"><a href="<?php echo FRONT_ROOT."Movie/Get/" . $id; ?>" ><img src="<?php echo $imgPath; ?>" alt=""></a></div>
+        <div class="movie">
+          <div class="img-poster-movie">
+            <img src="<?php echo $imgPath; ?>" alt="">
+          </div>
+          <div class="detalles">
+            <h2><?php echo $name; ?></h2>
+            <a href="">Reservar</a>
+          </div>
+        
+        </div>
        
       <?php endfor ?>
     </section>
