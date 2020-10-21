@@ -2,7 +2,7 @@
     {
         "id": 1,
         "movie": "694919",
-        "cinema": "1",
+        "billBoard": "1",
         "room": "1",
         "date": "2020-10-21",
         "time": "12:41",
@@ -11,7 +11,7 @@
     {
         "id": 2,
         "movie": "667141",
-        "cinema": "2",
+        "billBoard": "2",
         "room": "4",
         "date": "2020-10-20",
         "time": "19:09",
@@ -20,7 +20,7 @@
     {
         "id": 3,
         "movie": "425001",
-        "cinema": "2",
+        "billBoard": "2",
         "room": "6",
         "date": "2020-10-28",
         "time": "19:09",
@@ -29,7 +29,7 @@
     {
         "id": 4,
         "movie": "337401",
-        "cinema": "1",
+        "billBoard": "1",
         "room": "3",
         "date": "2020-10-30",
         "time": "19:49",
@@ -38,7 +38,7 @@
     {
         "id": 5,
         "movie": "413518",
-        "cinema": "1",
+        "billBoard": "1",
         "room": "5",
         "date": false,
         "time": "22:27",
@@ -47,7 +47,7 @@
     {
         "id": 6,
         "movie": "627290",
-        "cinema": "1",
+        "billBoard": "1",
         "room": "2",
         "date": "31\/10\/2020",
         "time": "22:30",
@@ -56,7 +56,7 @@
     {
         "id": 7,
         "movie": "592350",
-        "cinema": "1",
+        "billBoard": "1",
         "room": "1",
         "date": "21\/10\/2020",
         "time": "11:11",

@@ -3,7 +3,6 @@
 namespace DAO;
 
 use Models\MovieShow;
-use Models\Seat;
 
 class MovieShowDAO implements IMovieShowDAO
 {
@@ -50,7 +49,7 @@ class MovieShowDAO implements IMovieShowDAO
                 $newMovieShow = new MovieShow();
                 $newMovieShow->setId($movieShow['id']);
                 $newMovieShow->setMovie($movieShow['movie']);
-                $newMovieShow->setCinema($movieShow['cinema']);
+                $newMovieShow->setBillBoard($movieShow['billBoard']);
                 $newMovieShow->setRoom($movieShow['room']);
                 $newMovieShow->setDate($movieShow['date']);
                 $newMovieShow->setTime($movieShow['time']);
@@ -68,7 +67,7 @@ class MovieShowDAO implements IMovieShowDAO
             $valuesMovieShow = array();
             $valuesMovieShow['id'] = $movieShow->getId();
             $valuesMovieShow['movie'] = $movieShow->getMovie();
-            $valuesMovieShow['cinema'] = $movieShow->getCinema();
+            $valuesMovieShow['billBoard'] = $movieShow->getBillBoard();
             $valuesMovieShow['room'] = $movieShow->getRoom();
             $valuesMovieShow['date'] = $movieShow->getDate();
             $valuesMovieShow['time'] = $movieShow->getTime();
