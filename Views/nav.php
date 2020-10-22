@@ -37,6 +37,9 @@
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Listar</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Ticket/showAddTicketView" tabindex="-1" aria-disabled="true">Ticket</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Salas

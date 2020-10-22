@@ -18,7 +18,7 @@ class TicketController{
 
     public function showAddTicketView(){
         $listTicket = $this->ticketDAO->getAll();
-        require_once(VIEWS_PATH.'add-ticket.php');
+        require_once(VIEWS_PATH.'add-purchase.php');
     }
 
     public function add($idMovieShow , $idSeat , $idUser, $discount){
@@ -39,6 +39,8 @@ class TicketController{
         else{
             $listTicket= $this->ticketDAO->getAll();
         }
+
+    require_once(VIEWS_PATH."list-ticket.php");
     }
 
 }

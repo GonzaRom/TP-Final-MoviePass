@@ -15,9 +15,7 @@ class Movie
     private $voteAverage;
     private $runtime;
 
-    public function __construct()
-    {
-    }
+
 
     public function getId()
     {

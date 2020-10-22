@@ -33,6 +33,7 @@ class MovieShowController
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
         $this->seatDAO = new SeatDAO();
         $this->billBoardDAO = new BillBoardDAO();
+        
     }
 
     public function showAddMovieShowView($message = "")
@@ -77,7 +78,7 @@ class MovieShowController
                     }
                 }
             }
-            ///validar que la pelicula no se este emitiendo el mismo dia en otro cine
+             ///validar que la pelicula no se este emitiendo el mismo dia en otro cine
         }
 
         if ($today <  $date) {
@@ -169,6 +170,14 @@ class MovieShowController
         require_once(VIEWS_PATH . "list-movieShow.php");
     }
 
+    public function getByMovie($idMovie){
+
+        $movieDTO = $this->movieDAO->get($idMovie);
+        $genres = $movieDTO->getGenres();
+        $listMovieShow = $this->movieShowDAO->getByMovie($idMovie);
+        require_once(VIEWS_PATH."detail-movie.php");
+    }
+
     private  function create_array($num_elements)
     {
         $seat = new Seat();
@@ -231,4 +240,6 @@ class MovieShowController
         }
         return $listMovieShow;
     }
+
+    
 }

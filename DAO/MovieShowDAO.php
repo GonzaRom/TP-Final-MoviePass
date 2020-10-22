@@ -37,6 +37,17 @@ class MovieShowDAO implements IMovieShowDAO
         return $this->getItem($id);
     }
 
+    public function getByMovie($idMovie){
+        $listByMovie=array();
+        $this->retriveData();
+        foreach($this->listMovieShow as $movieShow){
+            if($movieShow->getMovie() == $idMovie){
+                array_push($listByMovie , $movieShow);
+            }
+        }
+    return $listByMovie;
+    }
+
     private function retriveData()
     {
         $this->listMovieShow = array();
@@ -98,5 +109,7 @@ class MovieShowDAO implements IMovieShowDAO
         }
         return $getMovieShow;
     }
+
+
 
 }

@@ -2,8 +2,15 @@
     <div class="content-rgba-movie-list">
         <?php include("nav.php"); ?>
         <div class="container">
-            <form action="<?php echo FRONT_ROOT ?>Movie/Get" method="POST">
+            <form action="<?php echo FRONT_ROOT ?>MovieShow/getByMovie" method="GET">
+                <select name="" id="">
+                    <option value="">Todos</option>
+                    <option value="">Amabasador</option>
+                    <option value="">Aldrey</option>
+                    <option value="">Gallegos</option>
+                </select> 
                 <div class="card mb-3" style="max-width: 100%;">
+
                     <?php for ($j = 0; $j < count($movieShows); $j++) :
                         $movie = $movieShows[$j]->getMovie();
                         $nombre = $movie->getTitle();

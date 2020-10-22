@@ -42,3 +42,19 @@
 .button-remove:hover {
     background: rgb(133, 12, 12);
 }
+
+.list-movieShow-byMovie{
+    width: 100%;
+}
+
+.movieShowContent{
+    width: 100%;
+    display: flex; align-items: center;
+    background: #444;
+    padding: 10px;
+    margin: 10px;
+}
+
+.movieShowContent h2 , .movieShowContent h3{
+    margin:10px;
+}

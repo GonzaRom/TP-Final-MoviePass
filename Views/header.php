@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>detail-movie.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-movieShow.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>list-movieShow.css">
+    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-purchase.css">
+
     <script type="text/javascript">
     function selectCines(str){
        var conexion;

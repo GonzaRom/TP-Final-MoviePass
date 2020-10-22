@@ -70,5 +70,14 @@
         "date": "31\/10\/2020",
         "time": "21:00",
         "typeMovieShow": "1"
+    },
+    {
+        "id": 9,
+        "movie": "667141",
+        "billBoard": "2",
+        "room": "4",
+        "date": "2020-10-20",
+        "time": "19:09",
+        "typeMovieShow": "1"
     }
 ]

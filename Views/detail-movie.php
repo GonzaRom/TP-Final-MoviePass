@@ -22,5 +22,17 @@
         </p>
       </div>
     </div>
+    <section class="list-movieShow-byMovie">
+
+        <?php foreach($listMovieShow as $movieShow):?>
+          <div class="movieShowContent">
+            <h2><?php echo $movieShow->getBillBoard();?></h2>
+            <h3><?php echo $movieShow->getRoom();?></h3>
+            <h3><?php echo $movieShow->getDate();?></h3>
+            <h3><?php echo $movieShow->getTime();?></h3>
+
+          </div>
+        <?php endforeach;?>
+    </section>
   </div>
 </div>
