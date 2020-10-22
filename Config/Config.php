@@ -13,6 +13,11 @@ define("MOVIE_PATH", FRONT_ROOT.VIEWS_PATH . "peliculas/");
 define("SLICK", FRONT_ROOT.VIEWS_PATH . "slick/");
 define("FONTAWESOME", FRONT_ROOT.VIEWS_PATH . "fontawesome-free-5.15.1-web/");
 
+define("DB_HOST", "localhost");
+define("DB_NAME", "moviepass");
+define("DB_USER", "root");
+define("DB_PASS", "");
+
 
 ?>
 
