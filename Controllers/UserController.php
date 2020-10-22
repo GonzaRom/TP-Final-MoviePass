@@ -27,6 +27,19 @@ class UserController
         require_once(VIEWS_PATH . "login.php");
     }
 
+    public function showHomeView($message = "")
+    {
+        $nowPlayingMoviesList = array();
+        try {
+            $nowPlayingMoviesList = $this->movieDAO->getAllBackground();
+            require_once(VIEWS_PATH . "home.php");
+        } catch (\Exception $e) {
+            //Por hacer:
+            //return require_once(VIEWS_PATH."error_404.php");
+            echo $e->getMessage();
+        }
+    }
+
     public function showSingInView($message = "")
     {
         $userTypeList = $this->userTypeDAO->getAll();
