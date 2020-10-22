@@ -42,7 +42,7 @@ class RoomController
         $newroom->setCapacity($capacity);
         $newroom->setTypeRoom($typeroom);
         $newroom->setCinema($cinema);
-
+        $newroom->setActive(true);
         $this->roomDao->add($newroom);
 
         $this->showAddView(1);
@@ -57,13 +57,14 @@ class RoomController
             $roomDTO->setId($room->getId());
             $roomDTO->setName($room->getName());
             $roomDTO->setCapacity($room->getCapacity());
+            $roomDTO->setActive($room->getActive());
             $typeRoom = $this->typeroomDao->get($room->getTypeRoom());
             $cinema = $this->cinemaDao->get($room->getCinema());
             $roomDTO->setCinemaName(($cinema) ? $cinema->getName() : "");
             $roomDTO->setTypeRoomName($typeRoom->getName());
             array_push($roomsDTOList, $roomDTO);
         }
-        if (count($roomsDTOList > 0)) return $roomsDTOList;
+        if (count($roomsDTOList) > 0) return $roomsDTOList;
         return null;
     }
 

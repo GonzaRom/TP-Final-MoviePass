@@ -40,11 +40,11 @@
                                 </div>
                                 <div class="card-footer text-light bg-secondary">
                                     <p><span><strong>Cine:</strong>
-                                            <?php echo $movieShows[$i]->getNameCinema(); ?></span>
+                                            <?php echo $movieShows[$j]->getNameCinema(); ?></span>
                                         <span><strong>Sala:</strong>
-                                            <?php echo $movieShows[$i]->getRoomName(); ?></span>
+                                            <?php echo $movieShows[$j]->getRoomName(); ?></span>
                                         <span><strong>Proxima funcion:
-                                            </strong><?php echo $movieShows[$i]->getDate() . " " . $movieShows[$i]->getTime(); ?></span>
+                                            </strong><?php echo $movieShows[$j]->getDate() . " " . $movieShows[$j]->getTime(); ?></span>
                                         <span><strong>Duracion: 
                                             </strong><?php echo $duration." min"; ?></span>
                                     </p>

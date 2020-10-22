@@ -30,9 +30,14 @@ class RoomDAO implements IRoomDAO{
 
         }
         public function get($id){
+            $getRoom = null;
             $this->retriveData();
-            return $this->roomsList[$id];
-
+            foreach($this->roomsList as $room){
+                if($room->getId() == $id){
+                    $getRoom = $room;
+                }
+            }
+        return $getRoom;
         }
         //funcion q devuelve todos las salas de un cine
         public function getCinema($id)
@@ -52,6 +57,16 @@ class RoomDAO implements IRoomDAO{
             $this->saveData();
         }
 
+        public function deleteByCinema($id){
+            $this->retriveData();
+            foreach($this->roomsList as $room){
+                if($room->getCinema() == $id){
+                    $room->setActive(false);
+                }
+            }
+            $this->saveData();
+        }
+
         private function retriveData(){
             $this->roomsList= array();
             if(file_exists($this->fileName)){
@@ -67,6 +82,7 @@ class RoomDAO implements IRoomDAO{
                     $newRoom->setCapacity($room['capacity']);
                     $newRoom->setCinema($room['Cinema']);
                     $newRoom->setTypeRoom($room['typeRoom']);
+                    $newRoom->setActive($room['active']);
                     array_push($this->roomsList , $newRoom);            
                 }
             }
@@ -82,6 +98,7 @@ class RoomDAO implements IRoomDAO{
                 $valuesRoom['capacity'] = $room->getCapacity();
                 $valuesRoom['typeRoom'] = $room->getTypeRoom();
                 $valuesRoom['Cinema'] = $room->getCinema();
+                $valuesRoom['active'] = $room->getActive();
 
                 array_push($jsonEncode , $valuesRoom);
             }

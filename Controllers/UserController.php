@@ -46,20 +46,6 @@ class UserController
         require_once(VIEWS_PATH . "sign-in.php");
     }
 
-    public function showHomeView($message = "")
-    {
-        $nowPlayingMoviesList = array();
-        try {
-            $nowPlayingMoviesList = $this->movieDAO->getAllBackground();
-            $genreList = $this->genreDAO->getAll();
-
-            require_once(VIEWS_PATH . "home.php");
-        } catch (\Exception $e) {
-            //Por hacer:
-            //return require_once(VIEWS_PATH."error_404.php");
-            $message=$e->getMessage();
-        }
-    }
 
     public function login($userName = "", $password = "")
     {

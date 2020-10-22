@@ -52,9 +52,16 @@
         }
 
         public function delete($key){
+            $success = false;
             $this->retrieveData();
-            unset($this->cinemalist[$key]);
-            $this->saveData();                       
+            foreach($this->cinemalist as $cinema){
+                if($cinema->getId() == $key){
+                    $cinema->setActive(false);
+                    $success = true;
+                } 
+            }
+            $this->saveData();
+            return $success;                       
         }
 
         private function saveData(){
@@ -65,6 +72,7 @@
                 $valuesArray["name"]=$cinema->getName();
                 $valuesArray["adress"]=$cinema->getAdress();
                 $valuesArray["phonenumber"]=$cinema->getPhonenumber();
+                $valuesArray['active']=$cinema->getActive();
                 array_push($arrayToEncode,$valuesArray);
             }
             $jsonContent=json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -84,7 +92,8 @@
                     $cinema->setId($valuesArray["id"]);
                     $cinema->setName($valuesArray["name"]);
                     $cinema->setAdress($valuesArray["adress"]);
-                    $cinema->setPhonenumber($valuesArray["phonenumber"]);                    
+                    $cinema->setPhonenumber($valuesArray["phonenumber"]);    
+                    $cinema->setActive($valuesArray['active']);                
                     array_push($this->cinemalist,$cinema);
                 }
             }

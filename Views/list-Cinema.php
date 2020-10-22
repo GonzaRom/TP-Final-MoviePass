@@ -4,7 +4,7 @@
 
             <section class="section-cinema-list">
 
-                <form action="<?php echo FRONT_ROOT ?>Cinema/Delete" method="GET" class="form-list-cinema">
+                <form action="<?php echo FRONT_ROOT ?>Cinema/delete" method="GET" class="form-list-cinema">
                     <table class="table-list-cinema">
                         <thead class="thead-list-cinema">
                             <tr class="tr-list-cinema">
@@ -22,21 +22,23 @@
                             <?php
                             foreach ($cinemalist as $cinema) :
                             ?>
-                                <tr class="tr-list-information-cinema">
-                                    <td><?php echo $cinema->getName(); ?></td>
-                                    <td><?php echo $cinema->getAdress(); ?></td>
-                                    <td><?php echo $cinema->getPhonenumber(); ?></td>
-                                    <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></td>
-                                    <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "2") : ?>
-                                        <td>
-                                            <button class="button-remove-cinema" type="submit" name="id" value="<?php echo $cinema->getId(); ?>"> Eliminar </button>
-                                        </td>
-                                        <!--UPDATE-->
-                                        <td>
-                                            <a class="button-remove-cinema" href="<?php echo FRONT_ROOT. "Cinema/showUpdateView/" . $cinema->getId();?>" >Actualizar</a>
-                                        </td>
-                                    <?php endif; ?>
-                                </tr>
+                                <?php if ($cinema->getActive() ==  true) : ?>
+                                    <tr class="tr-list-information-cinema">
+                                        <td><?php echo $cinema->getName(); ?></td>
+                                        <td><?php echo $cinema->getAdress(); ?></td>
+                                        <td><?php echo $cinema->getPhonenumber(); ?></td>
+                                        <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></td>
+                                        <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "2") : ?>
+                                            <td>
+                                                <button class="button-remove-cinema" type="submit" name="id" value="<?php echo $cinema->getId(); ?>"> Eliminar </button>
+                                            </td>
+                                            <!--UPDATE-->
+                                            <td>
+                                                <a class="button-remove-cinema" href="<?php echo FRONT_ROOT . "Cinema/showUpdateView/" . $cinema->getId(); ?>">Actualizar</a>
+                                            </td>
+                                        <?php endif; ?>
+                                    </tr>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </tbody>
                     </table>

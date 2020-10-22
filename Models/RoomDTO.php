@@ -1,13 +1,16 @@
 <?php
-    namespace Models;
+
+namespace Models;
 
 
-class RoomDTO{
+class RoomDTO
+{
     private $id;
     private $name;
     private $capacity;
     private $typeRoomName;
     private $cinemaName;
+    private $active;
 
     public function __construct()
     {
@@ -61,6 +64,13 @@ class RoomDTO{
     {
         $this->cinemaName = $cinemaName;
     }
+    public function setActive($active)
+    {
+        $this->active = $active;
     }
 
-    
+    public function getActive()
+    {
+        return $this->active;
+    }
+}

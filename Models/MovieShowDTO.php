@@ -41,7 +41,7 @@ class MovieShowDTO{
         return $this->nameCinema;
     }
 
-    public function setNameCinema($nameCinema)
+    public function setNameCinema($nameCinema = "")
     {
         $this->nameCinema = $nameCinema;
     }

@@ -16,7 +16,6 @@ class Movie
     private $runtime;
 
 
-
     public function getId()
     {
         return $this->id;

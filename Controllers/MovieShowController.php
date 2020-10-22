@@ -178,6 +178,10 @@ class MovieShowController
         require_once(VIEWS_PATH."detail-movie.php");
     }
 
+    public function getByCinema($idCinema){
+        
+    }
+
     private  function create_array($num_elements)
     {
         $seat = new Seat();

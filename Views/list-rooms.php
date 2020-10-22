@@ -23,22 +23,25 @@
                         <?php
                         foreach ($listRooms as $room) :
                         ?>
-                            <tr class="tr-list-information-cinema">
-                                <td><?php echo $room->getName(); ?></td>
-                                <td><?php echo $room->getCinemaName(); ?></td>
-                                <td><?php echo $room->getTypeRoomName(); ?></td>
-                                <td><?php echo $room->getCapacity(); ?></td>
-                                <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></td>
-                                <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "2") : ?>
-                                    <td>
-                                        <button class="button-remove-cinema" type="submit" name="id" value="<?php echo $room->getId(); ?>"> Eliminar </button>
-                                    </td>
-                                    <!--UPDATE-->
-                                    <td>
-                                        <a class="button-remove-cinema" href="<?php echo FRONT_ROOT . "Cinema/showUpdateView/" . $room->getId(); ?>">Actualizar</a>
-                                    </td>
-                                <?php endif; ?>
-                            </tr>
+                            <?php if ($room->getActive() == true) : ?>
+                                <tr class="tr-list-information-cinema">
+                                    <td><?php echo $room->getName(); ?></td>
+                                    <td><?php echo $room->getCinemaName(); ?></td>
+                                    <td><?php echo $room->getTypeRoomName(); ?></td>
+                                    <td><?php echo $room->getCapacity(); ?></td>
+                                    <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></td>
+                                    <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "2") : ?>
+
+                                        <td>
+                                            <button class="button-remove-cinema" type="submit" name="id" value="<?php echo $room->getId(); ?>"> Eliminar </button>
+                                        </td>
+                                        <!--UPDATE-->
+                                        <td>
+                                            <a class="button-remove-cinema" href="<?php echo FRONT_ROOT . "Cinema/showUpdateView/" . $room->getId(); ?>">Actualizar</a>
+                                        </td>
+                                    <?php endif; ?>
+                                </tr>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

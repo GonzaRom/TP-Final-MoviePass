@@ -58,7 +58,7 @@
   <section class="content-peliculas-generos">
     <aside class="generos">
       <ul>
-        <?php foreach ($genreList as $genre) : ?>
+        <?php foreach ($listGenre as $genre) : ?>
           <li><?php echo $genre->getName(); ?></li>
         <?php endforeach; ?>
       </ul>

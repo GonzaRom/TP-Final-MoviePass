@@ -7,6 +7,7 @@
         private $adress;
         private $phonenumber;
         private $rooms;
+        private $active;
         
         public function __construct(){
 
@@ -66,6 +67,13 @@
         {
             $this->rooms = $rooms;
             return $this;
+        }
+        public function setActive($active){
+            $this->active = $active;
+        }
+
+        public function getActive(){
+            return $this->active;
         }
     }
 ?>

@@ -18,6 +18,7 @@ class BillBoardDAO implements IBillBoardDAO
     public function add(BillBoard $newBillBoard)
     {
         $this->retriveData();
+        $newBillBoard->setId($this->idBillboard());
         array_push($this->billBoardArray, $newBillBoard);
         $this->saveData();
     }
@@ -53,6 +54,18 @@ class BillBoardDAO implements IBillBoardDAO
             }
         }
         return null;
+    }
+
+    private function idBillboard(){
+       $id = 0; 
+       $this->retriveData();
+       $lastBillboard = end($this->billBoardArray);
+       if(!empty($lastBillboard)){
+           $id = $lastBillboard->getId();
+       }
+
+       $id++;
+       return $id;
     }
 
     private function retriveData()

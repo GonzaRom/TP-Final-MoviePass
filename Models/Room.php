@@ -9,6 +9,7 @@
         private $capacity;
         private $typeRoom;
         private $idcinema;
+        private $active;
 
         public function __construct(){
             
@@ -52,6 +53,14 @@
 
         public function getCinema(){
             return $this->idcinema;
+        }
+
+        public function setActive($active){
+            $this->active = $active;
+        }
+
+        public function getActive(){
+            return $this->active;
         }
     }
 ?>
