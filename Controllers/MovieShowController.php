@@ -4,7 +4,6 @@ namespace Controllers;
 
 use DAO\MovieShowDAO as MovieShowDAO;
 use DAO\CinemaDAO as CinemaDAO;
-use DAO\MovieDAO as MovieDAO;
 use DAO\RoomDAO as RoomDAO;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\SeatDAO as SeatDAO;
@@ -12,33 +11,34 @@ use Models\Seat as Seat;
 use Models\MovieShow as MovieShow;
 use Models\MovieShowDTO as MovieShowDTO;
 use DAO\BillBoardDAO as BillBoardDAO;
+use DAO\MovieDAOMSQL as MovieDAOMSQL;
 
 class MovieShowController
 {
 
     private $movieShowDAO;
     private $cinemaDAO;
-    private $movieDAO;
     private $roomDAO;
     private $typeMovieShowDAO;
     private $seatDAO;
     private $billBoardDAO;
+    private $movieDAOMSQL;
 
     public function __construct()
     {
         $this->movieShowDAO = new MovieShowDAO();
         $this->cinemaDAO = new CinemaDAO();
-        $this->movieDAO = new MovieDAO();
         $this->roomDAO = new RoomDAO();
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
         $this->seatDAO = new SeatDAO();
         $this->billBoardDAO = new BillBoardDAO();
+        $this->movieDAOMSQL = new MovieDAOMSQL();
         
     }
 
     public function showAddMovieShowView($message = "")
     {
-        $listMovies = $this->movieDAO->getAll();
+        $listMovies = $this->movieDAOMSQL->getAll();
         $listCinema = $this->cinemaDAO->getAll();
         $listTypeMovieShow = $this->typeMovieShowDAO->getAll();
         require_once(VIEWS_PATH . "add-movieShow.php");
@@ -124,7 +124,7 @@ class MovieShowController
         $listCinema = $this->cinemaDAO->getAll();
         $listSeatMovieShow = array();
         $listRoom = $this->roomDAO->getAll();
-
+        $listMovie = $this->movieDAOMSQL->getAll();
         $listMovieShow = array();
         foreach ($movieShows as $movieShow) {
             $movieShowDTO = new MovieShowDTO();
@@ -172,7 +172,7 @@ class MovieShowController
 
     public function getByMovie($idMovie){
 
-        $movieDTO = $this->movieDAO->get($idMovie);
+        $movieDTO = $this->movieDAOMSQL->get($idMovie);
         $genres = $movieDTO->getGenres();
         $listMovieShow = $this->movieShowDAO->getByMovie($idMovie);
         require_once(VIEWS_PATH."detail-movie.php");
@@ -226,7 +226,7 @@ class MovieShowController
             $movieShowDTO->setId($movieShow->getId());
             $movieShowDTO->setDate($movieShow->getDate());
             $movieShowDTO->setTime($movieShow->getTime());
-            $movieShowDTO->setMovie($this->movieDAO->get($movieShow->getMovie()));
+            $movieShowDTO->setMovie($this->movieDAOMSQL->get($movieShow->getMovie()));
             $billBoard = $this->billBoardDAO->get($movieShow->getBillBoard());
 
             foreach ($listCinema as $cinema) {

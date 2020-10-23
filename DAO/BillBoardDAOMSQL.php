@@ -24,7 +24,7 @@
             try{
                 $query= "INSERT INTO ".$this->tableName. "(idbillboard,idcinema,) VALUES (:id,:idCinema);";
             
-                $parameters['id'] = $newbillBoard->getId();
+                $parameters['id'] = $newbillboard->getId();
                 $parameters["idCinema"] = $newbillboard->getIdCinema();
                
                 $this->connection = Connection::getInstance();
