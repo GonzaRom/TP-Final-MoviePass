@@ -64,7 +64,7 @@ class MovieDAO implements IMovieDAO
     public function retriveNowPlayingFromApi()
     {
         $this->NowPlayingMovieList = array();
-        $endpointNowPlayingApi = "https://api.themoviedb.org/3/movie/now_playing?api_key=" . $this->KEY_PATH . "&language=es-ES&page=1";
+        $endpointNowPlayingApi = "https://api.themoviedb.org/3/movie/now_playing?api_key=" . $this->KEY_PATH . "&language=es-ES";
         $apiMovieContent = file_get_contents($endpointNowPlayingApi);
         $apiMovieDecode = ($apiMovieContent) ? json_decode($apiMovieContent, true) : array();
         if (count($apiMovieDecode) <= 0) {

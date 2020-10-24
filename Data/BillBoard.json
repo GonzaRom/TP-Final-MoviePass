@@ -10,5 +10,13 @@
     {
         "id": 3,
         "idCinema": 3
+    },
+    {
+        "id": 4,
+        "idCinema": 4
+    },
+    {
+        "id": 5,
+        "idCinema": 5
     }
 ]

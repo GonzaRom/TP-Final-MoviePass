@@ -10,10 +10,12 @@ use DAO\RoomDAO as RoomDAO;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\BillBoardDAO as BillBoardDAO;
 use Models\MovieShowDTO as MovieShowDTO;
+use DAO\MovieDAOMSQL as MovieDAOMSQL;
 
 class HomeController
 {
     private $movieDAO;
+    private $movieDAOMSQL;
     private $genreDAO;
     private $movieShowDAO;
     private $cinemaDAO;
@@ -24,6 +26,7 @@ class HomeController
     public function __construct()
     {
         $this->movieDAO = new MovieDAO();
+        $this->movieDAOMSQL = new MovieDAOMSQL();
         $this->genreDAO = new GenreDAO();
         $this->movieShowDAO = new MovieShowDAO();
         $this->cinemaDAO = new CinemaDAO();
@@ -37,6 +40,7 @@ class HomeController
     public function index($message = "")
     {
         $movieShows = $this->getMovieShowList();// trae todas las funciones disponibles.
+        $this->movieDAOMSQL->updateFromApi();
         if (empty($movieShows)){
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  

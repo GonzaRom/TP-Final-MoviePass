@@ -38,5 +38,13 @@
         "typeRoom": "2",
         "Cinema": "3",
         "active": true
+    },
+    {
+        "id": 6,
+        "name": "Sala 1",
+        "capacity": "50",
+        "typeRoom": "2",
+        "Cinema": "5",
+        "active": true
     }
 ]

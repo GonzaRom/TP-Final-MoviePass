@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "movie": "337401",
+        "billBoard": 3,
+        "room": "5",
+        "date": "23\/10\/2020",
+        "time": "22:00",
+        "typeMovieShow": "1"
+    },
+    {
+        "id": 2,
+        "movie": "667141",
+        "billBoard": 3,
+        "room": "5",
+        "date": "23\/10\/2020",
+        "time": "22:22",
+        "typeMovieShow": "1"
+    },
+    {
+        "id": 3,
+        "movie": "694919",
+        "billBoard": 3,
+        "room": "5",
+        "date": "22\/11\/2020",
+        "time": "22:22",
+        "typeMovieShow": "2"
+    },
+    {
+        "id": 4,
+        "movie": "590223",
+        "billBoard": 3,
+        "room": "5",
+        "date": "24\/10\/2020",
+        "time": "03:03",
+        "typeMovieShow": "1"
+    },
+    {
+        "id": 5,
+        "movie": "554311",
+        "billBoard": 5,
+        "room": "6",
+        "date": "24\/10\/2020",
+        "time": "22:22",
+        "typeMovieShow": "1"
+    }
+]
