@@ -20,7 +20,7 @@
             
         }
 
-        public function add(BillBoard $newbillboard){
+        public function add(BillBoard $newbillBoard){
             try{
                 $query= "INSERT INTO ".$this->tableName. "(idbillboard,idcinema,) VALUES (:id,:idCinema);";
             
@@ -73,7 +73,7 @@
             }
             try
             {
-                $billboard;
+                $billboard = NULL;
 
                 $query = "SELECT * FROM ".$this->tableName;
 

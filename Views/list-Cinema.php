@@ -22,7 +22,6 @@
                             <?php
                             foreach ($cinemalist as $cinema) :
                             ?>
-                                <?php if ($cinema->getActive() ==  true) : ?>
                                     <tr class="tr-list-information-cinema">
                                         <td><?php echo $cinema->getName(); ?></td>
                                         <td><?php echo $cinema->getAdress(); ?></td>
@@ -36,7 +35,6 @@
                                             <td>
                                                 <a class="button-remove-cinema" href="<?php echo FRONT_ROOT . "Cinema/showUpdateView/" . $cinema->getId(); ?>">Actualizar</a>
                                             </td>
-                                        <?php endif; ?>
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>

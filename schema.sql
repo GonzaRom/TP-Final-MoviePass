@@ -1,5 +1,6 @@
+
+drop database moviepass
 CREATE DATABASE moviepass;
-#drop database moviepass
 use moviepass;
 
 CREATE TABLE usertypes(
@@ -29,7 +30,11 @@ CREATE TABLE cinemas(
 	namecinema varchar(50),
 	adress varchar(100),
 	phonenumber varchar(50),
+<<<<<<< HEAD
     isactive boolean,
+=======
+    active boolean,
+>>>>>>> origin/Isaias
 	constraint PK_CINEMA  primary key(idcinema),
     constraint UNQ_CINE unique (namecinema,adress)
 )ENGINE=InnoDB;
@@ -60,6 +65,7 @@ CREATE TABLE rooms(
     constraint FK_CINEROOM foreign key (idcinema) references cinemas (idcinema),
     constraint FK_TYPEROOM foreign key (idtyperoom) references typerooms(idtyperoom)
 )ENGINE=InnoDB;
+
 
 CREATE TABLE genres(
 	idgenre int not null,

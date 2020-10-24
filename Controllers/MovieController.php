@@ -43,7 +43,6 @@ class MovieController
     {
         try {
             $movieDTO = $this->movieDAO->get($movieId);
-            $genres = $movieDTO->getGenres();
             require_once(VIEWS_PATH . "detail-movie.php");
         } catch (\Exception $e) {
             //Por hacer:

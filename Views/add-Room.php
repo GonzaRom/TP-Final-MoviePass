@@ -24,7 +24,7 @@
                             </span>
                             <select name="typeroom" id="" required>
                                 <option value="">Seleccione una opcion</option>
-                                <?php foreach($listtyperoom as $typeroom):?>
+                                <?php foreach($listTypeRoom as $typeroom):?>
                                     <option value="<?php echo $typeroom->getId();?>"><?php echo $typeroom->getName();?></option>
                                 <?php endforeach;?>
                             </select>
@@ -35,8 +35,12 @@
                             </span>
                             <input type="num" name="capacity" id="" required>
                         </div>
-
-                        
+                        <div class="input-room">
+                            <span>
+                                <b>Precio de sala:</b>
+                            </span>
+                            <input type="num" name="ticketcost" id="" required>
+                        </div>
                         <div class="contentButton">
                             <button class="button" type="submit">Agregar</button>
                         </div>
