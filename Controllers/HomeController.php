@@ -6,7 +6,7 @@ use DAO\GenreDAO;
 use DAO\MovieDAO as MovieDAO;
 use DAO\MovieShowDAO as MovieShowDAO;
 use DAO\CinemaDAO as CinemaDAO;
-use DAO\RoomDAO as RoomDAO;
+use DAO\RoomDAOMSQL as RoomDAO;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\BillBoardDAO as BillBoardDAO;
 use Models\MovieShowDTO as MovieShowDTO;
@@ -45,6 +45,7 @@ class HomeController
         require_once(VIEWS_PATH . "home.php");
     }
 
+    //trae Todas las movieShow y la almacena en un un array de movieShowDTO.
     private function getMovieShowList()
     {
         $movieShows = $this->movieShowDAO->getAll();
@@ -59,7 +60,7 @@ class HomeController
             $cinema = $this->cinemaDAO->get($billBoard->getIdCinema());
             $movieShowDTO->setNameCinema($cinema->getName());
             $room = $this->roomDAO->get($movieShow->getRoom());
-            $movieShowDTO->setRoomName($room->getName());
+            /*$movieShowDTO->setRoomName($room->getName());*/
             $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow()));
 
             array_push($listMovieShow, $movieShowDTO);

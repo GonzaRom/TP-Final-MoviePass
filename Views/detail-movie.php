@@ -14,8 +14,8 @@
         </p>
         <hr class="my-4">
         <p class="lead">
-          <?php for ($i = 0; $i < count($genres); $i++) : ?>
-            <span class="badge badge-info"><?php echo $genres[$i]["name"]; ?> </span>
+          <?php for ($i = 0; $i < count($listGenre); $i++) : ?>
+            <span class="badge badge-info"><?php echo $listGenre[$i]["name"]; ?> </span>
           <?php endfor; ?>
           <span class="badge badge-info"><?php echo $movieDTO->getReleaseDate(); ?> </span>
           <span class="badge badge-info"><?php echo $movieDTO->getVoteAverage(); ?> </span>
@@ -30,7 +30,6 @@
             <h3><?php echo $movieShow->getRoom();?></h3>
             <h3><?php echo $movieShow->getDate();?></h3>
             <h3><?php echo $movieShow->getTime();?></h3>
-
           </div>
         <?php endforeach;?>
     </section>

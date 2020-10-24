@@ -10,5 +10,53 @@
     {
         "id": 3,
         "idCinema": 3
+    },
+    {
+        "id": 4,
+        "idCinema": 1
+    },
+    {
+        "id": 5,
+        "idCinema": 1
+    },
+    {
+        "id": 6,
+        "idCinema": 2
+    },
+    {
+        "id": 7,
+        "idCinema": 3
+    },
+    {
+        "id": 8,
+        "idCinema": 4
+    },
+    {
+        "id": 9,
+        "idCinema": 1
+    },
+    {
+        "id": 10,
+        "idCinema": 1
+    },
+    {
+        "id": 11,
+        "idCinema": 1
+    },
+    {
+        "id": 12,
+        "idCinema": 1
+    },
+    {
+        "id": 13,
+        "idCinema": 2
+    },
+    {
+        "id": 14,
+        "idCinema": 1
+    },
+    {
+        "id": 15,
+        "idCinema": 2
     }
 ]

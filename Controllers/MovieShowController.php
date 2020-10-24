@@ -33,7 +33,6 @@ class MovieShowController
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
         $this->seatDAO = new SeatDAO();
         $this->billBoardDAO = new BillBoardDAO();
-        
     }
 
     public function showAddMovieShowView($message = "")
@@ -51,8 +50,11 @@ class MovieShowController
             echo 'Sala:<select name="room" id="">';
             echo '<option value="">Seleccione una sala</option> ';
             foreach ($listRoom as $room) {
+                if($room->getActive() == true){
+                    echo '<option value="' . $room->getId() . '">' . $room->getName()  . '</option> ';
+                }
 
-                echo '<option value="' . $room->getId() . '">' . $room->getName()  . '</option> ';
+                
             }
             echo '</select>';
         }
@@ -78,7 +80,7 @@ class MovieShowController
                     }
                 }
             }
-             ///validar que la pelicula no se este emitiendo el mismo dia en otro cine
+            ///validar que la pelicula no se este emitiendo el mismo dia en otro cine
         }
 
         if ($today <  $date) {
@@ -108,25 +110,24 @@ class MovieShowController
     public function getAll()
     {
         $movieShows = $this->getMovieShowList();
-        if (empty($movieShows))
+        if (empty($movieShows)) {
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  
             $message = "E R R O R, No existen funciones pendientes.";
-        else {
-            require_once(VIEWS_PATH . "list-movies.php");
         }
+        require_once(VIEWS_PATH . "list-movies.php");
     }
 
     public function showListMovieShowView()
     {
         $listSeat = $this->seatDAO->GetAll();
-        $movieShows = $this->movieShowDAO->getAll();
+        $movieShowsList = $this->movieShowDAO->getAll();
         $listCinema = $this->cinemaDAO->getAll();
         $listSeatMovieShow = array();
         $listRoom = $this->roomDAO->getAll();
-
+        $listMovie = $this->movieDAO->getAll();
         $listMovieShow = array();
-        foreach ($movieShows as $movieShow) {
+        foreach ($movieShowsList as $movieShow) {
             $movieShowDTO = new MovieShowDTO();
             $movieShowDTO->setId($movieShow->getId());
             $movieShowDTO->setDate($movieShow->getDate());
@@ -170,16 +171,13 @@ class MovieShowController
         require_once(VIEWS_PATH . "list-movieShow.php");
     }
 
-    public function getByMovie($idMovie){
+    public function getByMovie($idMovie)
+    {
 
         $movieDTO = $this->movieDAO->get($idMovie);
         $genres = $movieDTO->getGenres();
         $listMovieShow = $this->movieShowDAO->getByMovie($idMovie);
-        require_once(VIEWS_PATH."detail-movie.php");
-    }
-
-    public function getByCinema($idCinema){
-        
+        require_once(VIEWS_PATH . "detail-movie.php");
     }
 
     private  function create_array($num_elements)
@@ -244,6 +242,4 @@ class MovieShowController
         }
         return $listMovieShow;
     }
-
-    
 }

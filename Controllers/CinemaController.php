@@ -4,8 +4,9 @@ namespace Controllers;
 
 use DAO\BillBoardDAO as BillBoardDAO;
 use Models\Cinema as Cinema;
-use DAO\CinemaDAO as CinemaDAO;
-use DAO\RoomDAO as RoomDAO;
+/*use DAO\CinemaDAO as CinemaDAO;*/
+use DAO\CinemaDAOMSQL as CinemaDAOMQSQL;
+use DAO\RoomDAOMSQL as RoomDAO;
 use Models\BillBoard;
 
 class CinemaController
@@ -16,7 +17,7 @@ class CinemaController
 
     public function __construct()
     {
-        $this->cinemadao = new CinemaDAO;
+        $this->cinemadao = new CinemaDAOMQSQL();
         $this->roomDAO = new RoomDAO();
         $this->billBoardDAO = new BillBoardDAO();
     }
@@ -37,7 +38,7 @@ class CinemaController
         donde tenemos persistidos nuestra info*/
     public function add($name, $adress, $phonenumber)
     {
-        $message = 2; //variable q se va a usar como retorno para informar exito o no
+       $message = 2; //variable q se va a usar como retorno para informar exito o no
         $cinemalist = $this->cinemadao->getAll();/* variable donde guardamos la lista de cines traida desde json. */
         $flag = false; /*seteamos esta variable en falso para q nos permita agregar un cine*/
         foreach ($cinemalist as $cinema) {
@@ -62,12 +63,13 @@ class CinemaController
     }
 
     /* La funcion delete elimina un cinema recibiendo como parametro el id del cinema */
-    public function delete($id)
+    public function delete($nameCinema)
     {
         $message = 2; //variable q se va a usar como retorno para informar exito o no
-        $sucess = $this->cinemadao->delete($id);//elimina el objeto Cinema , y devuelte true si se encontro el cinema y false , si no lo encontro.
-        $this->roomDAO->deleteByCinema($id);
-        if ($sucess == true) {
+        $cinema = $this->cinemadao->get($nameCinema);//elimina el objeto Cinema , y devuelte true si se encontro el cinema y false , si no lo encontro.
+        if (!empty($cinema)) {
+            $cinema->setActive(0);
+            $this->cinemadao->delete($cinema);
             
             $message = 1;
             
@@ -104,11 +106,12 @@ class CinemaController
     // actualiza el cinema, trayendo los datos por parametro.
     public function update($id, $name, $adress, $phonenumber)
     {
-        $cinema = new Cinema();
+
+        $cinema = $this->cinemadao->get($id);
         $cinema->setName($name);
         $cinema->setAdress($adress);
         $cinema->setPhonenumber($phonenumber);
-        $flag = $this->cinemadao->update($id, $cinema);
+        $flag = $this->cinemadao->update($cinema);
         ($flag) ? $this->showListView($message = "Actualizacion exitosa!") : $this->showListView($message = "Falla en actualizacion!");
     }
 }

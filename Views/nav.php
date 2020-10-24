@@ -47,6 +47,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Room/ShowAddView">Agregar</a>
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Room/showListView">Listar</a>
+                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>TypeRoom/showAddTypeRoomView">Tipo</a>
                         </div>
                     </li>
                     <li class="nav-item">

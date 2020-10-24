@@ -14,11 +14,11 @@
                         </h2>
                     </div>
                     <div class="cinemaMovieShow">
-                        <h3><?php echo $movieShow->getCinema(); ?></h3>
+                        <h3><?php echo $movieShow->getNameCinema(); ?></h3>
                     </div>
 
                     <div class="roomMovieShow">
-                        <h3><?php echo $movieShow->getRoom(); ?></h3>
+                        <h3><?php echo $movieShow->getRoomName(); ?></h3>
                     </div>
                     <div class="dateMovieShow">
                         <h5><?php echo $movieShow->getDate(); ?></h5>
@@ -31,7 +31,7 @@
 
                 <div class="seatMovieShow">
                     <h3>Desocupados:</h3>
-                    <ul> <?php $listSeat = $movieShow->getSeat();
+                    <ul> <?php $listSeat = $movieShow->getSeats();
                             foreach ($listSeat as $seat) :
                             ?>
                             <li> <?php if ($seat->getOccupied() == false) : ?>
