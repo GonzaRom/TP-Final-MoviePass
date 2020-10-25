@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use DAO\GenreDAO;
+use DAO\GenreDAOMSQL as GenreDAOMSQL;
 use DAO\MovieDAO as MovieDAO;
 
 class MovieController

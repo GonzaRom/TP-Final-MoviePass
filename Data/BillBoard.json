@@ -66,5 +66,9 @@
     {
         "id": 17,
         "idCinema": 1
+    },
+    {
+        "id": 18,
+        "idCinema": 5
     }
 ]

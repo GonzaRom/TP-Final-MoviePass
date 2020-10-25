@@ -3,8 +3,8 @@
 namespace Controllers;
 
 use DAO\MovieShowDAO as MovieShowDAO;
-use DAO\CinemaDAO as CinemaDAO;
-use DAO\RoomDAO as RoomDAO;
+use DAO\CinemaDAOMSQL as CinemaDAOMSQL;
+use DAO\RoomDAOMSQL as RoomDAOMSQL;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\SeatDAO as SeatDAO;
 use Models\Seat as Seat;
@@ -27,8 +27,8 @@ class MovieShowController
     public function __construct()
     {
         $this->movieShowDAO = new MovieShowDAO();
-        $this->cinemaDAO = new CinemaDAO();
-        $this->roomDAO = new RoomDAO();
+        $this->cinemaDAO = new CinemaDAOMSQL();
+        $this->roomDAO = new RoomDAOMSQL();
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
         $this->seatDAO = new SeatDAO();
         $this->billBoardDAO = new BillBoardDAO();

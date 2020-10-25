@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use DAO\GenreDAO as GenreDAO;
+use DAO\GenreDAOMSQL as GenreDAOMSQL;
 
 class GenreController
 {
@@ -10,7 +10,7 @@ class GenreController
 
     public function __construct()
     {
-        $this->genreDAO = new GenreDAO();
+        $this->genreDAO = new GenreDAOMSQL();
     }
     
     public function update()

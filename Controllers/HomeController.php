@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use DAO\GenreDAO;
+use DAO\GenreDAOMSQL as GenreDAOMSQL;
 use DAO\MovieDAO as MovieDAO;
 use DAO\MovieShowDAO as MovieShowDAO;
 use DAO\CinemaDAOMSQL as CinemaDAOMSQL;
@@ -27,7 +27,7 @@ class HomeController
     {
         $this->movieDAO = new MovieDAO();
         $this->movieDAOMSQL = new MovieDAOMSQL();
-        $this->genreDAO = new GenreDAO();
+        $this->genreDAO = new GenreDAOMSQL();
         $this->movieShowDAO = new MovieShowDAO();
         $this->cinemaDAO = new CinemaDAOMSQL();
         $this->movieDAO = new MovieDAO();
@@ -39,8 +39,10 @@ class HomeController
     // se llaman a las vistas de home.php.
     public function index($message = "")
     {
+        
         $movieShows = $this->getMovieShowList();// trae todas las funciones disponibles.
-        $this->movieDAOMSQL->updateFromApi();
+        //$this->movieDAOMSQL->updateFromApi();
+        //$this->genreDAO->updateFromApi();
         if (empty($movieShows)){
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  
