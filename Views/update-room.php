@@ -36,14 +36,6 @@
                         </div>
                     </form>
                 </div>
-
-                <?php if ($message == 1) : ?>
-                    <div class="affirmative">
-
-                        <p>Cargado Exitosamente.</p>
-
-                    </div>
-                <?php endif; ?>
             </div>
 
         </div>

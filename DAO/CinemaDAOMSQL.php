@@ -41,7 +41,6 @@ class CinemaDAOMSQL implements ICinemaDAO
             $this->conection = Connection::getInstance();
 
             $result = $this->conection->Execute($sql);
-            
             foreach ($result as $cinema) {
                 $newCinema = new CinemaDTO();
                 $newCinema->setId($cinema['idcinema']);
@@ -82,7 +81,7 @@ class CinemaDAOMSQL implements ICinemaDAO
     {
         print_r($cinema);
         try {
-            $sql = "UPDATE " . $this->nameTable . " SET active = :active WHERE idcinema = :id";
+            $sql = "UPDATE " . $this->nameTable . " SET isactive = :isactive WHERE idcinema = :id";
             $parameters['id'] = $cinema->getId();
             $parameters['isactive'] = $cinema->getIsActive();
             $this->conection = Connection::getInstance();
@@ -91,6 +90,7 @@ class CinemaDAOMSQL implements ICinemaDAO
             throw $ex;
         }
     }
+    
 
     public function update(CinemaDTO $cinema)
     {

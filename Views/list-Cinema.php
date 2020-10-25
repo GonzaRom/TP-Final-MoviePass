@@ -12,7 +12,7 @@
                                 <th>Direccion</th>
                                 <th>Telefono</th>
                                 <th>Ranking</th>
-                                <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "2") : ?>
+                                <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "Admin") : ?>
                                     <th>Eliminar</th>
                                     <th>Actualizar</th>
                                 <?php endif; ?>
@@ -27,7 +27,7 @@
                                         <td><?php echo $cinema->getAdress(); ?></td>
                                         <td><?php echo $cinema->getPhonenumber(); ?></td>
                                         <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></td>
-                                        <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "2") : ?>
+                                        <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "Admin") : ?>
                                             <td>
                                                 <button class="button-remove-cinema" type="submit" name="id" value="<?php echo $cinema->getId(); ?>"> Eliminar </button>
                                             </td>
