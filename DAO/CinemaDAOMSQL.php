@@ -48,7 +48,7 @@ class CinemaDAOMSQL implements ICinemaDAO
                 $newCinema->setName($cinema['namecinema']);
                 $newCinema->setAdress($cinema['adress']);
                 $newCinema->setPhonenumber($cinema['phonenumber']);
-                $newCinema->setActive($cinema['active']);
+                $newCinema->setIsActive($cinema['isactive']);
                 array_push($cinemalist, $newCinema);
             }
 
@@ -64,12 +64,12 @@ class CinemaDAOMSQL implements ICinemaDAO
 
 
         try {
-            $sql = "INSERT INTO " . $this->nameTable . " (namecinema , adress , phonenumber , active) VALUES (:namecinema , :adress , :phonenumber , :active)";
+            $sql = "INSERT INTO " . $this->nameTable . " (namecinema , adress , phonenumber , isactive) VALUES (:namecinema , :adress , :phonenumber , :isactive)";
 
             $parameters['namecinema'] = $cinema->getName();
             $parameters['adress'] = $cinema->getAdress();
             $parameters['phonenumber'] = $cinema->getPhonenumber();
-            $parameters['active'] = $cinema->getActive();
+            $parameters['isactive'] = $cinema->getIsActive();
 
             $this->conection = Connection::getInstance();
             $result = $this->conection->ExecuteNonQuery($sql, $parameters);
@@ -84,7 +84,7 @@ class CinemaDAOMSQL implements ICinemaDAO
         try {
             $sql = "UPDATE " . $this->nameTable . " SET active = :active WHERE idcinema = :id";
             $parameters['id'] = $cinema->getId();
-            $parameters['active'] = $cinema->getActive();
+            $parameters['isactive'] = $cinema->getIsActive();
             $this->conection = Connection::getInstance();
             $this->conection->ExecuteNonQuery($sql, $parameters);
         } catch (Exception $ex) {
@@ -96,13 +96,13 @@ class CinemaDAOMSQL implements ICinemaDAO
     {
 
         try {
-            $sql = "UPDATE " . $this->nameTable . " SET namecinema = :namecinema, adress = :adress , phonenumber = :phonenumber , active = :active WHERE idcinema = :idcinema ;";
+            $sql = "UPDATE " . $this->nameTable . " SET namecinema = :namecinema, adress = :adress , phonenumber = :phonenumber , isactive = :isactive WHERE idcinema = :idcinema ;";
 
             $parameters['idcinema'] = $cinema->getId();
             $parameters['namecinema'] = $cinema->getName();
             $parameters['adress'] = $cinema->getAdress();
             $parameters['phonenumber'] = $cinema->getPhonenumber();
-            $parameters['active'] = $cinema->getActive();
+            $parameters['isactive'] = $cinema->getIsActive();
 
             $this->conection = Connection::getInstance();
             $result = $this->conection->ExecuteNonQuery($sql, $parameters);
@@ -120,10 +120,29 @@ class CinemaDAOMSQL implements ICinemaDAO
             $newCinema->setName($p['namecinema']);
             $newCinema->setAdress($p['adress']);
             $newCinema->setPhonenumber($p['phonenumber']);
-            $newCinema->setActive($p['active']);
+            $newCinema->setIsActive($p['isactive']);
             return $newCinema;
         }, $value);
 
         return count($resp) > 1 ? $resp : $resp[0];
     }
+<<<<<<< HEAD
+=======
+
+    protected function mapearTypeRoom($value)
+    {
+        $value = ($value) ? $value : array();
+        $resp = array_map(function ($p) {
+            $newCinema = new CinemaDTO();
+            $newCinema->setId($p['idcinema']);
+            $newCinema->setName($p['namecinema']);
+            $newCinema->setAdress($p['adress']);
+            $newCinema->setPhonenumber($p['phonenumber']);
+            $newCinema->setIsActive($p['isactive']);
+            return $newCinema;
+        }, $value);
+
+        return count($resp) > 1 ? $resp : $resp[0];
+    }
+>>>>>>> origin/Matias
 }

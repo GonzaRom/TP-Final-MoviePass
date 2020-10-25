@@ -53,7 +53,7 @@ class CinemaController
             $newcinema->setName($name);
             $newcinema->setAdress($adress);
             $newcinema->setPhoneNumber($phonenumber);
-            $newcinema->setActive(true);
+            $newcinema->setIsActive(true);
             $newBillBoard = new BillBoard();
             $newBillBoard->setIdCinema($newcinema->getId());
             $this->billBoardDAO->add($newBillBoard);

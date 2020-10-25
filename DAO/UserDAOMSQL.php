@@ -1,93 +1,182 @@
 <?php
 
-namespace DAO;
- 
-use DAO\IUserDAO;
-use Models\User;
-use \Exception as Exception;
+    namespace DAO;
+    
+    use DAO\IUserDAO;
+    use Models\User;
+    use Models\UserType as UserType;
+    use \Exception as Exception;
 
-class UserDAOMSQL implements IUserDAO{
-    
-    private $connection;
-    private $tableName = "users";
-    
-    
-    public function add(User $newuser){
-        try{
-            $query= "INSERT INTO ".$this->tableName. "(idusertype, firstname, lastname, email, userpassword) VALUES (:usertype,:firstname, :lastname, :username, :email, :password);";
+    class UserDAOMSQL implements IUserDAO{
         
-            $parameters['id'] = $newuser->getId();
-            $parameters['firstname'] = $newuser->getFirstName();
-            $parameters['lastname'] = $newuser->getLastName();
-            $parameters['username'] = $newuser->getUserName();
-            $parameters['email'] = $newuser->getEmail();
-            $parameters['usertype'] = $newuser->getUsertype();
-            $parameters['password'] = $newuser->getPassword();
-           
-            $this->connection = Connection::getInstance();
-
-            $this->connection->executeNonQuery($query, $parameters);
+        private $connection;
+        private $tableName = "users";
+        
+        //FUNCION Q AGREGA UN NUEVO USUARIO A LA BDD
+        public function add(User $newuser){
+            try{
+                $query= "INSERT INTO ".$this->tableName. " (idusertype, firstname, lastname, username, email, userpassword, isactive) VALUES ( 1, :firstname, :lastname, :username, :email, :password, true);";
+            
+                //$parameters['id'] = $newuser->getId();
+                $parameters['firstname'] = $newuser->getFirstName();
+                $parameters['lastname'] = $newuser->getLastName();
+                $parameters['username'] = $newuser->getUserName();
+                $parameters['email'] = $newuser->getEmail();
+                //$parameters['usertype'] = 1;
+                $parameters['password'] = $newuser->getPassword();
+                $this->connection = Connection::getInstance();
+                $this->connection->executeNonQuery($query, $parameters);
+        
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
-        catch(Exception $ex)
+
+        //FUNCION Q HACE BORRADO LOGICO DE UN USUARIO
+        public  function remove($id)
         {
-            throw $ex;
+            try{
+                $query= "UPDATE " .$this->tableName ." set isactive= false WHERE iduser= :id";
+
+                $parameters["id"]=$id;
+
+                $this->connection=Connection::getInstance();
+
+                $this->connection->executeNonQuery($query,$parameters);
+            }
+            catch(Exception $ex){
+                throw $ex;
+            }
         }
-    }
 
-    public  function remove($id)
-    {
-        $this->retriveData();
-        unset($this->userList[$id]);
-    }
 
-    public function get($id)
-    {
-        $this->retriveData();
-        return $this->userList[$id];
-    }
-
-    public function getAll()
-    {
-        try
+        //FUNCION Q DEVUELVE UN USUARIO BUSCANDOLO POR EL NOMBRE
+        public function get($username)
         {
-            $userlist = array();
+            try
+            {
 
-            $query = "SELECT * FROM ".$this->tableName;
+                $query = "SELECT * FROM ".$this->tableName . " WHERE iduser = :username";
 
-            $this->connection = Connection::getInstance();
+                $parameters["username"]=$username;
 
-            $resultSet = $this->connection->execute($query);
+                $this->connection = Connection::getInstance();
                 
-            foreach ($resultSet as $row)
-            {                
-                $user = new User();
-                $user->setId($row['id']);
-                $user->setFirstname($row['firstname']);
-                $user->setLastname($row['lastname']);
-                $user->setUserName($row['username']);
-                $user->setEmail($row['email']);
-                $user->setUsertype($row['usertype']);
-                $user->setPassword($row['password']);
-                    
-                array_push($userlist, $user);
-            }
+                $resultSet = $this->connection->execute($query,$parameters);
+                            
+                foreach ($resultSet as $row)
+                {                
+                    $user = new User();
+                    $user->setId($row['id']);
+                    $user->setFirstname($row['firstname']);
+                    $user->setLastname($row['lastname']);
+                    $user->setUserName($row['username']);
+                    $user->setEmail($row['email']);                
+                    $user->setUsertype($this->getUserType($row['idusertype']));
+                    $user->setPassword($row['userpassword']);
+                        
+                    array_push($userlist, $user);
+                }
 
-            return $userlist;
+                return $userlist;
+                }
+            catch(Exception $ex)
+            {
+                throw $ex;
             }
-        catch(Exception $ex)
-        {
-            throw $ex;
         }
-    }
 
-    public function update($newUser)
-    {
-        $this->retriveData();
-        $userList[$newUser->getId()] = $newUser;
-        $this->saveData();
-    }
+        //FUNCION Q GENERA EL TYPO DE USUARIO
+        public function getUserType($id){
+            try{
+                $usertype;
 
-}
+                $query="SELECT * FROM usertypes WHERE idusertype = :id";
+
+                $parameters["id"]= $id;
+
+                $this->connection= Connection::getInstance();
+                
+                $result=$this->connection->Execute($query,$parameters);
+
+                foreach ($result as $row)
+                {                
+                    $usertype = new UserType();
+                    $usertype->setId($row['idusertype']);
+                    $usertype->setName($row['nameusertype']);
+                }
+
+                return $usertype;
+            }
+            catch(EXCEPTION $ex){
+                throw $ex;
+            }
+        }
+
+        //FUNCION Q DEVUELVE TODOS LOS USUARIOS
+        public function getAll()
+        {
+            try
+            {
+                $userlist = array();
+
+                $query = "SELECT * FROM ".$this->tableName. " as u join usertypes as us on u.idusertype=us.idusertype;";
+
+                $this->connection = Connection::getInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                    
+                foreach ($resultSet as $row)
+                {                
+                    $user = new User();
+                    $ustp=new UserType();
+                    $ustp->setId($row['idusertype']);
+                    $ustp->setName($row['nameusertype']);
+                    $user->setId($row['iduser']);
+                    $user->setFirstname($row['firstname']);
+                    $user->setLastname($row['lastname']);
+                    $user->setUserName($row['username']);
+                    $user->setEmail($row['email']);
+                    $user->setUsertype($ustp);
+                    $user->setPassword($row['userpassword']);
+                        
+                    array_push($userlist, $user);
+                }
+
+                return $userlist;
+                }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        //FUNCION Q AHCE UN UPDATE SOBRE UN USUARIO
+        public function update($User)
+        {
+            try{
+                $query= "UPDATE " .$this->tableName ." set firstname= :firstname, lastname= :lastname, username= :username, email= :email, userpassword= :password WHERE iduser= :id";
+
+                $parameters['id'] = $newuser->getId();
+                $parameters['firstname'] = $newuser->getFirstName();
+                $parameters['lastname'] = $newuser->getLastName();
+                $parameters['username'] = $newuser->getUserName();
+                $parameters['email'] = $newuser->getEmail();
+                $parameters['usertype'] = $newuser->getUsertype()->getId();
+                $parameters['password'] = $newuser->getPassword();
+
+                $this->connection=Connection::getInstance();
+
+                $this->connection->executeNonQuery($query,$parameters);
+            }
+            catch(Exception $ex){
+                throw $ex;
+            }
+        }
+
+    }
 
 
 ?>

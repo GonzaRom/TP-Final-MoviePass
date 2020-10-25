@@ -1,6 +1,5 @@
-
-drop database moviepass
 CREATE DATABASE moviepass;
+#drop database moviepass
 use moviepass;
 
 CREATE TABLE usertypes(
@@ -19,6 +18,7 @@ CREATE TABLE users(
     username varchar(50),
     email varchar(50),
     userpassword varchar(100),
+    isactive boolean,
     constraint PK_USER primary key(iduser),
     constraint FK_USERTYPE foreign key(idusertype) references usertypes(idusertype),
     constraint UNQ_USERNAME unique(username),
@@ -30,11 +30,7 @@ CREATE TABLE cinemas(
 	namecinema varchar(50),
 	adress varchar(100),
 	phonenumber varchar(50),
-<<<<<<< HEAD
     isactive boolean,
-=======
-    active boolean,
->>>>>>> origin/Isaias
 	constraint PK_CINEMA  primary key(idcinema),
     constraint UNQ_CINE unique (namecinema,adress)
 )ENGINE=InnoDB;
@@ -65,7 +61,6 @@ CREATE TABLE rooms(
     constraint FK_CINEROOM foreign key (idcinema) references cinemas (idcinema),
     constraint FK_TYPEROOM foreign key (idtyperoom) references typerooms(idtyperoom)
 )ENGINE=InnoDB;
-
 
 CREATE TABLE genres(
 	idgenre int not null,
@@ -148,4 +143,6 @@ INSERT INTO typerooms(nametyperoom) VALUES ("Sala Standard"),("Sala Senior"),("S
 
 INSERT INTO usertypes(nameusertype) VALUES ("User"),("Admin");
 
-INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword) VALUES (2,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG"),(1,"Matias Manuel","Fernandez","Cosme Fulatino","matosmdq88@gmail.com","$2y$12$k0NR.RDXshLAI1KytIK2hOkm8mZ.EImEVs22lI3BMgw12hgmLo0be");
+INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword) VALUES 
+(2,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG"),
+(1,"Matias Manuel","Fernandez","Cosme Fulatino","matosmdq88@gmail.com","$2y$12$k0NR.RDXshLAI1KytIK2hOkm8mZ.EImEVs22lI3BMgw12hgmLo0be");

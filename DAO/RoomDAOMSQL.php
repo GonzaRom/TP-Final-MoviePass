@@ -17,13 +17,13 @@ class RoomDAOMSQL implements IRoomDAO
     public function add(Room $room)
     {
         try {
-            $sql = "INSERT INTO " . $this->nameTable . " (nameroom , capacity , idtyperoom , idcinema , ticketcost , active) VALUES (:nameroom , :capacity , :idtyperoom , :idcinema , :ticketcost , :active)";
+            $sql = "INSERT INTO " . $this->nameTable . " (nameroom , capacity , idtyperoom , idcinema , ticketcost , isactive) VALUES (:nameroom , :capacity , :idtyperoom , :idcinema , :ticketcost , :isactive)";
             $parameters['nameroom'] = $this->nameRoom($room->getCinema());
             $parameters['capacity'] = $room->getCapacity();
             $parameters['idtyperoom'] = $room->getTypeRoom();
             $parameters['idcinema'] = $room->getCinema();
             $parameters['ticketcost'] = $room->getTicketCost();
-            $parameters['active'] = $room->getActive();
+            $parameters['isactive'] = $room->getIsActive();
             $this->conection = Connection::getInstance();
             $this->conection->ExecuteNonQuery($sql, $parameters);
         } catch (Exception $ex) {
@@ -35,7 +35,7 @@ class RoomDAOMSQL implements IRoomDAO
     {
         try {
             $listRoom = array();
-            $sql = "SELECT * FROM " . $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE AND r.active = :active" ;
+            $sql = "SELECT * FROM " . $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE AND r.isactive = :isactive" ;
             $parameters['active']=true;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql);
@@ -49,7 +49,7 @@ class RoomDAOMSQL implements IRoomDAO
                 $newRoom->setTypeRoom($newTypeRoom);
                 $newRoom->setCapacity($room['capacity']);
                 $newRoom->setTicketCost($room['ticketcost']);
-                $newRoom->setActive($room['active']);
+                $newRoom->setIsActive($room['isactive']);
                 array_push($listRoom, $newRoom);
             }
             return $listRoom;
@@ -80,7 +80,7 @@ class RoomDAOMSQL implements IRoomDAO
     {
         try{
             $listRoom = array();
-            $sql = "SELECT * FROM ". $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE r.idcinema = :idcinema AND r.active = :active";
+            $sql = "SELECT * FROM ". $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE r.idcinema = :idcinema AND r.isactive = :isactive";
             $parameters['idcinema'] = $idCinema;
             $parameters['active'] = true;
             $this->conection = Connection::getInstance();
@@ -95,7 +95,7 @@ class RoomDAOMSQL implements IRoomDAO
                 $newRoom->setTypeRoom($newTypeRoom);
                 $newRoom->setCapacity($room['capacity']);
                 $newRoom->setTicketCost($room['ticketcost']);
-                $newRoom->setActive($room['active']);
+                $newRoom->setIsActive($room['isactive']);
                 array_push($listRoom, $newRoom);
             }
             return $listRoom;
@@ -126,9 +126,11 @@ class RoomDAOMSQL implements IRoomDAO
     public function delete($id)
     {
         try{
-            $sql = "UPDATE ".$this->nameTable . " SET active = :active  WHERE idroom = :idroom";
+
+            $sql = "UPDATE ".$this->nameTable . "SET isactive = :isactive  WHERE idroom = :idroom";
             $parameters['idroom'] = $id;
-            $parameters['active'] = false;
+            $parameters['isactive'] = false;
+
             $this->conection = Connection::getInstance();
             $this->conection->ExecuteNonQuery($sql , $parameters);
         }catch(Exception $ex){
@@ -187,7 +189,7 @@ class RoomDAOMSQL implements IRoomDAO
             $newRoom->setName($p['nameroom']);
             $newRoom->setCapacity($p['capacity']);
             $newRoom->setTypeRoom($newTypeRoom);
-            $newRoom->setActive($p['active']);
+            $newRoom->setIsActive($p['active']);
             $newRoom->setTicketCost($p['ticketcost']);
             return $newRoom;
         }, $value);

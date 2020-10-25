@@ -6,7 +6,7 @@
         private $name;
         private $adress;
         private $phonenumber;
-        private $active;
+        private $isactive;
         
         public function __construct(){
 
@@ -56,12 +56,12 @@
             return $this;
         }
 
-        public function setActive($active){
-            $this->active = $active;
+        public function setIsActive($isactive){
+            $this->isactive = $isactive;
         }
 
-        public function getActive(){
-            return $this->active;
+        public function getIsActive(){
+            return $this->isactive;
         }
     }
 ?>

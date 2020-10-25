@@ -55,12 +55,12 @@ class RoomDTO
         $this->typeRoom = $typeRoom;
     }
 
-    public function setActive($active)
+    public function setIsActive($active)
     {
         $this->active = $active;
     }
 
-    public function getActive()
+    public function getIsActive()
     {
         return $this->active;
     }

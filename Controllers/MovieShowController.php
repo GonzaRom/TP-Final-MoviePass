@@ -4,7 +4,7 @@ namespace Controllers;
 
 use DAO\MovieShowDAO as MovieShowDAO;
 use DAO\CinemaDAO as CinemaDAO;
-use DAO\RoomDAO as RoomDAO;
+use DAO\RoomDAOMSQL as RoomDAO;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\SeatDAO as SeatDAO;
 use Models\Seat as Seat;
@@ -32,11 +32,8 @@ class MovieShowController
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
         $this->seatDAO = new SeatDAO();
         $this->billBoardDAO = new BillBoardDAO();
-<<<<<<< HEAD
         $this->movieDAOMSQL = new MovieDAOMSQL();
         
-=======
->>>>>>> origin/Isaias
     }
 
     public function showAddMovieShowView($message = "")
@@ -50,7 +47,7 @@ class MovieShowController
     public function salas()
     {
         if (isset($_GET['cinema'])) {
-            $listRoom = $this->roomDAO->getCinema($_GET['cinema']);
+            $listRoom = $this->roomDAO->getByCinema($_GET['cinema']);
             echo 'Sala:<select name="room" id="">';
             echo '<option value="">Seleccione una sala</option> ';
             foreach ($listRoom as $room) {
@@ -63,7 +60,7 @@ class MovieShowController
             echo '</select>';
         }
     }
-
+/*
     public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)
     {
         $today = date('Y-m-d');
@@ -122,18 +119,14 @@ class MovieShowController
         require_once(VIEWS_PATH . "list-movies.php");
     }
 
-    public function showListMovieShowView()
+ /*   public function showListMovieShowView()
     {
         $listSeat = $this->seatDAO->GetAll();
         $movieShowsList = $this->movieShowDAO->getAll();
         $listCinema = $this->cinemaDAO->getAll();
         $listSeatMovieShow = array();
         $listRoom = $this->roomDAO->getAll();
-<<<<<<< HEAD
         $listMovie = $this->movieDAOMSQL->getAll();
-=======
-        $listMovie = $this->movieDAO->getAll();
->>>>>>> origin/Isaias
         $listMovieShow = array();
         foreach ($movieShowsList as $movieShow) {
             $movieShowDTO = new MovieShowDTO();
@@ -249,5 +242,7 @@ class MovieShowController
             array_push($listMovieShow, $movieShowDTO);
         }
         return $listMovieShow;
-    }
+    }*/
 }
+
+?>
