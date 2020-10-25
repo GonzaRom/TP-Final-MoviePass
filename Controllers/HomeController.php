@@ -8,7 +8,7 @@ use DAO\MovieShowDAO as MovieShowDAO;
 use DAO\CinemaDAOMSQL as CinemaDAOMSQL;
 use DAO\RoomDAOMSQL as RoomDAO;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
-use DAO\BillBoardDAO as BillBoardDAO;
+use DAO\BillBoardDAOMSQL as BillBoardDAOMSQL;
 use Models\MovieShowDTO as MovieShowDTO;
 use DAO\MovieDAOMSQL as MovieDAOMSQL;
 
@@ -33,7 +33,7 @@ class HomeController
         $this->movieDAO = new MovieDAO();
         $this->roomDAO = new RoomDAO();
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
-        $this->billBoardDAO = new BillBoardDAO();
+        $this->billBoardDAO = new BillBoardDAOMSQL();
     }
 
     // se llaman a las vistas de home.php.
