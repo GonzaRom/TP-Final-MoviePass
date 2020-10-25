@@ -11,7 +11,7 @@ class MovieShow
     private $room;
     private $date;
     private $time;
-
+    private $active;
     
 
     public function getId()
@@ -99,6 +99,14 @@ class MovieShow
     public function getSeat()
     {
         return $this->seat;
+    }
+
+    public function setIsActive($active){
+        $this->active = $active;
+    }
+
+    public function getIsActive(){
+        return $this->active;
     }
 
     /* funcion q devuelve el dinero recaudado */

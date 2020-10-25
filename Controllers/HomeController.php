@@ -38,18 +38,10 @@ class HomeController
 
     // se llaman a las vistas de home.php.
     public function index($message = "")
-<<<<<<< HEAD
     {  
          // trae todas las funciones disponibles.
         $movieShows = $this->getMovieShowList();
        
-=======
-    {
-        
-        $movieShows = $this->getMovieShowList();// trae todas las funciones disponibles.
-        //$this->movieDAOMSQL->updateFromApi();
-        //$this->genreDAO->updateFromApi();
->>>>>>> origin/Matias
         if (empty($movieShows)){
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  
@@ -70,10 +62,10 @@ class HomeController
             $movieShowDTO->setTime($movieShow->getTime());
             $movieShowDTO->setMovie($this->movieDAO->get($movieShow->getMovie()));
             $billBoard = $this->billBoardDAO->get($movieShow->getBillBoard());
-            //$cinema = $this->cinemaDAO->get($billBoard->getIdCinema());
-            //$movieShowDTO->setNameCinema($cinema->getName());
+            $cinema = $this->cinemaDAO->get($billBoard->getIdCinema());
+            $movieShowDTO->setNameCinema($cinema->getName());
             $room = $this->roomDAO->get($movieShow->getRoom());
-            /*$movieShowDTO->setRoomName($room->getName());*/
+            $movieShowDTO->setRoomName($room->getName());
             $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow()));
 
             array_push($listMovieShow, $movieShowDTO);

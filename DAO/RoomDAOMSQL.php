@@ -167,7 +167,7 @@ class RoomDAOMSQL implements IRoomDAO
             throw $ex;
         }
     }
-    public function highRoom($id)
+    public function upRoom($id)
     {
         try{
 

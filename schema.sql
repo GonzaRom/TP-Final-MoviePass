@@ -1,4 +1,4 @@
-#drop database moviepass
+drop database moviepass
 CREATE DATABASE moviepass;
 use moviepass;
 
@@ -97,17 +97,17 @@ CREATE TABLE typemovieshows(
     nametypemovieshow varchar(50),
     constraint PK_TYPEMOVIESHOW primary key (idtypemovieshow)
 )ENGINE=InnoDB;
-
 CREATE TABLE movieshows(
 	idmovieshow int not null auto_increment,
     idmovie int not null,
-    idcinema int not null,
+    idbillboard int not null,
     idtypemovieshow int not null,
     idroom int not null,
     date_ date,
     time_ time,
+    isactive boolean,
     constraint PK_MOVIESHOW primary key (idmovieshow),
-    constraint FK_CINESHOW foreign key (idcinema) references cinemas (idcinema),
+    constraint FK_BILLBOARD foreign key (idbillboard) references billboards (idbillboard),
     constraint FK_MOVIE foreign key (idmovie) references movies (idmovie),
     constraint FK_TYPEMOVIESHOW foreign key (idtypemovieshow) references typemovieshows (idtypemovieshow),
     constraint FK_ROOM foreign key (idroom) references rooms (idroom)

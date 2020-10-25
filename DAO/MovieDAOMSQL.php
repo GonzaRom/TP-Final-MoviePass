@@ -3,6 +3,7 @@
 namespace DAO;
 
 use Models\Movie as Movie;
+use Models\MovieDTO as MovieDTO;
 use DAO\IMovieDAO as IMovieDAO;
 use Exception;
 
@@ -33,7 +34,7 @@ class MovieDAOMSQL implements IMovieDAO
                 $movie = new Movie();
                 $movie->setId($row["idmovie"]);
                 $movie->setImdbID($row["imdbid"]);
-                $movie->setTitle($row["namemovie"]);
+                $movie->setName($row["namemovie"]);
                 $movie->setSynopsis($row["synopsis"]);
                 $movie->setPoster($row["poster"]);
                 $movie->setBackground($row["background"]);
@@ -62,7 +63,7 @@ class MovieDAOMSQL implements IMovieDAO
             $movie = new Movie();
             $movie->setId($resultMovie["idmovie"]);
             $movie->setImdbID($resultMovie["imdbid"]);
-            $movie->setTitle($resultMovie["namemovie"]);
+            $movie->setName($resultMovie["namemovie"]);
             $movie->setSynopsis($resultMovie["synopsis"]);
             $movie->setPoster($resultMovie["poster"]);
             $movie->setBackground($resultMovie["background"]);
@@ -87,7 +88,7 @@ class MovieDAOMSQL implements IMovieDAO
 
             $parameters['id'] = $newMovie->getId();
             $parameters['imdbid'] = $newMovie->getImdbID();
-            $parameters["namemovie"] = $newMovie->getTitle();
+            $parameters["namemovie"] = $newMovie->getName();
             $parameters["synopsis"] = $newMovie->getSynopsis();
             $parameters["poster"] = $newMovie->getPoster();
             $parameters["background"] = $newMovie->getBackground();
@@ -108,7 +109,7 @@ class MovieDAOMSQL implements IMovieDAO
             $query = "UPDATE " . $this->tableName . " SET namemovie = :name WHERE idmovie = :id ;";
             $parameters['id'] = $movie->getId();
             $parameters["imdbid"] = $movie->getImdbID();
-            $parameters["name"] = $movie->getTitle();
+            $parameters["name"] = $movie->getName();
             $parameters["synopsis"] = $movie->getSynopsis();
             $parameters["poster"] = $movie->getPoster();
             $parameters["background"] = $movie->getBackground();
@@ -157,14 +158,14 @@ class MovieDAOMSQL implements IMovieDAO
                 else {
                     $movie = new Movie();
                     $movie->setImdbId($apiMovieDecode["id"]);
-                    $movie->setOriginalTitle($apiMovieDecode["original_title"]);
+                  //  $movie->setOriginalTitle($apiMovieDecode["original_title"]);
                     $movie->setSynopsis($apiMovieDecode["overview"]);
-                    $movie->setShortSynopsis($apiMovieDecode["tagline"]);
-                    $movie->setReleaseDate($apiMovieDecode["release_date"]);
-                    $movie->setTitle($apiMovieDecode["title"]);
-                    $movie->setOriginalLanguage($apiMovieDecode["original_language"]);
+                   // $movie->setShortSynopsis($apiMovieDecode["tagline"]);
+                   // $movie->setReleaseDate($apiMovieDecode["release_date"]);
+                    $movie->setName($apiMovieDecode["title"]);
+                   // $movie->setOriginalLanguage($apiMovieDecode["original_language"]);
                     $movie->setVoteAverage($apiMovieDecode["vote_average"]);
-                    $movie->setGenres($apiMovieDecode["genres"]);
+                   // $movie->setGenres($apiMovieDecode["genres"]);
                     $movie->setBackground("http://image.tmdb.org/t/p/original" . $apiMovieDecode["backdrop_path"]);
                     $movie->setPoster("http://image.tmdb.org/t/p/original" . $apiMovieDecode["poster_path"]);
                     $movie->setRunTime($apiMovieDecode["runtime"]);
