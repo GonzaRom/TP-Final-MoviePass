@@ -1,4 +1,4 @@
-<?php require_once (HELPERS_PATH . "helper-nav.php")?>
+<?php require_once(HELPERS_PATH . "helper-nav.php") ?>
 <header class="d-flex justify-content-center bg-dark">
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg " style="width:1700px ;">
         <a class="navbar-brand" href="<?php echo FRONT_ROOT; ?>Home/Index">
@@ -27,7 +27,16 @@
                                 <a class="dropdown-item" href="#"><?php echo $genre->getName(); ?></a>
                             <?php endforeach; ?>
                         </div>
-                    </li>                    
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Peliculas
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Movie/UpdateMoviesToDB">UPDATE DB!</a>
+                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Movie/ShowAllMovies">Listar</a>
+                        </div>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Cines
@@ -62,10 +71,10 @@
                         </div>
                     </li>
                 <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == 1) : ?>
-  
+
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
-                    </li>    
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Generos

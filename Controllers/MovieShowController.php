@@ -78,6 +78,9 @@ class MovieShowController
                     }
                 }
             }
+            if($room == $movieShow->getRoom()){
+                $time += $movie->getRuntime()
+            }
              ///validar que la pelicula no se este emitiendo el mismo dia en otro cine
         }
 
@@ -144,7 +147,6 @@ class MovieShowController
                             $id = 1;
                             $newArray = array();
                             foreach ($listSeatMovieShow as $seat) {
-
                                 $seat = new Seat();
                                 $seat->setMovieShow($movieShow->getId());
                                 $seat->setId($id);
@@ -154,7 +156,6 @@ class MovieShowController
                             $listSeatMovieShow = $newArray;
 
                             foreach ($listSeat as $seat) {
-
                                 if ($seat->getMovieShow() == $movieShow->getId()) {
                                     $listSeatMovieShow[$seat->getId() - 1] = $seat;
                                 }
@@ -171,9 +172,8 @@ class MovieShowController
     }
 
     public function getByMovie($idMovie){
-
-        $movieDTO = $this->movieDAOMSQL->get($idMovie);
-        $genres = $movieDTO->getGenres();
+        $movie = $this->movieDAOMSQL->get($idMovie);
+        $genres = $movie->getGenres();
         $listMovieShow = $this->movieShowDAO->getByMovie($idMovie);
         require_once(VIEWS_PATH."detail-movie.php");
     }
