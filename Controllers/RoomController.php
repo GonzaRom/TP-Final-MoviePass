@@ -57,6 +57,28 @@ class RoomController
         return $cinemaList;
     }
 
+    public function delete($id){
+        $this->roomDao->delete($id);
+        $this->showListView();
+    }
+
+    public function showUpdateView($id){
+        $room = $this->roomDao->get($id);
+        $listTypeRoom = $this->typeroomDao->getAll();
+        require_once(VIEWS_PATH.'update-room.php');
+    }
+
+    public function updateRoom($id , $typeroom , $capacity , $ticketCost ){
+        $newRoom = new RoomDTO();
+        $newRoom->setId($id);
+        $newRoom->setTypeRoom($typeroom);
+        $newRoom->setCapacity($capacity);
+        $newRoom->setTicketCost($ticketCost);
+
+        $this->roomDao->update($newRoom);
+
+        $this->showListView();
+    }
     private function nameRoom($idCinema)
     {
         $listRooms = $this->roomDao->get($idCinema);

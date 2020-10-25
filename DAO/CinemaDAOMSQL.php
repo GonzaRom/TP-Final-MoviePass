@@ -41,7 +41,7 @@ class CinemaDAOMSQL implements ICinemaDAO
             $this->conection = Connection::getInstance();
 
             $result = $this->conection->Execute($sql);
-            print_r($result);
+            
             foreach ($result as $cinema) {
                 $newCinema = new CinemaDTO();
                 $newCinema->setId($cinema['idcinema']);
@@ -58,22 +58,6 @@ class CinemaDAOMSQL implements ICinemaDAO
         }
     }
 
-    public function getTypeRoom($id)
-    {
-        try {
-            $sql = "SELECT * FROM typerooms WHERE idtyperoom = :idtyperoom";
-
-            $parameters['idtyperoom'] = $id;
-            $this->conection = Connection::getInstance();
-            $result = $this->conection->Execute($sql, $parameters);
-        } catch (Exception $ex) {
-            throw $ex;
-        }
-
-        if(!empty($result)){
-
-        }
-    }
 
     public function add(Cinema $cinema)
     {
@@ -128,22 +112,6 @@ class CinemaDAOMSQL implements ICinemaDAO
     }
 
     protected function mapear($value)
-    {
-        $value = ($value) ? $value : array();
-        $resp = array_map(function ($p) {
-            $newCinema = new CinemaDTO();
-            $newCinema->setId($p['idcinema']);
-            $newCinema->setName($p['namecinema']);
-            $newCinema->setAdress($p['adress']);
-            $newCinema->setPhonenumber($p['phonenumber']);
-            $newCinema->setActive($p['active']);
-            return $newCinema;
-        }, $value);
-
-        return count($resp) > 1 ? $resp : $resp[0];
-    }
-
-    protected function mapearTypeRoom($value)
     {
         $value = ($value) ? $value : array();
         $resp = array_map(function ($p) {

@@ -4,7 +4,7 @@
 
         <section class="section-cinema-list">
 
-            <form action="<?php echo FRONT_ROOT ?>Room/Delete" method="GET" class="form-list-cinema">
+            <form action="<?php echo FRONT_ROOT ?>Room/delete" method="GET" class="form-list-cinema">
                 <table class="table-list-cinema">
                     <thead class="thead-list-cinema">
                         <tr class="tr-list-cinema">
@@ -36,7 +36,7 @@
                                     </td>
                                     <!--UPDATE-->
                                     <td>
-                                        <a class="button-remove-cinema" href="<?php echo FRONT_ROOT . "Cinema/showUpdateView/" . $room->getId(); ?>">Actualizar</a>
+                                        <a class="button-remove-cinema" href="<?php echo FRONT_ROOT . "Room/showUpdateView/" . $room->getId(); ?>">Actualizar</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
