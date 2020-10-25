@@ -9,7 +9,7 @@ class RoomDTO
     private $name;
     private $capacity;
     private $typeRoom;
-    private $active;
+    private $isactive;
     private $ticketCost;
 
     public function __construct()
@@ -55,9 +55,9 @@ class RoomDTO
         $this->typeRoom = $typeRoom;
     }
 
-    public function setIsActive($active)
+    public function setIsActive($isactive)
     {
-        $this->active = $active;
+        $this->isactive = $isactive;
     }
 
     public function getIsActive()

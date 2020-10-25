@@ -6,7 +6,7 @@ use DAO\UserDAOMSQL as UserDAOMSQL;
 use DAO\UserTypeDAOMSQL as UserTypeDAOMSQL;
 use DAO\MovieDAO as MovieDAO;
 use Models\User;
-use DAO\GenreDAO;
+use DAO\GenreDAOMSQL as GenreDAOMSQL;
 
 class UserController
 {
@@ -20,7 +20,7 @@ class UserController
         $this->userDAO = new UserDAOMSQL();
         $this->userTypeDAO = new UserTypeDAOMSQL();
         $this->movieDAO = new MovieDAO();
-        $this->genreDAO = new GenreDAO();
+        $this->genreDAO = new GenreDAOMSQL();
     }
     public function showLoginView($message = "")
     {

@@ -5,10 +5,9 @@ use moviepass;
 CREATE TABLE usertypes(
 	idusertype int not null auto_increment,
     nameusertype varchar(50),
-    constraint PK_USERTYPE primary key(idusertype)
+    constraint PK_USERTYPE primary key(idusertype),
+    constraint UNQ_NAMEUSERTYPE unique(nameusertype)
 )ENGINE=InnoDB;
-
-insert into usertypes(nameusertype) values ('Admin');
 
 CREATE TABLE users(
 	iduser int not null auto_increment,
@@ -146,3 +145,11 @@ INSERT INTO usertypes(nameusertype) VALUES ("User"),("Admin");
 INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword) VALUES 
 (2,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG"),
 (1,"Matias Manuel","Fernandez","Cosme Fulatino","matosmdq88@gmail.com","$2y$12$k0NR.RDXshLAI1KytIK2hOkm8mZ.EImEVs22lI3BMgw12hgmLo0be");
+
+insert into cinemas (namecinema, adress, phonenumber, isactive) values ("Ambassador","Cordoba 1234","2235656598",true),
+																	   ("Aldrey","Sarmiento 2665","2234457847",true),
+                                                                       ("Gallegos","Catamarca 5414","242525263",true);
+
+insert into billboards (idcinema, isactive) values (1,true),(2,true),(3,true);
+
+insert into rooms (nameroom, capacity, idtyperoom, idcinema, ticketcost, isactive) values  ("Sala 1",60,1,1,100,true),("Sala 2",50,2,1,110,true),("Sala 3",50,3,1,150,true),("Sala 1",50,3,2,120,true),("Sala 2",65,1,2,105,true),("Sala 3",70,1,2,160,true),("Sala Avengers",100,1,3,120,true),("Sala Universal",80,2,3,140,true),("Sala Dolby Atmos",60,3,3,200,true);

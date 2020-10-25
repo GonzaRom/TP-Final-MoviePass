@@ -18,7 +18,7 @@
         public function __construct()
         {
             $this->KEY_PATH = "75dfe3da15b955043c881c4089025e7c";
-             "https://api.themoviedb.org/3/genre/movie/list?api_key=" . $this->KEY_PATH . "&language=es-ES";
+            $this->conectionString = "https://api.themoviedb.org/3/genre/movie/list?api_key=" . $this->KEY_PATH . "&language=es-ES";
         }
 
         public function add(Genre $newgenre){
@@ -88,7 +88,7 @@
             try {
                 $this->retriveGenresFromApi();
                 foreach($this->genreslist as $genre){
-                    $this->update($genre);
+                    $this->add($genre);
                 }
             } catch (\Exception $e) {
                 echo $e->getMessage();
