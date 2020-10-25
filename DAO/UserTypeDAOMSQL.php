@@ -39,5 +39,36 @@ class UserTypeDAOMSQL implements IUserTypeDAO{
             throw $ex;
         }
     }
-    
+
+    public function getById($id)
+    {
+        try
+        {   
+            $usertype;
+
+            $query = "SELECT * FROM ".$this->tableName ." WHERE idusertype = :id";
+
+            $parameters["idusertype"]=$id;
+
+            $this->connection = Connection::getInstance();
+
+            $resultSet = $this->connection->execute($query,$parameters);
+                
+            foreach ($resultSet as $row)
+            {                
+                $usertype = new UserType();
+                $usertype->setId($row["idusertype"]);
+                $usertype->setName($row["nameusertype"]);
+                    
+             
+            }
+
+            return $usertype;
+            }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+}       
 ?>

@@ -16,7 +16,7 @@
                     <a class="nav-link " href="<?php echo FRONT_ROOT; ?>MovieShow/getAll" tabindex="-1" aria-disabled="true">Cartelera</a>
                 </li>
 
-                <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] == 2) : ?>
+                <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] == "Admin") : ?>
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -62,7 +62,7 @@
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>MovieShow/ShowListMovieShowView">Listar</a>
                         </div>
                     </li>
-                <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == 1) : ?>
+                <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == "User") : ?>
   
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>

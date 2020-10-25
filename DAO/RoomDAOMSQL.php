@@ -18,13 +18,13 @@ class RoomDAOMSQL implements IRoomDAO
     public function add(Room $room)
     {
         try {
-            $sql = "INSERT INTO " . $this->nameTable . " (nameroom , capacity , idtyperoom , idcinema , ticketcost , active) VALUES (:nameroom , :capacity , :idtyperoom , :idcinema , :ticketcost , :active)";
+            $sql = "INSERT INTO " . $this->nameTable . " (nameroom , capacity , idtyperoom , idcinema , ticketcost , isactive) VALUES (:nameroom , :capacity , :idtyperoom , :idcinema , :ticketcost , :isactive)";
             $parameters['nameroom'] = $this->nameRoom($room->getCinema());
             $parameters['capacity'] = $room->getCapacity();
             $parameters['idtyperoom'] = $room->getTypeRoom();
             $parameters['idcinema'] = $room->getCinema();
             $parameters['ticketcost'] = $room->getTicketCost();
-            $parameters['active'] = $room->getActive();
+            $parameters['isactive'] = $room->getIsActive();
             $this->conection = Connection::getInstance();
             $this->conection->ExecuteNonQuery($sql, $parameters);
         } catch (Exception $ex) {
@@ -47,7 +47,7 @@ class RoomDAOMSQL implements IRoomDAO
                 $newRoom->setTypeRoom($this->getTypeRoom($room['idtyperoom']));
                 $newRoom->setCapacity($room['capacity']);
                 $newRoom->setTicketCost($room['ticketCost']);
-                $newRoom->setActive($room['active']);
+                $newRoom->setIsActive($room['isactive']);
                 array_push($listRoom, $newRoom);
             }
             return $listRoom;
@@ -90,7 +90,7 @@ class RoomDAOMSQL implements IRoomDAO
                 $newRoom->setTypeRoom($this->getTypeRoom($room['idtyperoom']));
                 $newRoom->setCapacity($room['capacity']);
                 $newRoom->setTicketCost($room['ticketcost']);
-                $newRoom->setActive($room['active']);
+                $newRoom->setIsActive($room['isactive']);
                 array_push($listRoom, $newRoom);
             }
             return $listRoom;
@@ -121,9 +121,9 @@ class RoomDAOMSQL implements IRoomDAO
     public function delete(RoomDTO $room)
     {
         try{
-            $sql = "UPDATE ".$this->nameTable . "SET active = :active  WHERE idroom = :idroom";
+            $sql = "UPDATE ".$this->nameTable . "SET isactive = :isactive  WHERE idroom = :idroom";
             $parameters['idroom'] = $room->getId();
-            $parameters['active'] = $room->getActive();
+            $parameters['isactive'] = $room->getIsActive();
 
             $this->conection = Connection::getInstance();
             $this->conection->ExecuteNonQuery($sql , $parameters);

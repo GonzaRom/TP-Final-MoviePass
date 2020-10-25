@@ -32,11 +32,8 @@ class MovieShowController
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
         $this->seatDAO = new SeatDAO();
         $this->billBoardDAO = new BillBoardDAO();
-<<<<<<< HEAD
         $this->movieDAOMSQL = new MovieDAOMSQL();
         
-=======
->>>>>>> origin/Isaias
     }
 
     public function showAddMovieShowView($message = "")
@@ -129,11 +126,7 @@ class MovieShowController
         $listCinema = $this->cinemaDAO->getAll();
         $listSeatMovieShow = array();
         $listRoom = $this->roomDAO->getAll();
-<<<<<<< HEAD
         $listMovie = $this->movieDAOMSQL->getAll();
-=======
-        $listMovie = $this->movieDAO->getAll();
->>>>>>> origin/Isaias
         $listMovieShow = array();
         foreach ($movieShowsList as $movieShow) {
             $movieShowDTO = new MovieShowDTO();

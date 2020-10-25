@@ -5,7 +5,7 @@ namespace Controllers;
 use DAO\GenreDAO;
 use DAO\MovieDAO as MovieDAO;
 use DAO\MovieShowDAO as MovieShowDAO;
-use DAO\CinemaDAO as CinemaDAO;
+use DAO\CinemaDAOMSQL as CinemaDAOMSQL;
 use DAO\RoomDAOMSQL as RoomDAO;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\BillBoardDAO as BillBoardDAO;
@@ -29,7 +29,7 @@ class HomeController
         $this->movieDAOMSQL = new MovieDAOMSQL();
         $this->genreDAO = new GenreDAO();
         $this->movieShowDAO = new MovieShowDAO();
-        $this->cinemaDAO = new CinemaDAO();
+        $this->cinemaDAO = new CinemaDAOMSQL();
         $this->movieDAO = new MovieDAO();
         $this->roomDAO = new RoomDAO();
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
