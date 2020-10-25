@@ -36,15 +36,18 @@ class RoomDAOMSQL implements IRoomDAO
     {
         try {
             $listRoom = array();
-            $sql = "SELECT * FROM " . $this->nameTable;
+            $sql = "SELECT * FROM " . $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom" ;
 
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql);
             foreach ($result as $room) {
                 $newRoom = new RoomDTO();
+                $newTypeRoom = new TypeRoom();
+                $newTypeRoom->setId($result['idtyperoom']);
+                $newTypeRoom->setId($result['nametyperoom']);
                 $newRoom->setId($room['idroom']);
                 $newRoom->setName($room['nameroom']);
-                $newRoom->setTypeRoom($this->getTypeRoom($room['idtyperoom']));
+                $newRoom->setTypeRoom($newTypeRoom);
                 $newRoom->setCapacity($room['capacity']);
                 $newRoom->setTicketCost($room['ticketCost']);
                 $newRoom->setActive($room['active']);
