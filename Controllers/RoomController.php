@@ -83,9 +83,9 @@ class RoomController
         $this->showListView(2);
     }
 
-    public function highInactive($id)
+    public function upRoom($id)
     {
-        $this->roomDao->highRoom($id);
+        $this->roomDao->upRoom($id);
         $this->showListView(3);
     }
 
