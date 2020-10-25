@@ -3,8 +3,13 @@
 namespace Controllers;
 
 use DAO\MovieShowDAO as MovieShowDAO;
+<<<<<<< HEAD
 use DAO\CinemaDAOMSQL as CinemaDAOMSQL;
 use DAO\RoomDAOMSQL as RoomDAOMSQL;
+=======
+use DAO\CinemaDAO as CinemaDAO;
+use DAO\RoomDAOMSQL as RoomDAO;
+>>>>>>> origin/Isaias
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\SeatDAO as SeatDAO;
 use Models\Seat as Seat;
@@ -47,7 +52,7 @@ class MovieShowController
     public function salas()
     {
         if (isset($_GET['cinema'])) {
-            $listRoom = $this->roomDAO->getCinema($_GET['cinema']);
+            $listRoom = $this->roomDAO->getByCinema($_GET['cinema']);
             echo 'Sala:<select name="room" id="">';
             echo '<option value="">Seleccione una sala</option> ';
             foreach ($listRoom as $room) {
@@ -60,7 +65,6 @@ class MovieShowController
             echo '</select>';
         }
     }
-
     public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)
     {
         $today = date('Y-m-d');
@@ -118,8 +122,7 @@ class MovieShowController
         }
         require_once(VIEWS_PATH . "list-movies.php");
     }
-
-    public function showListMovieShowView()
+      public function showListMovieShowView()
     {
         $listSeat = $this->seatDAO->GetAll();
         $movieShowsList = $this->movieShowDAO->getAll();
@@ -244,3 +247,5 @@ class MovieShowController
         return $listMovieShow;
     }
 }
+
+?>

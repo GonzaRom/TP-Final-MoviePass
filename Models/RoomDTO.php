@@ -57,7 +57,7 @@ class RoomDTO
 
     public function setIsActive($isactive)
     {
-        $this->active = $isactive;
+        $this->isactive = $isactive;
     }
 
     public function getIsActive()

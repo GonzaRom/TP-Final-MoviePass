@@ -30,57 +30,82 @@ class RoomController
         require_once(VIEWS_PATH . "add-Room.php");
     }
     /* se le proporcionara una lista de objetos rooms con objetos cinema ya cargado en su atributo correspondiente */
-    public function showListView(){/*se encargara de listar y mostrar todos las rooms */
+    public function showListView($message = "")
+    {/*se encargara de listar y mostrar todos las rooms */
         $listCinemas = $this->showAllRooms();
         require_once(VIEWS_PATH . "list-rooms.php");
     }
 
-    public function addRooms($cinema, $typeroom, $capacity , $ticketCost)
-    {
-        $newRoom = new Room();
-        $newRoom->setCinema($cinema);
-        $newRoom->setTypeRoom($typeroom);
-        $newRoom->setCapacity($capacity);
-        $newRoom->setTicketCost($ticketCost);
-        $newRoom->setActive(true);
-        $this->roomDao->add($newRoom);
+    public function showListViewInactive($message = "")
+    {/*se encargara de listar y mostrar todos las rooms */
+        $listCinemas = $this->showAllInactive();
+        require_once(VIEWS_PATH . "list-roomsInactive.php");
+    }
 
-        $this->showAddView(1);
+    public function addRooms($cinema = 0, $typeroom = 0, $capacity = 0, $ticketCost = 0)
+    {
+        if ($cinema == 0 || $typeroom == 0 || $capacity == 0 || $ticketCost == 0) {
+            $this->showAddView();
+        } else {
+            $newRoom = new Room();
+            $newRoom->setCinema($cinema);
+            $newRoom->setTypeRoom($typeroom);
+            $newRoom->setCapacity($capacity);
+            $newRoom->setTicketCost($ticketCost);
+            $newRoom->setIsActive(true);
+            $this->roomDao->add($newRoom);
+
+            $this->showAddView(1);
+        }
     }
 
     private function showAllRooms()
     {
         $cinemaList = $this->cinemaDao->getAll();
-        foreach($cinemaList as $cinema){
+        foreach ($cinemaList as $cinema) {
             $cinema->setRooms($this->roomDao->getByCinema($cinema->getId()));
         }
         return $cinemaList;
     }
 
-    private function nameRoom($idCinema)
+    private function showAllInactive()
     {
-        $listRooms = $this->roomDao->get($idCinema);
-        $lastRoom = end($listRooms);
-        $id = 0;
-        if ($lastRoom) {
-            $id = $lastRoom->getName();
-            $arrayExplode = explode('Sala ', $id);
-            $id = $arrayExplode[1];
+        $cinemaList = $this->cinemaDao->getAll();
+        foreach ($cinemaList as $cinema) {
+            $cinema->setRooms($this->roomDao->getByCinemaInactive($cinema->getId()));
         }
-        $id++;
-        $name = "Sala " . $id;
-        return $name;
+        return $cinemaList;
     }
 
-    private function idRoom()
+    public function delete($id)
     {
-        $listRooms = $this->roomDao->getAll();
-        $lastRoom = end($listRooms);
-        $id = 0;
-        if ($lastRoom) {
-            $id = $lastRoom->getId();
-        }
-        $id++;
-        return $id;
+        $this->roomDao->delete($id);
+        $this->showListView(2);
+    }
+
+    public function highInactive($id)
+    {
+        $this->roomDao->highRoom($id);
+        $this->showListView(3);
+    }
+
+    public function showUpdateView($id)
+    {
+        $room = $this->roomDao->get($id);
+        $listTypeRoom = $this->typeroomDao->getAll();
+        require_once(VIEWS_PATH . 'update-room.php');
+    }
+
+    public function updateRoom($id, $typeroom, $capacity, $ticketCost)
+    {
+        $newRoom = new RoomDTO();
+        $newRoom->setId($id);
+        $newRoom->setTypeRoom($typeroom);
+        $newRoom->setCapacity($capacity);
+        $newRoom->setTicketCost($ticketCost);
+
+        $this->roomDao->update($newRoom);
+
+        $this->showListView(1);
     }
 }

@@ -56,12 +56,12 @@
             return $this;
         }
 
-        public function setIsActive($active){
-            $this->active = $active;
+        public function setIsActive($isactive){
+            $this->isactive = $isactive;
         }
 
         public function getIsActive(){
-            return $this->active;
+            return $this->isactive;
         }
     }
 ?>
