@@ -20,7 +20,7 @@
             
         }
 
-        public function add(BillBoard $newbillboard){
+        public function add(BillBoard $newbillBoard){
             try{
                 $query= "INSERT INTO ".$this->tableName. "(idbillboard,idcinema,) VALUES (:id,:idCinema);";
             
@@ -73,18 +73,19 @@
             }
             try
             {
-                $billboard;
+                $billboards = array();
 
                 $query = "SELECT * FROM ".$this->tableName;
 
                 $this->connection = Connection::getInstance();
 
                 $resultSet = $this->connection->execute($query);
-                
-                $billboard = new Billboard();
-                $billboard->setId($resultSet["idbillboard"]);
-                $billboard->setIdCinema($resultSet["idcinema"]);
-                return $billboard;
+                foreach($resultSet as $row){
+                    $billboard = new Billboard();
+                    $billboard->setId($row["idbillboard"]);
+                    $billboard->setIdCinema($row["idcinema"]);
+                }    
+                return $billboards;
             }
             catch(Exception $ex)
             {

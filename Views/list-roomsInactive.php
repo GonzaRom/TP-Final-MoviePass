@@ -4,7 +4,7 @@
 
         <section class="section-cinema-list">
 
-            <form action="<?php echo FRONT_ROOT ?>Room/delete" method="GET" class="form-list-cinema">
+            <form action="<?php echo FRONT_ROOT ?>Room/highInactive" method="GET" class="form-list-cinema">
                 <table class="table-list-cinema">
                     <thead class="thead-list-cinema">
                         <tr class="tr-list-cinema">
@@ -12,6 +12,7 @@
                             <th>Cine</th>
                             <th>Tipo de sala</th>
                             <th>Capacidad Maxima</th>
+                            <th>Puntuacion</th>
                             <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "Admin") : ?>
                                 <th>Eliminar</th>
                                 <th>Actualizar</th>
@@ -28,9 +29,10 @@
                                     <td><?php echo $cinema->getName(); ?></td>
                                     <td><?php echo $room->getTypeRoom()->getName(); ?></td>
                                     <td><?php echo $room->getCapacity(); ?></td>
+                                    <td><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></td>
                                     <?php if (isset($_SESSION['userType']) && $_SESSION['userType'] == "Admin") : ?>
                                         <td>
-                                            <button class="button-remove-cinema" type="submit" name="id" value="<?php echo $room->getId(); ?>"> Eliminar </button>
+                                            <button class="button-remove-cinema" type="submit" name="id" value="<?php echo $room->getId(); ?>">Dar Alta</button>
                                         </td>
                                         <!--UPDATE-->
                                         <td>
@@ -42,25 +44,6 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <?php if ($message == 1) : ?>
-                    <div class="affirmative">
-
-                        <p>Actualizado Exitosamente.</p>
-
-                    </div>
-                <?php elseif ($message == 2) : ?>
-                    <div class="affirmative">
-
-                        <p>Eliminado Exitosamente.</p>
-
-                    </div>
-                <?php elseif ($message == 3) : ?>
-                    <div class="affirmative">
-
-                        <p>Dado de Alta Exitosamente.</p>
-
-                    </div>
-                <?php endif; ?>
             </form>
         </section>
     </div>

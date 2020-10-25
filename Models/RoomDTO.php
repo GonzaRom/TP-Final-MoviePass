@@ -8,9 +8,9 @@ class RoomDTO
     private $id;
     private $name;
     private $capacity;
-    private $typeRoomName;
-    private $cinemaName;
-    private $active;
+    private $typeRoom;
+    private $isactive;
+    private $ticketCost;
 
     public function __construct()
     {
@@ -45,32 +45,31 @@ class RoomDTO
         $this->capacity = $capacity;
     }
 
-    public function getTypeRoomName()
+    public function getTypeRoom()
     {
-        return $this->typeRoomName;
+        return $this->typeRoom;
     }
 
-    public function setTypeRoomName($typeRoomName)
+    public function setTypeRoom($typeRoom)
     {
-        $this->typeRoomName = $typeRoomName;
+        $this->typeRoom = $typeRoom;
     }
 
-    public function getCinemaName()
+    public function setIsActive($isactive)
     {
-        return $this->cinemaName;
+        $this->isactive = $isactive;
     }
 
-    public function setCinemaName($cinemaName)
-    {
-        $this->cinemaName = $cinemaName;
-    }
-    public function setActive($active)
-    {
-        $this->active = $active;
-    }
-
-    public function getActive()
+    public function getIsActive()
     {
         return $this->active;
+    }
+
+    public function setTicketCost($ticketCost){
+        $this->ticketCost = $ticketCost;
+    }
+
+    public function getTicketCost(){
+        return $this->ticketCost;
     }
 }

@@ -68,7 +68,7 @@ class MovieDAOMSQL implements IMovieDAO
             $movie->setBackground($resultMovie["background"]);
             $movie->setVoteAverage($resultMovie["voteAverage"]);
             $movie->setRunTime($resultMovie["runtime"]);
-
+            
             return $movie;
         } catch (Exception $ex) {
             throw $ex;

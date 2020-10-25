@@ -62,23 +62,23 @@ class BillBoardController
             echo "E R R O R no existe el cinema";
         }
     }
-
+    //retorna todas las movieShow correspondientes a un cinema;
     private function getMovieShowList($idCinema)
     {
-        $movieShows = $this->movieShowDAO->getByCinema($idCinema);
-        $cinema = $this->cinemaDAO->get($idCinema);
+        $movieShows = $this->movieShowDAO->getByCinema($idCinema); //se traen todas las movieShow correspondientes a un cinema.
+        $cinema = $this->cinemaDAO->get($idCinema); //se trae el objeto cinema.
         $listMovieShow = array();
         foreach ($movieShows as $movieShow) {
-            $movieShowDTO = new MovieShowDTO();
-            $movieShowDTO->setId($movieShow->getId());
-            $movieShowDTO->setDate($movieShow->getDate());
-            $movieShowDTO->setTime($movieShow->getTime());
-            $movieShowDTO->setMovie($this->movieDAO->get($movieShow->getMovie()));
-            $movieShowDTO->setNameCinema($cinema->getName());
-            $room = $this->roomDAO->get($movieShow->getRoom());
-            $movieShowDTO->setRoomName($room->getName());
-            $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow()));
-            array_push($listMovieShow, $movieShowDTO);
+            $movieShowDTO = new MovieShowDTO(); 
+            $movieShowDTO->setId($movieShow->getId()); // se cargar movieShowDTO con todas los atributos de movieShow.
+            $movieShowDTO->setDate($movieShow->getDate()); //se cargar movieShowDTO con todas los atributos de movieShow.
+            $movieShowDTO->setTime($movieShow->getTime()); //se cargar movieShowDTO con todas los atributos de movieShow.
+            $movieShowDTO->setMovie($this->movieDAO->get($movieShow->getMovie())); //se cargar movieShowDTO con todas los atributos de movieShow.
+            $movieShowDTO->setNameCinema($cinema->getName()); // se carga el nombre del cinema.
+            $room = $this->roomDAO->get($movieShow->getRoom()); // se trae la room de donde se va a dar la movieShow.
+            $movieShowDTO->setRoomName($room->getName()); // se cargar movieShowDTO con los atributos de room.
+            $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow())); // se cargar movieShowDTO con los atributos de room.
+            array_push($listMovieShow, $movieShowDTO); // se agrega al arreglo de movieShows.
             }
         return $listMovieShow;
     }

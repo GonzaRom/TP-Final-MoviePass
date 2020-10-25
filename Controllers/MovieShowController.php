@@ -3,14 +3,14 @@
 namespace Controllers;
 
 use DAO\MovieShowDAO as MovieShowDAO;
-use DAO\CinemaDAO as CinemaDAO;
-use DAO\RoomDAO as RoomDAO;
+use DAO\CinemaDAOMSQL as CinemaDAOMSQL;
+use DAO\RoomDAOMSQL as RoomDAOMSQL;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\SeatDAO as SeatDAO;
 use Models\Seat as Seat;
 use Models\MovieShow as MovieShow;
 use Models\MovieShowDTO as MovieShowDTO;
-use DAO\BillBoardDAO as BillBoardDAO;
+use DAO\BillBoardDAOMSQL as BillBoardDAOMSQl;
 use DAO\MovieDAOMSQL as MovieDAOMSQL;
 
 class MovieShowController
@@ -27,11 +27,11 @@ class MovieShowController
     public function __construct()
     {
         $this->movieShowDAO = new MovieShowDAO();
-        $this->cinemaDAO = new CinemaDAO();
-        $this->roomDAO = new RoomDAO();
+        $this->cinemaDAO = new CinemaDAOMSQL();
+        $this->roomDAO = new RoomDAOMSQL();
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
         $this->seatDAO = new SeatDAO();
-        $this->billBoardDAO = new BillBoardDAO();
+        $this->billBoardDAO = new BillBoardDAOMSQL();
         $this->movieDAOMSQL = new MovieDAOMSQL();
         
     }
@@ -47,17 +47,19 @@ class MovieShowController
     public function salas()
     {
         if (isset($_GET['cinema'])) {
-            $listRoom = $this->roomDAO->getCinema($_GET['cinema']);
+            $listRoom = $this->roomDAO->getByCinema($_GET['cinema']);
             echo 'Sala:<select name="room" id="">';
             echo '<option value="">Seleccione una sala</option> ';
             foreach ($listRoom as $room) {
+                if($room->getActive() == true){
+                    echo '<option value="' . $room->getId() . '">' . $room->getName()  . '</option> ';
+                }
 
-                echo '<option value="' . $room->getId() . '">' . $room->getName()  . '</option> ';
+                
             }
             echo '</select>';
         }
     }
-
     public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)
     {
         $today = date('Y-m-d');
@@ -78,10 +80,7 @@ class MovieShowController
                     }
                 }
             }
-            if($room == $movieShow->getRoom()){
-                $time += $movie->getRuntime()
-            }
-             ///validar que la pelicula no se este emitiendo el mismo dia en otro cine
+            ///validar que la pelicula no se este emitiendo el mismo dia en otro cine
         }
 
         if ($today <  $date) {
@@ -111,25 +110,23 @@ class MovieShowController
     public function getAll()
     {
         $movieShows = $this->getMovieShowList();
-        if (empty($movieShows))
+        if (empty($movieShows)) {
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  
             $message = "E R R O R, No existen funciones pendientes.";
-        else {
-            require_once(VIEWS_PATH . "list-movies.php");
         }
+        require_once(VIEWS_PATH . "list-movies.php");
     }
-
-    public function showListMovieShowView()
+      public function showListMovieShowView()
     {
         $listSeat = $this->seatDAO->GetAll();
-        $movieShows = $this->movieShowDAO->getAll();
+        $movieShowsList = $this->movieShowDAO->getAll();
         $listCinema = $this->cinemaDAO->getAll();
         $listSeatMovieShow = array();
         $listRoom = $this->roomDAO->getAll();
         $listMovie = $this->movieDAOMSQL->getAll();
         $listMovieShow = array();
-        foreach ($movieShows as $movieShow) {
+        foreach ($movieShowsList as $movieShow) {
             $movieShowDTO = new MovieShowDTO();
             $movieShowDTO->setId($movieShow->getId());
             $movieShowDTO->setDate($movieShow->getDate());
@@ -171,15 +168,13 @@ class MovieShowController
         require_once(VIEWS_PATH . "list-movieShow.php");
     }
 
-    public function getByMovie($idMovie){
-        $movie = $this->movieDAOMSQL->get($idMovie);
-        $genres = $movie->getGenres();
-        $listMovieShow = $this->movieShowDAO->getByMovie($idMovie);
-        require_once(VIEWS_PATH."detail-movie.php");
-    }
+    public function getByMovie($idMovie)
+    {
 
-    public function getByCinema($idCinema){
-        
+        $movieDTO = $this->movieDAOMSQL->get($idMovie);
+        $genres = $movieDTO->getGenres();
+        $listMovieShow = $this->movieShowDAO->getByMovie($idMovie);
+        require_once(VIEWS_PATH . "detail-movie.php");
     }
 
     private  function create_array($num_elements)
@@ -244,6 +239,6 @@ class MovieShowController
         }
         return $listMovieShow;
     }
-
-    
 }
+
+?>

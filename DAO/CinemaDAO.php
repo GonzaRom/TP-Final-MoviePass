@@ -4,7 +4,7 @@
     use Models\Cinema as Cinema;
     use DAO\ICinemaDAO as ICinemaDAO;
     
-    class CinemaDAO implements ICinemaDAO{
+    class CinemaDAO  {
         private $cinemalist=array();
         private $filename;
 
@@ -34,7 +34,7 @@
             $this->saveData();
         } 
 
-        public function update($key, Cinema $cinema){
+        /*public function update(Cinema $cinema){
             $this->retrieveData();
             $flag = false;
             foreach ($this->cinemalist as $value) {
@@ -62,7 +62,7 @@
             }
             $this->saveData();
             return $success;                       
-        }
+        }*/
 
         private function saveData(){
             $arrayToEncode=array();

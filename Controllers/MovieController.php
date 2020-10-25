@@ -21,7 +21,17 @@ class MovieController
             $this->movieDAOMSQL->updateFromApi();
             $this->genreDAOMSQL->updateFromApi();
             require_once(VIEWS_PATH . "home.php");
-
+        } catch (\Exception $e) {
+            //Por hacer:
+            //return require_once(VIEWS_PATH."error_404.php");
+            echo $e->getMessage();
+        }
+    }
+    public function get($movieId)
+    {
+        try {
+            $movieDTO = $this->movieDAO->get($movieId);
+            require_once(VIEWS_PATH . "detail-movie.php");
         } catch (\Exception $e) {
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");

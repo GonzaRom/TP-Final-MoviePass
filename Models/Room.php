@@ -9,11 +9,9 @@
         private $capacity;
         private $typeRoom;
         private $idcinema;
+        private $ticketCost;
         private $active;
 
-        public function __construct(){
-            
-        }
 
         public function setId($id){
             $this->id = $id;
@@ -55,12 +53,23 @@
             return $this->idcinema;
         }
 
-        public function setActive($active){
+        public function setIsActive($active){
             $this->active = $active;
         }
 
-        public function getActive(){
+        public function getIsActive(){
             return $this->active;
+        }
+
+        public function setTicketCost($ticketcost){
+           
+            $this->ticketCost = $ticketcost;
+
+        }
+
+        public function getTicketCost(){
+
+            return $this->ticketCost;
         }
     }
 ?>

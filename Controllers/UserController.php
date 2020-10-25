@@ -2,11 +2,11 @@
 
 namespace Controllers;
 
-use DAO\UserDAO;
-use DAO\UserTypeDAO;
+use DAO\UserDAOMSQL as UserDAOMSQL;
+use DAO\UserTypeDAOMSQL as UserTypeDAOMSQL;
 use DAO\MovieDAO as MovieDAO;
 use Models\User;
-use DAO\GenreDAO;
+use DAO\GenreDAOMSQL as GenreDAOMSQL;
 
 class UserController
 {
@@ -17,10 +17,10 @@ class UserController
 
     public  function __construct()
     {
-        $this->userDAO = new UserDAO();
-        $this->userTypeDAO = new UserTypeDAO();
+        $this->userDAO = new UserDAOMSQL();
+        $this->userTypeDAO = new UserTypeDAOMSQL();
         $this->movieDAO = new MovieDAO();
-        $this->genreDAO = new GenreDAO();
+        $this->genreDAO = new GenreDAOMSQL();
     }
     public function showLoginView($message = "")
     {
@@ -57,10 +57,10 @@ class UserController
 
                 if (password_verify($password, $user->getPassword())) {
                     $_SESSION['loggedUser'] = $user->getId();
-                    $_SESSION['userType'] = $user->getUsertype();
+                    $_SESSION['userType'] = $user->getUsertype()->getName();
                     require_once(VIEWS_PATH.'validate-session.php');
                 } else {
-                    $message = "Contraseña Incorrecta";
+                    $message = "Usuario o Contraseña Incorrecta";
 
                     $this->showLoginView($message);
                 }

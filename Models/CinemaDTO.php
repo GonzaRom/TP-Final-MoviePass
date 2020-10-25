@@ -1,12 +1,13 @@
 <?php
     namespace Models;
 
-    class Cinema{
+    class CinemaDTO{
         private $id;
         private $name;
         private $adress;
         private $phonenumber;
-        private $isactive;
+        private $rooms;
+        private $active;
         
         public function __construct(){
 
@@ -35,33 +36,43 @@
         public function setId($id)
         {
             $this->id = $id;
-            return $this;
+           
         }
 
         public function setName($name)
         {
             $this->name = $name;
-            return $this;
+            
         }
 
         public function setAdress($adress)
         {
             $this->adress = $adress;
-            return $this;
+            
         }
 
         public function setPhonenumber($phonenumber)
         {
             $this->phonenumber = $phonenumber;
-            return $this;
+            
         }
+        
+        public function getRooms()
+        {
+            return $this->rooms;
+        }
+ 
+        public function setRooms($rooms)
+        {
+            $this->rooms = $rooms;
 
-        public function setIsActive($isactive){
-            $this->isactive = $isactive;
+        }
+        public function setIsActive($active){
+            $this->active = $active;
         }
 
         public function getIsActive(){
-            return $this->isactive;
+            return $this->active;
         }
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-    namespace DAO;
+   /* namespace DAO;
     use Models\Room as Room;
     use Models\RoomDTO as RoomDTO;
     use DAO\IRoomDAO as IRoomDAO;
@@ -110,3 +110,5 @@ class RoomDAO implements IRoomDAO{
 
         
     }
+*/
+?>
