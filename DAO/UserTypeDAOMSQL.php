@@ -44,7 +44,7 @@ class UserTypeDAOMSQL implements IUserTypeDAO{
     {
         try
         {   
-            $usertype;
+            $usertype = null;
 
             $query = "SELECT * FROM ".$this->tableName ." WHERE idusertype = :id";
 

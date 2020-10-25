@@ -61,8 +61,8 @@ class HomeController
             $movieShowDTO->setTime($movieShow->getTime());
             $movieShowDTO->setMovie($this->movieDAO->get($movieShow->getMovie()));
             $billBoard = $this->billBoardDAO->get($movieShow->getBillBoard());
-            $cinema = $this->cinemaDAO->get($billBoard->getIdCinema());
-            $movieShowDTO->setNameCinema($cinema->getName());
+            //$cinema = $this->cinemaDAO->get($billBoard->getIdCinema());
+            //$movieShowDTO->setNameCinema($cinema->getName());
             $room = $this->roomDAO->get($movieShow->getRoom());
             /*$movieShowDTO->setRoomName($room->getName());*/
             $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow()));

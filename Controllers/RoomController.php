@@ -42,7 +42,7 @@ class RoomController
         $newRoom->setTypeRoom($typeroom);
         $newRoom->setCapacity($capacity);
         $newRoom->setTicketCost($ticketCost);
-        $newRoom->setActive(true);
+        $newRoom->setIsActive(true);
         $this->roomDao->add($newRoom);
 
         $this->showAddView(1);
@@ -78,31 +78,5 @@ class RoomController
         $this->roomDao->update($newRoom);
 
         $this->showListView();
-    }
-    private function nameRoom($idCinema)
-    {
-        $listRooms = $this->roomDao->get($idCinema);
-        $lastRoom = end($listRooms);
-        $id = 0;
-        if ($lastRoom) {
-            $id = $lastRoom->getName();
-            $arrayExplode = explode('Sala ', $id);
-            $id = $arrayExplode[1];
-        }
-        $id++;
-        $name = "Sala " . $id;
-        return $name;
-    }
-
-    private function idRoom()
-    {
-        $listRooms = $this->roomDao->getAll();
-        $lastRoom = end($listRooms);
-        $id = 0;
-        if ($lastRoom) {
-            $id = $lastRoom->getId();
-        }
-        $id++;
-        return $id;
     }
 }

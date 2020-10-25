@@ -126,8 +126,6 @@ class CinemaDAOMSQL implements ICinemaDAO
 
         return count($resp) > 1 ? $resp : $resp[0];
     }
-<<<<<<< HEAD
-=======
 
     protected function mapearTypeRoom($value)
     {
@@ -144,5 +142,4 @@ class CinemaDAOMSQL implements ICinemaDAO
 
         return count($resp) > 1 ? $resp : $resp[0];
     }
->>>>>>> origin/Matias
 }

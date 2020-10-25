@@ -60,7 +60,6 @@ class MovieShowController
             echo '</select>';
         }
     }
-/*
     public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)
     {
         $today = date('Y-m-d');
@@ -118,8 +117,7 @@ class MovieShowController
         }
         require_once(VIEWS_PATH . "list-movies.php");
     }
-
- /*   public function showListMovieShowView()
+      public function showListMovieShowView()
     {
         $listSeat = $this->seatDAO->GetAll();
         $movieShowsList = $this->movieShowDAO->getAll();
@@ -242,7 +240,7 @@ class MovieShowController
             array_push($listMovieShow, $movieShowDTO);
         }
         return $listMovieShow;
-    }*/
+    }
 }
 
 ?>
