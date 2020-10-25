@@ -54,7 +54,7 @@ class MovieDAOMSQL implements IMovieDAO
 
     public function get($id)
     {
-        /*try {
+        try {
             $movieList = array();
 
             $query = "SELECT * FROM " . $this->tableName . "WHERE idmovie = :id ;";
@@ -76,7 +76,7 @@ class MovieDAOMSQL implements IMovieDAO
             return $movie;
         } catch (Exception $ex) {
             throw $ex;
-        }*/
+        }
         $endPointMovieApi = "https://api.themoviedb.org/3/movie/" . $id . "?api_key=" . $this->KEY_PATH . "&language=es-ES&append_to_response=videos";
         $apiMovieContent = file_get_contents($endPointMovieApi);
         $apiMovieDecode = ($apiMovieContent) ? json_decode($apiMovieContent, true) : array();

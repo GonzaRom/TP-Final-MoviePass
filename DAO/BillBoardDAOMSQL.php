@@ -22,10 +22,10 @@
 
         public function add(BillBoard $newbillBoard){
             try{
-                $query= "INSERT INTO ".$this->tableName. "(idbillboard,idcinema,) VALUES (:id,:idCinema);";
+                $query= "INSERT INTO ".$this->tableName. " (idbillboard,idcinema,) VALUES (:id,:idCinema);";
             
-                $parameters['id'] = $newbillboard->getId();
-                $parameters["idCinema"] = $newbillboard->getIdCinema();
+                $parameters['id'] = $newbillBoard->getId();
+                $parameters["idCinema"] = $newbillBoard->getIdCinema();
                
                 $this->connection = Connection::getInstance();
 

@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use DAO\MovieShowDAO as MovieShowDAO;
-use DAO\CinemaDAO as CinemaDAO;
+use DAO\CinemaDAOMSQL as CinemaDAO;
 use DAO\RoomDAOMSQL as RoomDAO;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\SeatDAO as SeatDAO;
@@ -11,7 +11,7 @@ use Models\Seat as Seat;
 use Models\MovieShow as MovieShow;
 use Models\MovieShowDTO as MovieShowDTO;
 use DAO\BillBoardDAO as BillBoardDAO;
-use DAO\MovieDAOMSQL as MovieDAOMSQL;
+use DAO\MovieDAOMSQL as MovieDAO;
 
 class MovieShowController
 {
@@ -32,13 +32,13 @@ class MovieShowController
         $this->typeMovieShowDAO = new TypeMovieShowDAO();
         $this->seatDAO = new SeatDAO();
         $this->billBoardDAO = new BillBoardDAO();
-        $this->movieDAOMSQL = new MovieDAOMSQL();
+        $this->movieDAO = new MovieDAO();
         
     }
 
     public function showAddMovieShowView($message = "")
     {
-        $listMovies = $this->movieDAOMSQL->getAll();
+        $listMovies = $this->movieDAO->getAll();
         $listCinema = $this->cinemaDAO->getAll();
         $listTypeMovieShow = $this->typeMovieShowDAO->getAll();
         require_once(VIEWS_PATH . "add-movieShow.php");
