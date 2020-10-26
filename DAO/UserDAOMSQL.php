@@ -90,7 +90,6 @@
         //FUNCION Q GENERA EL TYPO DE USUARIO
         public function getUserType($id){
             try{
-                $usertype;
 
                 $query="SELECT * FROM usertypes WHERE idusertype = :id";
 
@@ -153,7 +152,7 @@
         }
 
         //FUNCION Q AHCE UN UPDATE SOBRE UN USUARIO
-        public function update($User)
+        public function update($newuser)
         {
             try{
                 $query= "UPDATE " .$this->tableName ." set firstname= :firstname, lastname= :lastname, username= :username, email= :email, userpassword= :password WHERE iduser= :id";

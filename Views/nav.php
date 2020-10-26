@@ -71,7 +71,7 @@
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>MovieShow/ShowListMovieShowView">Listar</a>
                         </div>
                     </li>
-                <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == 1) : ?>
+                <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == 2) : ?>
 
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>

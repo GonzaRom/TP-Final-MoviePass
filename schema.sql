@@ -142,9 +142,10 @@ INSERT INTO typerooms(nametyperoom) VALUES ("Sala Standard"),("Sala Senior"),("S
 
 INSERT INTO usertypes(nameusertype) VALUES ("User"),("Admin");
 
-INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword) VALUES 
-(1,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG"),
-(1,"Matias Manuel","Fernandez","Cosme Fulatino","matosmdq88@gmail.com","$2y$12$k0NR.RDXshLAI1KytIK2hOkm8mZ.EImEVs22lI3BMgw12hgmLo0be");
+INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword, isactive) VALUES 
+(2,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG",1),
+(2,"Matias Manuel","Fernandez","Cosme Fulatino","matosmdq88@gmail.com","$2y$12$k0NR.RDXshLAI1KytIK2hOkm8mZ.EImEVs22lI3BMgw12hgmLo0be",1),
+(2,"Ignacio Gonzalo","Romero","romero","rom.gonzalo88@gmail.com","$2y$12$KV8USIB8NlmqFRH24LGMEenrvbxD.mPD7YMJE7AcZHqBeTB4IZmyG",1);
 
 insert into cinemas (namecinema, adress, phonenumber, isactive) values ("Ambassador","Cordoba 1234","2235656598",true),
 																	   ("Aldrey","Sarmiento 2665","2234457847",true),
