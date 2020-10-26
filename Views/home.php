@@ -17,7 +17,7 @@
                 <img src="<?php echo $imgPoster; ?>" alt="">
               </div>
               <div class="content-movie-info">
-                <h1><?php echo $nombre; ?></h1>
+                <h2><?php echo $nombre; ?></h2>
                 <h3><?php echo $movie->getSynopsis(); ?></h3>
                 <br>
                 <br>
@@ -79,7 +79,6 @@
             <h2><?php echo $movie->getName() ?></h2>
             <a href="">Reservar</a>
           </div>
-        
         </div>
        
       <?php endforeach ?>
