@@ -18,9 +18,9 @@ class MovieController
     public function UpdateMoviesToDB()
     {
         try {
-            $this->movieDAOMSQL->updateFromApi();
             $this->genreDAOMSQL->updateFromApi();
-            require_once(VIEWS_PATH . "home.php");
+            $movies = $this->movieDAOMSQL->updateFromApi();
+            require_once(VIEWS_PATH . "list-dbmovies.php");
         } catch (\Exception $e) {
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");

@@ -77,7 +77,7 @@ CREATE TABLE movies(
     background varchar(500),
 	voteAverage int,
     runtime int,
-    isactive boolean,
+    isactiveMovie boolean,
     constraint PK_MOVIE primary key (idmovie),
     constraint UNK_IMDBID unique (imdbid)
 )ENGINE=InnoDB;
@@ -105,7 +105,7 @@ CREATE TABLE movieshows(
     idroom int not null,
     date_ date,
     time_ time,
-    isactive boolean,
+    isactiveMovieShow boolean,
     constraint PK_MOVIESHOW primary key (idmovieshow),
     constraint FK_BILLBOARD foreign key (idbillboard) references billboards (idbillboard),
     constraint FK_MOVIE foreign key (idmovie) references movies (idmovie),
@@ -143,7 +143,7 @@ INSERT INTO typerooms(nametyperoom) VALUES ("Sala Standard"),("Sala Senior"),("S
 INSERT INTO usertypes(nameusertype) VALUES ("User"),("Admin");
 
 INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword) VALUES 
-(2,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG"),
+(1,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG"),
 (1,"Matias Manuel","Fernandez","Cosme Fulatino","matosmdq88@gmail.com","$2y$12$k0NR.RDXshLAI1KytIK2hOkm8mZ.EImEVs22lI3BMgw12hgmLo0be");
 
 insert into cinemas (namecinema, adress, phonenumber, isactive) values ("Ambassador","Cordoba 1234","2235656598",true),

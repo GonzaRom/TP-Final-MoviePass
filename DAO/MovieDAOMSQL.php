@@ -41,6 +41,19 @@ class MovieDAOMSQL implements IMovieDAO
                 $movie->setVoteAverage($row["voteAverage"]);
                 $movie->setRunTime($row["runtime"]);
 
+                ////HASTA ACA LLEGUE( tira error en la query)
+                $query = " SELECT * FROM genresxmovie as gxm INNER JOIN genres as g ON gxm.idgenre = g.idgenre WHERE gxm.idmovie = :idmovie ;";
+                $parameters["idmovie"] = $movie->getId();
+                $this->connection = Connection::getInstance();
+                $result = $this->connection->execute($query);
+                for ($i = 0 ; $i<count($result) ; $i++) {
+                    $row = $result;
+                    $genres = array();
+                    $genres[$i]["namegenre"] = $row["namegenre"];
+                }
+                $movie->setGenreId($genres);
+                var_dump($movie->getGenreId());
+                //// ////HASTA ACA LLEGUE
                 array_push($movieList, $movie);
             }
             return $movieList;
@@ -52,25 +65,24 @@ class MovieDAOMSQL implements IMovieDAO
     public function get($id)
     {
         try {
-           
+
             $query = "SELECT * FROM " . $this->tableName . " WHERE idmovie = :id ;";
             $parameters["id"] = $id;
             $this->connection = Connection::getInstance();
 
             $resultMovie = $this->connection->execute($query, $parameters);
-           
-                $movie = new Movie();
-                $movie->setId($resultMovie["idmovie"]);
-                $movie->setImdbID($resultMovie["imdbid"]);
-                $movie->setName($resultMovie["namemovie"]);
-                $movie->setSynopsis($resultMovie["synopsis"]);
-                $movie->setPoster($resultMovie["poster"]);
-                $movie->setBackground($resultMovie["background"]);
-                $movie->setVoteAverage($resultMovie["voteAverage"]);
-                $movie->setRunTime($resultMovie["runtime"]);
+
+            $movie = new Movie();
+            $movie->setId($resultMovie["idmovie"]);
+            $movie->setImdbID($resultMovie["imdbid"]);
+            $movie->setName($resultMovie["namemovie"]);
+            $movie->setSynopsis($resultMovie["synopsis"]);
+            $movie->setPoster($resultMovie["poster"]);
+            $movie->setBackground($resultMovie["background"]);
+            $movie->setVoteAverage($resultMovie["voteAverage"]);
+            $movie->setRunTime($resultMovie["runtime"]);
 
             return $movie;
-            
         } catch (Exception $ex) {
             throw $ex;
         }
@@ -149,8 +161,6 @@ class MovieDAOMSQL implements IMovieDAO
                 $this->add($movie);
             }
             $movies = $this->getAll();
-
-
             return $this->NowPlayingMovieList;
         } catch (Exception $e) {
             echo $e->getMessage();

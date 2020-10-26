@@ -3,6 +3,7 @@
 namespace DAO;
 
 use Exception;
+use Models\Movie;
 use Models\MovieShow;
 
 class MovieShowDAOMSQL implements IMovieShowDAO
@@ -17,12 +18,12 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             VALUES (:idmovie , :idbillboard , :idtypemovieshow , :idroom , :date_ , :time_ , :isactive)";
 
             $parameters['idmovie']= $newMovieShow->getMovie();
-            $parameters['idcinema']=$newMovieShow->getBillBoard();
+            $parameters['idbillboard']=$newMovieShow->getBillBoard();
             $parameters['idtypemovieshow'] = $newMovieShow->getTypeMovieShow();
             $parameters['idroom']=$newMovieShow->getRoom();
             $parameters['date_'] = $newMovieShow->getDate();
-            $parameters['isactive'] = $newMovieShow->getIsActive();
-
+            $parameters['time_'] = $newMovieShow->getTime();
+            $parameters['isactiveMovieShow'] = $newMovieShow->getIsActive();
             $this->conection = Connection :: getInstance();
             $this->conection->ExecuteNonQuery($sql , $parameters);
 
@@ -32,8 +33,39 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     }
     public function getAll()
     {
-        $this->retriveData();
-        return $this->listMovieShow;
+        try{
+            $sql= "SELECT * FROM ". $this->nameTable. "as m INNER JOIN movies as mo ON m.idmovie = mo.idmovie ";
+            $parameters['isactive'] = true;
+            $listMovieShow = array();
+            $this->conection = Connection :: getInstance();
+            $result = $this->conection->Execute($sql , $parameters);
+            foreach($result as $movieShow){
+                $newMovieShow = new MovieShow();
+                $newMovie = new Movie();
+                $newMovie->setId($movieShow['idmovie']);
+                $newMovie->setImdbID($movieShow['imdbid']);
+                $newMovie->setName($movieShow['namemovie']);
+                $newMovie->setSynopsis($newMovieShow['synopsis']);
+                $newMovie->setPoster($newMovieShow['poster']);
+                $newMovie->setBackground($newMovieShow['background']);
+                $newMovie->setVoteAverage($newMovieShow['voteAverage']);
+                $newMovie->setRunTime($newMovieShow['runtime']);
+                $newMovie->setIsactive($newMovieShow['isactive']);
+                $newMovieShow->setId($movieShow['idmovieshow']);
+                $newMovieShow->setMovie($newMovie);
+                $newMovieShow->setRoom($movieShow['idroom']);
+                $newMovieShow->setBillBoard($movieShow['idbillboard']);
+                $newMovieShow->setDate($movieShow['date_']);
+                $newMovieShow->setTime($movieShow['time_']);
+
+                array_push($listMovieShow , $newMovieShow);
+            }
+
+            return $listMovieShow;
+
+        }catch(Exception $ex){
+            throw $ex;
+        }
     }
     public function remove($id)
     {

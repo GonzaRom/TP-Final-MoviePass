@@ -11,7 +11,7 @@
                 </select> 
                 <div class="card mb-3" style="max-width: 100%;">
 
-                    <?php for ($j = 0; $j < count($movieList); $j++) :
+                    <?php for ($j = 0; $j < count($movies); $j++) :
                         $movie = $movieList[$j];
                         $nombre = $movie->getName();
                         $genres = $movie->getGenres();
