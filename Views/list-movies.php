@@ -1,15 +1,19 @@
 <div class="content-movie-list">
     <div class="content-rgba-movie-list">
         <?php include("nav.php"); ?>
+        <form action="<?php echo FRONT_ROOT ?>MovieShow/filterByDate" method="GET">
+        <input type="date" name="date">
+        <button type="submit">Filtrar</button>
+        </form>
         <div class="container">
             <form action="<?php echo FRONT_ROOT ?>MovieShow/getByMovie" method="GET">
-                <select name="" id="">
-                    <option value="">Todos</option>
-                    <option value="">Amabasador</option>
-                    <option value="">Aldrey</option>
-                    <option value="">Gallegos</option>
+                <select name="" id="cine" onclick="moviesByCinema(this.value);">
+                    <option value="0">Todos</option>
+                    <?php foreach($cinemas as $cinema):?>
+                        <option value="<?php echo  $cinema->getId();?>"><?php echo $cinema->getName();?></option>
+                    <?php endforeach;?>
                 </select>
-                <div class="card mb-3" style="max-width: 100%;">
+                <div class="card mb-3" style="max-width: 100%;" id="movieShows">
                     <?php foreach ($cinemas as $cinema) : ?>
                     <?php $movieShows = $cinema->getBillBoard()->getMovieShows();?>
                         <?php for ($j = 0; $j < count($movieShows); $j++) :

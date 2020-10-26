@@ -177,7 +177,6 @@ class MovieDAOMSQL implements IMovieDAO
         try {
             $query = "UPDATE " . $this->tableName . " SET isactiveMovie = true WHERE idmovie = :id ;";
             $parameters['id'] = $id;
-
             $this->connection = Connection::getInstance();
 
             $this->connection->executeNonQuery($query, $parameters);

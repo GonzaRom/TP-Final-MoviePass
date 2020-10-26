@@ -5,7 +5,7 @@
       <?php for ($i = 0; $i < count($movieShows); $i++) :
         $movie = $movieShows[$i]->getMovie();
         $imgPath = $movie->getBackground();
-        $nombre = $movie->getTitle();
+        $nombre = $movie->getName();
         $imgPoster = $movie->getPoster();
         $duration = $movie->getRunTime(); 
         $id = $movie->getId();
@@ -43,7 +43,7 @@
           slidesToShow: 1,
           slidesToScroll: 1,
           autoplay: true,
-          autoplaySpeed: 3000,
+          autoplaySpeed: 4000,
           dots: true,
           infinite: true,
           speed: 300,

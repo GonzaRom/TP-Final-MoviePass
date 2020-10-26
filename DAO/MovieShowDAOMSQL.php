@@ -6,7 +6,6 @@ use Exception;
 use Models\Genre;
 use Models\Movie;
 use Models\MovieShow;
-use Models\Room;
 use Models\RoomDTO;
 use Models\TypeMovieShow;
 use Models\TypeRoom;
@@ -37,26 +36,31 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     }
     public function getAll()
     {
+        $listMovieShow = array();
         try {
-            $sql = "SELECT * FROM " . $this->nameTable . " as m INNER JOIN movies as mo ON m.idmovie = mo.idmovie";
-            $listMovieShow = array();
+            $sql = "SELECT * FROM " . $this->nameTable . " as m 
+            INNER JOIN typemovieshows as tm 
+            ON m.idtypemovieshow = tm.idtypemovieshow
+            INNER JOIN movies as mo
+            ON m.idmovie = mo.idmovie 
+            INNER JOIN rooms as r 
+            ON m.idroom = r.idroom 
+            INNER JOIN typerooms as t 
+            ON r.idtyperoom = t.idtyperoom ";
+            
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql);
-            foreach ($result as $movieShow) {
-                $newMovieShow = new MovieShow();
-                $newMovieShow->setId($movieShow['idmovieshow']);
-                $newMovieShow->setMovie($this->mapearMovie($movieShow));
-                $newMovieShow->setRoom($movieShow['idroom']);
-                $newMovieShow->setBillBoard($movieShow['idbillboard']);
-                $newMovieShow->setDate($movieShow['date_']);
-                $newMovieShow->setTime($movieShow['time_']);
-                array_push($listMovieShow, $newMovieShow);
-            }
-
-            return $listMovieShow;
         } catch (Exception $ex) {
             throw $ex;
         }
+
+        if(!empty($result)){
+            foreach($result as $movieShow){
+                $newMovieShow = $this->creatMovieShow($movieShow);
+                array_push($listMovieShow , $newMovieShow);
+            }
+        }
+        return $listMovieShow;
     }
 
     public function getMovieShowBycinema($id)
@@ -97,6 +101,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     {
     }
 
+
     public function getMovieShowByMovie($idMovie)
     {   $listMovieShow = array();
         try{
@@ -118,6 +123,41 @@ class MovieShowDAOMSQL implements IMovieShowDAO
         return $listMovieShow;
 
     }
+
+    public function getMovieShowByMovieDate($idMovie , $date)
+    {   $listMovieShow = array();
+        try{
+            
+            $sql = "SELECT * FROM " . $this->nameTable ." as m 
+            INNER JOIN typemovieshows as tm 
+            ON m.idtypemovieshow = tm.idtypemovieshow
+            INNER JOIN movies as mo
+            ON m.idmovie = mo.idmovie 
+            INNER JOIN rooms as r 
+            ON m.idroom = r.idroom 
+            INNER JOIN typerooms as t 
+            ON r.idtyperoom = t.idtyperoom 
+            WHERE m.idbillboard = :idbillboard AND m.date_ = :date";
+            $parameters['idbillboard'] = $idMovie;
+            $parameters['date'] =$date;
+            $this->conection = Connection::getInstance();
+            $result = $this->conection->Execute($sql , $parameters);
+        }catch(Exception $ex){
+            throw $ex;
+        }
+
+        if(!empty($result)){
+            foreach($result as $movieShow){
+                $newMovieShow = $this->creatMovieShow($movieShow);
+                array_push($listMovieShow , $newMovieShow);
+            }
+        } 
+        return $listMovieShow;
+
+    }
+
+
+
     protected function creatMovieShow($value)
     {
         $value = ($value) ? $value : array();
