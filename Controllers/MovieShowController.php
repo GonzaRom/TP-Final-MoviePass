@@ -40,6 +40,7 @@ class MovieShowController
     {
         $listMovies = $this->movieDAOMSQL->getAll();
         $listCinema = $this->cinemaDAO->getAll();
+        var_dump($listCinema);
         $listTypeMovieShow = $this->typeMovieShowDAO->getAll();
         require_once(VIEWS_PATH . "add-movieShow.php");
     }

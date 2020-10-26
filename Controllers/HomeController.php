@@ -41,8 +41,9 @@ class HomeController
     {
         
         $movieShows = $this->getMovieShowList();// trae todas las funciones disponibles.
-        //$this->movieDAOMSQL->updateFromApi();
+        $movieList=$this->movieDAO->getAll();
         //$this->genreDAO->updateFromApi();
+        //$this->movieDAOMSQL->updateFromApi();
         if (empty($movieShows)){
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  

@@ -15,14 +15,13 @@
         //FUNCION Q AGREGA UN NUEVO USUARIO A LA BDD
         public function add(User $newuser){
             try{
-                $query= "INSERT INTO ".$this->tableName. " (idusertype, firstname, lastname, username, email, userpassword, isactive) VALUES ( 1, :firstname, :lastname, :username, :email, :password, true);";
+                $query= "INSERT INTO ".$this->tableName. " (idusertype, firstname, lastname, username, email, userpassword, isactive) VALUES ( :usertype, :firstname, :lastname, :username, :email, :password, true);";
             
-                //$parameters['id'] = $newuser->getId();
                 $parameters['firstname'] = $newuser->getFirstName();
                 $parameters['lastname'] = $newuser->getLastName();
                 $parameters['username'] = $newuser->getUserName();
                 $parameters['email'] = $newuser->getEmail();
-                //$parameters['usertype'] = 1;
+                $parameters['usertype'] = $newuser->getUserType();
                 $parameters['password'] = $newuser->getPassword();
                 $this->connection = Connection::getInstance();
                 $this->connection->executeNonQuery($query, $parameters);
