@@ -52,27 +52,25 @@ class MovieDAOMSQL implements IMovieDAO
     public function get($id)
     {
         try {
-            $movieList = array();
-
-            $query = "SELECT * FROM " . $this->tableName . " WHERE imdbid = :id ;";
+           
+            $query = "SELECT * FROM " . $this->tableName . " WHERE idmovie = :id ;";
             $parameters["id"] = $id;
             $this->connection = Connection::getInstance();
 
             $resultMovie = $this->connection->execute($query, $parameters);
-            foreach ($resultMovie as $row) {
+           
                 $movie = new Movie();
-                $movie->setId($row["idmovie"]);
-                $movie->setImdbID($row["imdbid"]);
-                $movie->setName($row["namemovie"]);
-                $movie->setSynopsis($row["synopsis"]);
-                $movie->setPoster($row["poster"]);
-                $movie->setBackground($row["background"]);
-                $movie->setVoteAverage($row["voteAverage"]);
-                $movie->setRunTime($row["runtime"]);
+                $movie->setId($resultMovie["idmovie"]);
+                $movie->setImdbID($resultMovie["imdbid"]);
+                $movie->setName($resultMovie["namemovie"]);
+                $movie->setSynopsis($resultMovie["synopsis"]);
+                $movie->setPoster($resultMovie["poster"]);
+                $movie->setBackground($resultMovie["background"]);
+                $movie->setVoteAverage($resultMovie["voteAverage"]);
+                $movie->setRunTime($resultMovie["runtime"]);
 
-                array_push($movieList, $movie);
-            }
-            return $movieList;
+            return $movie;
+            
         } catch (Exception $ex) {
             throw $ex;
         }

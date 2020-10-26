@@ -38,10 +38,12 @@ class HomeController
 
     // se llaman a las vistas de home.php.
     public function index($message = "")
-    {  
-         // trae todas las funciones disponibles.
-        $movieShows = $this->getMovieShowList();
-       
+    {
+        
+        $movieShows = $this->getMovieShowList();// trae todas las funciones disponibles.
+        $movieList=$this->movieDAO->getAll();
+        //$this->genreDAO->updateFromApi();
+        //$this->movieDAOMSQL->updateFromApi();
         if (empty($movieShows)){
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  

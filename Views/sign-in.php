@@ -15,7 +15,7 @@
                     <input class="input-login" type="text" name="userName" placeholder="Nombre de usuario">
                     <input class="input-login" type="email" name="email" placeholder="Email">
                     <input class="input-login" type="password" name="password" placeholder="Password">
-                    <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] == 2) : ?>
+                    <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] == "Admin") : ?>
                         <select name="userType" id="userType">
                             <?php foreach ($userTypeList as $userType) :  ?>
                                 <option value="<?php echo $userType->getId(); ?>" id="userType"><?php echo $userType->getName(); ?></option>

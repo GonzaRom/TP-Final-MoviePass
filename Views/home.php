@@ -64,25 +64,25 @@
       </ul>
     </aside>
     <section class="peliculas">
-      <?php for ($i = 0; $i < count($movieShows); $i++) :
-        $movie = $movieShows[$i]->getMovie();
-        $imgPath = $movie->getPoster();
+      <?php foreach($movieList as $movie) :
+        /*$movie = $movieShows[$i]->getMovie();                  /////esto estaba asi para mostrar las funciones.
+        $imgPath = $movie->getPoster();                          /////matias lo cambio para q el dia antes de la segunda entrega muestre las peliculas 
         $name =  $movie->getTitle();
-        $id = $movie->getId();
+        $id = $movie->getId();*/
       ?>
        
         <div class="movie">
           <div class="img-poster-movie">
-            <img src="<?php echo $imgPath; ?>" alt="">
+            <img src="<?php echo $movie->getPoster(); ?>" alt="">
           </div>
           <div class="detalles">
-            <h2><?php echo $name; ?></h2>
+            <h2><?php echo $movie->getName() ?></h2>
             <a href="">Reservar</a>
           </div>
         
         </div>
        
-      <?php endfor ?>
+      <?php endforeach ?>
     </section>
 
   </section>
