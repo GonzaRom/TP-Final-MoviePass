@@ -4,7 +4,7 @@ namespace Controllers;
 
 use DAO\GenreDAOMSQL as GenreDAOMSQL;
 use DAO\MovieDAO as MovieDAO;
-use DAO\MovieShowDAO as MovieShowDAO;
+use DAO\MovieShowDAOMSQL as MovieShowDAO;
 use DAO\CinemaDAOMSQL as CinemaDAOMSQL;
 use DAO\RoomDAOMSQL as RoomDAO;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
@@ -41,7 +41,7 @@ class HomeController
     public function index($message = "")
     {
 
-        $movieShows = $this->getMovieShowList(); // trae todas las funciones disponibles.
+        $movieShows = $this->movieShowDAO->getAll(); // trae todas las funciones disponibles.
         $movieList = $this->movieDAO->getAll();
         //$this->genreDAO->updateFromApi();
         //$this->movieDAOMSQL->updateFromApi();

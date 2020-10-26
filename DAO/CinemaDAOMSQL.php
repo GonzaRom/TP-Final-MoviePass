@@ -18,7 +18,7 @@ class CinemaDAOMSQL implements ICinemaDAO
     {
 
         try {
-            $sql = "SELECT * FROM " . $this->nameTable . " WHERE idcinema = :id";
+            $sql = "SELECT * FROM " . $this->nameTable . " as c INNER JOIN billboards as b ON c.idcinema = b.idcinema WHERE c.idcinema = :id";
 
             $parameter['id'] = $id;
             $this->conection = Connection::getInstance();
@@ -118,11 +118,14 @@ class CinemaDAOMSQL implements ICinemaDAO
         $value = ($value) ? $value : array();
         $resp = array_map(function ($p) {
             $newCinema = new CinemaDTO();
+            $newBillBoard = new BillBoardDTO();
+            $newBillBoard->setId($p['idbillboard']);
             $newCinema->setId($p['idcinema']);
             $newCinema->setName($p['namecinema']);
             $newCinema->setAdress($p['adress']);
             $newCinema->setPhonenumber($p['phonenumber']);
             $newCinema->setIsActive($p['isactive']);
+            $newCinema->setBillBoard($newBillBoard);
             return $newCinema;
         }, $value);
 
