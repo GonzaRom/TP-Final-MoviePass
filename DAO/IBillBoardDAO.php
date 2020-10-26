@@ -8,7 +8,7 @@ interface IBillBoardDAO {
     public function getAll();
     public function remove($id);
     public function get($id);
-    public function getByIdCinema($id = 0);
+    public function getByIdCinema($id);
     
 }
 

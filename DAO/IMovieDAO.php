@@ -5,6 +5,5 @@
     interface IMovieDAO{
         public function getAll();
         public function get($id);
-        public function delete($key);
     }
 ?>

@@ -14,8 +14,8 @@
                 </div>
 
                 <div class="input-box">
-                    <span>Funcion: </span><select name="movieShow" id="">
-                        <option value="">Seleccione una opcion</option>
+                    <span>Funcion: </span><select class="form-control " name="movieShow" id="">
+                        <option  value="">Seleccione una opcion</option>
                         <?php /*foreach ($listmovieShow as $movieShow) :*/ ?>
                         <option value="<?php/* echo $movieShow->getId();*/ ?>"><?php /*echo $movieShow->getDate() . " " . $movieShow->getTime(); */ ?></option>
                         <?php /*endforeach;*/ ?>

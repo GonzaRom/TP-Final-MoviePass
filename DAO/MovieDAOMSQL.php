@@ -54,31 +54,28 @@ class MovieDAOMSQL implements IMovieDAO
         try {
             $movieList = array();
 
-            $query = "SELECT * FROM " . $this->tableName . "WHERE idmovie = :id ;";
-
+            $query = "SELECT * FROM " . $this->tableName . " WHERE imdbid = :id ;";
+            $parameters["id"] = $id;
             $this->connection = Connection::getInstance();
 
-            $resultMovie = $this->connection->execute($query);
+            $resultMovie = $this->connection->execute($query, $parameters);
+            foreach ($resultMovie as $row) {
+                $movie = new Movie();
+                $movie->setId($row["idmovie"]);
+                $movie->setImdbID($row["imdbid"]);
+                $movie->setName($row["namemovie"]);
+                $movie->setSynopsis($row["synopsis"]);
+                $movie->setPoster($row["poster"]);
+                $movie->setBackground($row["background"]);
+                $movie->setVoteAverage($row["voteAverage"]);
+                $movie->setRunTime($row["runtime"]);
 
-            $movie = new Movie();
-            $movie->setId($resultMovie["idmovie"]);
-            $movie->setImdbID($resultMovie["imdbid"]);
-            $movie->setName($resultMovie["namemovie"]);
-            $movie->setSynopsis($resultMovie["synopsis"]);
-            $movie->setPoster($resultMovie["poster"]);
-            $movie->setBackground($resultMovie["background"]);
-            $movie->setVoteAverage($resultMovie["voteAverage"]);
-            $movie->setRunTime($resultMovie["runtime"]);
-            
-            return $movie;
+                array_push($movieList, $movie);
+            }
+            return $movieList;
         } catch (Exception $ex) {
             throw $ex;
         }
-    }
-
-    public function delete($key)
-    {
-        //TO DO
     }
 
     public function add(Movie $newMovie)
@@ -94,14 +91,36 @@ class MovieDAOMSQL implements IMovieDAO
             $parameters["background"] = $newMovie->getBackground();
             $parameters["voteAverage"] = $newMovie->getVoteAverage();
             $parameters["runtime"] = $newMovie->getRunTime();
-
             $this->connection = Connection::getInstance();
-
             $this->connection->executeNonQuery($query, $parameters);
+
+            $this->addGenresxMovie($newMovie);
         } catch (Exception $ex) {
             throw $ex;
         }
     }
+
+    public function addGenresxMovie($movie)
+    {
+        $genres = $movie->getGenreId();
+        foreach ($genres as $genre) {
+            try {
+                $queryId = " SELECT m.idmovie FROM movies m where m.imdbid= " . $movie->getImdbID();
+                $this->connection = Connection::getInstance();
+                $resultSet = $this->connection->execute($queryId);
+                var_dump($resultSet);
+                $idBd = $resultSet[0]["idmovie"];
+
+                $query = " INSERT INTO genresxmovie (idgenre , idmovie) VALUES ( :idgenre , :idmovie );";
+                $parameters['idgenre'] = $genre['id'];
+                $parameters['idmovie'] = $idBd;
+                $this->connection->executeNonQuery($query, $parameters);
+            } catch (Exception $ex) {
+                throw $ex;
+            }
+        }
+    }
+
 
     public function update(Movie $movie)
     {
@@ -131,8 +150,11 @@ class MovieDAOMSQL implements IMovieDAO
             foreach ($this->NowPlayingMovieList as $movie) {
                 $this->add($movie);
             }
+            $movies = $this->getAll();
+
+
             return $this->NowPlayingMovieList;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
@@ -148,9 +170,8 @@ class MovieDAOMSQL implements IMovieDAO
         else {
             $apiMovieList = $apiMovieDecode["results"];
 
-            for ($i = 0; $i < count($apiMovieList); $i++) {
-                $apiMovieData = $apiMovieList[$i];
-                $endPointMovieApi = "https://api.themoviedb.org/3/movie/" . $apiMovieData["id"] . "?api_key=" . $this->KEY_PATH . "&language=es-ES&append_to_response=videos";
+            foreach ($apiMovieList as $apiMovie) {
+                $endPointMovieApi = "https://api.themoviedb.org/3/movie/" . $apiMovie["id"] . "?api_key=" . $this->KEY_PATH . "&language=es-ES&append_to_response=videos";
                 $apiMovieContent = file_get_contents($endPointMovieApi);
                 $apiMovieDecode = ($apiMovieContent) ? json_decode($apiMovieContent, true) : array();
                 if (count($apiMovieDecode) <= 0) throw new Exception("Failed retriving data from api.");
@@ -158,14 +179,11 @@ class MovieDAOMSQL implements IMovieDAO
                 else {
                     $movie = new Movie();
                     $movie->setImdbId($apiMovieDecode["id"]);
-                  //  $movie->setOriginalTitle($apiMovieDecode["original_title"]);
                     $movie->setSynopsis($apiMovieDecode["overview"]);
-                   // $movie->setShortSynopsis($apiMovieDecode["tagline"]);
-                   // $movie->setReleaseDate($apiMovieDecode["release_date"]);
+                    //$movie->setShortSynopsis($apiMovieDecode["tagline"]);
                     $movie->setName($apiMovieDecode["title"]);
-                   // $movie->setOriginalLanguage($apiMovieDecode["original_language"]);
                     $movie->setVoteAverage($apiMovieDecode["vote_average"]);
-                   // $movie->setGenres($apiMovieDecode["genres"]);
+                    $movie->setGenreId($apiMovieDecode["genres"]);
                     $movie->setBackground("http://image.tmdb.org/t/p/original" . $apiMovieDecode["backdrop_path"]);
                     $movie->setPoster("http://image.tmdb.org/t/p/original" . $apiMovieDecode["poster_path"]);
                     $movie->setRunTime($apiMovieDecode["runtime"]);

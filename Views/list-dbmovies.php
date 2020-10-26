@@ -13,7 +13,7 @@
 
                     <?php for ($j = 0; $j < count($movieList); $j++) :
                         $movie = $movieList[$j];
-                        $nombre = $movie->getTitle();
+                        $nombre = $movie->getName();
                         $genres = $movie->getGenres();
                         $duration =$movie->getRunTime();
                     ?>
@@ -29,7 +29,7 @@
                             <div class="card h-100">
                                 <div class="card-body">
                                     <h5 class="card-title text-center ">
-                                        <strong><?php echo $movie->getTitle(); ?></strong>
+                                        <strong><?php echo $movie->getName(); ?></strong>
                                     </h5>
                                     <?php for ($i = 0; $i < count($movie->getGenres()); $i++) : ?>
                                     <span class="badge badge-info"><?php echo $genres[$i]["name"]; ?> </span>

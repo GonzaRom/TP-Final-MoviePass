@@ -5,12 +5,12 @@
             <div class="content-add-room">
                 <div class="content-form">
                     <h1 class="tittle-add-room">Add Cartelera</h1>
-                    <form action="<?php echo FRONT_ROOT; ?>BillBoard/addBillBoard" method="POST" >
+                    <form action="<?php echo FRONT_ROOT; ?>BillBoard/add" method="POST" >
                         <div class="select-room">
                             <span>
                                 <b>Cine:</b>
                             </span>
-                            <select name="idCinema" id="" required>
+                            <select class="form-control" name="idCinema" id="" required>
                                 <option value="">Seleccione una opcion</option>
                                 <?php foreach($listCinema as $cinema):?>
                                     <option value="<?php echo $cinema->getId();?>"><?php echo $cinema->getName();?></option>
