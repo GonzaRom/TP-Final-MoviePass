@@ -5,6 +5,8 @@ namespace DAO;
 use Models\Cinema as Cinema;
 use Models\CinemaDTO as  CinemaDTO;
 use Exception;
+use Models\BillBoard;
+use Models\BillBoardDTO;
 
 class CinemaDAOMSQL implements ICinemaDAO
 {
@@ -36,18 +38,19 @@ class CinemaDAOMSQL implements ICinemaDAO
         try {
             $cinemalist = array();
 
-            $sql = "SELECT * FROM " . $this->nameTable. " WHERE isactive = :isactive";
-            $parameters['isactive'] = true;
+            $sql = "SELECT * FROM " . $this->nameTable. " as c INNER JOIN billboards as b ON c.idcinema = b.idcinema";
             $this->conection = Connection::getInstance();
 
-            $result = $this->conection->Execute($sql,$parameters);
+            $result = $this->conection->Execute($sql);
             foreach ($result as $cinema) {
                 $newCinema = new CinemaDTO();
+                $newBillBoard = new BillBoardDTO();
+                $newBillBoard->setId($cinema['idbillboard']);
                 $newCinema->setId($cinema['idcinema']);
                 $newCinema->setName($cinema['namecinema']);
                 $newCinema->setAdress($cinema['adress']);
                 $newCinema->setPhonenumber($cinema['phonenumber']);
-                $newCinema->setIsActive($cinema['isactive']);
+                $newCinema->setBillBoard($newBillBoard);
                 array_push($cinemalist, $newCinema);
             }
            return $cinemalist;  

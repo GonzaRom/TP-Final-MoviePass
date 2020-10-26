@@ -11,7 +11,7 @@ class TypeRoomDAOMSQL implements ITypeRoomDAO{
 
         public function get($id){
             try{
-                $sql = "SELECT * FROM ". $this->nameTable . "WHERE idtyperoom = :idtyperoom";
+                $sql = "SELECT * FROM ". $this->nameTable . " WHERE idtyperoom = :idtyperoom";
                 $parameters['idtyperoom'] = $id;
 
                 $this->conecction = Connection::getInstance();

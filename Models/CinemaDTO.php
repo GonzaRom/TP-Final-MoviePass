@@ -8,7 +8,7 @@
         private $phonenumber;
         private $rooms;
         private $active;
-        
+        private BillBoardDTO $billBoard;        
         public function __construct(){
 
         }
@@ -73,6 +73,14 @@
 
         public function getIsActive(){
             return $this->active;
+        }
+
+        public function getBillBoard(){
+            return $this->billBoard;
+        }
+
+        public function setBillBoard(BillBoardDTO $billBoard){
+            $this->billBoard = $billBoard;
         }
     }
 ?>

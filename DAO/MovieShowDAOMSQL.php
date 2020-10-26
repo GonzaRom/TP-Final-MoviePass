@@ -3,166 +3,214 @@
 namespace DAO;
 
 use Exception;
+use Models\Genre;
 use Models\Movie;
 use Models\MovieShow;
+use Models\Room;
+use Models\RoomDTO;
+use Models\TypeMovieShow;
+use Models\TypeRoom;
 
 class MovieShowDAOMSQL implements IMovieShowDAO
 {
-    private $nameTable= "movieshows";
+    private $nameTable = "movieshows";
     private $conection;
 
     public function add(MovieShow $newMovieShow)
     {
-        try{
-            $sql = "INSERT INTO ".$this->nameTable. " (idmovie , idbillboard , idtypemovieshow , idroom , date_ , time_ , isactive )
-            VALUES (:idmovie , :idbillboard , :idtypemovieshow , :idroom , :date_ , :time_ , :isactive)";
+        try {
+            $sql = "INSERT INTO " . $this->nameTable . " (idmovie , idbillboard , idtypemovieshow , idroom , date_ , time_ , isactiveMovieShow )
+            VALUES (:idmovie , :idbillboard , :idtypemovieshow , :idroom , :date_ , :time_ , :isactiveMovieShow)";
 
-            $parameters['idmovie']= $newMovieShow->getMovie();
-            $parameters['idbillboard']=$newMovieShow->getBillBoard();
+            $parameters['idmovie'] = $newMovieShow->getMovie();
+            $parameters['idbillboard'] = $newMovieShow->getBillBoard();
             $parameters['idtypemovieshow'] = $newMovieShow->getTypeMovieShow();
-            $parameters['idroom']=$newMovieShow->getRoom();
+            $parameters['idroom'] = $newMovieShow->getRoom();
             $parameters['date_'] = $newMovieShow->getDate();
             $parameters['time_'] = $newMovieShow->getTime();
             $parameters['isactiveMovieShow'] = $newMovieShow->getIsActive();
-            $this->conection = Connection :: getInstance();
-            $this->conection->ExecuteNonQuery($sql , $parameters);
-
-        }catch(Exception $ex){
+            $this->conection = Connection::getInstance();
+            $this->conection->ExecuteNonQuery($sql, $parameters);
+        } catch (Exception $ex) {
             throw $ex;
         }
     }
     public function getAll()
     {
-        try{
-            $sql= "SELECT * FROM ". $this->nameTable. "as m INNER JOIN movies as mo ON m.idmovie = mo.idmovie ";
-            $parameters['isactive'] = true;
+        try {
+            $sql = "SELECT * FROM " . $this->nameTable . " as m INNER JOIN movies as mo ON m.idmovie = mo.idmovie";
             $listMovieShow = array();
-            $this->conection = Connection :: getInstance();
-            $result = $this->conection->Execute($sql , $parameters);
-            foreach($result as $movieShow){
+            $this->conection = Connection::getInstance();
+            $result = $this->conection->Execute($sql);
+            foreach ($result as $movieShow) {
                 $newMovieShow = new MovieShow();
-                $newMovie = new Movie();
-                $newMovie->setId($movieShow['idmovie']);
-                $newMovie->setImdbID($movieShow['imdbid']);
-                $newMovie->setName($movieShow['namemovie']);
-                $newMovie->setSynopsis($newMovieShow['synopsis']);
-                $newMovie->setPoster($newMovieShow['poster']);
-                $newMovie->setBackground($newMovieShow['background']);
-                $newMovie->setVoteAverage($newMovieShow['voteAverage']);
-                $newMovie->setRunTime($newMovieShow['runtime']);
-                $newMovie->setIsactive($newMovieShow['isactive']);
                 $newMovieShow->setId($movieShow['idmovieshow']);
-                $newMovieShow->setMovie($newMovie);
+                $newMovieShow->setMovie($this->mapearMovie($movieShow));
                 $newMovieShow->setRoom($movieShow['idroom']);
                 $newMovieShow->setBillBoard($movieShow['idbillboard']);
                 $newMovieShow->setDate($movieShow['date_']);
                 $newMovieShow->setTime($movieShow['time_']);
-
-                array_push($listMovieShow , $newMovieShow);
+                array_push($listMovieShow, $newMovieShow);
             }
 
             return $listMovieShow;
-
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             throw $ex;
         }
     }
+
+    public function getMovieShowBycinema($id)
+    {
+        try {
+            $sql = "SELECT * FROM " . $this->nameTable . " as m 
+            INNER JOIN typemovieshows as tm 
+            ON m.idtypemovieshow = tm.idtypemovieshow
+            INNER JOIN movies as mo
+            ON m.idmovie = mo.idmovie 
+            INNER JOIN rooms as r 
+            ON m.idroom = r.idroom 
+            INNER JOIN typerooms as t 
+            ON r.idtyperoom = t.idtyperoom 
+            WHERE m.idbillboard = :idbillboard";
+
+            $parameters['idbillboard'] = $id;
+            $listMovieShow = array();
+            $this->conection = Connection::getInstance();
+            $result = $this->conection->Execute($sql, $parameters);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+
+        if (!empty($result)) {
+            foreach ($result as $movieShow) {
+
+                $newMovieShow = $this->creatMovieShow($movieShow);
+                array_push($listMovieShow, $newMovieShow);
+            }
+        }
+        return $listMovieShow;
+    }
     public function remove($id)
     {
-        $this->retriveData();
-        $this->removeItem($id);
-        $this->saveData();
     }
     public function get($id)
     {
-        $this->retriveData();
-        return $this->getItem($id);
     }
 
-    public function getByMovie($idMovie)
-    {
-        $listByMovie = array();
-        $this->retriveData();
-        foreach ($this->listMovieShow as $movieShow) {
-            if ($movieShow->getMovie() == $idMovie) {
-                array_push($listByMovie, $movieShow);
+    public function getMovieShowByMovie($idMovie)
+    {   $listMovieShow = array();
+        try{
+            
+            $sql = "SELECT * FROM " . $this->nameTable ." as ms INNER JOIN movies as m ON ms.idmovie = m.idmovie WHERE ms.idmovie = :id";
+            $parameters['id'] = $idMovie;
+            $this->conection = Connection::getInstance();
+            $result = $this->conection->Execute($sql , $parameters);
+        }catch(Exception $ex){
+            throw $ex;
+        }
+
+        if(!empty($result)){
+            foreach($result as $movieShow){
+                $newMovieShow = $this->creatMovieShow($movieShow);
+                array_push($listMovieShow , $newMovieShow);
             }
-        }
-        return $listByMovie;
+        } 
+        return $listMovieShow;
+
     }
-
-    public function getByCinema($idCinema)
+    protected function creatMovieShow($value)
     {
-        $movieShowByCinema = array();
-        $this->retriveData();
-        foreach ($this->listMovieShow as $movieShow) {
-            if ($movieShow->getCinema() == $idCinema) {
-                array_push($movieShowByCinema, $movieShow);
-            }
-        }
-        return $movieShowByCinema;
-    }
-
-    private function retriveData()
-    {
-        $this->listMovieShow = array();
-        if (file_exists($this->fileName)) {
-            $jsonContent = file_get_contents($this->fileName);
-
-            $jsonDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-            foreach ($jsonDecode as $movieShow) {
-                $newMovieShow = new MovieShow();
-                $newMovieShow->setId($movieShow['id']);
-                $newMovieShow->setMovie($movieShow['movie']);
-                $newMovieShow->setBillBoard($movieShow['billBoard']);
-                $newMovieShow->setRoom($movieShow['room']);
-                $newMovieShow->setDate($movieShow['date']);
-                $newMovieShow->setTime($movieShow['time']);
-                $newMovieShow->setTypeMovieShow($movieShow['typeMovieShow']);
-                array_push($this->listMovieShow, $newMovieShow);
-            }
-        }
-    }
-
-    private function saveData()
-    {
-        $jsonEncode = array();
-
-        foreach ($this->listMovieShow as $movieShow) {
-            $valuesMovieShow = array();
-            $valuesMovieShow['id'] = $movieShow->getId();
-            $valuesMovieShow['movie'] = $movieShow->getMovie();
-            $valuesMovieShow['billBoard'] = $movieShow->getBillBoard();
-            $valuesMovieShow['room'] = $movieShow->getRoom();
-            $valuesMovieShow['date'] = $movieShow->getDate();
-            $valuesMovieShow['time'] = $movieShow->getTime();
-            $valuesMovieShow['typeMovieShow'] = $movieShow->getTypeMovieShow();
-            array_push($jsonEncode, $valuesMovieShow);
+        $value = ($value) ? $value : array();
+        if(!empty($value)){
+            $newMovieShow = new MovieShow();
+            $newMovieShow->setId($value['idmovieshow']);
+            $newMovieShow->setMovie($this->mapearMovie($value));
+            $newMovieShow->setRoom($this->mapearRoom($value));
+            $newMovieShow->setTypeMovieShow($this->mapearTypeMovieShow($value));
+            $newMovieShow->setDate($value['date_']);
+            $newMovieShow->setTime($value['time_']);
+            return $newMovieShow;
         }
 
-        $jsonContent = json_encode($jsonEncode, JSON_PRETTY_PRINT);
-        file_put_contents($this->fileName, $jsonContent);
+        
     }
 
-    private  function removeItem($id)
+
+    protected function mapearRoom($value)
     {
-        foreach ($this->listMovieShow as $movieShow) {
-            if ($movieShow->getId() == $id) {
-                unset($this->listMovieShow, $movieShow);
-            }
+        $value = ($value) ? $value : array();
+        if(!empty($value)){
+            $newRoom = new RoomDTO();
+            $newRoom->setId($value['idroom']);
+            $newRoom->setName($value['nameroom']);
+            $newRoom->setCapacity($value['capacity']);
+            $newRoom->setTypeRoom($this->mapearTypeRoom($value));
+            $newRoom->setIsActive($value['isactive']);
+            $newRoom->setTicketCost($value['ticketcost']);
+            return $newRoom;
+        }
+
+        
+    }
+
+    protected function mapearTypeRoom($value)
+    {
+        $value = ($value) ? $value : array();
+        if(!empty($value)){
+            $newTypeRoom = new TypeRoom();
+            $newTypeRoom->setId($value['idtyperoom']);
+            $newTypeRoom->setName($value['nametyperoom']);
+
+            return $newTypeRoom;
         }
     }
 
-    private  function getItem($id)
+    protected function mapearTypeMovieShow($value)
     {
-        $getMovieShow = null;
-        foreach ($this->listMovieShow as $movieShow) {
-            if ($movieShow->getId() == $id) {
-                $getMovieShow = $movieShow;
-            }
+        $value = ($value) ? $value : array();
+        if(!empty($value)){
+            $newTypeRoom = new TypeMovieShow();
+            $newTypeRoom->setId($value['idtypemovieshow']);
+            $newTypeRoom->setName($value['nametypemovieshow']);
+
+            return $newTypeRoom;
         }
-        return $getMovieShow;
+
+        
+    }
+
+    protected function mapearMovie($value)
+    {
+        $value = ($value) ? $value : array();
+        if (!empty($value)) {
+            $movie = new Movie();
+            $movie->setId($value["idmovie"]);
+            $movie->setImdbID($value["imdbid"]);
+            $movie->setName($value["namemovie"]);
+            $movie->setSynopsis($value["synopsis"]);
+            $movie->setPoster($value["poster"]);
+            $movie->setBackground($value["background"]);
+            $movie->setVoteAverage($value["voteAverage"]);
+            $movie->setRunTime($value["runtime"]);
+            $movie->setGenreId($this->getGenresById($movie->getId()));
+            return $movie;
+        }
+    }
+
+    public function getGenresById($idmovie)
+    {
+        $listGenres = array();
+        $query = " SELECT * FROM genresxmovie as gxm INNER JOIN genres as g ON gxm.idgenre = g.idgenre WHERE gxm.idmovie = :idmovie";
+        $parameters["idmovie"] = $idmovie;
+
+        $this->connection = Connection::getInstance();
+        $result = $this->connection->execute($query, $parameters);
+        foreach ($result as $genres) {
+            $newGenre = new Genre();
+            $newGenre->setId($genres['idgenre']);
+            $newGenre->setName($genres['namegenre']);
+            array_push($listGenres, $newGenre);
+        }
+        return $listGenres;
     }
 }
-?>

@@ -59,11 +59,11 @@
     <aside class="generos">
       <ul>
         <?php foreach ($listGenre as $genre) : ?>
-          <li><?php echo $genre->getName(); ?></li>
+          <li> <a onclick="selectMovie(<?php echo $genre->getId();?>);"><?php echo $genre->getName(); ?></a></li>
         <?php endforeach; ?>
       </ul>
     </aside>
-    <section class="peliculas">
+    <section class="peliculas" id="movies">
       <?php foreach($movieList as $movie) :
         /*$movie = $movieShows[$i]->getMovie();                  /////esto estaba asi para mostrar las funciones.
         $imgPath = $movie->getPoster();                          /////matias lo cambio para q el dia antes de la segunda entrega muestre las peliculas 

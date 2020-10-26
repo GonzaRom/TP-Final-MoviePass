@@ -4,7 +4,6 @@ namespace Models;
 class BillBoardDTO
 {
     private $id;
-    private $idcinema;
     private $movieshows;
 
     public function __construct()
@@ -23,16 +22,6 @@ class BillBoardDTO
         return $this;
     }
 
-    public function getIdCinema()
-    {
-        return $this->idcinema;
-    }
-
-    public function setIdCinema($idcinema)
-    {
-        $this->idcinema = $idcinema;
-        return $this;
-    }
 
     public function getMovieShows()
     {

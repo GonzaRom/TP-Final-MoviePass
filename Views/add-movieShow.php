@@ -17,9 +17,8 @@
                     <select name="cinema" id="" onclick="selectCines(this.value);">
                         <option value="">Seleccione un cine</option>
                         <?php foreach ($listCinema as $cinema) : ?>
-                            <?php if($cinema->getIsActive() == true):?>
                             <option value="<?php echo $cinema->getId(); ?>"><?php echo $cinema->getName(); ?></option>
-                            <?php endif; endforeach; ?>
+                            <?php  endforeach; ?>
                     </select>
                     </select>
                 </label>

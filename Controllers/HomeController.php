@@ -40,12 +40,12 @@ class HomeController
     // se llaman a las vistas de home.php.
     public function index($message = "")
     {
-        
-        $movieShows = $this->getMovieShowList();// trae todas las funciones disponibles.
-        $movieList=$this->movieDAO->getAll();
+
+        $movieShows = $this->getMovieShowList(); // trae todas las funciones disponibles.
+        $movieList = $this->movieDAO->getAll();
         //$this->genreDAO->updateFromApi();
         //$this->movieDAOMSQL->updateFromApi();
-        if (empty($movieShows)){
+        if (empty($movieShows)) {
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  
             $message = "E R R O R, No existen funciones pendientes.";
@@ -54,7 +54,7 @@ class HomeController
     }
 
     //trae Todas las movieShow y la almacena en un un array de movieShowDTO.
-   private function getMovieShowList()
+    private function getMovieShowList()
     {
         $movieShows = $this->movieShowDAO->getAll();
         $listMovieShow = array();
@@ -66,7 +66,7 @@ class HomeController
             $movieShowDTO->setMovie($this->movieDAO->get($movieShow->getMovie()));
             $billBoard = $this->billBoardDAO->get($movieShow->getBillBoard());
             //$cinema = $this->cinemaDAO->get($billBoard->getCinema());
-           // $movieShowDTO->setNameCinema($cinema->getName());
+            // $movieShowDTO->setNameCinema($cinema->getName());
             $room = $this->roomDAO->get($movieShow->getRoom());
             //$movieShowDTO->setRoomName($room->getName());
             $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow()));
@@ -75,5 +75,22 @@ class HomeController
         }
         return $listMovieShow;
     }
+
+    public function filterByGenre()
+    {
+        if (isset($_GET['genre'])) {
+            $movieList = $this->movieDAOMSQL->getMoviesByGenre($_GET['genre']);
+            foreach ($movieList as $movie) {
+                echo '<div class="movie">';
+                echo '<div class="img-poster-movie">';
+                echo '<img src="' . $movie->getPoster() . '" alt="">';
+                echo '</div>';
+                echo '<div class="detalles">';
+                echo '<h2>' . $movie->getName() . '</h2>';
+                echo '<a href="">Reservar</a>';
+                echo '</div>';
+                echo '</div>';
+            }
+        }
+    }
 }
-?>

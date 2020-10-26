@@ -35,7 +35,7 @@ class RoomDAOMSQL implements IRoomDAO
     {
         try {
             $listRoom = array();
-            $sql = "SELECT * FROM " . $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE AND r.isactive = :isactive" ;
+            $sql = "SELECT * FROM " . $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE r.isactive = :isactive" ;
             $parameters['active']=true;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql);

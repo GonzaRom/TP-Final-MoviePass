@@ -39,7 +39,7 @@ class MovieShowController
     {
         $listMovies = $this->movieDAOMSQL->getAll();
         $listCinema = $this->cinemaDAO->getAll();
-        var_dump($listCinema);
+
         $listTypeMovieShow = $this->typeMovieShowDAO->getAll();
         require_once(VIEWS_PATH . "add-movieShow.php");
     }
@@ -58,6 +58,7 @@ class MovieShowController
     }
     public function add($movie, $billBoard, $room, $typeMovieShow, $date, $time)
     {
+        $this->movieDAOMSQL->upMovie($movie);
         $today = date('Y-m-d');
         $newMovieShow = new MovieShow();
         $exist = false;
@@ -80,11 +81,14 @@ class MovieShowController
 
     public function getAll()
     {
-        $movieShows = $this->getMovieShowList();
-        if (empty($movieShows)) {
+        $cinemas = $this->cinemaDAO->getAll();
+        /*if (empty($movieShows)) {
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  
             $message = "E R R O R, No existen funciones pendientes.";
+        }*/
+        foreach($cinemas as $cinema){
+            $cinema->getBillBoard()->setMovieShows($this->movieShowDAO->getMovieShowBycinema($cinema->getBillBoard()->getId()));
         }
         require_once(VIEWS_PATH . "list-movies.php");
     }
@@ -99,8 +103,8 @@ class MovieShowController
     {
 
         $movieDTO = $this->movieDAOMSQL->get($idMovie);
-        $genres = $movieDTO->getGenres();
-        $listMovieShow = $this->movieShowDAO->getByMovie($idMovie);
+
+        $listMovieShow = $this->movieShowDAO->getMovieShowByMovie($idMovie);
         require_once(VIEWS_PATH . "detail-movie.php");
     }
 
