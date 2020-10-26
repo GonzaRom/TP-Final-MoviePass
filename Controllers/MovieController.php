@@ -13,7 +13,7 @@ class MovieController
     public function __construct()
     {
         $this->movieDAO = new MovieDAO();
-        $this->GenreDAO = new GenreDAO();
+        $this->GenreDAO = new GenreDAOMSQL();
     }
 
     public function getall($message = "")

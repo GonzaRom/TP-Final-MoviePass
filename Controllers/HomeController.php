@@ -11,6 +11,7 @@ use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\BillBoardDAOMSQL as BillBoardDAOMSQL;
 use Models\MovieShowDTO as MovieShowDTO;
 use DAO\MovieDAOMSQL as MovieDAOMSQL;
+use Models\BillBoard;
 
 class HomeController
 {
@@ -41,8 +42,8 @@ class HomeController
     {
         
         $movieShows = $this->getMovieShowList();// trae todas las funciones disponibles.
-        //$this->movieDAOMSQL->updateFromApi();
-        //$this->genreDAO->updateFromApi();
+      //$this->movieDAOMSQL->updateFromApi();
+       //$this->genreDAO->updateFromApi();
         if (empty($movieShows)){
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  
@@ -52,7 +53,7 @@ class HomeController
     }
 
     //trae Todas las movieShow y la almacena en un un array de movieShowDTO.
-    private function getMovieShowList()
+   private function getMovieShowList()
     {
         $movieShows = $this->movieShowDAO->getAll();
         $listMovieShow = array();
@@ -63,10 +64,10 @@ class HomeController
             $movieShowDTO->setTime($movieShow->getTime());
             $movieShowDTO->setMovie($this->movieDAO->get($movieShow->getMovie()));
             $billBoard = $this->billBoardDAO->get($movieShow->getBillBoard());
-            $cinema = $this->cinemaDAO->get($billBoard->getIdCinema());
-            $movieShowDTO->setNameCinema($cinema->getName());
+            //$cinema = $this->cinemaDAO->get($billBoard->getCinema());
+           // $movieShowDTO->setNameCinema($cinema->getName());
             $room = $this->roomDAO->get($movieShow->getRoom());
-            $movieShowDTO->setRoomName($room->getName());
+            //$movieShowDTO->setRoomName($room->getName());
             $movieShowDTO->setTypeMovieShow($this->typeMovieShowDAO->getName($movieShow->getTypeMovieShow()));
 
             array_push($listMovieShow, $movieShowDTO);
@@ -74,3 +75,4 @@ class HomeController
         return $listMovieShow;
     }
 }
+?>

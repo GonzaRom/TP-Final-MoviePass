@@ -182,6 +182,7 @@ class MovieDAOMSQL implements IMovieDAO
                 $movie->setBackground("http://image.tmdb.org/t/p/original" . $apiMovieData["backdrop_path"]);
                 $movie->setVoteAverage($apiMovieData["vote_average"]);
                 $movie->setImdbID($apiMovieData["id"]);
+               // $movie->setRunTime($apiMovieData["runtime"]);
 
                 array_push($this->NowPlayingMovieList, $movie);
             }

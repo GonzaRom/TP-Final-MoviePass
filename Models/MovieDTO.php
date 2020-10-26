@@ -13,6 +13,7 @@ class MovieDTO{
     private $background;
     private $poster;
     private $runtime;
+    private $active;
     
     public function __construct()
     {
@@ -132,5 +133,12 @@ class MovieDTO{
     }
     public function getRunTime(){
         return $this->runtime ;
+    }
+    public function setIsActive($active){
+        $this->active = $active;
+    }
+
+    public function getIsActive(){
+        return $this->active;
     }
 }

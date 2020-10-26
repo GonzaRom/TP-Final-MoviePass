@@ -8,7 +8,7 @@
                     <select name="movie" id="movie">
                         <option value="">Seleccione una pelicula</option>
                         <?php foreach ($listMovies as $movies) : ?>
-                            <option value="<?php echo $movies->getImdbID(); ?>"><?php echo $movies->getName(); ?></option>
+                            <option value="<?php echo $movies->getId(); ?>"><?php echo $movies->getName(); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </label>
@@ -17,9 +17,7 @@
                     <select name="cinema" id="" onclick="selectCines(this.value);">
                         <option value="">Seleccione un cine</option>
                         <?php foreach ($listCinema as $cinema) : ?>
-                            <?php if($cinema->getActive() == true):?>
                             <option value="<?php echo $cinema->getId(); ?>"><?php echo $cinema->getName(); ?></option>
-                            <?php endif;?>
                         <?php endforeach; ?>
                     </select>
                     </select>

@@ -36,11 +36,11 @@ class CinemaDAOMSQL implements ICinemaDAO
         try {
             $cinemalist = array();
 
-            $sql = "SELECT * FROM " . $this->nameTable;
-
+            $sql = "SELECT * FROM " . $this->nameTable. " WHERE isactive = :isactive";
+            $parameters['isactive'] = true;
             $this->conection = Connection::getInstance();
 
-            $result = $this->conection->Execute($sql);
+            $result = $this->conection->Execute($sql,$parameters);
             foreach ($result as $cinema) {
                 $newCinema = new CinemaDTO();
                 $newCinema->setId($cinema['idcinema']);
@@ -50,8 +50,7 @@ class CinemaDAOMSQL implements ICinemaDAO
                 $newCinema->setIsActive($cinema['isactive']);
                 array_push($cinemalist, $newCinema);
             }
-
-            return $cinemalist;
+           return $cinemalist;  
         } catch (Exception $ex) {
             throw $ex;
         }

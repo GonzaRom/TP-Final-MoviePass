@@ -14,6 +14,7 @@ class Movie
     private $background;
     private $voteAverage;
     private $runtime;
+    private $active;
 
 
     public function getId()
@@ -111,5 +112,12 @@ class Movie
     }
     public function getRunTime(){
         return $this->runtime ;
+    }
+    public function setIsActive($active){
+        $this->active = $active;
+    }
+
+    public function getIsActive(){
+        return $this->active;
     }
 }
