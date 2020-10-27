@@ -87,3 +87,22 @@
   </section>
 
 </div>
+<script type="text/javascript">
+        function selectMovie(str) {
+            var conexion;
+            if (str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+            if (window.XMLHttpRequest) {
+                conexion = new XMLHttpRequest();
+            }
+            conexion.onreadystatechange = function() {
+                if (conexion.readyState == 4 && conexion.status == 200) {
+                    document.getElementById("movies").innerHTML = conexion.responseText;
+                }
+            }
+            conexion.open("GET", "filterByGenre?genre=" + str, true);
+            conexion.send();
+        }
+    </script>

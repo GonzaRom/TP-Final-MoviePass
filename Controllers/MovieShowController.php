@@ -88,6 +88,9 @@ class MovieShowController
         }
         require_once(VIEWS_PATH . "list-movies.php");
     }
+
+
+    
     public function showListMovieShowView()
     {
         $listMovieShow = $this->movieShowDAO->getAll();

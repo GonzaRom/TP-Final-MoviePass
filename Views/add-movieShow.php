@@ -81,3 +81,22 @@
         </div>
     </div>
 </section>
+<script type="text/javascript">
+        function selectCines(str) {
+            var conexion;
+            if (str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+            if (window.XMLHttpRequest) {
+                conexion = new XMLHttpRequest();
+            }
+            conexion.onreadystatechange = function() {
+                if (conexion.readyState == 4 && conexion.status == 200) {
+                    document.getElementById("salas").innerHTML = conexion.responseText;
+                }
+            }
+            conexion.open("GET", "salas?cinema=" + str, true);
+            conexion.send();
+        }
+    </script>

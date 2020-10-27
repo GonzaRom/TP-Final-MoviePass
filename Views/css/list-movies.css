@@ -58,3 +58,11 @@
 .far.fa-star{
     color:#000
 }
+
+.container{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
