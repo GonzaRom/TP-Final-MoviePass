@@ -3,7 +3,10 @@
         <?php include("nav.php"); ?>
 
         <div class="container">
-
+                <form action="<?php echo FRONT_ROOT ?>MovieShow/filterByDate" method="GET">
+                    <input type="date" name="date">
+                    <button type="submit">Filtrar</button>
+                </form>
             <form action="<?php echo FRONT_ROOT ?>MovieShow/getByMovie" method="GET">
                 <select name="" id="cine" onclick="moviesByCinema(this.value);">
                     <option value="0">Todos</option>
@@ -11,10 +14,7 @@
                         <option value="<?php echo  $cinema->getId(); ?>"><?php echo $cinema->getName(); ?></option>
                     <?php endforeach; ?>
                 </select>
-                <form action="<?php echo FRONT_ROOT ?>MovieShow/filterByDate" method="GET">
-                    <input type="date" name="date">
-                    <button type="submit">Filtrar</button>
-                </form>
+
                 <div class="card mb-3" style="width:1250px;" id="movieShows">
                     <?php foreach ($cinemas as $cinema) : ?>
                         <?php $movieShows = $cinema->getBillBoard()->getMovieShows(); ?>
