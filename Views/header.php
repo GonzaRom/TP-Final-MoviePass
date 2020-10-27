@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +16,48 @@
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-movieShow.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>list-movieShow.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-purchase.css">
+<<<<<<< HEAD
+=======
+
+    <script type="text/javascript">
+        function selectCines(str) {
+            var conexion;
+            if (str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+            if (window.XMLHttpRequest) {
+                conexion = new XMLHttpRequest();
+            }
+            conexion.onreadystatechange = function() {
+                if (conexion.readyState == 4 && conexion.status == 200) {
+                    document.getElementById("salas").innerHTML = conexion.responseText;
+                }
+            }
+            conexion.open("GET", "salas?cinema=" + str, true);
+            conexion.send();
+        }
+    </script>
+    <script type="text/javascript">
+        function selectMovie(str) {
+            var conexion;
+            if (str == "") {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+            if (window.XMLHttpRequest) {
+                conexion = new XMLHttpRequest();
+            }
+            conexion.onreadystatechange = function() {
+                if (conexion.readyState == 4 && conexion.status == 200) {
+                    document.getElementById("movies").innerHTML = conexion.responseText;
+                }
+            }
+            conexion.open("GET", "filterByGenre?genre=" + str, true);
+            conexion.send();
+        }
+    </script>
+>>>>>>> origin/Gonzalo
     <link rel="stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick-theme.css" />
     <link rel="stylesheet" href="<?php echo FONTAWESOME; ?>/css/all.css">
@@ -25,4 +66,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-</head><body>
+</head>
+
+<body>
