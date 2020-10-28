@@ -4,7 +4,7 @@
     <div class="jumbotron jumbotron-image " style="background-image: linear-gradient(rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.2)), url(<?php echo $movieDTO->getBackground(); ?>)">
       <div class="container">
         <h1 class="display-3 font-weight-bold">
-          <?php echo $movieDTO->getTitle(); ?>
+          <?php echo $movieDTO->getName(); ?>
         </h1>
         <h4 class="display-4">
           <?php echo $movieDTO->getOriginalTitle(); ?>

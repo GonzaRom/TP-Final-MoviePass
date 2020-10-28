@@ -45,7 +45,7 @@ class BillBoardDAOMSQL implements IBillBoardDAO
 
         public function add(BillBoard $newbillBoard){
             try{
-                $query= "INSERT INTO ".$this->tableName. " (idcinema,isactive) VALUES (:idCinema,:isActive);";
+                $query= "INSERT INTO ".$this->tableName. " (idcinema, isactive) VALUES (:idCinema, :isActive);";
             
                 $parameters["idCinema"] = $newbillBoard->getIdCinema();
                 $parameters["isActive"] = true;
