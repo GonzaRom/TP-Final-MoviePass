@@ -1,3 +1,8 @@
+<div class="body" id="onload">
+  <div class="container">
+    <div class="loader"><span></span></div>
+  </div>
+</div>
 <div class="content-home ">
   <?php require_once('nav.php'); ?>
   <section class="slider d-flex">
@@ -7,7 +12,7 @@
         $imgPath = $movie->getBackground();
         $nombre = $movie->getName();
         $imgPoster = $movie->getPoster();
-        $duration = $movie->getRunTime(); 
+        $duration = $movie->getRunTime();
         $id = $movie->getId();
       ?>
         <div class="img-slider" style="background:url('<?php echo $imgPath; ?>');">
@@ -21,10 +26,10 @@
                 <h3><?php echo $movie->getSynopsis(); ?></h3>
                 <br>
                 <br>
-                <h3><span class="badge badge-light"> <?php echo "Proxima funcion: ". $movieShows[$i]->getDate() . " " . $movieShows[$i]->getTime(); ?></span></h3>
-                <h3><span class="badge badge-light"> <?php echo "Duracion: ". $duration." min"; ?></span></h3>
-          
-                <!--a class="btn btn-light btn-sm" href="<?php echo FRONT_ROOT."Movie/Get/" . $id; ?>" role="button">MAS INFO </a-->
+                <h3><span class="badge badge-light"> <?php echo "Proxima funcion: " . $movieShows[$i]->getDate() . " " . $movieShows[$i]->getTime(); ?></span></h3>
+                <h3><span class="badge badge-light"> <?php echo "Duracion: " . $duration . " min"; ?></span></h3>
+
+                <!--a class="btn btn-light btn-sm" href="<?php echo FRONT_ROOT . "Movie/Get/" . $id; ?>" role="button">MAS INFO </a-->
               </div>
             </div>
           </div>
@@ -59,18 +64,18 @@
     <aside class="generos">
       <ul>
         <?php foreach ($listGenre as $genre) : ?>
-          <li> <a onclick="selectMovie(<?php echo $genre->getId();?>);"><?php echo $genre->getName(); ?></a></li>
+          <li> <a onclick="selectMovie(<?php echo $genre->getId(); ?>);"><?php echo $genre->getName(); ?></a></li>
         <?php endforeach; ?>
       </ul>
     </aside>
     <section class="peliculas" id="movies">
-      <?php foreach($movieList as $movie) :
+      <?php foreach ($movieList as $movie) :
         /*$movie = $movieShows[$i]->getMovie();                  /////esto estaba asi para mostrar las funciones.
         $imgPath = $movie->getPoster();                          /////matias lo cambio para q el dia antes de la segunda entrega muestre las peliculas 
         $name =  $movie->getTitle();
         $id = $movie->getId();*/
       ?>
-       
+
         <div class="movie">
           <div class="img-poster-movie">
             <img src="<?php echo $movie->getPoster(); ?>" alt="">
@@ -80,29 +85,34 @@
             <a href="">Reservar</a>
           </div>
         </div>
-       
+
       <?php endforeach ?>
     </section>
 
   </section>
 
 </div>
+<script>
+  window.onload = function(){
+    $('#onload').fadeOut();
+}
+</script>
 <script type="text/javascript">
-        function selectMovie(str) {
-            var conexion;
-            if (str == "") {
-                document.getElementById("txtHint").innerHTML = "";
-                return;
-            }
-            if (window.XMLHttpRequest) {
-                conexion = new XMLHttpRequest();
-            }
-            conexion.onreadystatechange = function() {
-                if (conexion.readyState == 4 && conexion.status == 200) {
-                    document.getElementById("movies").innerHTML = conexion.responseText;
-                }
-            }
-            conexion.open("GET", "filterByGenre?genre=" + str, true);
-            conexion.send();
-        }
-    </script>
+  function selectMovie(str) {
+    var conexion;
+    if (str == "") {
+      document.getElementById("txtHint").innerHTML = "";
+      return;
+    }
+    if (window.XMLHttpRequest) {
+      conexion = new XMLHttpRequest();
+    }
+    conexion.onreadystatechange = function() {
+      if (conexion.readyState == 4 && conexion.status == 200) {
+        document.getElementById("movies").innerHTML = conexion.responseText;
+      }
+    }
+    conexion.open("GET", "filterByGenre?genre=" + str, true);
+    conexion.send();
+  }
+</script>

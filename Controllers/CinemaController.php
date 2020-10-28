@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use DAO\BillBoardDAO as BillBoardDAO;
+use DAO\BillBoardDAOMSQL as BillBoardDAO;
 use Models\Cinema as Cinema;
 /*use DAO\CinemaDAO as CinemaDAO;*/
 use DAO\CinemaDAOMSQL as CinemaDAOMQSQL;
@@ -56,8 +56,8 @@ class CinemaController
             $newcinema->setIsActive(true);
             $newBillBoard = new BillBoard();
             $newBillBoard->setIdCinema($newcinema->getId());
-            $this->billBoardDAO->add($newBillBoard);
-            $this->cinemadao->add($newcinema);;/* pusheamos el nuevo cinema dentro del DAO */
+            $this->cinemadao->add($newcinema);
+            $this->billBoardDAO->add($newBillBoard);/* pusheamos el nuevo cinema dentro del DAO */
         }
         $this->showAddView($message); //invocamos la vista enviandole como parametro el mensaje correspondiente.
     }
@@ -68,7 +68,7 @@ class CinemaController
         $message = 2; //variable q se va a usar como retorno para informar exito o no
         $cinema = $this->cinemadao->get($nameCinema);//elimina el objeto Cinema , y devuelte true si se encontro el cinema y false , si no lo encontro.
         if (!empty($cinema)) {
-            $cinema->setActive(0);
+            $cinema->setIsActive(false);
             $this->cinemadao->delete($cinema);
             
             $message = 1;
@@ -87,6 +87,7 @@ class CinemaController
             $id = $lastCinema->getId();
         }
         $id++;
+        echo $id;
         return $id;
     }
 

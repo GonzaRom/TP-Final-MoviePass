@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 CREATE DATABASE moviepass;
 #drop database moviepass
+=======
+drop database moviepass;
+CREATE database moviepass;
+
+>>>>>>> origin/Isaias
 use moviepass;
 
 CREATE TABLE usertypes(

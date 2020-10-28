@@ -1,10 +1,21 @@
 <?php
     namespace Models;
 
-    class Seat{
+    class SeatDTO{
+        private $id;
         private $numAsiento;
         private $occupied;
         private $movieShow;
+
+        public function getId()
+        {
+            return $this->id;
+        }
+
+        public function setId($id)
+        {
+            $this->Id = $id;
+        }
 
         public function getNumSeat()
         {
