@@ -6,6 +6,7 @@ use Exception;
 use Models\Genre;
 use Models\Movie;
 use Models\MovieShow;
+use Models\MovieShowDTO;
 use Models\RoomDTO;
 use Models\TypeMovieShow;
 use Models\TypeRoom;
@@ -94,6 +95,8 @@ class MovieShowDAOMSQL implements IMovieShowDAO
         }
         return $listMovieShow;
     }
+
+    
     public function remove($id)
     {
     }
@@ -162,7 +165,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     {
         $value = ($value) ? $value : array();
         if(!empty($value)){
-            $newMovieShow = new MovieShow();
+            $newMovieShow = new MovieShowDTO();
             $newMovieShow->setId($value['idmovieshow']);
             $newMovieShow->setMovie($this->mapearMovie($value));
             $newMovieShow->setRoom($this->mapearRoom($value));

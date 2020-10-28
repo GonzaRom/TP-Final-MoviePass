@@ -38,7 +38,7 @@ class CinemaDAOMSQL implements ICinemaDAO
         try {
             $cinemalist = array();
 
-            $sql = "SELECT * FROM " . $this->nameTable. " as c INNER JOIN billboards as b ON c.idcinema = b.idcinema";
+            $sql = "SELECT * FROM " . $this->nameTable. " as c INNER JOIN billboards as b ON c.idcinema = b.idcinema WHERE c.isactive = true ";
             $this->conection = Connection::getInstance();
 
             $result = $this->conection->Execute($sql);

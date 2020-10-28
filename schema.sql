@@ -1,5 +1,6 @@
-#drop database moviepass
-CREATE DATABASE moviepass;
+drop database moviepass;
+CREATE database moviepass;
+
 use moviepass;
 
 CREATE TABLE usertypes(

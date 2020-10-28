@@ -56,6 +56,7 @@ class UserController
             if ($user->getUsername() == $userName) {
 
                 if (password_verify($password, $user->getPassword())) {
+                    
                     $_SESSION['loggedUser'] = $user->getId();
                     $_SESSION['userType'] = $user->getUsertype()->getName();
                     require_once(VIEWS_PATH.'validate-session.php');

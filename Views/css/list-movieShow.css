@@ -12,7 +12,6 @@
 .rgba-content-listMovieShow{
     width: 100%;
     background: rgba(0,0,0,.5);
-    
     display: flex;
     align-items: center;
     flex-flow: column;
@@ -22,7 +21,7 @@
 
 .rgba-content-listMovieShow .infoMovieShow{
     width: 80%;
-    height: 300px;
+    height: 400px;
     display: flex;
     color: #fff;
     justify-content: space-between;

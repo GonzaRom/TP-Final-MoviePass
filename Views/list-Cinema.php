@@ -1,9 +1,7 @@
-    <div class="content-cinema-list">
+<div class="content-cinema-list">
         <div class="content-rgba-cinema-list">
             <?php include("nav.php"); ?>
-
             <section class="section-cinema-list">
-
                 <form action="<?php echo FRONT_ROOT ?>Cinema/delete" method="GET" class="form-list-cinema">
                     <table class="table-list-cinema">
                         <thead class="thead-list-cinema">
@@ -45,3 +43,4 @@
         </div>
 
     </div>
+    

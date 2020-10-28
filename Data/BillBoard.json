@@ -70,5 +70,41 @@
     {
         "id": 18,
         "idCinema": 1
+    },
+    {
+        "id": 19,
+        "idCinema": 4
+    },
+    {
+        "id": 20,
+        "idCinema": 4
+    },
+    {
+        "id": 21,
+        "idCinema": 4
+    },
+    {
+        "id": 22,
+        "idCinema": 4
+    },
+    {
+        "id": 23,
+        "idCinema": 4
+    },
+    {
+        "id": 24,
+        "idCinema": 4
+    },
+    {
+        "id": 25,
+        "idCinema": 4
+    },
+    {
+        "id": 26,
+        "idCinema": 4
+    },
+    {
+        "id": 27,
+        "idCinema": 4
     }
 ]

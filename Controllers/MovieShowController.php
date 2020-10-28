@@ -6,7 +6,7 @@ use DAO\MovieShowDAOMSQL as MovieShowDAO;
 use DAO\CinemaDAOMSQL as CinemaDAOMSQL;
 use DAO\RoomDAOMSQL as RoomDAOMSQL;
 use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
-use DAO\SeatDAO as SeatDAO;
+use DAO\SeatDAOMSQL as SeatDAO;
 use Models\MovieShow as MovieShow;
 use DAO\BillBoardDAOMSQL as BillBoardDAOMSQl;
 use DAO\MovieDAOMSQL as MovieDAOMSQL;
@@ -19,6 +19,7 @@ class MovieShowController
     private $roomDAO;
     private $typeMovieShowDAO;
     private $movieDAOMSQL;
+    private $seatDAO;
 
     public function __construct()
     {
@@ -93,7 +94,15 @@ class MovieShowController
     
     public function showListMovieShowView()
     {
-        $listMovieShow = $this->movieShowDAO->getAll();
+        $cinemas = $this->cinemaDAO->getAll();
+        foreach ($cinemas as $cinema) {
+            $movieShows = $this->movieShowDAO->getMovieShowBycinema($cinema->getBillBoard()->getId());
+            foreach($movieShows as $movieShow){
+                $movieShow->setSeats($this->seatDAO->getSeats($movieShow->getId() , $movieShow->getRoom()->getCapacity()));
+            }
+            $cinema->getBillBoard()->setMovieShows($movieShows);
+        }
+
 
         require_once(VIEWS_PATH . "list-movieShow.php");
     }
@@ -157,4 +166,6 @@ class MovieShowController
 
         require_once(VIEWS_PATH . "list-movies.php");
     }
+
+    
 }

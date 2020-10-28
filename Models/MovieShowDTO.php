@@ -4,17 +4,13 @@ namespace Models;
 class MovieShowDTO{
     private $id;
     private $movie;
-    private $nameCinema;
+    private $billBoard;
     private $typeMovieShow;
-    private $roomName;
-    private $seats;
+    private $room;
     private $date;
     private $time;
-
-
-    public function __construct()
-    {
-    }
+    private $active;
+    
 
     public function getId()
     {
@@ -36,44 +32,15 @@ class MovieShowDTO{
         $this->movie = $movie;
     }
 
-    public function getNameCinema()
+
+    public function getRoom()
     {
-        return $this->nameCinema;
+        return $this->room;
     }
 
-    public function setNameCinema($nameCinema = "")
+    public function setRoom($room)
     {
-        $this->nameCinema = $nameCinema;
-    }
-
-    public function getTypeMovieShow()
-    {
-        return $this->typeMovieShow;
-    }
-
-    public function setTypeMovieShow($typeMovieShow)
-    {
-        $this->typeMovieShow = $typeMovieShow;
-    }
-
-    public function getRoomName()
-    {
-        return $this->roomName;
-    }
-
-    public function setRoomName($roomName)
-    {
-        $this->roomName = $roomName;
-    }
-
-    public function getSeats()
-    {
-        return $this->seats;
-    }
-
-    public function setSeats($seats)
-    {
-        $this->seats = $seats;
+        $this->room = $room;
     }
 
     public function getDate()
@@ -85,7 +52,6 @@ class MovieShowDTO{
     {
         $this->date = $date;
     }
-
     public function getTime()
     {
         return $this->time;
@@ -94,5 +60,50 @@ class MovieShowDTO{
     public function setTime($time)
     {
         $this->time = $time;
+    }
+
+    public function setListSeat($listSeat)
+    {
+        $this->listSeat = $listSeat;
+    }
+
+
+    public function getBillBoard()
+    {
+        return $this->billBoard;
+    }
+
+    public function setBillBoard($billBoard)
+    {
+        $this->billBoard = $billBoard;
+    }
+
+    public function setTypeMovieShow($typeMovieShow)
+    {
+        $this->typeMovieShow = $typeMovieShow;
+    }
+
+    public function getTypeMovieShow()
+    {
+        return $this->typeMovieShow;
+    }
+
+    public function setSeats($seat)
+    {
+        $this->seat = array();
+        $this->seat = $seat;
+    }
+
+    public function getSeats()
+    {
+        return $this->seat;
+    }
+
+    public function setIsActive($active){
+        $this->active = $active;
+    }
+
+    public function getIsActive(){
+        return $this->active;
     }
 }
