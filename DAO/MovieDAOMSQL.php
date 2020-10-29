@@ -33,7 +33,7 @@ class MovieDAOMSQL implements IMovieDAO
 
             foreach ($resultSet as $row) {
                 $movie = new Movie();
-                $movie->setId($row["idmovie"]);
+                $movie->setId($row['idmovie']);
                 $movie->setImdbID($row["imdbid"]);
                 $movie->setName($row["namemovie"]);
                 $movie->setSynopsis($row["synopsis"]);

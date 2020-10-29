@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiflex</title>
+    <link rel="shortcut icon" href="<?php echo IMG_PATH; ?>iconfinder-camera-video-photography-photo-movie-4593196_122247.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>login.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>nav.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-Room.css">
@@ -28,8 +29,3 @@
 </head>
 
 <body class="hidden">
-<div class="body" id="onload">
-  <div class="container">
-    <div class="loader"><span></span></div>
-  </div>
-</div>

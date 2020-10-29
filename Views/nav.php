@@ -9,25 +9,18 @@
         </button>
         <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
             <ul class="navbar-nav text-center ml-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT; ?>Home/Index">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " href="<?php echo FRONT_ROOT; ?>MovieShow/getAll" tabindex="-1" aria-disabled="true">Cartelera</a>
                 </li>
 
+
+
+
                 <?php if (!empty($_SESSION['userType']) && $_SESSION['userType'] == "Admin") : ?>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Generos
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <?php foreach ($listGenre as $genre) : ?>
-                                <a class="dropdown-item" href="#"><?php echo $genre->getName(); ?></a>
-                            <?php endforeach; ?>
-                        </div>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Peliculas
@@ -71,47 +64,65 @@
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>MovieShow/ShowListMovieShowView">Listar</a>
                         </div>
                     </li>
-                <?php elseif (!empty($_SESSION['userType']) && $_SESSION['userType'] == "User") : ?>
-
-                    <li class="nav-item">
-                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Generos
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <?php foreach ($listGenre as $genre) : ?>
-                                <a class="dropdown-item" href="#"><?php echo $genre->getName(); ?></a>
-                            <?php endforeach; ?>
-                        </div>
-                    </li>
                 <?php endif; ?>
 
+
+
+
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Generos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <?php foreach ($listGenre as $genre) : ?>
+                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Home/filterByGenres?genre=<?php echo $genre->getId(); ?>"><?php echo $genre->getName(); ?></a>
+                        <?php endforeach; ?>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
+                </li> 
+                
+                
+                
+                
+                
+                
+                
                 <?php if (isset($_SESSION['loggedUser'])) : ?>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/logout" tabindex="-1" aria-disabled="true">Logout</a>
                     </li>
                 <?php else : ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Generos
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <?php foreach ($listGenre as $genre) : ?>
-                                <a class="dropdown-item" href="#"><?php echo $genre->getName(); ?></a>
-                            <?php endforeach; ?>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
-                    </li>
-
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/showLoginView" tabindex="-1" aria-disabled="true">Login</a>
                     </li>
                 <?php endif; ?>
+
+
+
             </ul>
         </div>
     </nav>
 </header>
+<script type="text/javascript">
+    function selectMovie(str) {
+        var conexion;
+        if (str == "") {
+            document.getElementById("txtHint").innerHTML = "";
+            return;
+        }
+        if (window.XMLHttpRequest) {
+            conexion = new XMLHttpRequest();
+        }
+        conexion.onreadystatechange = function() {
+            if (conexion.readyState == 4 && conexion.status == 200) {
+                document.getElementById("movies").innerHTML = conexion.responseText;
+            }
+        }
+        conexion.open("GET", "<?php echo FRONT_ROOT; ?>Home/filterByGenre?genre=" + str, true);
+        conexion.send();
+    }
+</script>

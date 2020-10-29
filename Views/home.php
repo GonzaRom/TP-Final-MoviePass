@@ -1,4 +1,8 @@
-
+<div class="body" id="onload">
+  <div class="container">
+    <div class="loader"><span></span></div>
+  </div>
+</div>
 <div class="content-home ">
   <?php require_once('nav.php'); ?>
   <section class="slider d-flex">
@@ -24,6 +28,9 @@
                 <br>
                 <h3><span class="badge badge-light"> <?php echo "Proxima funcion: " . $movieShows[$i]->getDate() . " " . $movieShows[$i]->getTime(); ?></span></h3>
                 <h3><span class="badge badge-light"> <?php echo "Duracion: " . $duration . " min"; ?></span></h3>
+                <a href="<?php echo FRONT_ROOT;?>MovieShow/getByMovie?movie=<?php echo $movie->getId();?>">Ver Funciones Disponibles</a>
+                <a href="<?php echo FRONT_ROOT;?>MovieShow/getByMovie?movie=<?php echo $movie->getId();?>">Detalle de pelicula</a>
+                
 
                 <!--a class="btn btn-light btn-sm" href="<?php echo FRONT_ROOT . "Movie/Get/" . $id; ?>" role="button">MAS INFO </a-->
               </div>
@@ -77,8 +84,8 @@
             <img src="<?php echo $movie->getPoster(); ?>" alt="">
           </div>
           <div class="detalles">
-            <h2><?php echo $movie->getName() ?></h2>
-            <a href="">Reservar</a>
+            <h2><?php echo $movie->getName(); ?></h2>
+            <a href="<?php echo FRONT_ROOT;?>MovieShow/getByMovie?movie=<?php echo $movie->getId();?>">Reservar</a>
           </div>
         </div>
 

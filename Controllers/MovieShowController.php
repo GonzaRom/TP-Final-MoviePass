@@ -76,29 +76,32 @@ class MovieShowController
         }
     }
 
-    public function getAll()
+    public function getAll($cinemas = null)
     {
-        $cinemas = $this->cinemaDAO->getAll();
-        /*if (empty($movieShows)) {
+        if ($cinemas == null) {
+            $cinemas = $this->cinemaDAO->getAll();
+            /*if (empty($movieShows)) {
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");  
             $message = "E R R O R, No existen funciones pendientes.";
         }*/
-        foreach ($cinemas as $cinema) {
-            $cinema->getBillBoard()->setMovieShows($this->movieShowDAO->getMovieShowBycinema($cinema->getBillBoard()->getId()));
+            foreach ($cinemas as $cinema) {
+                $cinema->getBillBoard()->setMovieShows($this->movieShowDAO->getMovieShowBycinema($cinema->getBillBoard()->getId()));
+            }
         }
+
         require_once(VIEWS_PATH . "list-movies.php");
     }
 
 
-    
+
     public function showListMovieShowView()
     {
         $cinemas = $this->cinemaDAO->getAll();
         foreach ($cinemas as $cinema) {
             $movieShows = $this->movieShowDAO->getMovieShowBycinema($cinema->getBillBoard()->getId());
-            foreach($movieShows as $movieShow){
-                $movieShow->setSeats($this->seatDAO->getSeats($movieShow->getId() , $movieShow->getRoom()->getCapacity()));
+            foreach ($movieShows as $movieShow) {
+                $movieShow->setSeats($this->seatDAO->getSeats($movieShow->getId(), $movieShow->getRoom()->getCapacity()));
             }
             $cinema->getBillBoard()->setMovieShows($movieShows);
         }
@@ -109,11 +112,15 @@ class MovieShowController
 
     public function getByMovie($idMovie)
     {
+        $cinemas = array();
+        if (!empty($idMovie)) {
+            $cinemas = $this->cinemaDAO->getAll();
+            foreach ($cinemas as $cinema) {
+                $cinema->getBillBoard()->setMovieShows($this->movieShowDAO->getMovieShowByMovie($cinema->getBillBoard()->getId(), $idMovie));
+            }
+        }
 
-        $movieDTO = $this->movieDAOMSQL->get($idMovie);
-
-        $listMovieShow = $this->movieShowDAO->getMovieShowByMovie($idMovie);
-        require_once(VIEWS_PATH . "detail-movie.php");
+       $this->getAll($cinemas);
     }
 
     public function filterByCinema()
@@ -159,13 +166,10 @@ class MovieShowController
         if (isset($_GET['date'])) {
             $cinemas = $this->cinemaDAO->getAll();
             foreach ($cinemas as $cinema) {
-                $cinema->getBillBoard()->setMovieShows($this->movieShowDAO->getMovieShowByMovieDate($cinema->getBillBoard()->getId() , $_GET['date']));
+                $cinema->getBillBoard()->setMovieShows($this->movieShowDAO->getMovieShowByMovieDate($cinema->getBillBoard()->getId(), $_GET['date']));
             }
-            
         }
 
-        require_once(VIEWS_PATH . "list-movies.php");
+       $this->getAll($cinemas);
     }
-
-    
 }

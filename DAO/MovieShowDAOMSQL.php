@@ -105,12 +105,22 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     }
 
 
-    public function getMovieShowByMovie($idMovie)
+    public function getMovieShowByMovie($idBillBoard, $idMovie)
     {   $listMovieShow = array();
         try{
             
-            $sql = "SELECT * FROM " . $this->nameTable ." as ms INNER JOIN movies as m ON ms.idmovie = m.idmovie WHERE ms.idmovie = :id";
-            $parameters['id'] = $idMovie;
+            $sql = "SELECT * FROM " . $this->nameTable ." as m 
+            INNER JOIN typemovieshows as tm 
+            ON m.idtypemovieshow = tm.idtypemovieshow
+            INNER JOIN movies as mo
+            ON m.idmovie = mo.idmovie 
+            INNER JOIN rooms as r 
+            ON m.idroom = r.idroom 
+            INNER JOIN typerooms as t 
+            ON r.idtyperoom = t.idtyperoom 
+            WHERE m.idbillboard = :idbillboard AND mo.idmovie = :idmovie";
+            $parameters['idmovie'] = $idMovie;
+            $parameters['idbillboard'] = $idBillBoard;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql , $parameters);
         }catch(Exception $ex){
@@ -228,6 +238,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
         if (!empty($value)) {
             $movie = new Movie();
             $movie->setId($value["idmovie"]);
+            
             $movie->setImdbID($value["imdbid"]);
             $movie->setName($value["namemovie"]);
             $movie->setSynopsis($value["synopsis"]);

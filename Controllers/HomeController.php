@@ -38,18 +38,20 @@ class HomeController
     }
 
     // se llaman a las vistas de home.php.
-    public function index($message = "")
-    {
-
-        $movieShows = $this->movieShowDAO->getAll(); // trae todas las funciones disponibles.
-        $movieList = $this->movieDAO->getAll();
-        //$this->genreDAO->updateFromApi();
-        //$this->movieDAOMSQL->updateFromApi();
-        if (empty($movieShows)) {
-            //Por hacer:
-            //return require_once(VIEWS_PATH."error_404.php");  
-            $message = "E R R O R, No existen funciones pendientes.";
+    public function index($message = "", $movieList = null)
+    {   $movieShows = $this->movieShowDAO->getAll(); // trae todas las funciones disponibles.
+        if ($movieList == null) {
+            
+            $movieList = $this->movieDAOMSQL->getAll();
+            //$this->genreDAO->updateFromApi();
+            //$this->movieDAOMSQL->updateFromApi();
+            if (empty($movieShows)) {
+                //Por hacer:
+                //return require_once(VIEWS_PATH."error_404.php");  
+                $message = "E R R O R, No existen funciones pendientes.";
+            }
         }
+
         require_once(VIEWS_PATH . "home.php");
     }
 
@@ -76,8 +78,19 @@ class HomeController
         return $listMovieShow;
     }
 
+    public function filterByGenres()
+    {
+        $movieList = array();
+        if (isset($_GET['genre'])) {
+            $movieList = $this->movieDAOMSQL->getMoviesByGenre($_GET['genre']);
+        }
+
+        $this->index("" , $movieList);
+    }
+
     public function filterByGenre()
     {
+        $movieList = array();
         if (isset($_GET['genre'])) {
             $movieList = $this->movieDAOMSQL->getMoviesByGenre($_GET['genre']);
             foreach ($movieList as $movie) {
