@@ -1,3 +1,8 @@
+<div class="body" id="onload">
+  <div class="container">
+    <div class="loader"><span></span></div>
+  </div>
+</div>
 <div class="vhSignIn">
     <?php if (isset($_SESSION['loggedUser'])) {
         require_once("nav.php");

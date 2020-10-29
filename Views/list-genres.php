@@ -1,3 +1,8 @@
+<div class="body" id="onload">
+  <div class="container">
+    <div class="loader"><span></span></div>
+  </div>
+</div>
 <div class="content-movie-list" style="width:100%; height:auto; padding:0px;">
     <div class="content-rgba-movie-list">
         <?php include("nav.php"); ?>

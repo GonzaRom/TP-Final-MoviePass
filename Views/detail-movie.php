@@ -1,3 +1,8 @@
+<div class="body" id="onload">
+  <div class="container">
+    <div class="loader"><span></span></div>
+  </div>
+</div>
 <div class="content-detail-movie ">
   <?php include("nav.php"); ?>
   <div class="container">
