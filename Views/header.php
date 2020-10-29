@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-movieShow.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>list-movieShow.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-purchase.css">
-    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>loader.css"">
+    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>loader.css">
     <link rel=" stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick-theme.css" />
     <link rel="stylesheet" href="<?php echo FONTAWESOME; ?>/css/all.css">
@@ -27,4 +27,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="hidden">
+<div class="body" id="onload">
+  <div class="container">
+    <div class="loader"><span></span></div>
+  </div>
+</div>

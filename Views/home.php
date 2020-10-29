@@ -1,8 +1,4 @@
-<div class="body" id="onload">
-  <div class="container">
-    <div class="loader"><span></span></div>
-  </div>
-</div>
+
 <div class="content-home ">
   <?php require_once('nav.php'); ?>
   <section class="slider d-flex">
@@ -92,11 +88,7 @@
   </section>
 
 </div>
-<script>
-  window.onload = function(){
-    $('#onload').fadeOut();
-}
-</script>
+<script src="<?php echo JS_PATH; ?>preloader.js"></script>
 <script type="text/javascript">
   function selectMovie(str) {
     var conexion;
