@@ -1,3 +1,8 @@
+<div class="body" id="onload">
+  <div class="container">
+    <div class="loader"><span></span></div>
+  </div>
+</div>
 <section class="Add-cinema">
     <?php include("nav.php"); ?>
 
@@ -54,3 +59,4 @@
 
 
 </section>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

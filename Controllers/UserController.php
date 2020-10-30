@@ -49,28 +49,26 @@ class UserController
 
     public function login($userName = "", $password = "")
     {
-        $userList = $this->userDAO->getAll();
+        $user = new User();
+        $user = $this->userDAO->get($userName);
+        var_dump($user);
+        if (!empty($user)) {
+            if (password_verify($password, $user->getPassword())) {
+                $_SESSION['loggedUser'] = $user->getId();
+                $_SESSION['userType'] = $user->getUsertype()->getName();
+                require_once(VIEWS_PATH . 'validate-session.php');
+            } else {
+                $message = "Usuario o Contraseña Incorrecta";
 
-        foreach ($userList as $user) {
-
-            if ($user->getUsername() == $userName) {
-
-                if (password_verify($password, $user->getPassword())) {
-                    
-                    $_SESSION['loggedUser'] = $user->getId();
-                    $_SESSION['userType'] = $user->getUsertype()->getName();
-                    require_once(VIEWS_PATH.'validate-session.php');
-                } else {
-                    $message = "Usuario o Contraseña Incorrecta";
-
-                    $this->showLoginView($message);
-                }
+                $this->showLoginView($message);
             }
         }
-
         $message = "Usuario no encontrado";
         $this->showLoginView($message);
     }
+
+
+
 
     public function signIn($firstName, $lastName, $userName, $email, $password, $userType = 1)
     {

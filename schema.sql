@@ -142,6 +142,16 @@ CREATE TABLE tickets(
     constraint FK_USER foreign key (iduser) references users(iduser)
 )ENGINE=InnoDB;
 
+CREATE TABLE purchase(
+    idpurchase int not null auto_increment,
+    iduser int not null,
+    cost int not null,
+    date_ date,
+    constraint PK_PURCHASE primary key (idpurchase),
+    constraint FK_IDUSER foreign key (iduser) references users (iduser)
+)ENGINE=InnoDB;
+
+
 INSERT INTO typemovieshows(nametypemovieshow) VALUES("2D"),("3D");
 
 INSERT INTO typerooms(nametyperoom) VALUES ("Sala Standard"),("Sala Senior"),("Sala Premium");

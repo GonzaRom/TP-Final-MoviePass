@@ -33,7 +33,7 @@ class MovieDAOMSQL implements IMovieDAO
 
             foreach ($resultSet as $row) {
                 $movie = new Movie();
-                $movie->setId($row["idmovie"]);
+                $movie->setId($row['idmovie']);
                 $movie->setImdbID($row["imdbid"]);
                 $movie->setName($row["namemovie"]);
                 $movie->setSynopsis($row["synopsis"]);
@@ -116,7 +116,6 @@ class MovieDAOMSQL implements IMovieDAO
                 $queryId = " SELECT m.idmovie FROM movies m where m.imdbid= " . $movie->getImdbID();
                 $this->connection = Connection::getInstance();
                 $resultSet = $this->connection->execute($queryId);
-                var_dump($resultSet);
                 $idBd = $resultSet[0]["idmovie"];
 
                 $query = " INSERT INTO genresxmovie (idgenre , idmovie) VALUES ( :idgenre , :idmovie );";

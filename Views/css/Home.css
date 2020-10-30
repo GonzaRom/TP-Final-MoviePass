@@ -129,6 +129,26 @@
     color: #fff;
 }
 
+
+.detalles a{
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
+.detalles a:hover{
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+    background: rgb(92, 5, 5);
+    border-radius: 5px;
+}
+
+
 .peliculas .movie:hover .detalles{
     bottom: 0;
     transition: .5s;

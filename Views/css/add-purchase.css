@@ -10,21 +10,21 @@
 .add-puchase-content .rgba-add-puchase{
     width: 100%;
     height: 94.5%;
-    background: rgba(0, 0, 0 ,.5);
+    background: rgba(0, 0, 0 ,.7);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .flex-add-puchase{
-    width: 40%;
+    width: 70%;
 }
 
 .flex-add-puchase form{
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-flow: column;
     background: rgba(0, 0, 0 ,.5);
     padding: 50px;
@@ -33,8 +33,17 @@
     box-shadow: 10px 10px 10px #000;
 }
 
+
+
 .flex-add-puchase form h2{
     text-shadow: 2px 2px 2px #000;
+}
+
+.flex-add-puchase form .content-info-movieshow{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .flex-add-puchase form .input-box{
@@ -103,4 +112,15 @@ color: #fff;
 transform: translateY(10px);
 transition: .5s;
 box-shadow: 0px 0px 5px #000;
+}
+
+
+input[type="checkbox"]{
+    display: none;
+}
+
+
+input[type="checkbox"]:checked + label{
+    color: rgb(12, 212, 162);
+
 }

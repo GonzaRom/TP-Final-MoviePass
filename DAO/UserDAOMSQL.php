@@ -56,8 +56,9 @@
         {
             try
             {
+                $user = null;
 
-                $query = "SELECT * FROM ".$this->tableName . " WHERE iduser = :username";
+                $query = "SELECT * FROM ".$this->tableName . " WHERE username = :username";
 
                 $parameters["username"]=$username;
 
@@ -68,7 +69,7 @@
                 foreach ($resultSet as $row)
                 {                
                     $user = new User();
-                    $user->setId($row['id']);
+                    $user->setId($row['iduser']);
                     $user->setFirstname($row['firstname']);
                     $user->setLastname($row['lastname']);
                     $user->setUserName($row['username']);
@@ -76,10 +77,9 @@
                     $user->setUsertype($this->getUserType($row['idusertype']));
                     $user->setPassword($row['userpassword']);
                         
-                    array_push($userlist, $user);
                 }
 
-                return $userlist;
+                return $user;
                 }
             catch(Exception $ex)
             {

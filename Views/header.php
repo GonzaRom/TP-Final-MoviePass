@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiflex</title>
+    <link rel="shortcut icon" href="<?php echo IMG_PATH; ?>iconfinder-camera-video-photography-photo-movie-4593196_122247.ico" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>login.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>nav.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-Room.css">
@@ -16,7 +17,7 @@
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-movieShow.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>list-movieShow.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-purchase.css">
-    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>loader.css"">
+    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>loader.css">
     <link rel=" stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick-theme.css" />
     <link rel="stylesheet" href="<?php echo FONTAWESOME; ?>/css/all.css">
@@ -27,4 +28,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="hidden">
