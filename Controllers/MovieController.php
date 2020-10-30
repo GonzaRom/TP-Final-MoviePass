@@ -7,7 +7,7 @@ use DAO\MovieDAOMSQL as MovieDAOMSQL;
 
 class MovieController
 {
-    private $movieDAO;
+    private $movieDAOMSQL;
 
     public function __construct()
     {
@@ -20,18 +20,7 @@ class MovieController
         try {
             $this->genreDAOMSQL->updateFromApi();
             $movies = $this->movieDAOMSQL->updateFromApi();
-            require_once(VIEWS_PATH . "list-dbmovies.php");
-        } catch (\Exception $e) {
-            //Por hacer:
-            //return require_once(VIEWS_PATH."error_404.php");
-            echo $e->getMessage();
-        }
-    }
-    public function get($movieId)
-    {
-        try {
-            $movieDTO = $this->movieDAO->get($movieId);
-            require_once(VIEWS_PATH . "detail-movie.php");
+            require_once(VIEWS_PATH . "home.php");
         } catch (\Exception $e) {
             //Por hacer:
             //return require_once(VIEWS_PATH."error_404.php");
@@ -39,8 +28,14 @@ class MovieController
         }
     }
 
+
     public function ShowAllMovies(){
         $movieList = $this->movieDAOMSQL->getAll();
         require_once(VIEWS_PATH . "list-dbmovies.php");
+    }
+
+    public function detailMovie($movie){
+        $movieDTO = $this->movieDAOMSQL->get($movie);
+         require_once(VIEWS_PATH . "detail-movie.php");
     }
 }

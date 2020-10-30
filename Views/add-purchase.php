@@ -1,30 +1,35 @@
-<div class="body" id="onload">
+<!--div class="body" id="onload">
   <div class="container">
     <div class="loader"><span></span></div>
   </div>
-</div>
+</div-->
 <section class="add-puchase-content">
     <?php require_once('nav.php'); ?>
     <div class="rgba-add-puchase">
 
         <div class="flex-add-puchase">
 
-            <form action="" method="post">
+            <form action="<?php FRONT_ROOT."Purchase/createTickets"?>" method="post">
                 <h2>Reservar Entrada</h2>
                 <div class="input-box" style="display: none;">
-                    <input type="text" name="idUser" placeholder="idUser" value="<?php/* echo $_SESSION['loggedUser']; */?>">
+                    <input type="text" name="idUser" placeholder="idUser" value="<?php echo $_SESSION['loggedUser']; ?>">
                 </div>
                 <div class="input-box">
-                    <span>Pelicula: </span><span class="input"><?php /*echo $nameMovie;*/ ?>Pelicula</span>
+                    <span>Pelicula: </span><span class="input"><?php echo $movieshow->getMovie()->getName(); ?></span>
                 </div>
 
                 <div class="input-box">
-                    <span>Funcion: </span><select class="form-control " name="movieShow" id="">
-                        <option  value="">Seleccione una opcion</option>
-                        <?php /*foreach ($listmovieShow as $movieShow) :*/ ?>
-                        <option value="<?php/* echo $movieShow->getId();*/ ?>"><?php /*echo $movieShow->getDate() . " " . $movieShow->getTime(); */ ?></option>
-                        <?php /*endforeach;*/ ?>
-                    </select>
+                <span>Cinema: </span><span class="input"><?php echo $cinema->getName(); ?></span>
+                </div>
+
+
+                <div class="input-box">
+                <span>Sala: </span><span class="input"><?php echo $movieshow->getRoom()->getName(); ?></span>
+
+                </div>
+
+                <div class="input-box">
+                    <span>Fecha y hora </span><span class="input"><?php echo $movieshow->getDate() ." " . $movieshow->getTime(); ?></span>
                 </div>
 
                 <div class="input-box">
@@ -32,7 +37,7 @@
                 </div>
 
 
-                <button class="submit-add-purchase" type="submit" value="<?php ?>">Comprar Ticket</button>
+                <button class="submit-add-purchase" type="submit">Comprar Ticket</button>
             </form>
         </div>
     </div>

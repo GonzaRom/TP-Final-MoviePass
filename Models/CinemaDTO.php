@@ -8,7 +8,7 @@
         private $phonenumber;
         private $rooms;
         private $active;
-        private BillBoardDTO $billBoard;        
+        private  $billBoard;        
         public function __construct(){
 
         }
@@ -79,7 +79,7 @@
             return $this->billBoard;
         }
 
-        public function setBillBoard(BillBoardDTO $billBoard){
+        public function setBillBoard( $billBoard){
             $this->billBoard = $billBoard;
         }
     }

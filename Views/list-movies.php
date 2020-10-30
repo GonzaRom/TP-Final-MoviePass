@@ -12,7 +12,7 @@
                     <input type="date" name="date">
                     <button type="submit">Filtrar</button>
                 </form>
-            <form action="<?php echo FRONT_ROOT ?>MovieShow/getByMovie" method="GET">
+            <form action="<?php echo FRONT_ROOT ?>Ticket/showAddTicketView" method="GET">
                 <select name="" id="cine" onclick="moviesByCinema(this.value);">
                     <option value="0">Todos</option>
                     <?php foreach ($cinemas as $cinema) : ?>
@@ -24,11 +24,17 @@
                     <?php foreach ($cinemas as $cinema) : ?>
                         <?php $movieShows = $cinema->getBillBoard()->getMovieShows(); ?>
                         <?php for ($j = 0; $j < count($movieShows); $j++) :
+                            
                             $movie = $movieShows[$j]->getMovie();
                             $nombre = $movie->getName();
                             $genres = $movie->getGenreId();
                             $duration = $movie->getRunTime();
                         ?>
+                        <div class="content-none" style="display: none;">
+                             <input type="text" name="cinema" value="<?php echo $cinema->getId();?>">
+                            <input type="text" name="movieshow" value="<?php echo  $movieShows[$j]->getId();?>">
+                        </div>
+                           
                             <div class="row no-gutters">
                                 <!--IMAGEN-->
                                 <div class="col-md-2">
@@ -69,7 +75,7 @@
                                         <small class="card-text">
                                             <i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                         </small>
-                                        <button type="submit" class="btn btn-secondary btn-sm" name="movieId" value="<?php echo $movie->getId(); ?>">Reservar</button>
+                                        <button type="submit" class="btn btn-secondary btn-sm">Reservar</button>
                                     </div>
                                 </div>
 
