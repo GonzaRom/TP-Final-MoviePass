@@ -66,3 +66,13 @@
     justify-content: center;
     flex-flow: column;
 }
+
+
+.container .filtros{
+    width: 100%;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}

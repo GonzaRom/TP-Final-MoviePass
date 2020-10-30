@@ -27,7 +27,6 @@ class PurchaseController{
         echo $movieshow;
         $cinema = $this->cinemaDAOMSQL->get($cinema);
         $movieshow = $this->movieShowDAOMSQL->get($movieshow);
-        $movieshow->setSeats();
         $cinema->setBillBoard($movieshow);
         
         require_once(VIEWS_PATH."add-purchase.php");
@@ -38,12 +37,13 @@ class PurchaseController{
 
     }
 
-    public function createTickets($cant , $cinema,  $idMovieshow){
-        if(empty($cant)){
-            $this->showAddView($cinema , $idMovieshow);
-        }else{
-            require_once(VIEWS_PATH."add-ticket.php");
+    public function createTickets($idUser,$cinema,  $idMovieshow , $seats){
+        var_dump($cinema);
+        var_dump($idMovieshow);
+        var_dump($seats);
+
+        foreach($seats as $seat){
+            echo $seat . "  ";
         }
     }
-
 }

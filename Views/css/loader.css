@@ -5,7 +5,7 @@
 }
 
 .hidden{
-    height: 100vh;
+    height: 110vh;
     overflow: hidden;
 }
 
@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 110vh;
     background: #102626;
 }
 
@@ -32,7 +32,7 @@
     height: 200px;
     border-radius: 50%;
     background: #0d2323;
-    animation : animate 2s linear infinite
+    animation : animate 2s linear infinite;
 }
 
 .container .loader::before{
