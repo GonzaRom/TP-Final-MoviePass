@@ -51,7 +51,6 @@ class UserController
     {
         $user = new User();
         $user = $this->userDAO->get($userName);
-        var_dump($user);
         if (!empty($user)) {
             if (password_verify($password, $user->getPassword())) {
                 $_SESSION['loggedUser'] = $user->getId();

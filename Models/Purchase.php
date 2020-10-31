@@ -4,6 +4,7 @@ namespace Models;
 class Purchase{
     private $id;
     private $date;
+    private $time;
     private $tickets;
     private $idUser;
     private $costo;
@@ -39,6 +40,13 @@ class Purchase{
     }
     public function getCosto(){
         return $this->costo;
+    }
+
+    public function setTime($time){
+        $this->time = $time;
+    }
+    public function getTime(){
+        return $this->time;
     }
 
 }

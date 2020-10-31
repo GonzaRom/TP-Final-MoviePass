@@ -8,6 +8,8 @@
         private $movieshow;
         private $user;
         private $purchase;
+        private $seat;
+        private $ticketCost;
 
         public function __construct(){
             
@@ -78,6 +80,26 @@
                 $this->purchase = $purchase;
 
                 return $this;
+        }
+
+        public function getSeat()
+        {
+                return $this->seat;
+        }
+ 
+        public function setSeat($seat)
+        {
+                $this->seat = $seat;
+        }
+
+        public function getTicketCost()
+        {
+                return $this->ticketCost;
+        }
+ 
+        public function setTicketCost($ticketCost)
+        {
+                $this->ticketCost = $ticketCost;
         }
     }
 ?>

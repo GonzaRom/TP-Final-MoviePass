@@ -39,9 +39,6 @@
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Listar</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Ticket/showAddTicketView" tabindex="-1" aria-disabled="true">Ticket</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Salas
@@ -65,12 +62,6 @@
                         </div>
                     </li>
                 <?php endif; ?>
-
-
-
-
-
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Generos
@@ -92,6 +83,9 @@
                 
                 
                 <?php if (isset($_SESSION['loggedUser'])) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Purchase/showAddPurchase"><i class="fas fa-shopping-cart"></i></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/logout" tabindex="-1" aria-disabled="true">Logout</a>
                     </li>
