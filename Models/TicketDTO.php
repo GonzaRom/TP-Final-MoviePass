@@ -1,16 +1,17 @@
 <?php
     namespace Models;
 
-    class Ticket{
+    class TicketDTO{
         private $id;
         private $date;
         private $time;
         private $movieshow;
         private $user;
         private $purchase;
+        private $seats;
 
         public function __construct(){
-            
+            $this->seats=array();;
         }
 
         public function getId()
@@ -76,6 +77,18 @@
         public function setPurchase($purchase)
         {
                 $this->purchase = $purchase;
+
+                return $this;
+        }
+
+        public function getSeats()
+        {
+                return $this->seats;
+        }
+ 
+        public function setSeats($seats)
+        {
+                $this->seats = $seats;
 
                 return $this;
         }

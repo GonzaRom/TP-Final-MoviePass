@@ -6,6 +6,8 @@ use DAO\CinemaDAOMSQL;
 use DAO\MovieShowDAOMSQL;
 use DAO\PurchaseDAOMSQL;
 use DAO\SeatDAOMSQL;
+use Models\Purchase;
+use Models\Ticket;
 
 class PurchaseController{
     private $purchaseDAOMSQL;
@@ -37,13 +39,19 @@ class PurchaseController{
 
     }
 
-    public function createTickets($idUser,$cinema,  $idMovieshow , $seats){
-        var_dump($cinema);
-        var_dump($idMovieshow);
-        var_dump($seats);
+    public function createTickets($cinema,  $idMovieshow , $seats){
+
+        $time = time();
+        $today = date('Y-m-d');
+        $timeNow = date('H:i:s' , $time);
+        $idUser = $_SESSION['loggedUser'];
+        $newPurchase = new Purchase;
 
         foreach($seats as $seat){
-            echo $seat . "  ";
+           $newTicket = new Ticket();
+           $newTicket->setDate($today);
+           $newTicket->setTime($timeNow);
+           $newTicket->setMovieshow($idMovieshow);
         }
     }
 }

@@ -13,10 +13,9 @@ class SeatDAOMSQL implements ISeatDAO{
     public function add(Seat $seat)
     {
         try{
-            $query= "INSERT INTO ".$this->tableName. " (numasiento , occupied, idmovieshow) VALUES (:numasiento , :occupied , :idmovieshow);";
+            $query= "INSERT INTO ".$this->tableName. " (numasiento , idmovieshow) VALUES (:numasiento , :idmovieshow);";
         
             $parameters['numasiento'] = $seat->getNumSeat();
-            $parameters['occupied'] = true;
             $parameters['idmovieshow'] = $seat->getMovieShow();
             $this->conecction = Connection::getInstance();
             $this->conecction->executeNonQuery($query, $parameters);
@@ -45,7 +44,6 @@ class SeatDAOMSQL implements ISeatDAO{
                     $seat = new SeatDTO();
                     $seat->setId($row['idseat']);
                     $seat->setNumSeat($row['numasiento']);
-                    $seat->setOccupied($row['occupied']);
                     $seat->setMovieShow($row['idmovieshow']);
                         
                     array_push($seatlist, $seat);
@@ -71,7 +69,6 @@ class SeatDAOMSQL implements ISeatDAO{
                 $seat= new SeatDTO();
                 $seat->setId($row['idseat']);
                 $seat->setNumSeat($row['numasiento']);
-                $seat->setOccupied($row['occupied']);
                 $seat->setMovieShow($row['idmovieshow']);
             }
             return $seat;
@@ -93,7 +90,6 @@ class SeatDAOMSQL implements ISeatDAO{
                 $seat = new SeatDTO();
                 $seat->setId($row['idseat']);
                 $seat->setNumSeat($row['numasiento']);
-                $seat->setOccupied($row['occupied']);
                 $seat->setMovieShow($row['idmovieshow']);
                     
                 array_push($seatlist, $seat);
@@ -112,9 +108,8 @@ class SeatDAOMSQL implements ISeatDAO{
     
         for($i = 0 ; $i< count($seatList) ; $i++){
             $newSeat = new SeatDTO();
-            $newSeat->setMovieShow(0);
+            $newSeat->setMovieShow(null);
             $newSeat->setNumSeat($i + 1);
-            $newSeat->setOccupied(false);
             $seatList[$i] = $newSeat;
         }
         

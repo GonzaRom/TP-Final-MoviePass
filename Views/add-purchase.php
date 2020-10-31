@@ -44,7 +44,7 @@
                     <ul> <?php $listSeat = $movieshow->getSeats();
                             foreach ($listSeat as $seat) :
                             ?>
-                            <li> <?php if ($seat->getOccupied() == false) : ?>
+                            <li> <?php if ($seat->getMovieShow() == null) : ?>
                                 <input class="checkbox" value="<?php echo $seat->getNumSeat(); ?>" type="checkbox" name="seats[<?php echo $seat->getNumSeat() - 1; ?>]" id="seats<?php echo $seat->getNumSeat(); ?>">
                                 <label class="" for="seats<?php echo $seat->getNumSeat(); ?>"><i class="fas fa-chair" style="font-size:18px;">[ <?php echo $seat->getNumSeat(); ?>]</i></label>
                                     
