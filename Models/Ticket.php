@@ -3,8 +3,6 @@
 
     class Ticket{
         private $id;
-        private $date;
-        private $time;
         private $movieshow;
         private $user;
         private $purchase;

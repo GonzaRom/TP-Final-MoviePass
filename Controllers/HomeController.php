@@ -52,6 +52,15 @@ class HomeController
             }
         }
 
+        $para      = 'isaiasemanuelcalfin@hotmail.com';
+        $titulo    = 'Acceso a la plataforma';
+        $mensaje   = 'Accedieron a la plataforma';
+        $cabeceras = 'From: isaiasemanuelcalfin@hotmail.com' . "\r\n" .
+            'Reply-To: isaiasemanuelcalfin@hotmail.com' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+        
+        $valido=mail($para,$titulo,$mensaje,$cabeceras);
+
         require_once(VIEWS_PATH . "home.php");
     }
 

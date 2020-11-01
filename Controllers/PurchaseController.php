@@ -48,15 +48,11 @@ class PurchaseController
         $timeNow = date('H:i:s', $time);
         $idUser = $_SESSION['loggedUser'];
         $newPurchase = new Purchase;
-        $newPurchase->setDate($today);
-        $newPurchase->setTime($timeNow);
         $newPurchase->setIdUser($idUser);
         $costPurchase = $movieshow->getRoom()->getTicketCost() * count($seats);
         $newPurchase->setCosto($costPurchase);
         foreach ($seats as $seat) {
             $newTicket = new Ticket();
-            $newTicket->setDate($today);
-            $newTicket->setTime($timeNow);
             $newTicket->setMovieshow($movieshow);
             $newTicket->setSeat($seat);
             $newTicket->setUser($idUser);
