@@ -224,7 +224,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             $newRoom->setName($value['nameroom']);
             $newRoom->setCapacity($value['capacity']);
             $newRoom->setTypeRoom($this->mapearTypeRoom($value));
-            $newRoom->setIsActive($value['isactive']);
+            $newRoom->setIsActive($value['isactiveMovieShow']);
             $newRoom->setTicketCost($value['ticketcost']);
             return $newRoom;
         }
