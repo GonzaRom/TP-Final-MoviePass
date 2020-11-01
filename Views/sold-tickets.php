@@ -17,24 +17,29 @@
                         </tr>
                     </thead>
 
-                    <?php foreach ($listTickets as $ticket) : ?>
+                    <?php for($i =0 ; $i < count($listTickets) ; $i++): ?>
                         <tbody class="tbody-list-sold">
                             <tr class="ticket">
-                                <td><?php echo $ticket->getMovieshow()->getMovie()->getName(); ?></td>
+                                <div class="displaynone" style="display: none;">
+                                <input type="num" name="ticket[<?php echo $i ?>]['movieshow']" value="<?php echo $listTickets[$i]->getMovieshow()->getId(); ?>">
+                                <input type="num" name="ticket[<?php echo $i ?>]['seat']" value="<?php echo $listTickets[$i]->getSeat(); ?>">
+                                <input type="num" name="ticket[<?php echo $i ?>]['ticketcost']" value="<?php echo $listTickets[$i]->getTicketCost(); ?>">
+                                </div>
+                                <td><?php echo $listTickets[$i]->getMovieshow()->getMovie()->getName(); ?></td>
                                 <td>Ambasador</td>
-                                <td><?php echo $ticket->getMovieshow()->getRoom()->getName(); ?></td>
-                                <td><?php echo $ticket->getMovieshow()->getDate(); ?></td>
-                                <td><?php echo $ticket->getMovieshow()->getTime(); ?></td>
-                                <td><?php echo $ticket->getSeat(); ?></td>
-                                <td><?php echo $ticket->getTicketCost(); ?></td>
+                                <td><?php echo $listTickets[$i]->getMovieshow()->getRoom()->getName(); ?></td>
+                                <td><?php echo $listTickets[$i]->getMovieshow()->getDate(); ?></td>
+                                <td><?php echo $listTickets[$i]->getMovieshow()->getTime(); ?></td>
+                                <td><?php echo $listTickets[$i]->getSeat(); ?></td>
+                                <td><?php echo $listTickets[$i]->getTicketCost(); ?></td>
                                 <td><i style="color: red; font-size:25px;" class="fas fa-times"></i></td>
                             </tr>
                         </tbody>
-                    <?php endforeach; ?>
+                    <?php endfor; ?>
 
                 </table>
                 <div class="totalcost">
-                    <h3>200</h3>
+                    <h3><?php echo $purchase->getCosto();?></h3>
                 </div>
                 <div class="content-button-sold">
                     <button class="submit-sold" type="submit">Finalizar Compra</button>
