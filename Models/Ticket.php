@@ -1,13 +1,19 @@
 <?php
     namespace Models;
-    use Models\Seat as Seat;
 
     class Ticket{
         private $id;
-        private $discount;
+        private $date;
+        private $time;
+        private $movieshow;
+        private $user;
+        private $purchase;
         private $seat;
-        private $movieShow;
-        private $idUser;
+        private $ticketCost;
+
+        public function __construct(){
+            
+        }
 
         public function getId()
         {
@@ -19,43 +25,81 @@
             $this->id = $id;
             return $this;
         }
- 
-        public function getDiscount()
+
+        public function getDate()
         {
-            return $this->discount;
+            return $this->date;
         }
 
-        public function setDiscount($discount)
+        public function setDate($date)
         {
-            $this->discount = $discount;
+            $this->date = $date;
             return $this;
+        }
+
+        public function getTime()
+        {
+            return $this->time;
+        }
+
+        public function setTime($time)
+        {
+            $this->time = $time;
+            return $this;
+        }
+ 
+        public function getMovieshow()
+        {
+            return $this->movieshow;
+        }
+
+        public function setMovieshow($movieshow)
+        {
+            $this->movieshow = $movieshow;
+            return $this;
+        }
+
+        public function getUser()
+        {
+            return $this->user;
+        }
+
+        public function setUser($user)
+        {
+            $this->user = $user;
+            return $this;
+        }
+
+        public function getPurchase()
+        {
+                return $this->purchase;
+        }
+ 
+        public function setPurchase($purchase)
+        {
+                $this->purchase = $purchase;
+
+                return $this;
         }
 
         public function getSeat()
         {
-            return $this->seat;
+                return $this->seat;
         }
-
+ 
         public function setSeat($seat)
         {
-            $this->seat = $seat;
-            return $this;
+                $this->seat = $seat;
         }
 
-        public function setMovieShow($movieShow){
-            $this->movieShow = $movieShow;
+        public function getTicketCost()
+        {
+                return $this->ticketCost;
         }
-
-        public function getMovieShow(){
-            return $this->movieShow;
-        }
-
-        public function setUser($user){
-            $this->idUser = $user;
-        }
-
-        public function getUser($user){
-            $this->idUser;
+ 
+        public function setTicketCost($ticketCost)
+        {
+                $this->ticketCost = $ticketCost;
         }
     }
 ?>

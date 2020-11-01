@@ -1,0 +1,118 @@
+.content-sold{
+    width: 100%;
+    min-height: 100vh;
+    background: url(../img/cinema-popcorn-box-with-ticket.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.content-sold .rgba-sold{
+    width: 100%;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, .7);
+}
+
+.rgba-sold .content-form-sold{
+    width: 100%;
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-form-sold form{
+    width: 80%;
+
+}
+
+.content-form-sold form .table-list-sold{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+
+.content-form-sold .thead-list-sold ,.content-form-sold .tbody-list-sold {
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+
+}
+
+.ticket{
+    padding: 10px;
+    color: #000;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;   
+}
+
+.ticket th{
+    width:150px;
+    text-align: center;
+}
+
+.ticket td{
+    width:150px;
+    text-align: center;
+}
+
+.totalcost{
+    width: 100%;
+    background: rgb(85, 88, 90);
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    box-shadow: 5px 5px 5px #000;
+}
+
+.totalcost h3{
+    width: 20%;
+    background: rgba(255, 255, 255 , .7);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.content-button-sold{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+    margin: 10px;
+}
+
+.submit-sold{
+    width: 15%;
+    padding: 20px;
+    outline: none;
+    border: none;
+    background: #ccc;
+    border-radius: 20px;
+    transition: .5s;
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 5px #000;
+}
+
+.submit-sold:hover{
+    width: 15%;
+    padding: 20px;
+    outline: none;
+    border: none;
+    background: rgb(4, 122, 29);
+    border-radius: 20px;
+    transition: .5s;
+    transform: translateY(0);
+    box-shadow: 2px 2px 2px #000;
+
+}
+
+

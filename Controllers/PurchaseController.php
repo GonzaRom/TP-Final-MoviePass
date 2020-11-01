@@ -6,8 +6,11 @@ use DAO\CinemaDAOMSQL;
 use DAO\MovieShowDAOMSQL;
 use DAO\PurchaseDAOMSQL;
 use DAO\SeatDAOMSQL;
+use Models\Purchase;
+use Models\Ticket;
 
-class PurchaseController{
+class PurchaseController
+{
     private $purchaseDAOMSQL;
     private $cinemaDAOMSQL;
     private $movieShowDAOMSQL;
@@ -15,35 +18,55 @@ class PurchaseController{
     public function __construct()
     {
         $this->purchaseDAOMSQL = new PurchaseDAOMSQL;
-        $this->cinemaDAOMSQL= new CinemaDAOMSQL;
+        $this->cinemaDAOMSQL = new CinemaDAOMSQL;
         $this->movieShowDAOMSQL = new MovieShowDAOMSQL;
         $this->seatDAOMSQL = new SeatDAOMSQL;
     }
 
 
-    public function showAddView($cinema , $movieshow){
+    public function confirm($reserva)
+    {
+        require_once(VIEWS_PATH . "add-purchase.php");
+    }
 
-        echo $cinema;
-        echo $movieshow;
-        $cinema = $this->cinemaDAOMSQL->get($cinema);
-        $movieshow = $this->movieShowDAOMSQL->get($movieshow);
-        $cinema->setBillBoard($movieshow);
+    public function showAddPurchase()
+    {
+        $purchase = $_SESSION['purchase'];
+        $listTickets = $purchase->getTickets();
         
-        require_once(VIEWS_PATH."add-purchase.php");
-    }
-
-    public function add(){
-
+        require_once (VIEWS_PATH."sold-tickets.php");
 
     }
 
-    public function createTickets($idUser,$cinema,  $idMovieshow , $seats){
-        var_dump($cinema);
-        var_dump($idMovieshow);
-        var_dump($seats);
-
-        foreach($seats as $seat){
-            echo $seat . "  ";
+    public function createTickets($idMovieshow, $seats)
+    {
+        
+        $tickets = array();
+        $movieshow = $this->movieShowDAOMSQL->get($idMovieshow);
+        $time = time();
+        $today = date('Y-m-d');
+        $timeNow = date('H:i:s', $time);
+        $idUser = $_SESSION['loggedUser'];
+        $newPurchase = new Purchase;
+        $newPurchase->setDate($today);
+        $newPurchase->setTime($timeNow);
+        $newPurchase->setIdUser($idUser);
+        $costPurchase = $movieshow->getRoom()->getTicketCost() * count($seats);
+        $newPurchase->setCosto($costPurchase);
+        foreach ($seats as $seat) {
+            $newTicket = new Ticket();
+            $newTicket->setDate($today);
+            $newTicket->setTime($timeNow);
+            $newTicket->setMovieshow($movieshow);
+            $newTicket->setSeat($seat);
+            $newTicket->setUser($idUser);
+            $newTicket->setTicketCost($movieshow->getRoom()->getTicketCost());
+            array_push($tickets, $newTicket);
         }
+
+        $newPurchase->setTickets($tickets);
+        $_SESSION['purchase'] = $newPurchase;
+        $reserva = "Reserva Confirmada";
+        $this->confirm($reserva);
     }
 }
