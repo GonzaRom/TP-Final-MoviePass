@@ -17,13 +17,13 @@ class RoomDAOMSQL implements IRoomDAO
     public function add(Room $room)
     {
         try {
-            $sql = "INSERT INTO " . $this->nameTable . " (nameroom , capacity , idtyperoom , idcinema , ticketcost , isactive) VALUES (:nameroom , :capacity , :idtyperoom , :idcinema , :ticketcost , :isactive)";
+            $sql = "INSERT INTO " . $this->nameTable . " (nameroom , capacity , idtyperoom , idcinema , ticketcost , isactiver) VALUES (:nameroom , :capacity , :idtyperoom , :idcinema , :ticketcost , :isactiver)";
             $parameters['nameroom'] = $this->nameRoom($room->getCinema());
             $parameters['capacity'] = $room->getCapacity();
             $parameters['idtyperoom'] = $room->getTypeRoom();
             $parameters['idcinema'] = $room->getCinema();
             $parameters['ticketcost'] = $room->getTicketCost();
-            $parameters['isactive'] = $room->getIsActive();
+            $parameters['isactiver'] = $room->getIsActive();
             $this->conection = Connection::getInstance();
             $this->conection->ExecuteNonQuery($sql, $parameters);
         } catch (Exception $ex) {
@@ -35,8 +35,8 @@ class RoomDAOMSQL implements IRoomDAO
     {
         try {
             $listRoom = array();
-            $sql = "SELECT * FROM " . $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE r.isactive = :isactive" ;
-            $parameters['active']=true;
+            $sql = "SELECT * FROM " . $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE r.isactiver = :isactiver" ;
+            $parameters['activer']=true;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql);
             foreach ($result as $room) {
@@ -49,7 +49,7 @@ class RoomDAOMSQL implements IRoomDAO
                 $newRoom->setTypeRoom($newTypeRoom);
                 $newRoom->setCapacity($room['capacity']);
                 $newRoom->setTicketCost($room['ticketcost']);
-                $newRoom->setIsActive($room['isactive']);
+                $newRoom->setIsActive($room['isactiver']);
                 array_push($listRoom, $newRoom);
             }
             return $listRoom;
@@ -80,9 +80,9 @@ class RoomDAOMSQL implements IRoomDAO
     {
         try{
             $listRoom = array();
-            $sql = "SELECT * FROM ". $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE r.idcinema = :idcinema AND r.isactive = :isactive";
+            $sql = "SELECT * FROM ". $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE r.idcinema = :idcinema AND r.isactiver = :isactiver";
             $parameters['idcinema'] = $idCinema;
-            $parameters['isactive'] = true;
+            $parameters['isactiver'] = true;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql, $parameters);
             foreach($result as $room){
@@ -95,7 +95,7 @@ class RoomDAOMSQL implements IRoomDAO
                 $newRoom->setTypeRoom($newTypeRoom);
                 $newRoom->setCapacity($room['capacity']);
                 $newRoom->setTicketCost($room['ticketcost']);
-                $newRoom->setIsActive($room['isactive']);
+                $newRoom->setIsActive($room['isactiver']);
                 array_push($listRoom, $newRoom);
             }
             return $listRoom;
@@ -142,9 +142,9 @@ class RoomDAOMSQL implements IRoomDAO
     {
         try{
             $listRoom = array();
-            $sql = "SELECT * FROM ". $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE r.idcinema = :idcinema AND r.isactive = :isactive";
+            $sql = "SELECT * FROM ". $this->nameTable . " as r INNER JOIN typerooms as t ON r.idtyperoom = t.idtyperoom WHERE r.idcinema = :idcinema AND r.isactiver = :isactiver";
             $parameters['idcinema'] = $idCinema;
-            $parameters['isactive'] = false;
+            $parameters['isactiver'] = false;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql, $parameters);
             foreach($result as $room){
@@ -157,7 +157,7 @@ class RoomDAOMSQL implements IRoomDAO
                 $newRoom->setTypeRoom($newTypeRoom);
                 $newRoom->setCapacity($room['capacity']);
                 $newRoom->setTicketCost($room['ticketcost']);
-                $newRoom->setIsActive($room['isactive']);
+                $newRoom->setIsActive($room['isactiver']);
                 array_push($listRoom, $newRoom);
             }
             return $listRoom;

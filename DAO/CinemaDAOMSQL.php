@@ -38,7 +38,7 @@ class CinemaDAOMSQL implements ICinemaDAO
         try {
             $cinemalist = array();
 
-            $sql = "SELECT * FROM " . $this->nameTable. " as c INNER JOIN billboards as b ON c.idcinema = b.idcinema WHERE c.isactive = true ";
+            $sql = "SELECT * FROM " . $this->nameTable. " as c INNER JOIN billboards as b ON c.idcinema = b.idcinema WHERE c.isactivec = true ";
             $this->conection = Connection::getInstance();
 
             $result = $this->conection->Execute($sql);
@@ -60,7 +60,7 @@ class CinemaDAOMSQL implements ICinemaDAO
     }
 
 
-    public function add(Cinema $cinema)
+    /*public function add(Cinema $cinema)
     {
 
 
@@ -77,15 +77,48 @@ class CinemaDAOMSQL implements ICinemaDAO
         } catch (Exception $ex) {
             throw $ex;
         }
+    }*/
+
+    public function add(Cinema $cinema)
+    {
+
+
+        try {
+            $sql = "call add_cinema (:namecinema , :adress , :phonenumber , :isactivec)";
+
+            $parameters['namecinema'] = $cinema->getName();
+            $parameters['adress'] = $cinema->getAdress();
+            $parameters['phonenumber'] = $cinema->getPhonenumber();
+            $parameters['isactivec'] = $cinema->getIsActive();
+
+            $this->conection = Connection::getInstance();
+            $result = $this->conection->ExecuteNonQuery($sql, $parameters);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
     }
 
-    public function delete(CinemaDTO $cinema)
+    /*public function delete(CinemaDTO $cinema)
     {
         print_r($cinema);
         try {
             $sql = "UPDATE " . $this->nameTable . " SET isactive = :isactive WHERE idcinema = :id";
             $parameters['id'] = $cinema->getId();
             $parameters['isactive'] = $cinema->getIsActive();
+            $this->conection = Connection::getInstance();
+            $this->conection->ExecuteNonQuery($sql, $parameters);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }*/
+
+    public function delete(CinemaDTO $cinema)
+    {
+        print_r($cinema);
+        try {
+            $sql = "call delete_cinema(:id)";
+            $parameters['id'] = $cinema->getId();
+            //$parameters['isactivec'] = $cinema->getIsActive();
             $this->conection = Connection::getInstance();
             $this->conection->ExecuteNonQuery($sql, $parameters);
         } catch (Exception $ex) {
@@ -124,7 +157,7 @@ class CinemaDAOMSQL implements ICinemaDAO
             $newCinema->setName($p['namecinema']);
             $newCinema->setAdress($p['adress']);
             $newCinema->setPhonenumber($p['phonenumber']);
-            $newCinema->setIsActive($p['isactive']);
+            $newCinema->setIsActive($p['isactivec']);
             $newCinema->setBillBoard($newBillBoard);
             return $newCinema;
         }, $value);

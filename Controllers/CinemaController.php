@@ -68,7 +68,7 @@ class CinemaController
         $message = 2; //variable q se va a usar como retorno para informar exito o no
         $cinema = $this->cinemadao->get($nameCinema);//elimina el objeto Cinema , y devuelte true si se encontro el cinema y false , si no lo encontro.
         if (!empty($cinema)) {
-            $cinema->setIsActive(false);
+            //$cinema->setIsActive(false);
             $this->cinemadao->delete($cinema);
             
             $message = 1;

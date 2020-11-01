@@ -8,11 +8,7 @@
         private $phonenumber;
         private $rooms;
         private $active;
-<<<<<<< HEAD
-        private $billBoard;        
-=======
         private  $billBoard;        
->>>>>>> origin/Isaias
         public function __construct(){
 
         }
