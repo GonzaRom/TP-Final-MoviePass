@@ -35,8 +35,14 @@ class PurchaseController
 
     public function showAddPurchase()
     {
-        $purchase = $_SESSION['purchase'];
-        $listTickets = $purchase->getTickets();
+        $purchase = null;
+        $listTickets = null;
+        if(isset($_SESSION['purchase'])){
+           $purchase =  $_SESSION['purchase'];
+           $listTickets = $purchase->getTickets();
+        }
+        
+        
         
         require_once (VIEWS_PATH."sold-tickets.php");
 
@@ -114,6 +120,10 @@ class PurchaseController
             $ticket->setPurchase($purchase->getId());
             $this->ticketDAOMSQL->add($ticket);
         }
+        $purchase = null;
+        $_SESSION['purchase'] = null;
+        $listTickets = null;
+
 
         require_once (VIEWS_PATH."sold-tickets.php");
     }
