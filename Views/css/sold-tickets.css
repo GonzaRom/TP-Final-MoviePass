@@ -1,15 +1,17 @@
 .content-sold{
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     background: url(../img/cinema-popcorn-box-with-ticket.jpg);
     background-position: center;
-    background-size: cover;
+    background-size: cover; 
+    overflow-y: scroll;
 }
 
 .content-sold .rgba-sold{
     width: 100%;
     min-height: 100vh;
     background: rgba(0, 0, 0, .7);
+   
 }
 
 .rgba-sold .content-form-sold{
@@ -31,7 +33,6 @@
     align-items: center;
     justify-content: center;
     flex-flow: column;
-    background: rgba(0, 0, 0, .7);
 }
 
 .content-form-sold .thead-list-sold ,.content-form-sold .tbody-list-sold {
@@ -42,6 +43,7 @@
     align-items: center;
     background: #fff;
     border-radius: 20px;
+    box-shadow: 5px 5px 5px #222;
 
 }
 

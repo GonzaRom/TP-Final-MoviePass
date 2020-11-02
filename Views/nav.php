@@ -84,7 +84,7 @@
                 
                 <?php if (isset($_SESSION['loggedUser'])) : ?>
                     <li class="nav-item">
-                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Purchase/showAddPurchase"><i class="fas fa-shopping-cart"></i></a>
+                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Purchase/showAddPurchase"><i style="font-size: 20px; color:brown" class="fas fa-shopping-cart"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/logout" tabindex="-1" aria-disabled="true">Logout</a>

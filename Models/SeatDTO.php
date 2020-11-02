@@ -5,6 +5,7 @@
         private $id;
         private $numAsiento;
         private $movieShow;
+        private $ocupped;
 
         public function getId()
         {
@@ -13,7 +14,7 @@
 
         public function setId($id)
         {
-            $this->Id = $id;
+            $this->id = $id;
         }
 
         public function getNumSeat()

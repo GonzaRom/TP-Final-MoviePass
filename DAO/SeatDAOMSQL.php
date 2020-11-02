@@ -13,7 +13,7 @@ class SeatDAOMSQL implements ISeatDAO{
     public function add(Seat $seat)
     {
         try{
-            $query= "INSERT INTO ".$this->tableName. " (numasiento , idmovieshow) VALUES (:numasiento , :idmovieshow);";
+            $query= "INSERT INTO ". $this->nameTable . " (numseat , idmovieshow) VALUES (:numasiento , :idmovieshow);";
         
             $parameters['numasiento'] = $seat->getNumSeat();
             $parameters['idmovieshow'] = $seat->getMovieShow();
@@ -43,7 +43,7 @@ class SeatDAOMSQL implements ISeatDAO{
                 {                
                     $seat = new SeatDTO();
                     $seat->setId($row['idseat']);
-                    $seat->setNumSeat($row['numasiento']);
+                    $seat->setNumSeat($row['numseat']);
                     $seat->setMovieShow($row['idmovieshow']);
                         
                     array_push($seatlist, $seat);
@@ -57,6 +57,26 @@ class SeatDAOMSQL implements ISeatDAO{
             }
     }
 
+    public function getSeat($idMovieShow , $numSeat){
+        try{
+            $seat=null;
+            $sql = "SELECT * FROM ". $this->nameTable. " WHERE idmovieshow = :idmovieshow AND numseat = :num ;";
+            $parameters['idmovieshow']= $idMovieShow;
+            $parameters['num'] = $numSeat;
+            $this->conecction = Connection::getInstance();
+            $resul = $this->conecction->Execute($sql ,$parameters);
+            foreach($resul as $row){
+                $seat= new SeatDTO();
+                var_dump($row);
+                $seat->setId($row['idseat']);
+                $seat->setNumSeat($row['numseat']);
+                $seat->setMovieShow($row['idmovieshow']);
+            }
+            return $seat;
+        }catch(Exception $ex){
+            throw $ex;
+        }
+    }
     public function get($id)
     {
         try{
@@ -68,7 +88,7 @@ class SeatDAOMSQL implements ISeatDAO{
             foreach($resul as $row){
                 $seat= new SeatDTO();
                 $seat->setId($row['idseat']);
-                $seat->setNumSeat($row['numasiento']);
+                $seat->setNumSeat($row['numseat']);
                 $seat->setMovieShow($row['idmovieshow']);
             }
             return $seat;
@@ -89,7 +109,7 @@ class SeatDAOMSQL implements ISeatDAO{
             {                
                 $seat = new SeatDTO();
                 $seat->setId($row['idseat']);
-                $seat->setNumSeat($row['numasiento']);
+                $seat->setNumSeat($row['numseat']);
                 $seat->setMovieShow($row['idmovieshow']);
                     
                 array_push($seatlist, $seat);

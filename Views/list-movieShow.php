@@ -1,8 +1,8 @@
-<div class="body" id="onload">
+<!--div class="body" id="onload">
   <div class="container">
     <div class="loader"><span></span></div>
   </div>
-</div>
+</div-->
 <div class="listMovieShow">
     <?php require_once("nav.php"); ?>
     <div class="rgba-content-listMovieShow">
@@ -37,7 +37,7 @@
                     <ul> <?php $listSeat = $movieShow->getSeats();
                             foreach ($listSeat as $seat) :
                             ?>
-                            <li> <?php if ($seat->getOccupied() == false) : ?>
+                            <li> <?php if ($seat->getMovieShow() == null) : ?>
                                     <i class="fas fa-chair" style="color:#aaa;">( <?php echo $seat->getNumSeat(); ?>)</i>
                                 <?php else : ?>
                                     <i class="fas fa-chair" style="color:red;">( <?php echo $seat->getNumSeat(); ?>)</i>

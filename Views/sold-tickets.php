@@ -2,7 +2,7 @@
     <div class="rgba-sold">
         <?php require_once("nav.php"); ?>
         <div class="content-form-sold">
-            <form action="">
+            <form action="<?php echo FRONT_ROOT;?>Purchase/addPurchase" method="POST">
                 <table class="table-list-sold">
                     <thead class="thead-list-sold">
                         <tr class="ticket">
@@ -20,11 +20,6 @@
                     <?php for($i =0 ; $i < count($listTickets) ; $i++): ?>
                         <tbody class="tbody-list-sold">
                             <tr class="ticket">
-                                <div class="displaynone" style="display: none;">
-                                <input type="num" name="ticket[<?php echo $i ?>]['movieshow']" value="<?php echo $listTickets[$i]->getMovieshow()->getId(); ?>">
-                                <input type="num" name="ticket[<?php echo $i ?>]['seat']" value="<?php echo $listTickets[$i]->getSeat(); ?>">
-                                <input type="num" name="ticket[<?php echo $i ?>]['ticketcost']" value="<?php echo $listTickets[$i]->getTicketCost(); ?>">
-                                </div>
                                 <td><?php echo $listTickets[$i]->getMovieshow()->getMovie()->getName(); ?></td>
                                 <td>Ambasador</td>
                                 <td><?php echo $listTickets[$i]->getMovieshow()->getRoom()->getName(); ?></td>
