@@ -27,7 +27,6 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Movie/UpdateMoviesToDB">UPDATE DB!</a>
-                            <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>Movie/ShowAllMovies">Listar</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -75,12 +74,6 @@
                 <li class="nav-item">
                     <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
                 </li> 
-                
-                
-                
-                
-                
-                
                 
                 <?php if (isset($_SESSION['loggedUser'])) : ?>
                     <li class="nav-item">

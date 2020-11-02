@@ -1,5 +1,4 @@
 <?php
-
 namespace Controllers;
 
 use DAO\GenreDAOMSQL as GenreDAOMSQL;
@@ -26,12 +25,6 @@ class MovieController
             //return require_once(VIEWS_PATH."error_404.php");
             echo $e->getMessage();
         }
-    }
-
-
-    public function ShowAllMovies(){
-        $movieList = $this->movieDAOMSQL->getAll();
-        require_once(VIEWS_PATH . "list-dbmovies.php");
     }
 
     public function detailMovie($movie){

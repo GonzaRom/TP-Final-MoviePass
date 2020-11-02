@@ -66,27 +66,33 @@ class UserController
         $this->showLoginView($message);
     }
 
-
-
-
     public function signIn($firstName, $lastName, $userName, $email, $password, $userType = 1)
     {
+        //Validaciones
+        if (empty($firstName) || empty($lastName) || empty($userName) || empty($email) || empty($password)) $this->showSingInView("Todos los campos son requeridos.");
+        if (ctype_alpha($lastName)) $this->showSingInView("Solo se permiten caracteres alfabeticos en apellido!");
+        if (ctype_alpha($firstName)) $this->showSingInView("Solo se permiten caracteres alfabeticos en nombre!");
+        $userName = filter_var(trim($userName), FILTER_SANITIZE_SPECIAL_CHARS);
+        $email = filter_var(trim($email), FILTER_SANITIZE_EMAIL);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $this->showSingInView("Email no valido!");
+
         $userList = $this->userDAO->getAll();
         foreach ($userList as $user) {
             if ($user->getUserName() == $userName) {
-                $message = "Nombre de usuario existente.";
+                $message = "Nombre de usuario existente!";
                 $this->showSingInView($message);
             }
+            if ($user->getEmail() == $email)  $this->showSingInView("Email ya exite!");
         }
 
         $password = password_hash($password, PASSWORD_DEFAULT, array("cost" => 12));
         $newUser = new User();
         $newUser->setId($this->userid());
-        $newUser->setFirstname($firstName);
-        $newUser->setLastname($lastName);
+        $newUser->setFirstname(trim($firstName));
+        $newUser->setLastname(trim($lastName));
         $newUser->setUserName($userName);
         $newUser->setEmail($email);
-        $newUser->setPassword($password);
+        $newUser->setPassword(trim($password));
         $newUser->setUsertype($userType);
         $this->userDAO->add($newUser);
         if (isset($_SESSION['loggedUser'])) {
