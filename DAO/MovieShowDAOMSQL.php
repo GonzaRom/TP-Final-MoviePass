@@ -19,11 +19,11 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     public function add(MovieShow $newMovieShow)
     {
         try {
-            $sql = "INSERT INTO " . $this->nameTable . " (idmovie , idbillboard , idtypemovieshow , idroom , date_ , time_ , isactiveMovieShow )
-            VALUES (:idmovie , :idbillboard , :idtypemovieshow , :idroom , :date_ , :time_ , :isactiveMovieShow)";
+            $sql = "INSERT INTO " . $this->nameTable . " (idmovie , idcinema , idtypemovieshow , idroom , date_ , time_ , isactiveMovieShow )
+            VALUES (:idmovie , :idcinema , :idtypemovieshow , :idroom , :date_ , :time_ , :isactiveMovieShow)";
 
             $parameters['idmovie'] = $newMovieShow->getMovie();
-            $parameters['idbillboard'] = $newMovieShow->getBillBoard();
+            $parameters['idcinema'] = $newMovieShow->getCinema();
             $parameters['idtypemovieshow'] = $newMovieShow->getTypeMovieShow();
             $parameters['idroom'] = $newMovieShow->getRoom();
             $parameters['date_'] = $newMovieShow->getDate();
@@ -76,9 +76,9 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
-            WHERE m.idbillboard = :idbillboard";
+            WHERE m.idcinema = :idcinema";
 
-            $parameters['idbillboard'] = $id;
+            $parameters['idcinema'] = $id;
             $listMovieShow = array();
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql, $parameters);
@@ -133,7 +133,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     }
 
 
-    public function getMovieShowByMovie($idBillBoard, $idMovie)
+    public function getMovieShowByMovie($idcinema, $idMovie)
     {
         $listMovieShow = array();
         try {
@@ -147,9 +147,9 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
-            WHERE m.idbillboard = :idbillboard AND mo.idmovie = :idmovie";
+            WHERE m.idcinema = :idcinema AND mo.idmovie = :idmovie";
             $parameters['idmovie'] = $idMovie;
-            $parameters['idbillboard'] = $idBillBoard;
+            $parameters['idcinema'] = $idcinema;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql, $parameters);
         } catch (Exception $ex) {
@@ -179,8 +179,8 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
-            WHERE m.idbillboard = :idbillboard AND m.date_ = :date";
-            $parameters['idbillboard'] = $idMovie;
+            WHERE m.idcinema = :idcinema AND m.date_ = :date";
+            $parameters['idcinema'] = $idMovie;
             $parameters['date'] = $date;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql, $parameters);

@@ -5,8 +5,6 @@ namespace DAO;
 use Models\Cinema as Cinema;
 use Models\CinemaDTO as  CinemaDTO;
 use Exception;
-use Models\BillBoard;
-use Models\BillBoardDTO;
 
 class CinemaDAOMSQL implements ICinemaDAO
 {
@@ -18,7 +16,7 @@ class CinemaDAOMSQL implements ICinemaDAO
     {
 
         try {
-            $sql = "SELECT * FROM " . $this->nameTable . " as c INNER JOIN billboards as b ON c.idcinema = b.idcinema WHERE c.idcinema = :id";
+            $sql = "SELECT * FROM " . $this->nameTable . " WHERE idcinema = :id";
 
             $parameter['id'] = $id;
             $this->conection = Connection::getInstance();
@@ -38,19 +36,16 @@ class CinemaDAOMSQL implements ICinemaDAO
         try {
             $cinemalist = array();
 
-            $sql = "SELECT * FROM " . $this->nameTable. " as c INNER JOIN billboards as b ON c.idcinema = b.idcinema WHERE c.isactivec = true ";
+            $sql = "SELECT * FROM " . $this->nameTable. " WHERE isactivec = true ";
             $this->conection = Connection::getInstance();
 
             $result = $this->conection->Execute($sql);
             foreach ($result as $cinema) {
                 $newCinema = new CinemaDTO();
-                $newBillBoard = new BillBoardDTO();
-                $newBillBoard->setId($cinema['idbillboard']);
                 $newCinema->setId($cinema['idcinema']);
                 $newCinema->setName($cinema['namecinema']);
                 $newCinema->setAdress($cinema['adress']);
                 $newCinema->setPhonenumber($cinema['phonenumber']);
-                $newCinema->setBillBoard($newBillBoard);
                 array_push($cinemalist, $newCinema);
             }
            return $cinemalist;  
@@ -151,14 +146,11 @@ class CinemaDAOMSQL implements ICinemaDAO
         $value = ($value) ? $value : array();
         $resp = array_map(function ($p) {
             $newCinema = new CinemaDTO();
-            $newBillBoard = new BillBoardDTO();
-            $newBillBoard->setId($p['idbillboard']);
             $newCinema->setId($p['idcinema']);
             $newCinema->setName($p['namecinema']);
             $newCinema->setAdress($p['adress']);
             $newCinema->setPhonenumber($p['phonenumber']);
-            $newCinema->setIsActive($p['isactivec']);
-            $newCinema->setBillBoard($newBillBoard);
+            $newCinema->setIsActive($p['isactivec']);;
             return $newCinema;
         }, $value);
 

@@ -6,7 +6,7 @@ class MovieShow
 {
     private $id;
     private $movie;
-    private $billBoard;
+    private $cinema;
     private $typeMovieShow;
     private $room;
     private $date;
@@ -70,14 +70,14 @@ class MovieShow
     }
 
 
-    public function getBillBoard()
+    public function getCinema()
     {
-        return $this->billBoard;
+        return $this->cinema;
     }
 
-    public function setBillBoard($billBoard)
+    public function setCinema($cinema)
     {
-        $this->billBoard = $billBoard;
+        $this->cinema = $cinema;
     }
 
     public function setTypeMovieShow($typeMovieShow)
