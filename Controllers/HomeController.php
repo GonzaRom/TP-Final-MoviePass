@@ -36,7 +36,7 @@ class HomeController
 
     // se llaman a las vistas de home.php.
     public function index($message = "", $movieList = null)
-    {   $movieShows = $this->movieShowDAO->getAll(); // trae todas las funciones disponibles.
+    {   $movieShows = $this->movieShowDAO->getAllActive(); // trae todas las funciones disponibles.
         if ($movieList == null) {
             
             $movieList = $this->movieDAOMSQL->getAll();
@@ -64,7 +64,7 @@ class HomeController
     //trae Todas las movieShow y la almacena en un un array de movieShowDTO.
     private function getMovieShowList()
     {
-        $movieShows = $this->movieShowDAO->getAll();
+        $movieShows = $this->movieShowDAO->getAllActive();
         $listMovieShow = array();
         foreach ($movieShows as $movieShow) {
             $movieShowDTO = new MovieShowDTO();
