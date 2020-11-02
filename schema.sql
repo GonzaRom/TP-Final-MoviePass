@@ -36,6 +36,7 @@ CREATE TABLE cinemas(
 )ENGINE=InnoDB;
 
 
+
 CREATE TABLE typerooms(
 	idtyperoom int not null auto_increment,
     nametyperoom varchar(50),
@@ -159,14 +160,14 @@ insert into cinemas (namecinema, adress, phonenumber, isactivec) values ("Ambass
 
 insert into rooms (nameroom, capacity, idtyperoom, idcinema, ticketcost, isactiver) values  ("Sala 1",60,1,1,100,true),("Sala 2",50,2,1,110,true),("Sala 3",50,3,1,150,true),("Sala 1",50,3,2,120,true),("Sala 2",65,1,2,105,true),("Sala 3",70,1,2,160,true),("Sala Avengers",100,1,3,120,true),("Sala Universal",80,2,3,140,true),("Sala Dolby Atmos",60,3,3,200,true);
 
+
 DROP PROCEDURE IF EXISTS add_cinema;
-DELIMITER $$
+
 CREATE PROCEDURE add_cinema(in namecinema varchar(50), in adress varchar(50), in phonenumber varchar(50), in isactivec boolean)
 comment "agrega un cinema"
 BEGIN
 	INSERT INTO cinemas (namecinema , adress , phonenumber , isactivec) VALUES (namecinema, adress, phonenumber, isactivec);
 END;
-$$
 
 DROP PROCEDURE IF EXISTS delete_cinema;
 DELIMITER $$

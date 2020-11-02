@@ -20,19 +20,19 @@
                     <button type="submit">Filtrar</button>
                 </form>
             </div>
+            <?php foreach ($cinemas as $cinema) : ?>
+                <?php $movieShows = $cinema->getBillBoard()->getMovieShows(); ?>
+                <?php for ($j = 0; $j < count($movieShows); $j++) :
 
-            <form action="<?php echo FRONT_ROOT ?>Ticket/showAddTicketView" method="GET">
+                    $movie = $movieShows[$j]->getMovie();
+                    $nombre = $movie->getName();
+                    $genres = $movie->getGenreId();
+                    $duration = $movie->getRunTime();
+                ?>
+                    <form action="<?php echo FRONT_ROOT ?>Ticket/showAddTicketView" method="GET">
 
-                <div class="card mb-3" style="width:1250px;" id="movieShows">
-                    <?php foreach ($cinemas as $cinema) : ?>
-                        <?php $movieShows = $cinema->getBillBoard(); ?>
-                        <?php for ($j = 0; $j < count($movieShows); $j++) :
+                        <div class="card mb-3" style="width:1250px;" id="movieShows">
 
-                            $movie = $movieShows[$j]->getMovie();
-                            $nombre = $movie->getName();
-                            $genres = $movie->getGenreId();
-                            $duration = $movie->getRunTime();
-                        ?>
                             <div class="content-none" style="display: none;">
                                 <input type="text" name="cinema" value="<?php echo $cinema->getId(); ?>">
                                 <input type="text" name="movieshow" value="<?php echo  $movieShows[$j]->getId(); ?>">
@@ -78,15 +78,17 @@
                                         <small class="card-text">
                                             <i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
                                         </small>
-                                        <button type="submit" class="btn btn-secondary btn-sm">Reservar</button>
+                                        <h2><?php echo  $movieShows[$j]->getId(); ?></h2>
+                                        <button type="submit" value="" class="btn btn-secondary btn-sm">Reservar</button>
                                     </div>
                                 </div>
 
                             </div>
-                        <?php endfor; ?>
-                    <?php endforeach; ?>
-                </div>
-            </form>
+
+                        </div>
+                    </form>
+                <?php endfor; ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </div>

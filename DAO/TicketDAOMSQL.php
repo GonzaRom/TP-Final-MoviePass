@@ -12,14 +12,16 @@
 
         
         public function add(Ticket $ticket){
+            var_dump($ticket);
             try{
-                $sql = "INSERT INTO ". $this->tablename. " (idmovieshow, date_, time_, idpurchase, iduser)
-                        VALUES (:idmovieshow, :date, :time, :idpurchase, :iduser)";
-                $parameters['idmovieshow']=$ticket->getMovieShow();
-                $parameters['date']=$ticket->getDate();
-                $parameters['time']=$ticket->getTime();
+                
+                $sql = "INSERT INTO ". $this->tablename. " (idmovieshow , idpurchase , iduser , ticketcost , idseat)
+                        VALUES (:idmovieshow , :idpurchase , :iduser , :cost , :seat)";
+                $parameters['idmovieshow']=$ticket->getMovieShow()->getId();
                 $parameters['idpurchase']=$ticket->getPurchase();
                 $parameters['iduser']=$ticket->getUser();
+                $parameters['cost'] = $ticket->getTicketCost();
+                $parameters['seat'] = $ticket->getSeat()->getId();
 
                 $this->conection= Connection::getInstance();
                 $this->conection->ExecuteNonQuery($sql,$parameters);

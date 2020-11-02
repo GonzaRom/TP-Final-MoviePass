@@ -96,8 +96,26 @@ class UserController
         $newUser->setUsertype($userType);
         $this->userDAO->add($newUser);
         if (isset($_SESSION['loggedUser'])) {
-            $this->showSingInView();
-        } else {
+            require_once(VIEWS_PATH . 'validate-session.php');
+        } else{
+
+
+            $para      = $email;
+            $titulo    = 'Confirmar usuario.';
+            $mensaje   = '<html>'.
+            '<head><title>Bienvenido a multiflex</title></head>'.
+            '<body><h1>Confirmar Usuario</h1>'.
+            '<h2>Haga click en este enlace para confirma</h2>'.
+            '<hr>'.
+            '<a href=http://localhost/Projects/TP-Final-MoviePass/Home/Index>Haga clik <b>AQUI</b></a>'.
+            '</body>'.
+            '</html>';
+            $cabeceras = 'Content-type: text/html; charset=utf-8' . "\r\n";
+            $cabeceras .= 'From: ' .$email. "\r\n" .
+                'Reply-To:'. $email .'"\r\n" '.
+                'X-Mailer: PHP/' . phpversion();
+            
+            mail($para,$titulo,$mensaje,$cabeceras);
             $this->showLoginView();
         }
     }

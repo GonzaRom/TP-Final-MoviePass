@@ -1,8 +1,8 @@
-<div class="body" id="onload">
+<!--div class="body" id="onload">
   <div class="container">
     <div class="loader"><span></span></div>
   </div>
-</div>
+</div-->
 <div class="listMovieShow">
     <?php require_once("nav.php"); ?>
     <div class="rgba-content-listMovieShow">
