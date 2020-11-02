@@ -19,11 +19,11 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     public function add(MovieShow $newMovieShow)
     {
         try {
-            $sql = "INSERT INTO " . $this->nameTable . " (idmovie , idbillboard , idtypemovieshow , idroom , date_ , time_ , isactiveMovieShow )
-            VALUES (:idmovie , :idbillboard , :idtypemovieshow , :idroom , :date_ , :time_ , :isactiveMovieShow)";
+            $sql = "INSERT INTO " . $this->nameTable . " (idmovie , idcinema , idtypemovieshow , idroom , date_ , time_ , isactiveMovieShow )
+            VALUES (:idmovie , :idcinema , :idtypemovieshow , :idroom , :date_ , :time_ , :isactiveMovieShow)";
 
             $parameters['idmovie'] = $newMovieShow->getMovie();
-            $parameters['idbillboard'] = $newMovieShow->getBillBoard();
+            $parameters['idcinema'] = $newMovieShow->getCinema();
             $parameters['idtypemovieshow'] = $newMovieShow->getTypeMovieShow();
             $parameters['idroom'] = $newMovieShow->getRoom();
             $parameters['date_'] = $newMovieShow->getDate();
@@ -35,19 +35,33 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             throw $ex;
         }
     }
+
     public function getAll()
     {
         $listMovieShow = array();
         try {
-            $sql = "SELECT * FROM " . $this->nameTable . " as m 
-            INNER JOIN typemovieshows as tm 
-            ON m.idtypemovieshow = tm.idtypemovieshow
-            INNER JOIN movies as mo
-            ON m.idmovie = mo.idmovie 
-            INNER JOIN rooms as r 
-            ON m.idroom = r.idroom 
-            INNER JOIN typerooms as t 
-            ON r.idtyperoom = t.idtyperoom ";
+            $sql = "call get_movieshows()";
+
+            $this->conection = Connection::getInstance();
+            $result = $this->conection->Execute($sql);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+
+        if (!empty($result)) {
+            foreach ($result as $movieShow) {
+                $newMovieShow = $this->creatMovieShow($movieShow);
+                array_push($listMovieShow, $newMovieShow);
+            }
+        }
+        return $listMovieShow;
+    }
+
+    public function getAllActive()
+    {
+        $listMovieShow = array();
+        try {
+            $sql = "call get_movieshows_active();";
 
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql);
@@ -76,9 +90,9 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
-            WHERE m.idbillboard = :idbillboard";
+            WHERE m.idcinema = :idcinema";
 
-            $parameters['idbillboard'] = $id;
+            $parameters['idcinema'] = $id;
             $listMovieShow = array();
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql, $parameters);
@@ -126,14 +140,13 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             foreach ($result as $movieShow) {
 
                 $newMovieShow = $this->creatMovieShow($movieShow);
-                
             }
         }
         return $newMovieShow;
     }
 
 
-    public function getMovieShowByMovie($idBillBoard, $idMovie)
+    public function getMovieShowByMovie($idcinema, $idMovie)
     {
         $listMovieShow = array();
         try {
@@ -147,9 +160,9 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
-            WHERE m.idbillboard = :idbillboard AND mo.idmovie = :idmovie";
+            WHERE m.idcinema = :idcinema AND mo.idmovie = :idmovie";
             $parameters['idmovie'] = $idMovie;
-            $parameters['idbillboard'] = $idBillBoard;
+            $parameters['idcinema'] = $idcinema;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql, $parameters);
         } catch (Exception $ex) {
@@ -179,8 +192,8 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
-            WHERE m.idbillboard = :idbillboard AND m.date_ = :date";
-            $parameters['idbillboard'] = $idMovie;
+            WHERE m.idcinema = :idcinema AND m.date_ = :date";
+            $parameters['idcinema'] = $idMovie;
             $parameters['date'] = $date;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql, $parameters);
@@ -197,7 +210,37 @@ class MovieShowDAOMSQL implements IMovieShowDAO
         return $listMovieShow;
     }
 
+    public function getMovieShowByMovieDateCinema($idMovie, $date, $idCinema)
+    {
+        $listMovieShow = array();
+        try {
+            $sql = "SELECT * FROM " . $this->nameTable . " as m 
+            INNER JOIN typemovieshows as tm 
+            ON m.idtypemovieshow = tm.idtypemovieshow
+            INNER JOIN movies as mo
+            ON m.idmovie = mo.idmovie 
+            INNER JOIN rooms as r 
+            ON m.idroom = r.idroom 
+            INNER JOIN typerooms as t 
+            ON r.idtyperoom = t.idtyperoom 
+            WHERE m.idcinema = :idcinema AND m.date_ = :date AND m.idmovie = :idmovie";
+            $parameters['idmovie'] = $idMovie;
+            $parameters['idcinema'] = $idCinema;
+            $parameters['date'] = $date;
+            $this->conection = Connection::getInstance();
+            $result = $this->conection->Execute($sql, $parameters);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
 
+        if (!empty($result)) {
+            foreach ($result as $movieShow) {
+                $newMovieShow = $this->creatMovieShow($movieShow);
+                array_push($listMovieShow, $newMovieShow);
+            }
+        }
+        return $listMovieShow;
+    }
 
     protected function creatMovieShow($value)
     {
@@ -224,7 +267,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             $newRoom->setName($value['nameroom']);
             $newRoom->setCapacity($value['capacity']);
             $newRoom->setTypeRoom($this->mapearTypeRoom($value));
-            $newRoom->setIsActive($value['isactive']);
+            $newRoom->setIsActive($value['isactiveMovieShow']);
             $newRoom->setTicketCost($value['ticketcost']);
             return $newRoom;
         }

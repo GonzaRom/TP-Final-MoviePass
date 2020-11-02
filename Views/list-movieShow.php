@@ -7,7 +7,7 @@
     <?php require_once("nav.php"); ?>
     <div class="rgba-content-listMovieShow">
             <?php foreach ($cinemas as $cinema) : ?>
-            <?php $movieShows = $cinema->getBillBoard()->getMovieShows(); ?>
+            <?php $movieShows = $cinema->getBillBoard(); ?>
             <?php foreach ($movieShows as $movieShow) : ?>
             <div class="infoMovieShow">
                 <div class="infoLocation">

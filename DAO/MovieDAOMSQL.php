@@ -25,7 +25,7 @@ class MovieDAOMSQL implements IMovieDAO
         try {
             $movieList = array();
 
-            $query = "SELECT * FROM " . $this->tableName;
+            $query = "call get_movies();";
 
             $this->connection = Connection::getInstance();
 
@@ -72,7 +72,7 @@ class MovieDAOMSQL implements IMovieDAO
     {
         try {
 
-            $query = "SELECT * FROM " . $this->tableName . " WHERE idmovie = :id";
+            $query = "call get_movie_id(:id);";
             $parameters["id"] = $id;
             $this->connection = Connection::getInstance();
 

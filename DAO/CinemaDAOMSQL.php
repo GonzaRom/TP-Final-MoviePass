@@ -5,8 +5,6 @@ namespace DAO;
 use Models\Cinema as Cinema;
 use Models\CinemaDTO as  CinemaDTO;
 use Exception;
-use Models\BillBoard;
-use Models\BillBoardDTO;
 
 class CinemaDAOMSQL implements ICinemaDAO
 {
@@ -18,7 +16,7 @@ class CinemaDAOMSQL implements ICinemaDAO
     {
 
         try {
-            $sql = "SELECT * FROM " . $this->nameTable . " as c INNER JOIN billboards as b ON c.idcinema = b.idcinema WHERE c.idcinema = :id";
+            $sql = "call get_cinema_id(:id)";
 
             $parameter['id'] = $id;
             $this->conection = Connection::getInstance();
@@ -38,19 +36,16 @@ class CinemaDAOMSQL implements ICinemaDAO
         try {
             $cinemalist = array();
 
-            $sql = "SELECT * FROM " . $this->nameTable. " as c INNER JOIN billboards as b ON c.idcinema = b.idcinema WHERE c.isactive = true ";
+            $sql = "call get_cinemas();";
             $this->conection = Connection::getInstance();
 
             $result = $this->conection->Execute($sql);
             foreach ($result as $cinema) {
                 $newCinema = new CinemaDTO();
-                $newBillBoard = new BillBoardDTO();
-                $newBillBoard->setId($cinema['idbillboard']);
                 $newCinema->setId($cinema['idcinema']);
                 $newCinema->setName($cinema['namecinema']);
                 $newCinema->setAdress($cinema['adress']);
                 $newCinema->setPhonenumber($cinema['phonenumber']);
-                $newCinema->setBillBoard($newBillBoard);
                 array_push($cinemalist, $newCinema);
             }
            return $cinemalist;  
@@ -59,18 +54,17 @@ class CinemaDAOMSQL implements ICinemaDAO
         }
     }
 
-
     public function add(Cinema $cinema)
     {
 
 
         try {
-            $sql = "INSERT INTO " . $this->nameTable . " (namecinema , adress , phonenumber , isactive) VALUES (:namecinema , :adress , :phonenumber , :isactive)";
+            $sql = "call add_cinema (:namecinema , :adress , :phonenumber , :isactivec)";
 
             $parameters['namecinema'] = $cinema->getName();
             $parameters['adress'] = $cinema->getAdress();
             $parameters['phonenumber'] = $cinema->getPhonenumber();
-            $parameters['isactive'] = $cinema->getIsActive();
+            $parameters['isactivec'] = $cinema->getIsActive();
 
             $this->conection = Connection::getInstance();
             $result = $this->conection->ExecuteNonQuery($sql, $parameters);
@@ -83,9 +77,9 @@ class CinemaDAOMSQL implements ICinemaDAO
     {
         print_r($cinema);
         try {
-            $sql = "UPDATE " . $this->nameTable . " SET isactive = :isactive WHERE idcinema = :id";
+            $sql = "call delete_cinema(:id)";
             $parameters['id'] = $cinema->getId();
-            $parameters['isactive'] = $cinema->getIsActive();
+            //$parameters['isactivec'] = $cinema->getIsActive();
             $this->conection = Connection::getInstance();
             $this->conection->ExecuteNonQuery($sql, $parameters);
         } catch (Exception $ex) {
@@ -98,14 +92,13 @@ class CinemaDAOMSQL implements ICinemaDAO
     {
 
         try {
-            $sql = "UPDATE " . $this->nameTable . " SET namecinema = :namecinema, adress = :adress , phonenumber = :phonenumber , isactive = :isactive WHERE idcinema = :idcinema ;";
+            $sql = "call update_cinema(:namecinema, :adress , :phonenumber , :isactivec, :idcinema);";
 
             $parameters['idcinema'] = $cinema->getId();
             $parameters['namecinema'] = $cinema->getName();
             $parameters['adress'] = $cinema->getAdress();
             $parameters['phonenumber'] = $cinema->getPhonenumber();
-            $parameters['isactive'] = $cinema->getIsActive();
-
+            $parameters['isactivec'] = $cinema->getIsActive();
             $this->conection = Connection::getInstance();
             $result = $this->conection->ExecuteNonQuery($sql, $parameters);
         } catch (Exception $ex) {
@@ -118,14 +111,11 @@ class CinemaDAOMSQL implements ICinemaDAO
         $value = ($value) ? $value : array();
         $resp = array_map(function ($p) {
             $newCinema = new CinemaDTO();
-            $newBillBoard = new BillBoardDTO();
-            $newBillBoard->setId($p['idbillboard']);
             $newCinema->setId($p['idcinema']);
             $newCinema->setName($p['namecinema']);
             $newCinema->setAdress($p['adress']);
             $newCinema->setPhonenumber($p['phonenumber']);
-            $newCinema->setIsActive($p['isactive']);
-            $newCinema->setBillBoard($newBillBoard);
+            $newCinema->setIsActive($p['isactivec']);;
             return $newCinema;
         }, $value);
 

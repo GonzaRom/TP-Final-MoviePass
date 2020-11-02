@@ -18,7 +18,7 @@ CREATE TABLE users(
     username varchar(50),
     email varchar(50),
     userpassword varchar(100),
-    isactive boolean,
+    isactiveu boolean,
     constraint PK_USER primary key(iduser),
     constraint FK_USERTYPE foreign key(idusertype) references usertypes(idusertype),
     constraint UNQ_USERNAME unique(username),
@@ -30,18 +30,11 @@ CREATE TABLE cinemas(
 	namecinema varchar(50),
 	adress varchar(100),
 	phonenumber varchar(50),
-    isactive boolean,
+    isactivec boolean,
 	constraint PK_CINEMA  primary key(idcinema),
     constraint UNQ_CINE unique (namecinema,adress)
 )ENGINE=InnoDB;
 
-CREATE TABLE billboards(
-	idbillboard int not null auto_increment,
-    idcinema int not null,
-    isactive boolean,
-    constraint PK_BILLBOARD primary key (idbillboard),
-    constraint FK_CINEMA foreign key(idcinema) references cinemas (idcinema)
-)ENGINE=InnoDB;
 
 CREATE TABLE typerooms(
 	idtyperoom int not null auto_increment,
@@ -56,7 +49,7 @@ CREATE TABLE rooms(
 	idtyperoom int not null,
 	idcinema int not null,
     ticketcost int,
-    isactive boolean,
+    isactiver boolean,
     constraint PK_ROOM primary key (idroom),
     constraint FK_CINEROOM foreign key (idcinema) references cinemas (idcinema),
     constraint FK_TYPEROOM foreign key (idtyperoom) references typerooms(idtyperoom)
@@ -98,17 +91,18 @@ CREATE TABLE typemovieshows(
     nametypemovieshow varchar(50),
     constraint PK_TYPEMOVIESHOW primary key (idtypemovieshow)
 )ENGINE=InnoDB;
+
 CREATE TABLE movieshows(
 	idmovieshow int not null auto_increment,
     idmovie int not null,
-    idbillboard int not null,
+    idcinema int not null,
     idtypemovieshow int not null,
     idroom int not null,
     date_ date,
     time_ time,
     isactiveMovieShow boolean,
     constraint PK_MOVIESHOW primary key (idmovieshow),
-    constraint FK_BILLBOARD foreign key (idbillboard) references billboards (idbillboard),
+    constraint FK_CINEMASHOW foreign key (idcinema) references cinemas (idcinema),
     constraint FK_MOVIE foreign key (idmovie) references movies (idmovie),
     constraint FK_TYPEMOVIESHOW foreign key (idtypemovieshow) references typemovieshows (idtypemovieshow),
     constraint FK_ROOM foreign key (idroom) references rooms (idroom)
@@ -316,6 +310,7 @@ INSERT INTO typerooms(nametyperoom) VALUES ("Sala Standard"),("Sala Senior"),("S
 
 INSERT INTO usertypes(nameusertype) VALUES ("User"),("Admin");
 
+<<<<<<< HEAD
 INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword) VALUES 
 (2,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG"),
 (1,"Matias Manuel","Fernandez","Cosme Fulatino","matosmdq88@gmail.com","$2y$12$k0NR.RDXshLAI1KytIK2hOkm8mZ.EImEVs22lI3BMgw12hgmLo0be");
@@ -323,6 +318,17 @@ INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword
 insert into cinemas (namecinema, adress, phonenumber, isactivec) values ("Ambassador","Cordoba 1234","2235656598",true),
 																	   ("Gallegos","Catamarca 5441","2234457847",true),
                                                                        ("Aldrey","Sarmiento 2665","242525263",true);
+=======
+USE moviepass;
+INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword, isactiveu) VALUES 
+(2,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG",1),
+(2,"Matias Manuel","Fernandez","Cosme Fulatino","matosmdq88@gmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG",1),
+(2,"Ignacio Gonzalo","Romero","romero","rom.gonzalo88@gmail.com","$2y$12$KV8USIB8NlmqFRH24LGMEenrvbxD.mPD7YMJE7AcZHqBeTB4IZmyG",1);
+
+insert into cinemas (namecinema, adress, phonenumber, isactivec) values ("Ambassador","Cordoba 1234","2235656598",true),
+																	   ("Aldrey","Sarmiento 2665","2234457847",true),
+                                                                       ("Gallegos","Catamarca 5414","242525263",true);
+>>>>>>> origin/Gonzalo
 
 
 insert into rooms (nameroom, capacity, idtyperoom, idcinema, ticketcost, isactiver) values  ("Sala 1",60,1,1,100,true),("Sala 2",50,2,1,110,true),("Sala 3",50,3,1,150,true),("Sala 1",50,3,2,120,true),("Sala 2",65,1,2,105,true),("Sala 3",70,1,2,160,true),("Sala Avengers",100,1,3,120,true),("Sala Universal",80,2,3,140,true),("Sala Dolby Atmos",60,3,3,200,true);
@@ -332,7 +338,10 @@ DELIMITER $$
 CREATE PROCEDURE add_cinema(in namecinema varchar(50), in adress varchar(50), in phonenumber varchar(50), in isactivec boolean)
 comment "agrega un cinema"
 BEGIN
+<<<<<<< HEAD
 	declare id int default 0;
+=======
+>>>>>>> origin/Gonzalo
 	INSERT INTO cinemas (namecinema , adress , phonenumber , isactivec) VALUES (namecinema, adress, phonenumber, isactivec);
 END;
 $$
@@ -343,15 +352,149 @@ CREATE PROCEDURE delete_cinema(in idcine int)
 comment "elimina logicamente un cinema y todas las tablas dependientes"
 BEGIN
 	update cinemas set isactivec=false where idCinema=idcine;
+<<<<<<< HEAD
     call delete_room(idcine);
+=======
+    update movieshows set isactiveMovieShow=false where idCinema=idcine;
+    update rooms set isactiver=false where idCinema=idcine;
+>>>>>>> origin/Gonzalo
 END;
 $$
 
 DROP PROCEDURE IF EXISTS delete_room;
 DELIMITER $$
+<<<<<<< HEAD
 CREATE PROCEDURE delete_room(in idcine int)
 comment "elimina logicamente un cinema y todas las tablas dependientes"
 BEGIN
 	update rooms set isactive=false where idCinema=idcine;
 END;
 $$*/
+=======
+CREATE PROCEDURE delete_room(in idr int)
+comment "elimina logicamente un cinema y todas las tablas dependientes"
+BEGIN
+	update rooms set isactiver=false where idRoom=idr;
+    update movieshows set isactiveMovieShow=false where idRoom=idr;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS delete_movieshow;
+DELIMITER $$
+CREATE PROCEDURE delete_movieshow(in idm int)
+comment "elimina logicamente un movieshow"
+BEGIN
+	update movieshows set isactiveMovieShow=false where idMovieShow=idm;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS get_movieshows_active;
+DELIMITER $$
+CREATE PROCEDURE get_movieshows_active()
+comment "extrae los movieshows activos"
+BEGIN
+	select * 
+    from movieshows as m 
+	JOIN typemovieshows as tm 
+	ON m.idtypemovieshow = tm.idtypemovieshow
+    JOIN movies as mo
+	ON m.idmovie = mo.idmovie 
+    JOIN rooms as r 
+	ON m.idroom = r.idroom 
+    JOIN typerooms as t 
+	ON r.idtyperoom = t.idtyperoom
+    where isactiveMovieShow=true;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS get_movieshows;
+DELIMITER $$
+CREATE PROCEDURE get_movieshows()
+comment "extrae los movieshows"
+BEGIN
+	select * 
+    from movieshows as m 
+	JOIN typemovieshows as tm 
+	ON m.idtypemovieshow = tm.idtypemovieshow
+    JOIN movies as mo
+	ON m.idmovie = mo.idmovie 
+    JOIN rooms as r 
+	ON m.idroom = r.idroom 
+    JOIN typerooms as t 
+	ON r.idtyperoom = t.idtyperoom;
+END;
+$$
+
+
+DROP PROCEDURE IF EXISTS get_cinema_id;
+DELIMITER $$
+CREATE PROCEDURE get_cinema_id(in id int)
+comment "obtiene un cine"
+BEGIN
+	SELECT * FROM cinemas WHERE idcinema=id;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS get_cinemas;
+DELIMITER $$
+CREATE PROCEDURE get_cinemas()
+comment "obtiene todos los cines activos"
+BEGIN
+	SELECT * FROM cinemas WHERE isactivec = true;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS update_cinema;
+DELIMITER $$
+CREATE PROCEDURE update_cinema(in namec varchar(50),in adressc varchar(50),in phonenumberc varchar(50),in isactive boolean, in idc int)
+comment "update de un cine"
+BEGIN
+	UPDATE cinemas SET namecinema = namec, adress = adressc , phonenumber = phonenumberc , isactivec = isactive WHERE idcinema = idc;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS add_genre;
+DELIMITER $$
+CREATE PROCEDURE add_genre(in id int,in nameg varchar(50))
+comment "agrega un genero"
+BEGIN
+	INSERT INTO genres(idgenre, namegenre) VALUES ( id, nameg);
+END;
+$$
+
+DROP PROCEDURE IF EXISTS update_genre;
+DELIMITER $$
+CREATE PROCEDURE update_genre(in id int,in nameg varchar(50))
+comment "update un genero"
+BEGIN
+	UPDATE genres SET namegenre = nameg WHERE idgenre = id ;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS get_genres;
+DELIMITER $$
+CREATE PROCEDURE get_genres()
+comment "get de todos los generos"
+BEGIN
+	SELECT * FROM genres;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS get_movies;
+DELIMITER $$
+CREATE PROCEDURE get_movies()
+comment "get de todas las movies"
+BEGIN
+	SELECT * FROM movies;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS get_movie_id;
+DELIMITER $$
+CREATE PROCEDURE get_movie_id(in id int)
+comment "get de una mopvie por id"
+BEGIN
+	SELECT * FROM movies WHERE idmovie=id;
+END;
+$$
+>>>>>>> origin/Gonzalo

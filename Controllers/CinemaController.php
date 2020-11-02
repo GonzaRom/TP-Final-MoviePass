@@ -2,24 +2,20 @@
 
 namespace Controllers;
 
-use DAO\BillBoardDAOMSQL as BillBoardDAO;
+
 use Models\Cinema as Cinema;
-/*use DAO\CinemaDAO as CinemaDAO;*/
 use DAO\CinemaDAOMSQL as CinemaDAOMQSQL;
 use DAO\RoomDAOMSQL as RoomDAO;
-use Models\BillBoard;
 
 class CinemaController
 {
     private $cinemadao;   /*DAO con el cual vamos a gestionar la informacion persistida momentaneamente en json*/
-    private $roomDAO;  
-    private $billBoardDAO;                              
+    private $roomDAO;                             
 
     public function __construct()
     {
         $this->cinemadao = new CinemaDAOMQSQL();
         $this->roomDAO = new RoomDAO();
-        $this->billBoardDAO = new BillBoardDAO();
     }
 
     /* funcion q llama a la vista de agregado de cinema */
@@ -54,10 +50,7 @@ class CinemaController
             $newcinema->setAdress($adress);
             $newcinema->setPhoneNumber($phonenumber);
             $newcinema->setIsActive(true);
-            $newBillBoard = new BillBoard();
-            $newBillBoard->setIdCinema($newcinema->getId());
             $this->cinemadao->add($newcinema);
-            $this->billBoardDAO->add($newBillBoard);/* pusheamos el nuevo cinema dentro del DAO */
         }
         $this->showAddView($message); //invocamos la vista enviandole como parametro el mensaje correspondiente.
     }
@@ -68,7 +61,7 @@ class CinemaController
         $message = 2; //variable q se va a usar como retorno para informar exito o no
         $cinema = $this->cinemadao->get($nameCinema);//elimina el objeto Cinema , y devuelte true si se encontro el cinema y false , si no lo encontro.
         if (!empty($cinema)) {
-            $cinema->setIsActive(false);
+            //$cinema->setIsActive(false);
             $this->cinemadao->delete($cinema);
             
             $message = 1;

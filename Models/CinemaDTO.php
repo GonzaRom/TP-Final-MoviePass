@@ -8,9 +8,10 @@
         private $phonenumber;
         private $rooms;
         private $active;
-        private  $billBoard;        
-        public function __construct(){
+        private $billBoard;   
 
+        public function __construct(){
+            
         }
 
         public function getId()
