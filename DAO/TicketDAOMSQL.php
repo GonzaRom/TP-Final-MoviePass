@@ -12,7 +12,7 @@
 
         
         public function add(Ticket $ticket){
-            var_dump($ticket);
+            
             try{
                 
                 $sql = "INSERT INTO ". $this->tablename. " (idmovieshow , idpurchase , iduser , ticketcost , idseat)

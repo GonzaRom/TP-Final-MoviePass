@@ -21,7 +21,7 @@
                 </form>
             </div>
             <?php foreach ($cinemas as $cinema) : ?>
-                <?php $movieShows = $cinema->getBillBoard()->getMovieShows(); ?>
+                <?php $movieShows = $cinema->getBillBoard(); ?>
                 <?php for ($j = 0; $j < count($movieShows); $j++) :
 
                     $movie = $movieShows[$j]->getMovie();
@@ -31,14 +31,7 @@
                 ?>
                     <form action="<?php echo FRONT_ROOT ?>Ticket/showAddTicketView" method="GET">
 
-<<<<<<< HEAD
                         <div class="card mb-3" style="width:1250px;" id="movieShows">
-=======
-                <div class="card mb-3" style="width:1250px;" id="movieShows">
-                    <?php foreach ($cinemas as $cinema) : ?>
-                        <?php $movieShows = $cinema->getBillBoard(); ?>
-                        <?php for ($j = 0; $j < count($movieShows); $j++) :
->>>>>>> origin/Gonzalo
 
                             <div class="content-none" style="display: none;">
                                 <input type="text" name="cinema" value="<?php echo $cinema->getId(); ?>">

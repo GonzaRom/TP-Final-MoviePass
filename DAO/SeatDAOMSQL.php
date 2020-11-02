@@ -67,7 +67,6 @@ class SeatDAOMSQL implements ISeatDAO{
             $resul = $this->conecction->Execute($sql ,$parameters);
             foreach($resul as $row){
                 $seat= new SeatDTO();
-                var_dump($row);
                 $seat->setId($row['idseat']);
                 $seat->setNumSeat($row['numseat']);
                 $seat->setMovieShow($row['idmovieshow']);

@@ -1,4 +1,4 @@
-drop database moviepass;
+/*drop database moviepass;
 CREATE database moviepass;
 
 use moviepass;
@@ -160,8 +160,8 @@ insert into cinemas (namecinema, adress, phonenumber, isactive) values ("Ambassa
 
 insert into billboards (idcinema, isactive) values (1,true),(2,true),(3,true);
 
-insert into rooms (nameroom, capacity, idtyperoom, idcinema, ticketcost, isactive) values  ("Sala 1",60,1,1,100,true),("Sala 2",50,2,1,110,true),("Sala 3",50,3,1,150,true),("Sala 1",50,3,2,120,true),("Sala 2",65,1,2,105,true),("Sala 3",70,1,2,160,true),("Sala Avengers",100,1,3,120,true),("Sala Universal",80,2,3,140,true),("Sala Dolby Atmos",60,3,3,200,true);
-/*drop database moviepass;
+insert into rooms (nameroom, capacity, idtyperoom, idcinema, ticketcost, isactive) values  ("Sala 1",60,1,1,100,true),("Sala 2",50,2,1,110,true),("Sala 3",50,3,1,150,true),("Sala 1",50,3,2,120,true),("Sala 2",65,1,2,105,true),("Sala 3",70,1,2,160,true),("Sala Avengers",100,1,3,120,true),("Sala Universal",80,2,3,140,true),("Sala Dolby Atmos",60,3,3,200,true);*/
+drop database moviepass;
 CREATE database moviepass;
 
 use moviepass;
@@ -274,24 +274,10 @@ CREATE TABLE movieshows(
 
 CREATE TABLE seats(
 	idseat int not null auto_increment,
-	occupied boolean,
 	idmovieshow int not null,
+    numseat int not null,
     constraint PK_SEAT primary key (idseat),
     constraint FK_MOVIESHOW foreign key (idmovieshow) references movieshows (idmovieshow)
-)ENGINE=InnoDB;
-
-CREATE TABLE tickets(
-	idticket int not null auto_increment,
-	idseat int not null,
-    idmovieshow int not null,
-    iduser int not null,
-    discount int,
-	ticketcost float,
-    isactivet boolean,
-    constraint PK_TICKET primary key (idticket),
-    constraint FK_SEAT foreign key (idseat) references seats(idseat),
-    constraint FK_MOVIESH foreign key (idmovieshow) references movieshows(idmovieshow),
-    constraint FK_USER foreign key (iduser) references users(iduser)
 )ENGINE=InnoDB;
 
 CREATE TABLE purchase(
@@ -299,8 +285,23 @@ CREATE TABLE purchase(
     iduser int not null,
     cost int not null,
     date_ date,
+    time_ time,
     constraint PK_PURCHASE primary key (idpurchase),
     constraint FK_IDUSER foreign key (iduser) references users (iduser)
+)ENGINE=InnoDB;
+
+CREATE TABLE tickets(
+	idticket int not null auto_increment,
+	idseat int not null,
+    idmovieshow int not null,
+    iduser int not null,
+    idpurchase int not null,
+	ticketcost int,
+    constraint PK_TICKET primary key (idticket),
+    constraint FK_SEAT foreign key (idseat) references seats(idseat),
+    constraint FK_MOVIESH foreign key (idmovieshow) references movieshows(idmovieshow),
+    constraint FK_USER foreign key (iduser) references users(iduser),
+    constraint FK_PURCHASE foreign key (idpurchase) references purchase(idpurchase)
 )ENGINE=InnoDB;
 
 
@@ -310,16 +311,7 @@ INSERT INTO typerooms(nametyperoom) VALUES ("Sala Standard"),("Sala Senior"),("S
 
 INSERT INTO usertypes(nameusertype) VALUES ("User"),("Admin");
 
-<<<<<<< HEAD
-INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword) VALUES 
-(2,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG"),
-(1,"Matias Manuel","Fernandez","Cosme Fulatino","matosmdq88@gmail.com","$2y$12$k0NR.RDXshLAI1KytIK2hOkm8mZ.EImEVs22lI3BMgw12hgmLo0be");
 
-insert into cinemas (namecinema, adress, phonenumber, isactivec) values ("Ambassador","Cordoba 1234","2235656598",true),
-																	   ("Gallegos","Catamarca 5441","2234457847",true),
-                                                                       ("Aldrey","Sarmiento 2665","242525263",true);
-=======
-USE moviepass;
 INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword, isactiveu) VALUES 
 (2,"Isaias Emanuel","Calfin","Soler","isaiasemanuelcalfin@hotmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG",1),
 (2,"Matias Manuel","Fernandez","Cosme Fulatino","matosmdq88@gmail.com","$2y$12$yVfORaTBb29gRFhXUjv\/OeBGq49.2OK3o\/cQycxkxlqE3cDrEBwqG",1),
@@ -328,20 +320,16 @@ INSERT INTO users(idusertype, firstname, lastname, username, email, userpassword
 insert into cinemas (namecinema, adress, phonenumber, isactivec) values ("Ambassador","Cordoba 1234","2235656598",true),
 																	   ("Aldrey","Sarmiento 2665","2234457847",true),
                                                                        ("Gallegos","Catamarca 5414","242525263",true);
->>>>>>> origin/Gonzalo
 
 
 insert into rooms (nameroom, capacity, idtyperoom, idcinema, ticketcost, isactiver) values  ("Sala 1",60,1,1,100,true),("Sala 2",50,2,1,110,true),("Sala 3",50,3,1,150,true),("Sala 1",50,3,2,120,true),("Sala 2",65,1,2,105,true),("Sala 3",70,1,2,160,true),("Sala Avengers",100,1,3,120,true),("Sala Universal",80,2,3,140,true),("Sala Dolby Atmos",60,3,3,200,true);
+
 
 DROP PROCEDURE IF EXISTS add_cinema;
 DELIMITER $$
 CREATE PROCEDURE add_cinema(in namecinema varchar(50), in adress varchar(50), in phonenumber varchar(50), in isactivec boolean)
 comment "agrega un cinema"
 BEGIN
-<<<<<<< HEAD
-	declare id int default 0;
-=======
->>>>>>> origin/Gonzalo
 	INSERT INTO cinemas (namecinema , adress , phonenumber , isactivec) VALUES (namecinema, adress, phonenumber, isactivec);
 END;
 $$
@@ -352,25 +340,13 @@ CREATE PROCEDURE delete_cinema(in idcine int)
 comment "elimina logicamente un cinema y todas las tablas dependientes"
 BEGIN
 	update cinemas set isactivec=false where idCinema=idcine;
-<<<<<<< HEAD
-    call delete_room(idcine);
-=======
     update movieshows set isactiveMovieShow=false where idCinema=idcine;
     update rooms set isactiver=false where idCinema=idcine;
->>>>>>> origin/Gonzalo
 END;
 $$
 
 DROP PROCEDURE IF EXISTS delete_room;
 DELIMITER $$
-<<<<<<< HEAD
-CREATE PROCEDURE delete_room(in idcine int)
-comment "elimina logicamente un cinema y todas las tablas dependientes"
-BEGIN
-	update rooms set isactive=false where idCinema=idcine;
-END;
-$$*/
-=======
 CREATE PROCEDURE delete_room(in idr int)
 comment "elimina logicamente un cinema y todas las tablas dependientes"
 BEGIN
@@ -387,6 +363,8 @@ BEGIN
 	update movieshows set isactiveMovieShow=false where idMovieShow=idm;
 END;
 $$
+
+
 
 DROP PROCEDURE IF EXISTS get_movieshows_active;
 DELIMITER $$
@@ -497,4 +475,3 @@ BEGIN
 	SELECT * FROM movies WHERE idmovie=id;
 END;
 $$
->>>>>>> origin/Gonzalo
