@@ -25,7 +25,6 @@ class RoomController
     public function showAddView($message = "")
     {/* se encarga de las vistas para agregar una nueva room*/
         $listcinema = $this->cinemaDao->getAll();
-        print_r($listcinema);
         $listTypeRoom = $this->typeroomDao->getAll();
         require_once(VIEWS_PATH . "add-Room.php");
     }

@@ -23,7 +23,7 @@
 
         public function add(Genre $newgenre){
             try{
-                $query= "INSERT INTO ".$this->tableName. "(idgenre, namegenre) VALUES ( :id, :name);";
+                $query= "call add_genre( :id, :name);";
             
                 $parameters['id'] = $newgenre->getId();
                 $parameters["name"] = $newgenre->getName();
@@ -40,7 +40,7 @@
 
         public function update(Genre $genre){
             try{
-                $query= "UPDATE ".$this->tableName. " SET namegenre = :name WHERE idgenre = :id ;";
+                $query= "call update_genre(:id, :name);";
                 $parameters['id'] = $genre->getId();
                 $parameters["name"] = $genre->getName();
                
@@ -60,7 +60,7 @@
             {
                 $genrelist = array();
 
-                $query = "SELECT * FROM ".$this->tableName;
+                $query = "call get_genres();";
 
                 $this->connection = Connection::getInstance();
 
