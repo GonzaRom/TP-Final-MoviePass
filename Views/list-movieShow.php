@@ -7,7 +7,7 @@
     <?php require_once("nav.php"); ?>
     <div class="rgba-content-listMovieShow">
             <?php foreach ($cinemas as $cinema) : ?>
-            <?php $movieShows = $cinema->getBillBoard()->getMovieShows(); ?>
+            <?php $movieShows = $cinema->getBillBoard(); ?>
             <?php foreach ($movieShows as $movieShow) : ?>
             <div class="infoMovieShow">
                 <div class="infoLocation">
@@ -37,7 +37,7 @@
                     <ul> <?php $listSeat = $movieShow->getSeats();
                             foreach ($listSeat as $seat) :
                             ?>
-                            <li> <?php if ($seat->getOccupied() == false) : ?>
+                            <li> <?php if ($seat->getMovieShow() == null) : ?>
                                     <i class="fas fa-chair" style="color:#aaa;">( <?php echo $seat->getNumSeat(); ?>)</i>
                                 <?php else : ?>
                                     <i class="fas fa-chair" style="color:red;">( <?php echo $seat->getNumSeat(); ?>)</i>
