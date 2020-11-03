@@ -84,4 +84,31 @@ class PurchaseDAOMSQL implements IPurchaseDAO
         }
         return $purchase;
     }
+
+    public function getAll()
+    {
+        $purchase = null;
+        try {
+            $sql = "SELECT * FROM " . $this->nameTable . " as p INNER JOIN tickets as t ON p.idpurchase = t.idpurchase";
+            $this->coneccion = Connection::getInstance();
+
+            $result = $this->coneccion->Execute($sql);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+
+        if (!empty($result)) {
+            foreach ($result as $purchase) {
+                $newPurchase = new Purchase();
+                $newPurchase->setId($purchase['idpurchase']);
+                $newPurchase->setCosto($purchase['cost']);
+                $newPurchase->setDate($purchase['date_']);
+                $newPurchase->setTime($purchase['time_']);
+                $newPurchase->setIdUser($purchase['iduser']);
+
+                $purchase =  $newPurchase;
+            }
+        }
+        return $purchase;
+    }
 }

@@ -87,6 +87,41 @@
             }
         }
 
+        public function getById($id)
+        {
+            try
+            {
+                $user = null;
+
+                $query = "SELECT * FROM ".$this->tableName . " WHERE iduser = :id";
+
+                $parameters["id"]=$id;
+
+                $this->connection = Connection::getInstance();
+                
+                $resultSet = $this->connection->execute($query,$parameters);
+                            
+                foreach ($resultSet as $row)
+                {                
+                    $user = new User();
+                    $user->setId($row['iduser']);
+                    $user->setFirstname($row['firstname']);
+                    $user->setLastname($row['lastname']);
+                    $user->setUserName($row['username']);
+                    $user->setEmail($row['email']);                
+                    $user->setUsertype($this->getUserType($row['idusertype']));
+                    $user->setPassword($row['userpassword']);
+                        
+                }
+
+                return $user;
+                }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
         //FUNCION Q GENERA EL TYPO DE USUARIO
         public function getUserType($id){
             try{
