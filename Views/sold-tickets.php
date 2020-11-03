@@ -29,7 +29,7 @@
                                     <td><?php echo $listTickets[$i]->getMovieshow()->getRoom()->getName(); ?></td>
                                     <td><?php echo $listTickets[$i]->getMovieshow()->getDate(); ?></td>
                                     <td><?php echo $listTickets[$i]->getMovieshow()->getTime(); ?></td>
-                                    <td><?php echo $listTickets[$i]->getSeat(); ?></td>
+                                    <td><?php echo $listTickets[$i]->getSeat()->getNumSeat(); ?></td>
                                     <td><?php echo $listTickets[$i]->getTicketCost(); ?></td>
                                     <td><i style="color: red; font-size:25px;" class="fas fa-times"></i></td>
                                 </tr>

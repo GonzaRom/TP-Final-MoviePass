@@ -10,19 +10,19 @@
             <form action="<?php echo FRONT_ROOT . "MovieShow/add"; ?>" method="GET">
                 <h2>Agregar Funcion</h2>
                 <label for="movie">Pelicula:
-                    <select class="form-control form-control-lg" name="movie" id="movie">
+                    <select class="form-control form-control-lg" name="movie" id="movie" required="true">
                         <option value="">Seleccione una pelicula</option>
                         <?php foreach ($listMovies as $movies) : ?>
-                            <option value="<?php echo $movies->getId(); ?>"><?php echo $movies->getName(); ?></option>
+                            <option value="<?php echo $movies->getId(); ?> "><?php echo $movies->getName(); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </label>
 
                 <label for="">Cine:
-                    <select class="form-control form-control-lg" name="billBoard" id="" onclick="selectCines(this.value);">
+                    <select class="form-control form-control-lg" name="billBoard" id="" onclick="selectCines(this.value);" required="true">
                         <option value="">Seleccione un cine</option>
                         <?php foreach ($listCinema as $cinema) : ?>
-                            <option value="<?php echo $cinema->getId(); ?>"><?php echo $cinema->getName(); ?></option>
+                            <option value="<?php echo $cinema->getId(); ?>" required="true"><?php echo $cinema->getName(); ?></option>
                         <?php endforeach; ?>
                     </select>
                     </select>
@@ -38,7 +38,7 @@
                     <div class="div-checkbox">
                         <?php foreach ($listTypeMovieShow as $typeMovieShow) : ?>
                             <div class="input-checkbox">
-                                <input type="radio" class="radio" name="typeMovieShow" id="typeMovieShow" value="<?php echo $typeMovieShow->getId(); ?>"><?php echo $typeMovieShow->getName(); ?>
+                                <input type="radio" class="radio" name="typeMovieShow" id="typeMovieShow" value="<?php echo $typeMovieShow->getId(); ?>" required="true"><?php echo $typeMovieShow->getName(); ?>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -49,11 +49,11 @@
                 <label for="">
                     <div class="inputDateTime">
                         <div class="input-date">
-                            Fecha<input class="form-control" type="date" name="date" id="">
+                            Fecha<input class="form-control" type="date" name="date" id="" required="true">
                         </div>
 
                         <div class="input-time">
-                            Hora<input class="form-control" type="time" name="time" id="">
+                            Hora<input class="form-control" type="time" name="time" id="" required="true">
                         </div>
 
                     </div>

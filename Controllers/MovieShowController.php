@@ -43,7 +43,7 @@ class MovieShowController
     {
         if (isset($_GET['cinema'])) {
             $listRoom = $this->roomDAO->getByCinema($_GET['cinema']);
-            echo 'Sala:<select name="room" id="">';
+            echo 'Sala:<select name="room" id="" required="true">';
             echo '<option value="">Seleccione una sala</option> ';
             foreach ($listRoom as $room) {
                 echo '<option value="' . $room->getId() . '">' . $room->getName()  . '</option> ';

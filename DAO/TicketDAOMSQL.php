@@ -15,13 +15,29 @@
             
             try{
                 
-                $sql = "INSERT INTO ". $this->tablename. " (idmovieshow , idpurchase , iduser , ticketcost , idseat)
-                        VALUES (:idmovieshow , :idpurchase , :iduser , :cost , :seat)";
+                $sql = "INSERT INTO ". $this->tablename. " (idmovieshow , idpurchase , iduser , ticketcost , idseat, qrcode)
+                        VALUES (:idmovieshow , :idpurchase , :iduser , :cost , :seat, :qrcode)";
                 $parameters['idmovieshow']=$ticket->getMovieShow()->getId();
                 $parameters['idpurchase']=$ticket->getPurchase();
                 $parameters['iduser']=$ticket->getUser();
                 $parameters['cost'] = $ticket->getTicketCost();
                 $parameters['seat'] = $ticket->getSeat()->getId();
+                $parameters['qrcode'] = $ticket->getQrcode();
+
+                $this->conection= Connection::getInstance();
+                $this->conection->ExecuteNonQuery($sql,$parameters);
+            }
+            catch(Exception $ex){
+                throw $ex;
+            }
+        }
+
+        public function setQr(){
+            try{
+                
+                $sql = "call update_qr(:idticket, :qrcode)";
+                $parameters['idticket']=$ticket->getid();
+                $parameters['qrcode'] = $ticket->getQrcode();
 
                 $this->conection= Connection::getInstance();
                 $this->conection->ExecuteNonQuery($sql,$parameters);
