@@ -7,6 +7,7 @@ use DAO\MovieShowDAOMSQL;
 use DAO\PurchaseDAOMSQL;
 use DAO\SeatDAOMSQL;
 use DAO\TicketDAOMSQL;
+use DAO\UserDAOMSQL;
 use Models\Purchase;
 use Models\Seat;
 use Models\Ticket;
@@ -18,6 +19,7 @@ class PurchaseController
     private $movieShowDAOMSQL;
     private $seatDAOMSQL;
     private $ticketDAOMSQL;
+    private $userDAOMSQL;
     public function __construct()
     {
         $this->purchaseDAOMSQL = new PurchaseDAOMSQL;
@@ -25,6 +27,7 @@ class PurchaseController
         $this->movieShowDAOMSQL = new MovieShowDAOMSQL;
         $this->seatDAOMSQL = new SeatDAOMSQL;
         $this->ticketDAOMSQL = new TicketDAOMSQL;
+        $this->userDAOMSQL = new UserDAOMSQL;
     }
 
 
@@ -35,8 +38,14 @@ class PurchaseController
 
     public function showAddPurchase()
     {
-        $purchase = $_SESSION['purchase'];
-        $listTickets = $purchase->getTickets();
+        $purchase = null;
+        $listTickets = null;
+        if(isset($_SESSION['purchase'])){
+           $purchase =  $_SESSION['purchase'];
+           $listTickets = $purchase->getTickets();
+        }
+        
+        
         
         require_once (VIEWS_PATH."sold-tickets.php");
 
@@ -113,8 +122,154 @@ class PurchaseController
             $ticket->setSeat($this->seatDAOMSQL->getSeat($ticket->getMovieShow()->getId() , $ticket->getSeat()));
             $ticket->setPurchase($purchase->getId());
             $this->ticketDAOMSQL->add($ticket);
+            $this->mailTickets($ticket);
         }
+        $purchase = null;
+        $_SESSION['purchase'] = null;
+        $listTickets = null;
+
 
         require_once (VIEWS_PATH."sold-tickets.php");
+    }
+
+
+    private function mailTickets($ticket){
+
+        $user = $this->userDAOMSQL->getById($_SESSION['loggedUser']);
+
+        $email = $user->getEmail();
+
+        $para      = $email;
+        $titulo    = 'Ticket comprado';
+        $mensaje   = '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Ticket</title>
+            <style>
+                *{
+                    padding: 0;
+                    margin: 0;
+                    box-sizing: border-box;
+                }
+                .content{
+                    width:1000px;
+                }
+                .caja{
+                    width: 100%;
+                    height: 300px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+        
+                .caja img{
+                    width: 100px;
+                }
+        
+                .caja table{
+                    width: 100%;
+                    height: 100%;
+                }
+                .caja table tbody{
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    flex-flow: column;
+                    background: #ccc;
+                }
+        
+                tr{
+                    width:100%;
+                    display: flex;
+                    align-items: center;
+                    border-bottom: 2px solid #000;
+        
+                }
+        
+                td{
+                   text-align: center;
+                   width: 200px;
+                   font-size:30px;
+        
+                }
+                h2{
+                    width:  100%;
+                    text-align: center;
+                    font-size: 40px;
+                    background: brown;
+                    color: #fff;
+                    padding: 5px;
+                }
+        
+                h1{
+                    width: 100%;
+                    color: #fff;
+                    background: #333;
+                }
+                span{
+                    color: brown;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="content">
+                <h1>Multi<span>Flex</span></h1>
+                <div class="caja">
+                <img src="'. $ticket->getMovieshow()->getMovie()->getPoster() .'" alt="">
+                <table>
+                    
+                    <tbody>
+                        <tr>
+                            <td>Pelicula</td>
+                            <td>'. $ticket->getMovieshow()->getMovie()->getName() .'</td>
+                        </tr>
+        
+                        <tr>
+                            <td>Cinema</td>
+                            <td>Ambasador</td>
+                        </tr>
+        
+                        <tr>
+                            <td>Sala</td>
+        
+                            <td>'.$ticket->getMovieshow()->getRoom()->getName() .'</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha</td>
+        
+                            <td>'.$ticket->getMovieshow()->getDate() .'</td>
+                        </tr>
+                        <tr>
+                            <td>Hora</td>
+        
+                            <td>'. $ticket->getMovieshow()->getTime() .'</td>
+                        </tr>
+                        <tr>
+                            <td>Asiento</td>
+        
+                            <td>'. $ticket->getSeat()->getNumSeat()  .'</td>
+                        </tr>
+                        <tr>
+                        <td>Costo</td>
+    
+                        <td>'. $ticket->getTicketCost()  .'</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2>Presente el codigo QR para retirar la entrada</h2>
+            </div>
+        </body>
+        </html>';
+        $cabeceras = 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $cabeceras .= 'From: ' .$email. "\r\n" .
+            'Reply-To:'. $email .'"\r\n" '.
+            'X-Mailer: PHP/' . phpversion();
+        
+        mail($para,$titulo,$mensaje,$cabeceras);
     }
 }

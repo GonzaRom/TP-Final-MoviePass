@@ -131,12 +131,12 @@ class MovieShowController
         if (isset($_GET['billboard'])) {
             if ($_GET['billboard'] != 0) {
                 $cinema = $this->cinemaDAO->get($_GET['billboard']);
-                $cinema->setBillBoard()($this->movieShowDAO->getMovieShowBycinema($cinema->getId()));
+                $cinema->setBillBoard($this->movieShowDAO->getMovieShowBycinema($cinema->getId()));
                 array_push($cinemas, $cinema);
             } else {
                 $cinemas = $this->cinemaDAO->getAll();
                 foreach ($cinemas as $cinema) {
-                    $cinema->setBillBoard()($this->movieShowDAO->getMovieShowBycinema($cinema->getId()));
+                    $cinema->setBillBoard($this->movieShowDAO->getMovieShowBycinema($cinema->getId()));
                 }
             }
             foreach ($cinemas as $cinema) {
@@ -168,7 +168,7 @@ class MovieShowController
         if (isset($_GET['date'])) {
             $cinemas = $this->cinemaDAO->getAll();
             foreach ($cinemas as $cinema) {
-                $cinema->setBillBoard()($this->movieShowDAO->getMovieShowByMovieDate($cinema->getId(), $_GET['date']));
+                $cinema->setBillBoard($this->movieShowDAO->getMovieShowByMovieDate($cinema->getId(), $_GET['date']));
             }
         }
         $this->getAll($cinemas);

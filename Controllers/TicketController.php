@@ -24,7 +24,7 @@ class TicketController{
         $cinema = $this->cinemaDAOMSQL->get($idcinema);
         $movieshow = $this->movieShowDAOMSQL->get($idMovieshow);
         $movieshow->setSeats($this->seatDAOMSQL->getSeats($idMovieshow , $movieshow->getRoom()->getCapacity()));
-        $cinema->getBillBoard()->setMovieShows($movieshow);
+        $cinema->setBillBoard($movieshow);
         require_once(VIEWS_PATH."add-purchase.php");
     }
 

@@ -138,7 +138,6 @@ class MovieShowDAOMSQL implements IMovieShowDAO
 
         if (!empty($result)) {
             foreach ($result as $movieShow) {
-
                 $newMovieShow = $this->creatMovieShow($movieShow);
             }
         }

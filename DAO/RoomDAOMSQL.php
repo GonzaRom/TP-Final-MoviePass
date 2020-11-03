@@ -127,7 +127,7 @@ class RoomDAOMSQL implements IRoomDAO
     {
         try{
 
-            $sql = "UPDATE ".$this->nameTable . " SET isactive = :isactive  WHERE idroom = :idroom";
+            $sql = "UPDATE ".$this->nameTable . " SET isactiver = :isactive  WHERE idroom = :idroom";
             $parameters['idroom'] = $id;
             $parameters['isactive'] = false;
 
@@ -171,7 +171,7 @@ class RoomDAOMSQL implements IRoomDAO
     {
         try{
 
-            $sql = "UPDATE ".$this->nameTable . " SET isactive = :isactive  WHERE idroom = :idroom";
+            $sql = "UPDATE ".$this->nameTable . " SET isactiver = :isactive  WHERE idroom = :idroom";
             $parameters['idroom'] = $id;
             $parameters['isactive'] = true;
 
@@ -215,8 +215,8 @@ class RoomDAOMSQL implements IRoomDAO
             $id = $lastRoom->getId();
             
         }
-        echo "llego";
-        $id++;
+
+        $id = $id + 1;
 
         $name = "Sala ".$id; 
     return $name;
