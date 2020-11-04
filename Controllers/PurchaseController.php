@@ -54,7 +54,8 @@ class PurchaseController
     }
 
     public function createTickets($idMovieshow, $seats)
-    {
+    {   if(empty($seats)) $this->confirm("No puede realizar una compra sin eleguir un asiento!");
+        
         if(!isset($_SESSION['purchase'])){
             $this->newPurchase($idMovieshow,$seats);
         }
