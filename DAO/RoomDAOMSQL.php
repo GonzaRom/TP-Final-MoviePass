@@ -170,9 +170,8 @@ class RoomDAOMSQL implements IRoomDAO
     {
         try{
 
-            $sql = "UPDATE ".$this->nameTable . " SET isactiver = :isactive  WHERE idroom = :idroom";
+            $sql = "call up_room(:idroom)";
             $parameters['idroom'] = $id;
-            $parameters['isactive'] = true;
 
             $this->conection = Connection::getInstance();
             $this->conection->ExecuteNonQuery($sql , $parameters);
