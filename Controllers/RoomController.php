@@ -7,6 +7,7 @@ use Models\Room as Room;
 use Models\RoomDTO as RoomDTO;
 use DAO\CinemaDAOMSQL as CinemaDAO;
 use DAO\TypeRoomDAOMSQL as TypeRoomDAO;
+use Helpers\IsAuthorize as IsAuthorize;
 
 class RoomController
 {
@@ -24,9 +25,11 @@ class RoomController
     /* se le proporcionara una lista de cinemas , para utilizar en un select, de esta manera la carga de salas dependera de que un cine exista en la bdd o json*/
     public function showAddView($message = "")
     {/* se encarga de las vistas para agregar una nueva room*/
-        $listcinema = $this->cinemaDao->getAll();
-        $listTypeRoom = $this->typeroomDao->getAll();
-        require_once(VIEWS_PATH . "add-Room.php");
+        if(IsAuthorize::isauthorize()){
+            $listcinema = $this->cinemaDao->getAll();
+            $listTypeRoom = $this->typeroomDao->getAll();
+            require_once(VIEWS_PATH . "add-Room.php");
+        }
     }
     /* se le proporcionara una lista de objetos rooms con objetos cinema ya cargado en su atributo correspondiente */
     public function showListView($message = "")
@@ -43,18 +46,20 @@ class RoomController
 
     public function addRooms($cinema = 0, $typeroom = 0, $capacity = 0, $ticketCost = 0)
     {
-        if ($cinema == 0 || $typeroom == 0 || $capacity == 0 || $ticketCost == 0) {
-            $this->showAddView();
-        } else {
-            $newRoom = new Room();
-            $newRoom->setCinema($cinema);
-            $newRoom->setTypeRoom($typeroom);
-            $newRoom->setCapacity($capacity);
-            $newRoom->setTicketCost($ticketCost);
-            $newRoom->setIsActive(true);
-            $this->roomDao->add($newRoom);
+        if(IsAuthorize::isauthorize()){
+            if ($cinema == 0 || $typeroom == 0 || $capacity == 0 || $ticketCost == 0) {
+                $this->showAddView();
+            } else {
+                $newRoom = new Room();
+                $newRoom->setCinema($cinema);
+                $newRoom->setTypeRoom($typeroom);
+                $newRoom->setCapacity($capacity);
+                $newRoom->setTicketCost($ticketCost);
+                $newRoom->setIsActive(true);
+                $this->roomDao->add($newRoom);
 
-            $this->showAddView(1);
+                $this->showAddView(1);
+            }
         }
     }
 
@@ -78,33 +83,41 @@ class RoomController
 
     public function delete($id)
     {
-        $this->roomDao->delete($id);
-        $this->showListView(2);
+        if(IsAuthorize::isauthorize()){
+            $this->roomDao->delete($id);
+            $this->showListView(2);
+        }
     }
 
     public function upRoom($id)
     {
-        $this->roomDao->upRoom($id);
-        $this->showListView(3);
+        if(IsAuthorize::isauthorize()){
+            $this->roomDao->upRoom($id);
+            $this->showListView(3);
+        }
     }
 
     public function showUpdateView($id)
     {
-        $room = $this->roomDao->get($id);
-        $listTypeRoom = $this->typeroomDao->getAll();
-        require_once(VIEWS_PATH . 'update-room.php');
+        if(IsAuthorize::isauthorize()){
+            $room = $this->roomDao->get($id);
+            $listTypeRoom = $this->typeroomDao->getAll();
+            require_once(VIEWS_PATH . 'update-room.php');
+        }
     }
 
     public function updateRoom($id, $typeroom, $capacity, $ticketCost)
     {
-        $newRoom = new RoomDTO();
-        $newRoom->setId($id);
-        $newRoom->setTypeRoom($typeroom);
-        $newRoom->setCapacity($capacity);
-        $newRoom->setTicketCost($ticketCost);
+        if(IsAuthorize::isauthorize()){
+            $newRoom = new RoomDTO();
+            $newRoom->setId($id);
+            $newRoom->setTypeRoom($typeroom);
+            $newRoom->setCapacity($capacity);
+            $newRoom->setTicketCost($ticketCost);
 
-        $this->roomDao->update($newRoom);
+            $this->roomDao->update($newRoom);
 
-        $this->showListView(1);
+            $this->showListView(1);
+        }
     }
 }

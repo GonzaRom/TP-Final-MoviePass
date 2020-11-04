@@ -9,6 +9,7 @@ use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\SeatDAOMSQL as SeatDAO;
 use Models\MovieShow as MovieShow;
 use DAO\MovieDAOMSQL as MovieDAOMSQL;
+use Helpers\IsAuthorize as IsAuthorize; 
 use Helpers\helper_rating;
 
 class MovieShowController
@@ -33,6 +34,7 @@ class MovieShowController
 
     public function showAddMovieShowView($message = "")
     {
+        require_once(VIEWS_PATH."validated-usertype.php");
         $listMovies = $this->movieDAOMSQL->getAll();
         $listCinema = $this->cinemaDAO->getAll();
 
@@ -53,30 +55,32 @@ class MovieShowController
         }
     }
     public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)
-    {
-        if ($this->isMovieSetted($movie, $date)) $this->showAddMovieShowView(4);
+    {   
+        if(IsAuthorize::isauthorize()){
+            if ($this->isMovieSetted($movie, $date)) $this->showAddMovieShowView(4);
 
-        else {
-            $this->movieDAOMSQL->upMovie($movie);
-            $today = date('Y-m-d');
-            $newMovieShow = new MovieShow();
-            $exist = false;
-            if ($today <  $date) {
-                if (!$exist) {
-                    $newMovieShow->setMovie($movie);
-                    $newMovieShow->setCinema($cinema);
-                    $newMovieShow->setRoom($room);
-                    $newMovieShow->setTypeMovieShow($typeMovieShow);
-                    $newMovieShow->setDate($date);
-                    $newMovieShow->setTime($time);
-                    $newMovieShow->setIsActive(true);
-                    $this->movieShowDAO->add($newMovieShow);
-                    $this->showAddMovieShowView();
-                } else {
-                    $this->showAddMovieShowView(2);
+            else {
+                $this->movieDAOMSQL->upMovie($movie);
+                $today = date('Y-m-d');
+                $newMovieShow = new MovieShow();
+                $exist = false;
+                if ($today <  $date) {
+                    if (!$exist) {
+                        $newMovieShow->setMovie($movie);
+                        $newMovieShow->setCinema($cinema);
+                        $newMovieShow->setRoom($room);
+                        $newMovieShow->setTypeMovieShow($typeMovieShow);
+                        $newMovieShow->setDate($date);
+                        $newMovieShow->setTime($time);
+                        $newMovieShow->setIsActive(true);
+                        $this->movieShowDAO->add($newMovieShow);
+                        $this->showAddMovieShowView();
+                    } else {
+                        $this->showAddMovieShowView(2);
+                    }
                 }
-            }
-        }
+            }   
+        }    
         //FECHA ANTERIOR A HOY
         $this->showAddMovieShowView(2);
     }
@@ -96,15 +100,16 @@ class MovieShowController
 
     public function showListMovieShowView()
     {
-        $cinemas = $this->cinemaDAO->getAll();
-        foreach ($cinemas as $cinema) {
-            $movieShows = $this->movieShowDAO->getMovieShowBycinema($cinema->getId());
-            foreach ($movieShows as $movieShow) {
-                $movieShow->setSeats($this->seatDAO->getSeats($movieShow->getId(), $movieShow->getRoom()->getCapacity()));
+        if(IsAuthorize::isauthorize()){
+            $cinemas = $this->cinemaDAO->getAll();
+            foreach ($cinemas as $cinema) {
+                $movieShows = $this->movieShowDAO->getMovieShowBycinema($cinema->getId());
+                foreach ($movieShows as $movieShow) {
+                    $movieShow->setSeats($this->seatDAO->getSeats($movieShow->getId(), $movieShow->getRoom()->getCapacity()));
+                }
+                $cinema->setBillboard($movieShows);
             }
-            $cinema->setBillboard($movieShows);
         }
-
 
         require_once(VIEWS_PATH . "list-movieShow.php");
     }
@@ -176,12 +181,14 @@ class MovieShowController
 
     public function isMovieSetted($idMovie, $date)
     {
-        $movieShows = array();
-        $cinemas = $this->cinemaDAO->getAll();
-        foreach ($cinemas as $cinema) {
-            $movieShow = $this->movieShowDAO->getMovieShowByMovieDateCinema($idMovie, $date, $cinema->getId());
-            if (!empty($movieShow)) return true;
+        if(IsAuthorize::isauthorize()){
+            $movieShows = array();
+            $cinemas = $this->cinemaDAO->getAll();
+            foreach ($cinemas as $cinema) {
+                $movieShow = $this->movieShowDAO->getMovieShowByMovieDateCinema($idMovie, $date, $cinema->getId());
+                if (!empty($movieShow)) return true;
+            }
+            return false;
         }
-        return false;
     }
 }
