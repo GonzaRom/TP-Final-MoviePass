@@ -259,7 +259,10 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             $newMovieShow->setTypeMovieShow($this->mapearTypeMovieShow($value));
             $newMovieShow->setCinema($this->mapearCinema($value));
             $newMovieShow->setDate($value['date_']);
-            $newMovieShow->setTime($value['time_']);
+            //$time = $value['time_'];
+            $time = strtotime($value['time_']);
+            $timeNow = date('H:i' , $time);
+            $newMovieShow->setTime($timeNow);
             return $newMovieShow;
         }
     }
