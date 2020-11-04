@@ -1,4 +1,3 @@
-
 drop database moviepass;
 CREATE database moviepass;
 
@@ -135,7 +134,7 @@ CREATE TABLE tickets(
     iduser int not null,
     idpurchase int not null,
 	ticketcost int,
-    qrcode blob,
+    qrcode varchar(50),
     constraint PK_TICKET primary key (idticket),
     constraint FK_SEAT foreign key (idseat) references seats(idseat),
     constraint FK_MOVIESH foreign key (idmovieshow) references movieshows(idmovieshow),
@@ -220,7 +219,7 @@ BEGIN
     where isactiveMovieShow=true;
 END;
 $$
- 
+
 DROP PROCEDURE IF EXISTS get_movieshows;
 DELIMITER $$
 CREATE PROCEDURE get_movieshows()
@@ -313,3 +312,32 @@ BEGIN
 	SELECT * FROM movies WHERE idmovie=id;
 END;
 $$
+
+DROP PROCEDURE IF EXISTS update_qr;
+DELIMITER $$
+CREATE PROCEDURE update_qr(in id int,in img blob)
+comment "sube el codigo QR"
+BEGIN
+	UPDATE tickets SET qrcode=img WHERE idticket=id;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS add_ticket;
+DELIMITER $$
+CREATE PROCEDURE add_ticket(in idmo int, in idpur int, in idus int, in costo int, in asiento int)
+comment "agrega un ticket y devuelve el id"
+BEGIN
+	INSERT INTO tickets (idmovieshow , idpurchase , iduser , ticketcost , idseat) VALUES (idmo , idpur, idus , costo , asiento);
+END;
+$$
+
+DROP PROCEDURE IF EXISTS get_id_ticket;
+DELIMITER $$
+CREATE PROCEDURE get_id_ticket(in idfunc int , in idasiento int)
+comment "devuelve   id de tickete"
+BEGIN
+	SELECT idticket FROM tickets WHERE idmovieshow=idfunc AND idseat=idasiento;
+END;
+$$
+
+select * from tickets;

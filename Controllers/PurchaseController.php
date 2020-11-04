@@ -274,26 +274,13 @@ class PurchaseController
         $cabeceras .= 'From: ' .$email. "\r\n" .
             'Reply-To:'. $email .'"\r\n" '.
             'X-Mailer: PHP/' . phpversion();
-        //llamamos a la funcion q genera los QR
-        /*
-                aca me falta el guardado en el dao.. ya lo estoy viendo
-
-                https://blog.unreal4u.com/2010/08/como-ocupar-ob_start-ob_get_contents-y-otros-relacionados/
-
-                esta seria la opcion para traernos la imagen q guardamos en la carpeta TEMP
-
-                y luego hay q updetear el ticket en el dao con la funcion q ya cree q se llama   setQr();
-        */
-        //mail($para,$titulo,$mensaje,$cabeceras);
-        /*
-                destruir la imagen de la carpeta temporal luego e haberla envioadop a la base de datos
-        */
+        mail($para,$titulo,$mensaje,$cabeceras);
     }
 
     //genera el QR y lo guarda en una carpeta temporal
     private function generateQr($ticket){
         $filename =dirname(__DIR__)."\\Data\\temp\\"."qrnro".$ticket->getId().".png";
-        $content="Nro Ticket: ".$ticket->getId()."/ Nombre Pelicula: ".$ticket->getMovieshow()->getRoom()->getName() .
+        $content="Nro Ticket: ".$ticket->getId()."/ Nombre Cine: ". $ticket->getMovieshow()->getCinema()->getName() ."/ Nombre Pelicula: ".$ticket->getMovieshow()->getMovie()->getName() .
         "/ Nro Asiento: ". $ticket->getSeat()->getNumSeat(). "/ Fecha: ".$ticket->getMovieshow()->getDate() .
         "/ Hora: ". $ticket->getMovieshow()->getTime() ."/ Costo Ticket: ". $ticket->getTicketCost();
         $type="png";
