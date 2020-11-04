@@ -181,6 +181,16 @@ BEGIN
 END;
 $$
 
+
+DROP PROCEDURE IF EXISTS up_cinema;
+DELIMITER $$
+CREATE PROCEDURE up_cinema(in idcine int)
+comment "activa logicamente un cinema "
+BEGIN
+	update cinemas set isactivec=true where idCinema=idcine;
+END;
+$$
+
 DROP PROCEDURE IF EXISTS delete_room;
 DELIMITER $$
 CREATE PROCEDURE delete_room(in idr int)
@@ -188,6 +198,16 @@ comment "elimina logicamente un cinema y todas las tablas dependientes"
 BEGIN
 	update rooms set isactiver=false where idRoom=idr;
     update movieshows set isactiveMovieShow=false where idRoom=idr;
+END;
+$$
+
+
+DROP PROCEDURE IF EXISTS up_room;
+DELIMITER $$
+CREATE PROCEDURE up_room(in idr int)
+comment "activa logicamente una sala "
+BEGIN
+	update rooms set isactiver=true where idRoom=idr;
 END;
 $$
 

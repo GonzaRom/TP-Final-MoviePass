@@ -54,7 +54,8 @@ class PurchaseController
     }
 
     public function createTickets($idMovieshow, $seats)
-    {
+    {   if(empty($seats)) $this->confirm("No puede realizar una compra sin eleguir un asiento!");
+        
         if(!isset($_SESSION['purchase'])){
             $this->newPurchase($idMovieshow,$seats);
         }
@@ -290,7 +291,7 @@ class PurchaseController
 
     //genera el QR y lo guarda en una carpeta temporal
     private function generateQr($ticket){
-        $filename ="http://8c961b6ddd27.ngrok.io/Projects/TP-Final-MoviePass\\Data\\temp\\"."qrnro".$ticket->getId().".png";
+        $filename =dirname(__DIR__)."\\Data\\temp\\"."qrnro".$ticket->getId().".png";
         $content="Nro Ticket: ".$ticket->getId()."/ Nombre Cine: ". $ticket->getMovieshow()->getCinema()->getName() ."/ Nombre Pelicula: ".$ticket->getMovieshow()->getMovie()->getName() .
         "/ Nro Asiento: ". $ticket->getSeat()->getNumSeat(). "/ Fecha: ".$ticket->getMovieshow()->getDate() .
         "/ Hora: ". $ticket->getMovieshow()->getTime() ."/ Costo Ticket: ". $ticket->getTicketCost();
