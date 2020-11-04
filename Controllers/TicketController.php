@@ -18,12 +18,21 @@ class TicketController{
         $this->seatDAOMSQL = new SeatDAOMSQL;
     }
 
-    public function showAddTicketView($idcinema , $idMovieshow){
-        $cinema = $this->cinemaDAOMSQL->get($idcinema);
-        $movieshow = $this->movieShowDAOMSQL->get($idMovieshow);
-        $movieshow->setSeats($this->seatDAOMSQL->getSeats($idMovieshow , $movieshow->getRoom()->getCapacity()));
-        $cinema->setBillBoard($movieshow);
-        require_once(VIEWS_PATH."add-purchase.php");
+    public function showAddTicketView($idMovieshow){
+        
+        if(isset($_SESSION['loggedUser'])){
+            if(isset($_SESSION['movieshow'])){
+                $_SESSION['movieshow'] = null;
+            }
+            $movieshow = $this->movieShowDAOMSQL->get($idMovieshow);
+            $movieshow->setSeats($this->seatDAOMSQL->getSeats($idMovieshow , $movieshow->getRoom()->getCapacity()));
+            require_once(VIEWS_PATH."add-purchase.php");
+        }else{
+            $_SESSION['movieshow'] = $idMovieshow;
+            $message ="";
+            require_once(VIEWS_PATH."login.php");
+        }
+
     }
 
     public function showListTicket($idUser = 0){

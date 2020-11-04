@@ -70,8 +70,8 @@ class UserController
     {
         //Validaciones
         if (empty($firstName) || empty($lastName) || empty($userName) || empty($email) || empty($password)) $this->showSingInView("Todos los campos son requeridos.");
-        if (ctype_alpha($lastName)) $this->showSingInView("Solo se permiten caracteres alfabeticos en apellido!");
-        if (ctype_alpha($firstName)) $this->showSingInView("Solo se permiten caracteres alfabeticos en nombre!");
+        if (!ctype_alpha($lastName)) $this->showSingInView("Solo se permiten caracteres alfabeticos en apellido!");
+        if (!ctype_alpha($firstName)) $this->showSingInView("Solo se permiten caracteres alfabeticos en nombre!");
         $userName = filter_var(trim($userName), FILTER_SANITIZE_SPECIAL_CHARS);
         $email = filter_var(trim($email), FILTER_SANITIZE_EMAIL);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $this->showSingInView("Email no valido!");

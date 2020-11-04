@@ -70,6 +70,7 @@ CREATE TABLE movies(
     synopsis varchar(1000),
     poster varchar(500),
     background varchar(500),
+    trailer varchar(50),
 	voteAverage int,
     runtime int,
     isactiveMovie boolean,
@@ -339,5 +340,3 @@ BEGIN
 	SELECT idticket FROM tickets WHERE idmovieshow=idfunc AND idseat=idasiento;
 END;
 $$
-
-select * from tickets;

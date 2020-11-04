@@ -60,6 +60,10 @@
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>MovieShow/ShowListMovieShowView">Listar</a>
                         </div>
                     </li>
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
+                    </li>
                 <?php endif; ?>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,20 +75,26 @@
                         <?php endforeach; ?>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>
-                </li> 
-                
+
+
                 <?php if (isset($_SESSION['loggedUser'])) : ?>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Purchase/showAddPurchase"><i style="font-size: 20px; color:brown" class="fas fa-shopping-cart"></i></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/logout" tabindex="-1" aria-disabled="true">Logout</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Cuenta
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item " href="#" tabindex="-1" aria-disabled="true">Mi cuenta</a>
+                            <a class="dropdown-item " href="<?php echo FRONT_ROOT;?>Purchase/getByUser" tabindex="-1" aria-disabled="true">Mis Compras</a>
+                            <a class="dropdown-item " href="<?php echo FRONT_ROOT; ?>User/logout" tabindex="-1" aria-disabled="true">Cerrar Session</a>
+
+                        </div>
                     </li>
                 <?php else : ?>
                     <li class="nav-item">
-                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/showLoginView" tabindex="-1" aria-disabled="true">Login</a>
+                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>User/showLoginView" tabindex="-1" aria-disabled="true">Iniciar Session</a>
                     </li>
                 <?php endif; ?>
 

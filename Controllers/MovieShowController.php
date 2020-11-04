@@ -9,6 +9,7 @@ use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\SeatDAOMSQL as SeatDAO;
 use Models\MovieShow as MovieShow;
 use DAO\MovieDAOMSQL as MovieDAOMSQL;
+use Helpers\helper_rating;
 
 class MovieShowController
 {
@@ -80,24 +81,18 @@ class MovieShowController
         $this->showAddMovieShowView(2);
     }
 
-    public function getAll($cinemas = null)
+    public function getAll($movieShows = null)
     {
-        if ($cinemas == null) {
-            $cinemas = $this->cinemaDAO->getAll();
-            /*if (empty($movieShows)) {
-            //Por hacer:
-            //return require_once(VIEWS_PATH."error_204.php");  
-            $message = "E R R O R, No existen funciones pendientes.";
-        }*/
-            foreach ($cinemas as $cinema) {
-                $cinema->setBillboard($this->movieShowDAO->getMovieShowBycinema($cinema->getId()));
-            }
-        }
 
+        $cinemas = $this->cinemaDAO->getAll();
+        if($movieShows == null ){
+            $listMovieshow = $this->movieShowDAO->getAllActive();
+        }else{
+            $listMovieshow = $movieShows;
+        }
+        
         require_once(VIEWS_PATH . "list-movies.php");
     }
-
-
 
     public function showListMovieShowView()
     {
@@ -116,14 +111,9 @@ class MovieShowController
 
     public function getByMovie($idMovie)
     {
-        $cinemas = array();
-        if (!empty($idMovie)) {
-            $cinemas = $this->cinemaDAO->getAll();
-            foreach ($cinemas as $cinema) {
-                $cinema->setBillboard($this->movieShowDAO->getMovieShowByMovie($cinema->getId(), $idMovie));
-            }
-        }
-        $this->getAll($cinemas);
+        $movieshows = array();
+        $movieShows = $this->movieShowDAO->getMovieShowByMovie($idMovie);
+        $this->getAll($movieShows);
     }
 
     public function filterByCinema()
@@ -140,9 +130,15 @@ class MovieShowController
                     $cinema->setBillBoard($this->movieShowDAO->getMovieShowBycinema($cinema->getId()));
                 }
             }
+
             foreach ($cinemas as $cinema) {
                 foreach ($cinema->getBillBoard() as $movieShow) {
                     $movie = $movieShow->getMovie();
+                    echo '<form action="'. FRONT_ROOT . 'Ticket/showAddTicketView" method="GET">';
+                    echo '<div class="card mb-3" style="width:1250px;">';
+                    echo '<div class="content-none" style="display: none;">';
+                    echo '<input type="text" name="cinema" value="'.$cinema->getId().'">';
+                    echo '<input type="text" name="movieshow" value="'.$movieShow->getId().'"></div>';
                     echo '<div class="row no-gutters">';
                     echo '<div class="col-md-2">';
                     echo '<img src="' . $movie->getPoster() . '" alt="..." class="card-img h-100" /></div>';
@@ -156,8 +152,11 @@ class MovieShowController
                     echo ' <span><strong>Sala:</strong> ' . $movieShow->getRoom()->getName() . ' </span> ';
                     echo  ' <span><strong>Proxima funcion:</strong> ' . $movieShow->getDate()  . '  ' . $movieShow->getTime() . ' </span> ';
                     echo ' <span><strong>Duracion:</strong> ' . $movie->getRunTime() . ' min</span> </p></div></div></div>';
-                    echo '<div class="col-md-2"><div class="list-reserv"><small class="card-text"><i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></small>';
-                    echo '<button type="submit" class="btn btn-secondary btn-sm" name="movieId" value="' . $movie->getId() . '">Reservar</button></div></div></div>';
+                    echo '<div class="col-md-2"><div class="content-list-reserv"><div class="list-reserv">';
+                    echo helper_rating ::showRating($movieShow->getMovie()->getVoteAverage());
+                    echo '<button type="submit" value="" class="btn btn-secondary btn-sm">Reservar</button>';
+                    echo '<a type="button" href="'.FRONT_ROOT.'Movie/detailMovie?movie='.$movieShow->getMovie()->getId().'" class="btn btn-secondary btn-sm">Mas Info</a>
+                    </div></div></div></div></div></form>';
                 }
             }
         }

@@ -5,7 +5,12 @@
 </div>
 <div class="content-movie-list">
     <div class="content-rgba-movie-list">
-        <?php include("nav.php"); ?>
+        <?php
+
+        use Controllers\MovieShowController;
+        use Helpers\helper_rating;
+
+        include("nav.php"); ?>
 
         <div class="container">
             <div class="filtros">
@@ -20,22 +25,22 @@
                     <button type="submit">Filtrar</button>
                 </form>
             </div>
-            <?php foreach ($cinemas as $cinema) : ?>
-                <?php $movieShows = $cinema->getBillBoard(); ?>
-                <?php for ($j = 0; $j < count($movieShows); $j++) :
+            <div class="listMovieshows" id="movieShows">
 
-                    $movie = $movieShows[$j]->getMovie();
+
+                <?php for ($j = 0; $j < count($listMovieshow); $j++) :
+
+                    $movie = $listMovieshow[$j]->getMovie();
                     $nombre = $movie->getName();
                     $genres = $movie->getGenreId();
                     $duration = $movie->getRunTime();
                 ?>
                     <form action="<?php echo FRONT_ROOT ?>Ticket/showAddTicketView" method="GET">
 
-                        <div class="card mb-3" style="width:1250px;" id="movieShows">
+                        <div class="card mb-3" style="width:1250px;">
 
                             <div class="content-none" style="display: none;">
-                                <input type="text" name="cinema" value="<?php echo $cinema->getId(); ?>">
-                                <input type="text" name="movieshow" value="<?php echo  $movieShows[$j]->getId(); ?>">
+                                <input type="text" name="movieshow" value="<?php echo  $listMovieshow[$j]->getId(); ?>">
                             </div>
 
                             <div class="row no-gutters">
@@ -61,11 +66,11 @@
                                         </div>
                                         <div class="card-footer text-light bg-secondary">
                                             <p><span><strong>Cine:</strong>
-                                                    <?php echo $cinema->getName(); ?></span>
+                                                    <?php echo $listMovieshow[$j]->getCinema()->getName(); ?></span>
                                                 <span><strong>Sala:</strong>
-                                                    <?php echo $movieShows[$j]->getRoom()->getName(); ?></span>
+                                                    <?php echo $listMovieshow[$j]->getRoom()->getName(); ?></span>
                                                 <span><strong>Proxima funcion:
-                                                    </strong><?php echo $movieShows[$j]->getDate() . " " . $movieShows[$j]->getTime(); ?></span>
+                                                    </strong><?php echo $listMovieshow[$j]->getDate() . " " . $listMovieshow[$j]->getTime(); ?></span>
                                                 <span><strong>Duracion:
                                                     </strong><?php echo $duration . " min"; ?></span>
                                             </p>
@@ -74,12 +79,15 @@
                                 </div>
                                 <!--Valoracion mas botones-->
                                 <div class="col-md-2">
-                                    <div class="list-reserv">
-                                        <small class="card-text">
-                                            <i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                                        </small>
-                                        <h2><?php echo  $movieShows[$j]->getId(); ?></h2>
-                                        <button type="submit" value="" class="btn btn-secondary btn-sm">Reservar</button>
+                                    <div class="content-list-reserv">
+                                        <div class="list-reserv">
+                                            <?php helper_rating::showRating($listMovieshow[$j]->getMovie()->getVoteAverage()) ?>
+
+                                            <button type="submit" value="" class="btn btn-secondary btn-sm">Reservar</button>
+
+                                            <a type="button" href="<?php echo FRONT_ROOT; ?>Movie/detailMovie?movie=<?php echo $listMovieshow[$j]->getMovie()->getId(); ?>" class="btn btn-secondary btn-sm">Mas Info</a>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -88,7 +96,8 @@
                         </div>
                     </form>
                 <?php endfor; ?>
-            <?php endforeach; ?>
+            </div>
+
         </div>
     </div>
 </div>
