@@ -15,6 +15,7 @@ class Movie
     private $voteAverage;
     private $runtime;
     private $active;
+    private $trailer;
 
 
     public function getId()
@@ -119,5 +120,15 @@ class Movie
 
     public function getIsActive(){
         return $this->active;
+    }
+
+    public function getTrailer()
+    {
+        return $this->trailer;
+    }
+
+    public function setTrailer($trailer)
+    {
+        $this->trailer = $trailer;
     }
 }

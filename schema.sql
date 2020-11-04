@@ -70,6 +70,7 @@ CREATE TABLE movies(
     synopsis varchar(1000),
     poster varchar(500),
     background varchar(500),
+    trailer varchar(50),
 	voteAverage int,
     runtime int,
     isactiveMovie boolean,

@@ -30,10 +30,6 @@
                 <h3><span class="badge badge-light"> <?php echo "Duracion: " . $duration . " min"; ?></span></h3>
                 <h3><span class="badge badge-light"><a style="color: #000; text-decoration:none; " href="<?php echo FRONT_ROOT; ?>MovieShow/getByMovie?movie=<?php echo $movie->getId(); ?>"><i class="fas fa-list"></i> Ver Funciones Disponibles </a></span></h3>
                 <h3><span class="badge badge-light"><a style="color: #000; text-decoration:none; " href="<?php echo FRONT_ROOT; ?>Movie/detailMovie?movie=<?php echo $movie->getId(); ?>"><i class="fas fa-play-circle"></i> Detalle de pelicula</a></span></h3>
-
-
-
-
                 <!--a class="btn btn-light btn-sm" href="<?php echo FRONT_ROOT . "Movie/Get/" . $id; ?>" role="button">MAS INFO </a-->
               </div>
             </div>
@@ -87,7 +83,11 @@
           </div>
           <div class="detalles">
             <h2><?php echo $movie->getName(); ?></h2>
-            <a href="<?php echo FRONT_ROOT; ?>MovieShow/getByMovie?movie=<?php echo $movie->getId(); ?>">Reservar</a>
+            <span >
+            <a  href="<?php echo FRONT_ROOT; ?>MovieShow/getByMovie?movie=<?php echo $movie->getId(); ?>">Reservar</a>
+            <a href="<?php echo FRONT_ROOT; ?>Movie/detailMovie?movie=<?php echo $movie->getId(); ?>">Mas Info</a>
+            
+          </span>
           </div>
         </div>
 

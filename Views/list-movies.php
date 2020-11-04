@@ -5,7 +5,12 @@
 </div>
 <div class="content-movie-list">
     <div class="content-rgba-movie-list">
-        <?php include("nav.php"); ?>
+        <?php
+
+        use Controllers\MovieShowController;
+use Helpers\helper_rating;
+
+include("nav.php"); ?>
 
         <div class="container">
             <div class="filtros">
@@ -75,11 +80,12 @@
                                 <!--Valoracion mas botones-->
                                 <div class="col-md-2">
                                     <div class="list-reserv">
-                                        <small class="card-text">
-                                            <i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                                        </small>
-                                        <h2><?php echo  $movieShows[$j]->getId(); ?></h2>
+                                        
+                                        <?php helper_rating::showRating($movieShows[$j]->getMovie()->getVoteAverage()) ?>
+                                        
                                         <button type="submit" value="" class="btn btn-secondary btn-sm">Reservar</button>
+
+                                        <a  type="button" href="<?php echo FRONT_ROOT; ?>Movie/detailMovie?movie=<?php echo $movieShows[$j]->getMovie()->getId(); ?>" class="btn btn-secondary btn-sm">Mas Info</a>
                                     </div>
                                 </div>
 
