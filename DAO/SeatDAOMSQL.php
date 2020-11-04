@@ -15,7 +15,7 @@ class SeatDAOMSQL implements ISeatDAO{
         try{
             $query= "INSERT INTO ". $this->nameTable . " (numseat , idmovieshow) VALUES (:numasiento , :idmovieshow);";
         
-            $parameters['numasiento'] = $seat->getNumSeat();
+            $parameters['numasiento'] =  $seat->getNumSeat();
             $parameters['idmovieshow'] = $seat->getMovieShow();
             $this->conecction = Connection::getInstance();
             $this->conecction->executeNonQuery($query, $parameters);
@@ -144,6 +144,3 @@ class SeatDAOMSQL implements ISeatDAO{
         return array_fill(0, $num_elements,null);
     }
 }
-
-
-?>

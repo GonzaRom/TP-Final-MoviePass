@@ -3,6 +3,7 @@
 namespace DAO;
 
 use Exception;
+use Models\Cinema;
 use Models\Genre;
 use Models\Movie;
 use Models\MovieShow;
@@ -47,7 +48,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
         } catch (Exception $ex) {
             throw $ex;
         }
-
+        var_dump($result);
         if (!empty($result)) {
             foreach ($result as $movieShow) {
                 $newMovieShow = $this->creatMovieShow($movieShow);
@@ -90,6 +91,8 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
+            JOIN cinemas as c
+            ON m.idcinema = c.idcinema;
             WHERE m.idcinema = :idcinema";
 
             $parameters['idcinema'] = $id;
@@ -126,7 +129,9 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             INNER JOIN rooms as r 
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
-            ON r.idtyperoom = t.idtyperoom 
+            ON r.idtyperoom = t.idtyperoom
+            INNER JOIN cinemas as c 
+            ON m.idcinema = c.idcinema 
             WHERE m.idmovieshow = :id";
             $parameters['id'] = $id;
 
@@ -159,6 +164,8 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
+            INNER JOIN cinemas as c 
+            ON m.idcinema = c.idcinema 
             WHERE m.idcinema = :idcinema AND mo.idmovie = :idmovie";
             $parameters['idmovie'] = $idMovie;
             $parameters['idcinema'] = $idcinema;
@@ -191,6 +198,8 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
+            INNER JOIN cinemas as c 
+            ON m.idcinema = c.idcinema 
             WHERE m.idcinema = :idcinema AND m.date_ = :date";
             $parameters['idcinema'] = $idMovie;
             $parameters['date'] = $date;
@@ -222,6 +231,8 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
+            INNER JOIN cinemas as c 
+            ON m.idcinema = c.idcinema 
             WHERE m.idcinema = :idcinema AND m.date_ = :date AND m.idmovie = :idmovie";
             $parameters['idmovie'] = $idMovie;
             $parameters['idcinema'] = $idCinema;
@@ -250,6 +261,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             $newMovieShow->setMovie($this->mapearMovie($value));
             $newMovieShow->setRoom($this->mapearRoom($value));
             $newMovieShow->setTypeMovieShow($this->mapearTypeMovieShow($value));
+            $newMovieShow->setCinema($this->mapearCinema($value));
             $newMovieShow->setDate($value['date_']);
             $newMovieShow->setTime($value['time_']);
             return $newMovieShow;
@@ -293,6 +305,19 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             $newTypeRoom->setName($value['nametypemovieshow']);
 
             return $newTypeRoom;
+        }
+    }
+
+    protected function mapearCinema($value)
+    {
+        $value = ($value) ? $value : array();
+        if (!empty($value)) {
+            $newCinema = new Cinema();
+            $newCinema->setName($value['namecinema']);
+            $newCinema->setAdress($value['adress']);
+            $newCinema->setPhonenumber($value['phonenumber']);
+
+            return $newCinema;
         }
     }
 

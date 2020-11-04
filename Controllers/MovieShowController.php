@@ -54,6 +54,7 @@ class MovieShowController
     public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)
     {
         if ($this->isMovieSetted($movie, $date)) $this->showAddMovieShowView(4);
+
         else {
             $this->movieDAOMSQL->upMovie($movie);
             $today = date('Y-m-d');
@@ -85,7 +86,7 @@ class MovieShowController
             $cinemas = $this->cinemaDAO->getAll();
             /*if (empty($movieShows)) {
             //Por hacer:
-            //return require_once(VIEWS_PATH."error_404.php");  
+            //return require_once(VIEWS_PATH."error_204.php");  
             $message = "E R R O R, No existen funciones pendientes.";
         }*/
             foreach ($cinemas as $cinema) {

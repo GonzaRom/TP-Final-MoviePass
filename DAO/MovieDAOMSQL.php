@@ -58,12 +58,12 @@ class MovieDAOMSQL implements IMovieDAO
         $parameters["idmovie"] = $idmovie;
 
         $this->connection = Connection::getInstance();
-        $result = $this->connection->execute($query , $parameters);
+        $result = $this->connection->execute($query, $parameters);
         foreach ($result as $genres) {
             $newGenre = new Genre();
             $newGenre->setId($genres['idgenre']);
             $newGenre->setName($genres['namegenre']);
-            array_push($listGenres , $newGenre);
+            array_push($listGenres, $newGenre);
         }
         return $listGenres;
     }
@@ -81,7 +81,7 @@ class MovieDAOMSQL implements IMovieDAO
             throw $ex;
         }
 
-        if(!empty($resultMovie)){
+        if (!empty($resultMovie)) {
             return $this->mapear($resultMovie);
         }
     }
@@ -128,7 +128,8 @@ class MovieDAOMSQL implements IMovieDAO
         }
     }
 
-    public function getMoviesByGenre($id){
+    public function getMoviesByGenre($id)
+    {
         try {
             $listMovies = array();
             $query = "SELECT * FROM " . $this->tableName . " as m  INNER JOIN genresxmovie as gxm ON m.idmovie = gxm.idmovie  WHERE gxm.idgenre = :id AND m.isactiveMovie = true";
@@ -140,12 +141,11 @@ class MovieDAOMSQL implements IMovieDAO
             throw $ex;
         }
 
-        if(!empty($resultMovie)){
-            foreach($resultMovie as $movie){
+        if (!empty($resultMovie)) {
+            foreach ($resultMovie as $movie) {
                 $newMovie = $this->createMovie($movie);
-                array_push($listMovies , $newMovie);
+                array_push($listMovies, $newMovie);
             }
-
         }
         return $listMovies;
     }
@@ -172,7 +172,8 @@ class MovieDAOMSQL implements IMovieDAO
         }
     }
 
-    public function upMovie($id){
+    public function upMovie($id)
+    {
         try {
             $query = "UPDATE " . $this->tableName . " SET isactiveMovie = true WHERE idmovie = :id ;";
             $parameters['id'] = $id;
@@ -191,8 +192,6 @@ class MovieDAOMSQL implements IMovieDAO
             foreach ($this->NowPlayingMovieList as $movie) {
                 $this->add($movie);
             }
-            $movies = $this->getAll();
-            return $this->NowPlayingMovieList;
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -256,7 +255,7 @@ class MovieDAOMSQL implements IMovieDAO
     protected function createMovie($value)
     {
         $value = ($value) ? $value : array();
-        if(!empty($value))
+        if (!empty($value)) {
             $movie = new Movie();
             $movie->setId($value["idmovie"]);
             $movie->setImdbID($value["imdbid"]);
@@ -270,4 +269,4 @@ class MovieDAOMSQL implements IMovieDAO
             return $movie;
         }
     }
-?>
+}

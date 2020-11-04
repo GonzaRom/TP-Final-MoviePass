@@ -63,9 +63,8 @@
             if($img) {
                 if($filename) {
                     if(!preg_match("#.png$#i", $filename)) {
-                        $filename .= ".png";
+                        $filename = ".png";
                     }
-                    
                     return file_put_contents($filename, $img);
                 } else {
                     header("Content-type: image/png");
