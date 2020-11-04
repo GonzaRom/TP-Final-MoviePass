@@ -21,6 +21,9 @@ class TicketController{
     public function showAddTicketView($idMovieshow){
         
         if(isset($_SESSION['loggedUser'])){
+            if(isset($_SESSION['movieshow'])){
+                $_SESSION['movieshow'] = null;
+            }
             $movieshow = $this->movieShowDAOMSQL->get($idMovieshow);
             $movieshow->setSeats($this->seatDAOMSQL->getSeats($idMovieshow , $movieshow->getRoom()->getCapacity()));
             require_once(VIEWS_PATH."add-purchase.php");
