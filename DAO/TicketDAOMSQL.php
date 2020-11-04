@@ -61,5 +61,39 @@
                 throw $ex;
             }
         }
+         
+        public function getByPurchase($id){
+            $tickets = array();
+            try{
+                $sql ='SELECT * FROM '. $this->tablename  .' as p INNER JOIN movieshows as m ON p.idmovieshow = m.idmovieshow INNER JOIN typemovieshows as tm 
+                ON m.idtypemovieshow = tm.idtypemovieshow
+                INNER JOIN movies as mo
+                ON m.idmovie = mo.idmovie 
+                INNER JOIN rooms as r 
+                ON m.idroom = r.idroom 
+                INNER JOIN typerooms as t 
+                ON r.idtyperoom = t.idtyperoom INNER JOIN seats as s ON p.idseat = s.idseat  WHERE idpurchase = :id';
+                $parameters['id'] = $id;
+                $this->conection = Connection::getInstance();
+                $resultSet = $this->conection->Execute($sql,$parameters);
+
+                foreach ($resultSet as $row)
+                {                
+                    $ticket = new TicketDTO();
+                    $ticket->setId($row['idticket']);
+                    $ticket->setMovieShow(mapperDAO :: creatMovieShow($row));
+                    $ticket->setUser($row['iduser']);
+                    $ticket->setPurchase($row['idpurchase']);
+                    $ticket->setSeats(mapperDAO :: mapearSeat($row));
+                        
+                    array_push($tickets, $ticket);
+                }
+
+                return $tickets;
+
+            }catch (Exception $ex){
+                throw $ex;
+            }
+        }
     }
 ?>

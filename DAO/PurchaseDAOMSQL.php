@@ -45,8 +45,8 @@ class PurchaseDAOMSQL implements IPurchaseDAO
                 $newPurchase = new Purchase();
                 $newPurchase->setId($purchase['idpurchase']);
                 $newPurchase->setCosto($purchase['cost']);
-                $newPurchase->setDate($purchase['date']);
-                $purchase->setTime($purchase['time']);
+                $newPurchase->setDate($purchase['date_']);
+                $newPurchase->setTime($purchase['time_']);
                 $newPurchase->setIdUser($purchase['iduser']);
 
                 array_push($listPurchase, $newPurchase);

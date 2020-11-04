@@ -5,6 +5,7 @@ use Models\Genre;
 use Models\Movie;
 use Models\MovieShowDTO;
 use Models\RoomDTO;
+use Models\SeatDTO;
 use Models\Ticket;
 use Models\TypeMovieShow;
 use Models\TypeRoom;
@@ -12,6 +13,18 @@ use Models\TypeRoom;
 class mapperDAO{
     
     private $connection;
+
+    public static function mapearSeat($value)
+    {
+        $value = ($value) ? $value : array();
+        if (!empty($value)) {
+            $seat = new SeatDTO();
+            $seat->setId($value['idseat']);
+            $seat->setNumSeat($value['numseat']);
+            $seat->setMovieShow($value['idmovieshow']);
+            return $seat;
+        }
+    }
 
     public static function creatMovieShow($value)
     {
@@ -81,20 +94,20 @@ class mapperDAO{
             $movie->setBackground($value["background"]);
             $movie->setVoteAverage($value["voteAverage"]);
             $movie->setRunTime($value["runtime"]);
-            $movie->setGenreId(mapperDAO:: getGenresById($movie->getId()));
+            $movie->setGenreId(mapperDAO::getGenresById($movie->getId()));
             return $movie;
         }
     }
 
-    private static function getGenresById($idmovie)
+    public static function getGenresById($idmovie)
 
     {
         $listGenres = array();
         $query = " SELECT * FROM genresxmovie as gxm INNER JOIN genres as g ON gxm.idgenre = g.idgenre WHERE gxm.idmovie = :idmovie";
         $parameters["idmovie"] = $idmovie;
 
-        mapperDAO :: $connection = Connection::getInstance();
-        $result = mapperDAO :: $connection->execute($query, $parameters);
+        $connection = Connection::getInstance();
+        $result = $connection->execute($query, $parameters);
         foreach ($result as $genres) {
             $newGenre = new Genre;
             $newGenre->setId($genres['idgenre']);

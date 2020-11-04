@@ -132,6 +132,16 @@ class PurchaseController
         require_once (VIEWS_PATH."sold-tickets.php");
     }
 
+    public function getByUser(){
+        $id = $_SESSION['loggedUser'];
+        $purchases = $this->purchaseDAOMSQL->getByUser($id);
+
+        foreach($purchases as $purchase){
+            $purchase->setTickets($this->ticketDAOMSQL->getByPurchase($purchase->getId()));
+        }
+
+        require_once (VIEWS_PATH.'listPurchase.php');
+    }
 
     private function mailTickets($ticket){
 
@@ -272,4 +282,6 @@ class PurchaseController
         
         mail($para,$titulo,$mensaje,$cabeceras);
     }
+
+
 }

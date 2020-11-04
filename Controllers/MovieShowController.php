@@ -139,9 +139,15 @@ class MovieShowController
                     $cinema->setBillBoard($this->movieShowDAO->getMovieShowBycinema($cinema->getId()));
                 }
             }
+
             foreach ($cinemas as $cinema) {
                 foreach ($cinema->getBillBoard() as $movieShow) {
                     $movie = $movieShow->getMovie();
+                    echo '<form action="'. FRONT_ROOT . 'Ticket/showAddTicketView" method="GET">';
+                    echo '<div class="card mb-3" style="width:1250px;">';
+                    echo '<div class="content-none" style="display: none;">';
+                    echo '<input type="text" name="cinema" value="'.$cinema->getId().'">';
+                    echo '<input type="text" name="movieshow" value="'.$movieShow->getId().'"></div>';
                     echo '<div class="row no-gutters">';
                     echo '<div class="col-md-2">';
                     echo '<img src="' . $movie->getPoster() . '" alt="..." class="card-img h-100" /></div>';
@@ -156,7 +162,7 @@ class MovieShowController
                     echo  ' <span><strong>Proxima funcion:</strong> ' . $movieShow->getDate()  . '  ' . $movieShow->getTime() . ' </span> ';
                     echo ' <span><strong>Duracion:</strong> ' . $movie->getRunTime() . ' min</span> </p></div></div></div>';
                     echo '<div class="col-md-2"><div class="list-reserv"><small class="card-text"><i class="fas fa-star "></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></small>';
-                    echo '<button type="submit" class="btn btn-secondary btn-sm" name="movieId" value="' . $movie->getId() . '">Reservar</button></div></div></div>';
+                    echo '<button type="submit" class="btn btn-secondary btn-sm">Reservar</button></div></div></div></div></form>';
                 }
             }
         }
