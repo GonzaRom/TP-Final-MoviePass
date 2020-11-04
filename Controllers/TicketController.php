@@ -2,8 +2,6 @@
 namespace Controllers;
 
 use DAO\MovieShowDAOMSQL;
-use DAO\TicketDAO;
-use Models\Ticket;
 use DAO\CinemaDAOMSQL;
 use DAO\SeatDAOMSQL;
 

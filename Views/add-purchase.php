@@ -28,9 +28,8 @@
                             </div>
 
                             <div class="input-box">
-                                <span>Cinema: </span><span class="input"><?php echo $cinema->getName(); ?></span>
+                                <span>Cinema: </span><span class="input"><?php echo $movieshow->getCinema()->getName(); ?></span>
                             </div>
-
 
                             <div class="input-box">
                                 <span>Sala: </span><span class="input"><?php echo $movieshow->getRoom()->getName(); ?></span>

@@ -140,7 +140,6 @@ class PurchaseController
 
 
     private function mailTickets($ticket){
-
         $user = $this->userDAOMSQL->getById($_SESSION['loggedUser']);
         $email = $user->getEmail();
         $filename=($this->generateQr($ticket));
@@ -236,7 +235,7 @@ class PurchaseController
         
                         <tr>
                             <td>Cinema</td>
-                            <td>Ambasador</td>
+                            <td>'. $ticket->getMovieshow()->getCinema()->getName() .'</td>
                         </tr>
         
                         <tr>
@@ -293,9 +292,8 @@ class PurchaseController
 
     //genera el QR y lo guarda en una carpeta temporal
     private function generateQr($ticket){
-        $dir = "Data/temp/";
-        $filename = $dir."qrnro".$ticket->getId().".png";
-        $content="Nro Ticket: ".$ticket->getId()."/ Nombre Pelicula: ".$ticket->getMovieshow()->getMovie()->getName() .
+        $filename =dirname(__DIR__)."\\Data\\temp\\"."qrnro".$ticket->getId().".png";
+        $content="Nro Ticket: ".$ticket->getId()."/ Nombre Pelicula: ".$ticket->getMovieshow()->getRoom()->getName() .
         "/ Nro Asiento: ". $ticket->getSeat()->getNumSeat(). "/ Fecha: ".$ticket->getMovieshow()->getDate() .
         "/ Hora: ". $ticket->getMovieshow()->getTime() ."/ Costo Ticket: ". $ticket->getTicketCost();
         $type="png";

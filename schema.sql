@@ -215,10 +215,12 @@ BEGIN
 	ON m.idroom = r.idroom 
     JOIN typerooms as t 
 	ON r.idtyperoom = t.idtyperoom
+    JOIN cinemas as c
+    ON m.idcinema = c.idcinema
     where isactiveMovieShow=true;
 END;
 $$
-
+ 
 DROP PROCEDURE IF EXISTS get_movieshows;
 DELIMITER $$
 CREATE PROCEDURE get_movieshows()
@@ -233,7 +235,9 @@ BEGIN
     JOIN rooms as r 
 	ON m.idroom = r.idroom 
     JOIN typerooms as t 
-	ON r.idtyperoom = t.idtyperoom;
+	ON r.idtyperoom = t.idtyperoom
+    JOIN cinemas as c
+    ON m.idcinema = c.idcinema;
 END;
 $$
 
