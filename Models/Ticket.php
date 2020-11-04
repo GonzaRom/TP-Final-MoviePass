@@ -8,6 +8,7 @@
         private $purchase;
         private $seat;
         private $ticketCost;
+        private $qrcode;
 
         public function __construct(){
             
@@ -98,6 +99,16 @@
         public function setTicketCost($ticketCost)
         {
                 $this->ticketCost = $ticketCost;
+        }
+
+        public function getQrcode()
+        {
+            return $this->qrcode;
+        }
+
+        public function setQrcode($qrcode)
+        {
+            $this->qrcode = $qrcode;
         }
     }
 ?>

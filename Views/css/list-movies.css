@@ -59,6 +59,10 @@
     color:#000
 }
 
+.fas.fa-star-half-alt{
+    color: rgb(170, 30, 30);
+}
+
 .container{
     width: 90%;
     display: flex;

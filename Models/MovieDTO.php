@@ -14,6 +14,7 @@ class MovieDTO{
     private $poster;
     private $runtime;
     private $active;
+    private $trailer;
     
     public function __construct()
     {
@@ -140,5 +141,15 @@ class MovieDTO{
 
     public function getIsActive(){
         return $this->active;
+    }
+
+    public function getTrailer()
+    {
+        return $this->trailer;
+    }
+
+    public function setTrailer($trailer)
+    {
+        $this->trailer = $trailer;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Exception;
 use DAO\CinemaDAOMSQL;
 use DAO\MovieShowDAOMSQL;
 use DAO\PurchaseDAOMSQL;
@@ -11,6 +12,7 @@ use DAO\UserDAOMSQL;
 use Models\Purchase;
 use Models\Seat;
 use Models\Ticket;
+use Helpers\QR_BarCode as QR_BarCode;
 
 class PurchaseController
 {
@@ -122,7 +124,11 @@ class PurchaseController
             $ticket->setSeat($this->seatDAOMSQL->getSeat($ticket->getMovieShow()->getId() , $ticket->getSeat()));
             $ticket->setPurchase($purchase->getId());
             $this->ticketDAOMSQL->add($ticket);
+            $id=$this->ticketDAOMSQL->get_id($ticket->getMovieShow()->getId(),$ticket->getSeat()->getId());
+            $ticket->setId($id);
+
             $this->mailTickets($ticket);
+            
         }
         $purchase = null;
         $_SESSION['purchase'] = null;
@@ -144,11 +150,10 @@ class PurchaseController
     }
 
     private function mailTickets($ticket){
-
         $user = $this->userDAOMSQL->getById($_SESSION['loggedUser']);
-
         $email = $user->getEmail();
-
+        $filename=($this->generateQr($ticket));
+        $this->ticketDAOMSQL->setQr($ticket->getId(),$filename);
         $para      = $email;
         $titulo    = 'Ticket comprado';
         $mensaje   = '<!DOCTYPE html>
@@ -240,7 +245,7 @@ class PurchaseController
         
                         <tr>
                             <td>Cinema</td>
-                            <td>Ambasador</td>
+                            <td>'. $ticket->getMovieshow()->getCinema()->getName() .'</td>
                         </tr>
         
                         <tr>
@@ -279,9 +284,28 @@ class PurchaseController
         $cabeceras .= 'From: ' .$email. "\r\n" .
             'Reply-To:'. $email .'"\r\n" '.
             'X-Mailer: PHP/' . phpversion();
-        
         mail($para,$titulo,$mensaje,$cabeceras);
     }
 
+<<<<<<< HEAD
 
+=======
+    //genera el QR y lo guarda en una carpeta temporal
+    private function generateQr($ticket){
+        $filename =dirname(__DIR__)."\\Data\\temp\\"."qrnro".$ticket->getId().".png";
+        $content="Nro Ticket: ".$ticket->getId()."/ Nombre Cine: ". $ticket->getMovieshow()->getCinema()->getName() ."/ Nombre Pelicula: ".$ticket->getMovieshow()->getMovie()->getName() .
+        "/ Nro Asiento: ". $ticket->getSeat()->getNumSeat(). "/ Fecha: ".$ticket->getMovieshow()->getDate() .
+        "/ Hora: ". $ticket->getMovieshow()->getTime() ."/ Costo Ticket: ". $ticket->getTicketCost();
+        $type="png";
+        try{
+            $qr=new QR_BarCode;
+            $qr->content($type,15,$content);
+            $qr->qrCode(350,$filename);
+        return $filename;
+        }
+        catch (Exception $ex){
+            throw $ex;
+        }
+    }
+>>>>>>> origin/Gonzalo
 }

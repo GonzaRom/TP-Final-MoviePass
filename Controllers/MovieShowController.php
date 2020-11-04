@@ -43,7 +43,7 @@ class MovieShowController
     {
         if (isset($_GET['cinema'])) {
             $listRoom = $this->roomDAO->getByCinema($_GET['cinema']);
-            echo 'Sala:<select name="room" id="">';
+            echo 'Sala:<select name="room" id="" required="true">';
             echo '<option value="">Seleccione una sala</option> ';
             foreach ($listRoom as $room) {
                 echo '<option value="' . $room->getId() . '">' . $room->getName()  . '</option> ';
@@ -54,6 +54,7 @@ class MovieShowController
     public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)
     {
         if ($this->isMovieSetted($movie, $date)) $this->showAddMovieShowView(4);
+
         else {
             $this->movieDAOMSQL->upMovie($movie);
             $today = date('Y-m-d');
@@ -85,7 +86,7 @@ class MovieShowController
             $cinemas = $this->cinemaDAO->getAll();
             /*if (empty($movieShows)) {
             //Por hacer:
-            //return require_once(VIEWS_PATH."error_404.php");  
+            //return require_once(VIEWS_PATH."error_204.php");  
             $message = "E R R O R, No existen funciones pendientes.";
         }*/
             foreach ($cinemas as $cinema) {
@@ -95,8 +96,6 @@ class MovieShowController
 
         require_once(VIEWS_PATH . "list-movies.php");
     }
-
-
 
     public function showListMovieShowView()
     {
