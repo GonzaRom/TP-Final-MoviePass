@@ -12,18 +12,15 @@
 
         
         public function add(Ticket $ticket){
-            
+            $id=null;
             try{
                 
-                $sql = "INSERT INTO ". $this->tablename. " (idmovieshow , idpurchase , iduser , ticketcost , idseat, qrcode)
-                        VALUES (:idmovieshow , :idpurchase , :iduser , :cost , :seat, :qrcode)";
+                $sql = "call add_ticket(:idmovieshow , :idpurchase , :iduser , :cost , :seat)";
                 $parameters['idmovieshow']=$ticket->getMovieShow()->getId();
                 $parameters['idpurchase']=$ticket->getPurchase();
                 $parameters['iduser']=$ticket->getUser();
                 $parameters['cost'] = $ticket->getTicketCost();
                 $parameters['seat'] = $ticket->getSeat()->getId();
-                $parameters['qrcode'] = $ticket->getQrcode();
-
                 $this->conection= Connection::getInstance();
                 $this->conection->ExecuteNonQuery($sql,$parameters);
             }
@@ -32,12 +29,36 @@
             }
         }
 
-        public function setQr(){
+        public function get_id($idmovieshow, $idseat){
+            $id=null;
+            echo $idmovieshow."//".$idseat;
+            try{
+                $query = "call get_id_ticket(:idmovieshow, :idseat);";
+                $parameters['idmovieshow']=$idmovieshow;
+                $parameters['idseat'] = $idseat;
+
+                $this->connection = Connection::getInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+                    
+                foreach ($resultSet as $row)
+                {                
+                    $id=$row['idticket'];
+                }
+
+                return $id;
+            }
+            catch(Exception $ex){
+                throw $ex;
+            }
+        }
+
+        public function setQr($id,$filename){
             try{
                 
                 $sql = "call update_qr(:idticket, :qrcode)";
-                $parameters['idticket']=$ticket->getid();
-                $parameters['qrcode'] = $ticket->getQrcode();
+                $parameters['idticket']=$id;
+                $parameters['qrcode'] = $filename;
 
                 $this->conection= Connection::getInstance();
                 $this->conection->ExecuteNonQuery($sql,$parameters);
