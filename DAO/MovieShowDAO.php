@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace DAO;
 
 use Models\MovieShow;
@@ -123,3 +123,4 @@ class MovieShowDAO implements IMovieShowDAO
         return $getMovieShow;
     }
 }
+*/

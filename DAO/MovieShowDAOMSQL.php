@@ -91,10 +91,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON m.idroom = r.idroom 
             INNER JOIN typerooms as t 
             ON r.idtyperoom = t.idtyperoom 
-            JOIN cinemas as c
-            ON m.idcinema = c.idcinema;
             WHERE m.idcinema = :idcinema";
-
             $parameters['idcinema'] = $id;
             $listMovieShow = array();
             $this->conection = Connection::getInstance();
@@ -106,7 +103,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
         if (!empty($result)) {
             foreach ($result as $movieShow) {
 
-                $newMovieShow = $this->creatMovieShow($movieShow);
+                $newMovieShow = mapperDAO :: creatMovieShow($movieShow);
                 array_push($listMovieShow, $newMovieShow);
             }
         }
@@ -150,7 +147,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     }
 
 
-    public function getMovieShowByMovie($idcinema, $idMovie)
+    public function getMovieShowByMovie($idMovie)
     {
         $listMovieShow = array();
         try {
@@ -166,9 +163,8 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             ON r.idtyperoom = t.idtyperoom 
             INNER JOIN cinemas as c 
             ON m.idcinema = c.idcinema 
-            WHERE m.idcinema = :idcinema AND mo.idmovie = :idmovie";
+            WHERE mo.idmovie = :idmovie";
             $parameters['idmovie'] = $idMovie;
-            $parameters['idcinema'] = $idcinema;
             $this->conection = Connection::getInstance();
             $result = $this->conection->Execute($sql, $parameters);
         } catch (Exception $ex) {

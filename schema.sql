@@ -340,5 +340,3 @@ BEGIN
 	SELECT idticket FROM tickets WHERE idmovieshow=idfunc AND idseat=idasiento;
 END;
 $$
-
-select * from tickets;
