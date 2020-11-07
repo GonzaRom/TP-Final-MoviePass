@@ -53,12 +53,13 @@
             }
         }
 
-        public function setQr($id,$filename){
+        public function setQr($id,$filename,$code){
             try{
                 
-                $sql = "call update_qr(:idticket, :qrcode)";
+                $sql = "call update_qr_accescode(:idticket, :qrcode, :code)";
                 $parameters['idticket']=$id;
                 $parameters['qrcode'] = $filename;
+                $parameters['code'] = $code;
 
                 $this->conection= Connection::getInstance();
                 $this->conection->ExecuteNonQuery($sql,$parameters);
@@ -68,6 +69,24 @@
             }
         }
 
+        public function deliverTicket($code){
+            try{
+                $flag=false;
+                $query = "call deliver_ticket(:code)";
+                $parameters['code'] = $code;
+                var_dump($parameters);
+                $this->conection= Connection::getInstance();
+                $resultSet = $this->conection->Execute($query, $parameters);
+                foreach ($resultSet as $row)
+                {                
+                    $flag=$row['flag'];
+                }
+                return $flag;
+            }
+            catch(Exception $ex){
+                throw $ex;
+            }
+        }
 
         ///tengo q terminar
         public function getAll(){
@@ -77,7 +96,7 @@
 
                 $this->connection = Connection::getInstance();
 
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->conection->Execute($query);
                     
                 foreach ($resultSet as $row)
                 {                
