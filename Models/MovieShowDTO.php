@@ -9,6 +9,7 @@ class MovieShowDTO{
     private $room;
     private $date;
     private $time;
+    private $endTime;
     private $active;
     
 
@@ -105,5 +106,15 @@ class MovieShowDTO{
 
     public function getIsActive(){
         return $this->active;
+    }
+
+    public function getEndTime()
+    {
+        return $this->endTime;
+    }
+
+    public function setEndTime($endTime)
+    {
+        $this->endTime = $endTime;
     }
 }

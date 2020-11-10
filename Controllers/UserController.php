@@ -23,7 +23,9 @@ class UserController
         $this->genreDAO = new GenreDAOMSQL();
     }
     public function showLoginView($message = "")
-    {
+    {   require_once("Facebook/facebookConfig.php");
+        $data = ["email"];
+        $loginUrl = $handler->getLoginUrl($callbackUrl, $data);
         require_once(VIEWS_PATH . "login.php");
     }
 
@@ -97,25 +99,24 @@ class UserController
         $this->userDAO->add($newUser);
         if (isset($_SESSION['loggedUser'])) {
             require_once(VIEWS_PATH . 'validate-session.php');
-        } else{
-
+        } else {
 
             $para      = $email;
             $titulo    = 'Confirmar usuario.';
-            $mensaje   = '<html>'.
-            '<head><title>Bienvenido a multiflex</title></head>'.
-            '<body><h1>Confirmar Usuario</h1>'.
-            '<h2>Haga click en este enlace para confirma</h2>'.
-            '<hr>'.
-            '<a href=http://localhost/Projects/TP-Final-MoviePass/Home/Index>Haga clik <b>AQUI</b></a>'.
-            '</body>'.
-            '</html>';
+            $mensaje   = '<html>' .
+                '<head><title>Bienvenido a multiflex</title></head>' .
+                '<body><h1>Confirmar Usuario</h1>' .
+                '<h2>Haga click en este enlace para confirma</h2>' .
+                '<hr>' .
+                '<a href=http://localhost/Projects/TP-Final-MoviePass/Home/Index>Haga clik <b>AQUI</b></a>' .
+                '</body>' .
+                '</html>';
             $cabeceras = 'Content-type: text/html; charset=utf-8' . "\r\n";
-            $cabeceras .= 'From: ' .$email. "\r\n" .
-                'Reply-To:'. $email .'"\r\n" '.
+            $cabeceras .= 'From: ' . $email . "\r\n" .
+                'Reply-To:' . $email . '"\r\n" ' .
                 'X-Mailer: PHP/' . phpversion();
-            
-            mail($para,$titulo,$mensaje,$cabeceras);
+
+            mail($para, $titulo, $mensaje, $cabeceras);
             $this->showLoginView();
         }
     }
@@ -142,5 +143,54 @@ class UserController
         $id++;
 
         return $id;
+    }
+
+    public function loginFacebook($userDataFacebook)
+    {
+        if ($userDataFacebook != null) {
+            $user = $this->userDAO->get($userDataFacebook["email"]);
+            if (!empty($user)) {
+                $_SESSION['loggedUser'] = $user->getId();
+                $_SESSION['userType'] = $user->getUsertype()->getName();
+                require_once(VIEWS_PATH . 'validate-session.php');
+            } else {
+                //A diferencia de un usurio clasico, el usuario de FB guarda el id de FB (para futuras consultas a la API)
+                $newUserFromFacebook["id"] = $userDataFacebook["id"];
+                $newUserFromFacebook["email"] = $userDataFacebook["email"];
+                $newUserFromFacebook["password"] = $userDataFacebook["password"];
+                $newUserFromFacebook["firstName"] = $userDataFacebook["first_name"];
+                $newUserFromFacebook["lastName"] = $userDataFacebook["last_name"];
+                //$newUserFromFacebook["photo"] = $userDataFacebook["picture"]; <--Si nesecitamos la imagen
+                $this->signUpFromFacebook($newUserFromFacebook);
+            }
+        } else {
+            $this->homeController->showLoginView();
+        }
+    }
+
+    private function signUpFromFacebook($newUserFromFacebook)
+    {
+        if ($newUserFromFacebook != null) {
+            $password = password_hash($newUserFromFacebook["password"], PASSWORD_DEFAULT, array("cost" => 12));
+
+            $newUser = new User();
+            $newUser->setId($newUserFromFacebook["id"]);
+            $newUser->setFirstname($newUserFromFacebook["firstName"]);
+            $newUser->setLastname($newUserFromFacebook["lastName"]);
+            //Username va a ser el mismo email
+            $newUser->setUserName($newUserFromFacebook["email"]);
+            $newUser->setEmail($newUserFromFacebook["email"]);
+            $newUser->setPassword($password);
+            $newUser->setUsertype("1");
+            //Agregamos el nuevo usario a la base de datos
+            $this->userDAO->add($newUser);
+            //hacemos la consulta para confirmar que se guardo correctamente
+            $user = $this->userDAO->get($newUser->getEmail());
+            $_SESSION['loggedUser'] = $user->getId();
+            $_SESSION['userType'] = $user->getUsertype()->getName();
+            require_once(VIEWS_PATH . 'validate-session.php');
+        } else {
+            $this->homeController->showLoginView();
+        }
     }
 }

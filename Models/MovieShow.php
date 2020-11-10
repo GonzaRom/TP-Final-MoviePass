@@ -11,6 +11,7 @@ class MovieShow
     private $room;
     private $date;
     private $time;
+    private $endTime;
     private $active;
     
 
@@ -118,5 +119,15 @@ class MovieShow
             $risedmoney = $risedmoney + ($price * count($ticket->getSeats()));
         }
         return $risedmoney;
+    }
+
+    public function getEndTime()
+    {
+        return $this->endTime;
+    }
+
+    public function setEndTime($endTime)
+    {
+        $this->endTime = $endTime;
     }
 }
