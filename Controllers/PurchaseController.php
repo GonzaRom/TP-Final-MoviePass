@@ -108,7 +108,7 @@ class PurchaseController
         $_SESSION['purchase'] = $purchase;
     }
 
-    public function validateCreditCard($creditnumber, $expire, $verifcod, $nombre){
+    private function validateCreditCard($creditnumber, $expire, $verifcod, $nombre){
         $flag=true;
         $today = date('Y-m-d');
         if(strlen($creditnumber)!=16){
