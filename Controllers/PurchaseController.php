@@ -108,36 +108,63 @@ class PurchaseController
         $_SESSION['purchase'] = $purchase;
     }
 
-    public function addPurchase()
-    {
-        $time = time();
+    private function validateCreditCard($creditnumber, $expire, $verifcod, $nombre){
+        $flag=true;
         $today = date('Y-m-d');
-        $timeNow = date('H:i:s', $time);
-        $purchase = $_SESSION['purchase'];
-        $purchase->setDate($today);
-        $purchase->setTime($timeNow);
-        $tickets = $purchase->getTickets();
-        $this->purchaseDAOMSQL->add($purchase);
-        $purchase = $this->purchaseDAOMSQL->getPurchase($purchase->getIdUser(), $purchase->getDate(), $purchase->getTime());
-        foreach ($tickets as $ticket) {
-            $newSeat = new Seat();
-            $newSeat->setMovieShow($ticket->getMovieShow()->getId());
-            $newSeat->setNumSeat($ticket->getSeat());
-            $this->seatDAOMSQL->add($newSeat);
-            $ticket->setSeat($this->seatDAOMSQL->getSeat($ticket->getMovieShow()->getId(), $ticket->getSeat()));
-            $ticket->setPurchase($purchase->getId());
-            $this->ticketDAOMSQL->add($ticket);
-            $id = $this->ticketDAOMSQL->get_id($ticket->getMovieShow()->getId(), $ticket->getSeat()->getId());
-            $ticket->setId($id);
-
-            $this->mailTickets($ticket);
+        if(strlen($creditnumber)!=16){
+            $flag=false;
         }
-        $purchase = null;
-        $_SESSION['purchase'] = null;
-        $listTickets = null;
+        else{
+            if($expire<$today){
+                $flag=false;
+            }else{
+                if(strlen($verifcod)!=3){
+                    $flag=false;
+                }else{
+                    if(empty($nombre)){
+                        $flag=false;
+                    }
+                }
+            }
+        }
+        return $flag;
+    }
+
+    public function addPurchase($creditnumber, $expire, $verifcod, $nombre)
+    {   
+        if($this->validateCreditCard($creditnumber, $expire, $verifcod, $nombre)){
+            $time = time();
+            $today = date('Y-m-d');
+            $timeNow = date('H:i:s', $time);
+            $purchase = $_SESSION['purchase'];
+            $purchase->setDate($today);
+            $purchase->setTime($timeNow);
+            $tickets = $purchase->getTickets();
+            $this->purchaseDAOMSQL->add($purchase);
+            $purchase = $this->purchaseDAOMSQL->getPurchase($purchase->getIdUser(), $purchase->getDate(), $purchase->getTime());
+            foreach ($tickets as $ticket) {
+                $newSeat = new Seat();
+                $newSeat->setMovieShow($ticket->getMovieShow()->getId());
+                $newSeat->setNumSeat($ticket->getSeat());
+                $this->seatDAOMSQL->add($newSeat);
+                $ticket->setSeat($this->seatDAOMSQL->getSeat($ticket->getMovieShow()->getId(), $ticket->getSeat()));
+                $ticket->setPurchase($purchase->getId());
+                $this->ticketDAOMSQL->add($ticket);
+                $id = $this->ticketDAOMSQL->get_id($ticket->getMovieShow()->getId(), $ticket->getSeat()->getId());
+                $ticket->setId($id);
+
+                $this->mailTickets($ticket);
+            }
+            $purchase = null;
+            $_SESSION['purchase'] = null;
+            $listTickets = null;
 
 
-        require_once(VIEWS_PATH . "sold-tickets.php");
+            require_once(VIEWS_PATH . "sold-tickets.php");
+        }else{
+            $this->showAddPurchase();
+        }
+
     }
 
     public function getByUser()
@@ -195,6 +222,8 @@ class PurchaseController
         }
     }
 
+   
+
     public function sendMailFromHere($ticket, $file, $address)
     {
         $mail = new PHPMailer(true);
@@ -208,7 +237,7 @@ class PurchaseController
 
         try {
             //Server settings
-            $mail->SMTPDebug = 2;                  // Enable verbose debug output
+            $mail->SMTPDebug = 0;                  // Enable verbose debug output
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication

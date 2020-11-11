@@ -25,7 +25,7 @@
                             <tbody class="tbody-list-sold">
                                 <tr class="ticket">
                                     <td><?php echo $listTickets[$i]->getMovieshow()->getMovie()->getName(); ?></td>
-                                    <td><?php echo $listTickets[$i]->getMovieshow()->getCinema()->getName();?></td>
+                                    <td><?php echo $listTickets[$i]->getMovieshow()->getCinema()->getName(); ?></td>
                                     <td><?php echo $listTickets[$i]->getMovieshow()->getRoom()->getName(); ?></td>
                                     <td><?php echo $listTickets[$i]->getMovieshow()->getDate(); ?></td>
                                     <td><?php echo $listTickets[$i]->getMovieshow()->getTime(); ?></td>
@@ -43,7 +43,27 @@
                     <div class="content-button-sold">
                         <button class="submit-sold" type="submit">Finalizar Compra</button>
                     </div>
-
+                    <br>
+                    <div class="container totalcost">
+                        <div class="form-group col-md-5">
+                            <label class="text-white" for="name">Nombre Completo</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label class="text-white" for="creditnumber">Numero tarjeta</label>
+                            <input type="number" class="form-control" id="creditnumber" name="creditnumber" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="text-white" for="verifcod">Codigo Verificacion</label>
+                                <input type="text" class="form-control" id="verifcod" name="verifcod" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="text-white" for="expire">Fecha Vencimiento</label>
+                                <input type="month" class="form-control" id="expire" name="expire" required>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             <?php endif; ?>
         </div>
