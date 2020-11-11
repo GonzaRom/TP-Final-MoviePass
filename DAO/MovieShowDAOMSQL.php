@@ -275,7 +275,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
 
             return $movieshowlist;
         }
-        catch(Exeption $ex){
+        catch(Exception $ex){
             throw $ex;
         }
     }

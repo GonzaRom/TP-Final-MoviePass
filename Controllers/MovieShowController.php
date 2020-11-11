@@ -9,6 +9,7 @@ use DAO\TypeMovieShowDAO as TypeMovieShowDAO;
 use DAO\SeatDAOMSQL as SeatDAO;
 use Models\MovieShow as MovieShow;
 use DAO\MovieDAOMSQL as MovieDAOMSQL;
+use DateTime;
 use Helpers\IsAuthorize as IsAuthorize; 
 use Helpers\helper_rating;
 
@@ -70,8 +71,14 @@ class MovieShowController
             }
             if($add){
                 $auxmovie=$this->movieDAOMSQL->get($movie);
-                $end=$time+strtotime($auxmovie->getRuntime());/* aca hayq ver como sumar la hora en esta variable end... y la usamos como parametro*/
-                $listMShours=$this->validateTime($room,$time,$end,$date);
+                echo $time .' = hora de inicio<br>';
+                echo $auxmovie->getRunTime() . ' = minutos a sumar<br>';
+                $endObjt=new DateTime($time);
+                $strModify= '+' . $auxmovie->getRunTime(). ' minute';
+                $endObjt->modify($strModify);
+                $endObjt->modify('+15 minute');/* aca hayq ver como sumar la hora en esta variable end... y la usamos como parametro*/
+                $end = $endObjt->format('H:i:s'). ' Horario total<br>';
+                $listMShours=$this->movieShowDAO->validateTime($room,$time,$end,$date);
                 $this->addMs($movie, $cinema, $room, $typeMovieShow, $date, $time, $end);
             }
 

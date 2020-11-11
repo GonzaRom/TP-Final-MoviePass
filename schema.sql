@@ -374,17 +374,6 @@ BEGIN
 END;
 $$
 
-<<<<<<< HEAD
-use moviepass;
-DROP PROCEDURE IF EXISTS get_ticket_by_access;
-DELIMITER $$
-CREATE PROCEDURE get_ticket_by_access (in access int)
-comment "retorna el ticket del acceso correspondiente"
-BEGIN 
-    SELECT * FROM tickets WHERE accescode=access;
-END;
-$$
-=======
 DROP PROCEDURE IF EXISTS addmovieshow;
 DELIMITER $$
 CREATE PROCEDURE addmovieshow(in idmov int , in idcine int,in idtypemoviesh int, in idro int, in idate_ date, in itime_ time, in endti time, in isactiveMovieSh boolean)
@@ -424,4 +413,3 @@ END;
 $$
 
 call validateTime(1,'19:00:00','22:23:00','2020-11-20');
->>>>>>> origin/Matias
