@@ -102,7 +102,7 @@ CREATE TABLE movieshows(
     idroom int not null,
     date_ date,
     time_ time,
-    endtime_ time,
+    endtime time,
     isactiveMovieShow boolean,
     constraint PK_MOVIESHOW primary key (idmovieshow),
     constraint FK_CINEMASHOW foreign key (idcinema) references cinemas (idcinema),
@@ -184,16 +184,6 @@ BEGIN
 END;
 $$
 
-
-DROP PROCEDURE IF EXISTS up_cinema;
-DELIMITER $$
-CREATE PROCEDURE up_cinema(in idcine int)
-comment "activa logicamente un cinema "
-BEGIN
-	update cinemas set isactivec=true where idCinema=idcine;
-END;
-$$
-
 DROP PROCEDURE IF EXISTS delete_room;
 DELIMITER $$
 CREATE PROCEDURE delete_room(in idr int)
@@ -201,16 +191,6 @@ comment "elimina logicamente un cinema y todas las tablas dependientes"
 BEGIN
 	update rooms set isactiver=false where idRoom=idr;
     update movieshows set isactiveMovieShow=false where idRoom=idr;
-END;
-$$
-
-
-DROP PROCEDURE IF EXISTS up_room;
-DELIMITER $$
-CREATE PROCEDURE up_room(in idr int)
-comment "activa logicamente una sala "
-BEGIN
-	update rooms set isactiver=true where idRoom=idr;
 END;
 $$
 
@@ -337,6 +317,7 @@ BEGIN
 END;
 $$
 
+<<<<<<< HEAD
 use moviepass;
 DROP PROCEDURE IF EXISTS update_qr_accescode;
 
@@ -344,6 +325,25 @@ CREATE PROCEDURE update_qr_accescode(in id int,in filename varchar(50),in accesc
 comment "sube el codigo QR y el codigo de acceso"
 BEGIN
 	UPDATE tickets SET qrcode=filename , accescode=accesco WHERE idticket=id;
+=======
+DROP PROCEDURE IF EXISTS update_qr_accescode;
+DELIMITER $$
+CREATE PROCEDURE update_qr_accescode(in id int,in filename varchar(50),in accesco varchar(50))
+comment "sube el codigo QR y el codigo de acceso"
+BEGIN
+	UPDATE tickets SET qrcode=filename , accescode=accesco WHERE idticket=id;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS deliver_ticket;
+DELIMITER $$
+CREATE PROCEDURE deliver_ticket(in accesco varchar(50))
+comment "entrega el ticket"
+BEGIN
+	declare flag boolean default false;
+	UPDATE tickets SET isactiveticket=false  WHERE accescode=accesco;
+    select isactiveticket into flag WHERE accescode=accesco;
+>>>>>>> origin/Matias
 END;
 
 use moviepass;
@@ -361,19 +361,20 @@ DELIMITER $$
 CREATE PROCEDURE add_ticket(in idmo int, in idpur int, in idus int, in costo int, in asiento int)
 comment "agrega un ticket y devuelve el id"
 BEGIN
-	INSERT INTO tickets (idmovieshow , idpurchase , iduser , ticketcost , idseat) VALUES (idmo , idpur, idus , costo , asiento);
+	INSERT INTO tickets (idmovieshow , idpurchase , iduser , ticketcost , idseat, isactiveticket) VALUES (idmo , idpur, idus , costo , asiento, true);
 END;
 $$
 
 DROP PROCEDURE IF EXISTS get_id_ticket;
 DELIMITER $$
 CREATE PROCEDURE get_id_ticket(in idfunc int , in idasiento int)
-comment "devuelve   id de tickete"
+comment "devuelve   id de ticket"
 BEGIN
 	SELECT idticket FROM tickets WHERE idmovieshow=idfunc AND idseat=idasiento;
 END;
 $$
 
+<<<<<<< HEAD
 use moviepass;
 DROP PROCEDURE IF EXISTS get_ticket_by_access;
 DELIMITER $$
@@ -383,3 +384,44 @@ BEGIN
     SELECT * FROM tickets WHERE accescode=access;
 END;
 $$
+=======
+DROP PROCEDURE IF EXISTS addmovieshow;
+DELIMITER $$
+CREATE PROCEDURE addmovieshow(in idmov int , in idcine int,in idtypemoviesh int, in idro int, in idate_ date, in itime_ time, in endti time, in isactiveMovieSh boolean)
+comment "agregamovieshow"
+BEGIN
+	
+    
+	INSERT INTO movieshows (idmovie , idcinema , idtypemovieshow , idroom , date_ , time_ , endtime, isactiveMovieShow )
+            VALUES (idmov , idcine , idtypemoviesh , idro , idate_ , itime_ ,endti, isactiveMovieSh);          
+	
+END;
+$$
+
+DROP PROCEDURE IF EXISTS validateTime;
+DELIMITER $$
+CREATE PROCEDURE validateTime(in room int , in hrinicio time, in hrfin time, in dia date)
+comment "devuelve los movieshows q coincidan en horario y dia"
+BEGIN
+	
+	SELECT * FROM movieshows WHERE  (hrinicio between time_ and endtime) and (date_=dia) and idroom=room
+    
+    UNION   /*aca hay q seguir*/
+    
+    SELECT * FROM movieshows WHERE (hrfin between time_ and endtime) and (date_=dia) and idroom=room;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS validatemovie;
+DELIMITER $$
+CREATE PROCEDURE validatemovie(in idmov int , in idate_ date)
+comment "valida si la pelicula esta libre para ese dia"
+BEGIN
+	
+		select * from movieshows where idmovie=idmov and date_=idate_;
+	
+END;
+$$
+
+call validateTime(1,'19:00:00','22:23:00','2020-11-20');
+>>>>>>> origin/Matias
