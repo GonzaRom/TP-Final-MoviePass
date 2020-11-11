@@ -60,7 +60,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="text-white" for="expire">Fecha Vencimiento</label>
-                                <input type="date" class="form-control" id="expire" name="expire" required>
+                                <input type="month" class="form-control" id="expire" name="expire" required>
                             </div>
                         </div>
                     </div>
