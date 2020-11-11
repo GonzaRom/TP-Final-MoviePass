@@ -20,8 +20,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     public function add(MovieShow $newMovieShow)
     {
         try {
-            $sql = "INSERT INTO " . $this->nameTable . " (idmovie , idcinema , idtypemovieshow , idroom , date_ , time_ , isactiveMovieShow )
-            VALUES (:idmovie , :idcinema , :idtypemovieshow , :idroom , :date_ , :time_ , :isactiveMovieShow)";
+            $sql = "call addmovieshow(:idmovie, :idcinema, :idtypemovieshow, :idroom, :date_, :time_, :isactiveMovieShow)";
 
             $parameters['idmovie'] = $newMovieShow->getMovie();
             $parameters['idcinema'] = $newMovieShow->getCinema();
@@ -246,6 +245,30 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             }
         }
         return $listMovieShow;
+    }
+
+    public function validateTime(){
+        try {
+            $movieshowlist = array();
+
+            $query = "call validateTime();";/*aca tengo q seguir */
+
+            $this->connection = Connection::getInstance();
+
+            $resultSet = $this->connection->execute($query);
+
+            foreach ($resultSet as $row) {
+                $genre = new Genre();
+                $genre->setId($row["idgenre"]);
+                $genre->setName($row["namegenre"]);
+
+                array_push($genrelist, $genre);
+            }
+
+            return $genrelist;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
     }
 
     protected function creatMovieShow($value)

@@ -57,31 +57,48 @@ class MovieShowController
     public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)
     {   
         if(IsAuthorize::isauthorize()){
-            if ($this->isMovieSetted($movie, $date)) $this->showAddMovieShowView(4);
-
-            else {
-                $this->movieDAOMSQL->upMovie($movie);
-                $today = date('Y-m-d');
-                $newMovieShow = new MovieShow();
-                $exist = false;
-                if ($today <  $date) {
-                    if (!$exist) {
-                        $newMovieShow->setMovie($movie);
-                        $newMovieShow->setCinema($cinema);
-                        $newMovieShow->setRoom($room);
-                        $newMovieShow->setTypeMovieShow($typeMovieShow);
-                        $newMovieShow->setDate($date);
-                        $newMovieShow->setTime($time);
-                      //  $newMovieShow->setEndTime($time + $movie->getRunTime());
-                        $newMovieShow->setIsActive(true);
-                        $this->movieShowDAO->add($newMovieShow);
-                        $this->showAddMovieShowView();
-                    } else {
-                        $this->showAddMovieShowView(2);
+            $add=false;
+            $listMS=$movieShowDAO->validateMovie($movie,$date);
+            if(empty($listMS)){
+                $add=true;
+            }else{
+                foreach($listMS as $movieshow){
+                    if($movieshow->getRoom()==$room){
+                        $add=true;
                     }
                 }
-            }   
-        }    
+            }
+            if($add){
+                $listMShours=$this->validateTime($room,$time,$date);/* aca tengo q continuar*/ 
+                $this->addMs($movie, $cinema, $room, $typeMovieShow, $date, $time);
+            }
+
+        }
+    }
+
+    private function addMs($movie, $cinema, $room, $typeMovieShow, $date, $time)
+    {   
+        $this->movieDAOMSQL->upMovie($movie);
+        $today = date('Y-m-d');
+        $newMovieShow = new MovieShow();
+        $exist = false;
+        if ($today <  $date) {
+            if (!$exist) {
+                $newMovieShow->setMovie($movie);
+                $newMovieShow->setCinema($cinema);
+                $newMovieShow->setRoom($room);
+                $newMovieShow->setTypeMovieShow($typeMovieShow);
+                $newMovieShow->setDate($date);
+                $newMovieShow->setTime($time);
+                $newMovieShow->setEndTime($time + $movie->getRunTime());
+                $newMovieShow->setIsActive(true);
+                $this->movieShowDAO->add($newMovieShow);
+                $this->showAddMovieShowView();
+            } else {
+                $this->showAddMovieShowView(2);
+            }
+        }
+               
         //FECHA ANTERIOR A HOY
         $this->showAddMovieShowView(2);
     }
@@ -182,14 +199,12 @@ class MovieShowController
 
     private function isMovieSetted($idMovie, $date)
     {
-        if(IsAuthorize::isauthorize()){
-            $movieShows = array();
-            $cinemas = $this->cinemaDAO->getAll();
-            foreach ($cinemas as $cinema) {
-                $movieShow = $this->movieShowDAO->getMovieShowByMovieDateCinema($idMovie, $date, $cinema->getId());
-                if (!empty($movieShow)) return true;
-            }
-            return false;
+        $movieShows = array();
+        $cinemas = $this->cinemaDAO->getAll();
+        foreach ($cinemas as $cinema) {
+            $movieShow = $this->movieShowDAO->getMovieShowByMovieDateCinema($idMovie, $date, $cinema->getId());
+            if (!empty($movieShow)) return true;
         }
+        return false;    
     }
 }
