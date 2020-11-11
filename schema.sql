@@ -374,6 +374,26 @@ BEGIN
 END;
 $$
 
+use moviepass;
+DROP PROCEDURE IF EXISTS get_ticket_by_access;
+DELIMITER $$
+CREATE PROCEDURE get_ticket_by_access (in access int)
+comment "retorna el ticket del acceso correspondiente"
+BEGIN 
+    SELECT * FROM tickets as p INNER JOIN movieshows as m ON p.idmovieshow = m.idmovieshow INNER JOIN typemovieshows as tm 
+                ON m.idtypemovieshow = tm.idtypemovieshow
+                INNER JOIN movies as mo
+                ON m.idmovie = mo.idmovie 
+                INNER JOIN rooms as r 
+                ON m.idroom = r.idroom 
+                INNER JOIN cinemas as c
+                ON c.idcinema = m.idcinema
+                INNER JOIN users as u
+                ON p.iduser = u.iduser
+                INNER JOIN typerooms as t 
+                ON r.idtyperoom = t.idtyperoom INNER JOIN seats as s ON p.idseat = s.idseat   WHERE accescode=access;
+END;
+$$
 DROP PROCEDURE IF EXISTS addmovieshow;
 DELIMITER $$
 CREATE PROCEDURE addmovieshow(in idmov int , in idcine int,in idtypemoviesh int, in idro int, in idate_ date, in itime_ time, in endti time, in isactiveMovieSh boolean)
