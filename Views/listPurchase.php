@@ -8,13 +8,13 @@
                     <ul>
                         <li><?php echo $purchase->getDate(); ?></li>
                         <li><?php echo $purchase->getTime(); ?></li>
-                        <li><?php echo $purchase->getCosto(); ?></li>
+                        <li>$<?php echo $purchase->getCosto(); ?></li>
                     </ul>
                 </h2>
                 <?php foreach ($purchase->getTickets() as $ticket) : ?>
                     <ul>
                         <li><?php echo $ticket->getMovieshow()->getMovie()->getName(); ?></li>
-                        <li>Cinema</li>
+                        <li><?php echo $ticket->getMovieshow()->getCinema()->getName();?></li>
                         <li><?php echo $ticket->getMovieshow()->getRoom()->getName(); ?></li>
                         <li><?php echo $ticket->getMovieshow()->getDate(); ?></li>
                         <li><?php echo $ticket->getMovieshow()->getTime(); ?> </li>

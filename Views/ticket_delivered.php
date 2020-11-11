@@ -1,2 +1,52 @@
-<h1><?php echo $message?></h1>
-<a href="<?php echo FRONT_ROOT; ?>Home/Index">click aqui para volver al menu</a>
+<section class="deliver-ticket-content">
+    <?php require_once('nav.php');?>
+    <div class="rgba-deliver-ticket">
+        <h2>Gracias por su compra</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Usuario
+                    </th>
+                    <th>
+                        Pelicula
+                    </th>
+                    <th>
+                        Sala
+                    </th>
+                    <th>
+                        Butaca
+                    </th>
+                    <th>
+                        Fecha
+                    </th>
+                    <th>
+                        Hora
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>
+                        Usuario
+                    </th>
+                    <td>
+                        Pelicula
+                    </td>
+                    <td>
+                        Sala
+                    </td>
+                    <td>
+                        Butaca
+                    </td>
+                    <td>
+                        Fecha
+                    </td>
+                    <td>
+                        Hora
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

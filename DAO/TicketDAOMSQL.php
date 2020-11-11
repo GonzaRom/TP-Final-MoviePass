@@ -76,11 +76,11 @@
                 $parameters['code'] = $code;
                 var_dump($parameters);
                 $this->conection= Connection::getInstance();
-                $resultSet = $this->conection->Execute($query, $parameters);
-                foreach ($resultSet as $row)
+                $this->conection->ExecuteNonQuery($query, $parameters);
+                /*foreach ($resultSet as $row)
                 {                
                     $flag=$row['flag'];
-                }
+                }*/
                 return $flag;
             }
             catch(Exception $ex){
@@ -127,6 +127,8 @@
                 ON m.idmovie = mo.idmovie 
                 INNER JOIN rooms as r 
                 ON m.idroom = r.idroom 
+                INNER JOIN cinemas as c
+                ON c.idcinema = m.idcinema
                 INNER JOIN typerooms as t 
                 ON r.idtyperoom = t.idtyperoom INNER JOIN seats as s ON p.idseat = s.idseat  WHERE idpurchase = :id';
                 $parameters['id'] = $id;
@@ -137,7 +139,7 @@
                 {                
                     $ticket = new TicketDTO();
                     $ticket->setId($row['idticket']);
-                    $ticket->setMovieShow(mapperDAO :: creatMovieShow($row));
+                    $ticket->setMovieShow(mapperDAO :: creatMovieShowWithCinema($row));
                     $ticket->setUser($row['iduser']);
                     $ticket->setPurchase($row['idpurchase']);
                     $ticket->setSeats(mapperDAO :: mapearSeat($row));
@@ -148,6 +150,15 @@
                 return $tickets;
 
             }catch (Exception $ex){
+                throw $ex;
+            }
+        } 
+
+        public function getByAccess($access){
+            try{
+                $sql = "call get_ticket_by_access(:access)";
+            }
+            catch(Exception $ex){
                 throw $ex;
             }
         }

@@ -1,6 +1,7 @@
 <?php
 namespace DAO;
 
+use Models\Cinema;
 use Models\Genre;
 use Models\Movie;
 use Models\MovieShowDTO;
@@ -41,6 +42,31 @@ class mapperDAO{
         }
     }
 
+    public static function creatMovieShowWithCinema($value)
+    {
+        $value = ($value) ? $value : array();
+        if (!empty($value)) {
+            $newMovieShow = new MovieShowDTO;
+            $newMovieShow->setId($value['idmovieshow']);
+            $newMovieShow->setMovie(mapperDAO :: mapearMovie($value));
+            $newMovieShow->setRoom(mapperDAO :: mapearRoom($value));
+            $newMovieShow->setTypeMovieShow(mapperDAO :: mapearTypeMovieShow($value));
+            $newMovieShow->setCinema(mapperDAO :: mapearCinema($value));
+            $newMovieShow->setDate($value['date_']);
+            $newMovieShow->setTime($value['time_']);
+            return $newMovieShow;
+        }
+    }
+
+    public static function mapearCinema($value){
+        $value = ($value) ? $value : array();
+        if(!empty($value)){
+            $newCinema = new Cinema();
+            $newCinema->setName($value['namecinema']);
+            echo $value['namecinema'];
+            return $newCinema;
+        }
+    }
 
     public static function mapearRoom($value)
     {

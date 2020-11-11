@@ -41,22 +41,26 @@ class TicketController{
 
         }
 
-        public function showHome($message=""){
+        public function showHome($message="" , $acceso){
+            /*$ticket = $this->ticketDAO->getByAccess($acceso);*/
             
-            require_once(VIEWS_PATH."ticket-delivered.php");
+            require_once(VIEWS_PATH."ticket_delivered.php");
         }
 
         public function deliverNewTicket($code){
             if(IsAuthorize::isauthorize()){
                 try{
                     $message="no entro";
-                    if($this->ticketDAO->deliverTicket($code)){
+                    echo "hola";
+                    echo $this->ticketDAO->deliverTicket($code);
+                    /*if($this->ticketDAO->deliverTicket($code)){
                         $message="se borro";
+                        echo "hola 2";
                     }
                     else{
                         $message="no se pudo borrar";
-                    }
-                    $this->showHome($message);
+                    }*/
+                    $this->showHome($message , $code);
                 }
                 catch (Exception $ex){
                     throw $ex;

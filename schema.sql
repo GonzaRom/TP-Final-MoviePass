@@ -137,6 +137,8 @@ CREATE TABLE tickets(
     idpurchase int not null,
 	ticketcost int,
     qrcode varchar(50),
+    accescode varchar(50),
+    isactiveticket boolean,
     constraint PK_TICKET primary key (idticket),
     constraint FK_SEAT foreign key (idseat) references seats(idseat),
     constraint FK_MOVIESH foreign key (idmovieshow) references movieshows(idmovieshow),
@@ -344,15 +346,13 @@ BEGIN
 	UPDATE tickets SET qrcode=filename , accescode=accesco WHERE idticket=id;
 END;
 
-
+use moviepass;
 DROP PROCEDURE IF EXISTS deliver_ticket;
 
 CREATE PROCEDURE deliver_ticket(in accesco varchar(50))
 comment "entrega el ticket"
 BEGIN
-	declare flag boolean default false;
 	UPDATE tickets SET isactiveticket=false  WHERE accescode=accesco;
-    select isactiveticket into flag WHERE accescode=accesco; 
 END;
 
 
@@ -371,5 +371,15 @@ CREATE PROCEDURE get_id_ticket(in idfunc int , in idasiento int)
 comment "devuelve   id de tickete"
 BEGIN
 	SELECT idticket FROM tickets WHERE idmovieshow=idfunc AND idseat=idasiento;
+END;
+$$
+
+use moviepass;
+DROP PROCEDURE IF EXISTS get_ticket_by_access;
+DELIMITER $$
+CREATE PROCEDURE get_ticket_by_access (in access int)
+comment "retorna el ticket del acceso correspondiente"
+BEGIN 
+    SELECT * FROM tickets WHERE accescode=access;
 END;
 $$

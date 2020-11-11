@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>loader.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>sold-tickets.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>list-purchase.css">
+    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>ticket_delivered.css">
     <link rel=" stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick-theme.css" />
     <link rel="stylesheet" href="<?php echo FONTAWESOME; ?>/css/all.css">
