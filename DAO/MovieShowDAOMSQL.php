@@ -265,7 +265,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
                 $newmovieshow->setId($row['idmovieshow']);
                 $newmovieshow->setCinema($row['idcinema']);
                 $newmovieshow->setTypeMovieShow($row['idtypemovieshow']);
-                $newmovieshow->setMovie($row['movie']);
+                $newmovieshow->setMovie($row['idmovie']);
                 $newmovieshow->setRoom($row['idroom']);
                 $newmovieshow->setDate($row['date_']);
                 $newmovieshow->setTime($row['time_']);
