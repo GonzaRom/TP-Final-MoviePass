@@ -72,20 +72,18 @@ class MovieShowController
             if($add){
                 $auxmovie=$this->movieDAOMSQL->get($movie);
                 $endObjt=new DateTime($time);
+                $time = $endObjt->format('H:i');
                 $strModify= '+' . $auxmovie->getRunTime(). ' minute';
                 $endObjt->modify($strModify);
-                $endObjt->modify('+15 minute');
-                $end = $endObjt->format('H:i:s'). ' Horario total<br>';
-                $flag=$this->movieShowDAO->validateTime($room,$time,$end,$date);
-                var_dump($flag);
-                if(empty($flag)){
+                $endObjt->modify('+15 minute');/* aca hayq ver como sumar la hora en esta variable end... y la usamos como parametro*/
+                $end = $endObjt->format('H:i'). ' Horario total<br>';
+                $listMShours=$this->movieShowDAO->validateTime($room,$time,$end,$date);
+                if(empty($listMShours)){
                     $this->addMs($movie, $cinema, $room, $typeMovieShow, $date, $time, $end);
-                }
-                else{
+                }else{
                     $this->showAddMovieShowView(2);
                 }
-            }else{
-                $this->showAddMovieShowView(4);
+                
             }
 
         }

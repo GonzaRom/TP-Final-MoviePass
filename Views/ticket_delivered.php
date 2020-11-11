@@ -28,22 +28,22 @@
             <tbody>
                 <tr>
                     <th>
-                        Usuario
+                        <?php echo $ticket->getUser()->getFirstname() .' '. $ticket->getUser()->getLastName();?>
                     </th>
                     <td>
-                        Pelicula
+                        <?php echo $ticket->getMovieshow()->getCinema()->getName();?>
                     </td>
                     <td>
-                        Sala
+                        <?php echo $ticket->getMovieshow()->getRoom()->getName();?>
                     </td>
                     <td>
-                        Butaca
+                        <?php echo $ticket->getSeats()->getNumSeat();?>
                     </td>
                     <td>
-                        Fecha
+                        <?php echo $ticket->getMovieshow()->getDate();?>
                     </td>
                     <td>
-                        Hora
+                        <?php echo $ticket->getMovieshow()->getTime();?>
                     </td>
                 </tr>
             </tbody>

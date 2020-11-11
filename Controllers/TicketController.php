@@ -42,8 +42,7 @@ class TicketController{
         }
 
         public function showHome($message="" , $acceso){
-            /*$ticket = $this->ticketDAO->getByAccess($acceso);*/
-            
+            $ticket = $this->ticketDAO->getByAccess($acceso);
             require_once(VIEWS_PATH."ticket_delivered.php");
         }
 
@@ -51,8 +50,7 @@ class TicketController{
             if(IsAuthorize::isauthorize()){
                 try{
                     $message="no entro";
-                    echo "hola";
-                    echo $this->ticketDAO->deliverTicket($code);
+                    $this->ticketDAO->deliverTicket($code);
                     /*if($this->ticketDAO->deliverTicket($code)){
                         $message="se borro";
                         echo "hola 2";
