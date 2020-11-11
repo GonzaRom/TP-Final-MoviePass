@@ -16,8 +16,8 @@ define("DB_HOST", "localhost");
 define("DB_NAME", "moviepass");
 define("DB_USER", "root");
 define("DB_PASS", "");
-
-
+define("FAPP_ID","421910515476004");
+define("FAPP_SECRET","43d4c2357f17caef7dfe906e2d328101");
 ?>
 
 

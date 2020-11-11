@@ -72,6 +72,7 @@ class MovieShowController
                         $newMovieShow->setTypeMovieShow($typeMovieShow);
                         $newMovieShow->setDate($date);
                         $newMovieShow->setTime($time);
+                      //  $newMovieShow->setEndTime($time + $movie->getRunTime());
                         $newMovieShow->setIsActive(true);
                         $this->movieShowDAO->add($newMovieShow);
                         $this->showAddMovieShowView();
@@ -179,7 +180,7 @@ class MovieShowController
         $this->getAll($cinemas);
     }
 
-    public function isMovieSetted($idMovie, $date)
+    private function isMovieSetted($idMovie, $date)
     {
         if(IsAuthorize::isauthorize()){
             $movieShows = array();

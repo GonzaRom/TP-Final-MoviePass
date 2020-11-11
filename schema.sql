@@ -102,6 +102,7 @@ CREATE TABLE movieshows(
     idroom int not null,
     date_ date,
     time_ time,
+    endtime_ time,
     isactiveMovieShow boolean,
     constraint PK_MOVIESHOW primary key (idmovieshow),
     constraint FK_CINEMASHOW foreign key (idcinema) references cinemas (idcinema),
