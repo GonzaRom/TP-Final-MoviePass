@@ -121,7 +121,7 @@ class PurchaseController
                 if(strlen($verifcod)!=3){
                     $flag=false;
                 }else{
-                    if(empty($nombre){
+                    if(empty($nombre)){
                         $flag=false;
                     }
                 }
@@ -161,7 +161,10 @@ class PurchaseController
 
 
             require_once(VIEWS_PATH . "sold-tickets.php");
+        }else{
+            $this->showAddPurchase();
         }
+
     }
 
     public function getByUser()
@@ -234,7 +237,7 @@ class PurchaseController
 
         try {
             //Server settings
-            $mail->SMTPDebug = 2;                  // Enable verbose debug output
+            $mail->SMTPDebug = 0;                  // Enable verbose debug output
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
