@@ -71,8 +71,6 @@ class MovieShowController
             }
             if($add){
                 $auxmovie=$this->movieDAOMSQL->get($movie);
-                echo $time .' = hora de inicio<br>';
-                echo $auxmovie->getRunTime() . ' = minutos a sumar<br>';
                 $endObjt=new DateTime($time);
                 $time = $endObjt->format('H:i');
                 $strModify= '+' . $auxmovie->getRunTime(). ' minute';
