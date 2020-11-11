@@ -1,4 +1,5 @@
 <?php
+
 namespace DAO;
 
 use Models\Cinema;
@@ -10,9 +11,11 @@ use Models\SeatDTO;
 use Models\Ticket;
 use Models\TypeMovieShow;
 use Models\TypeRoom;
+use Models\User;
 
-class mapperDAO{
-    
+class mapperDAO
+{
+
     private $connection;
 
     public static function mapearSeat($value)
@@ -33,9 +36,9 @@ class mapperDAO{
         if (!empty($value)) {
             $newMovieShow = new MovieShowDTO;
             $newMovieShow->setId($value['idmovieshow']);
-            $newMovieShow->setMovie(mapperDAO :: mapearMovie($value));
-            $newMovieShow->setRoom(mapperDAO :: mapearRoom($value));
-            $newMovieShow->setTypeMovieShow(mapperDAO :: mapearTypeMovieShow($value));
+            $newMovieShow->setMovie(mapperDAO::mapearMovie($value));
+            $newMovieShow->setRoom(mapperDAO::mapearRoom($value));
+            $newMovieShow->setTypeMovieShow(mapperDAO::mapearTypeMovieShow($value));
             $newMovieShow->setDate($value['date_']);
             $newMovieShow->setTime($value['time_']);
             return $newMovieShow;
@@ -48,19 +51,20 @@ class mapperDAO{
         if (!empty($value)) {
             $newMovieShow = new MovieShowDTO;
             $newMovieShow->setId($value['idmovieshow']);
-            $newMovieShow->setMovie(mapperDAO :: mapearMovie($value));
-            $newMovieShow->setRoom(mapperDAO :: mapearRoom($value));
-            $newMovieShow->setTypeMovieShow(mapperDAO :: mapearTypeMovieShow($value));
-            $newMovieShow->setCinema(mapperDAO :: mapearCinema($value));
+            $newMovieShow->setMovie(mapperDAO::mapearMovie($value));
+            $newMovieShow->setRoom(mapperDAO::mapearRoom($value));
+            $newMovieShow->setTypeMovieShow(mapperDAO::mapearTypeMovieShow($value));
+            $newMovieShow->setCinema(mapperDAO::mapearCinema($value));
             $newMovieShow->setDate($value['date_']);
             $newMovieShow->setTime($value['time_']);
             return $newMovieShow;
         }
     }
 
-    public static function mapearCinema($value){
+    public static function mapearCinema($value)
+    {
         $value = ($value) ? $value : array();
-        if(!empty($value)){
+        if (!empty($value)) {
             $newCinema = new Cinema();
             $newCinema->setName($value['namecinema']);
             echo $value['namecinema'];
@@ -76,7 +80,7 @@ class mapperDAO{
             $newRoom->setId($value['idroom']);
             $newRoom->setName($value['nameroom']);
             $newRoom->setCapacity($value['capacity']);
-            $newRoom->setTypeRoom(mapperDAO :: mapearTypeRoom($value));
+            $newRoom->setTypeRoom(mapperDAO::mapearTypeRoom($value));
             $newRoom->setIsActive($value['isactiveMovieShow']);
             $newRoom->setTicketCost($value['ticketcost']);
             return $newRoom;
@@ -143,9 +147,10 @@ class mapperDAO{
         return $listGenres;
     }
 
-    public static function mapearTicket($value){
+    public static function mapearTicket($value)
+    {
         $value = ($value) ? $value : array();
-        if(!empty($value)){
+        if (!empty($value)) {
             $ticket = new Ticket();
             $ticket->setId($value['idticket']);
             $ticket->setMovieShow($value['idmovieshow']);
@@ -157,6 +162,14 @@ class mapperDAO{
         }
     }
 
+    public static function mapearUser($value)
+    {
+        $value = ($value) ? $value : array();
+        if (!empty($value)) {
+            $user = new User();
+            $user->setFirstname($value['username']);
+            $user->setLastname($value['lastname']);
+            return $user;
+        }
+    }
 }
-
-?>

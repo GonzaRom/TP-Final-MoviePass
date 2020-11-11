@@ -74,7 +74,6 @@
                 $flag=false;
                 $query = "call deliver_ticket(:code)";
                 $parameters['code'] = $code;
-                var_dump($parameters);
                 $this->conection= Connection::getInstance();
                 $this->conection->ExecuteNonQuery($query, $parameters);
                 /*foreach ($resultSet as $row)
@@ -156,7 +155,26 @@
 
         public function getByAccess($access){
             try{
+                $ticket = null;
                 $sql = "call get_ticket_by_access(:access)";
+                $parameters['access'] = $access;
+                $this->conection = Connection::getInstance();
+                $resultSet = $this->conection->Execute($sql,$parameters);
+
+                foreach ($resultSet as $row)
+                {                
+                    $ticket = new TicketDTO();
+                    $ticket->setId($row['idticket']);
+                    $ticket->setMovieShow(mapperDAO :: creatMovieShowWithCinema($row));
+                    $ticket->setUser($row['iduser']);
+                    $ticket->setPurchase($row['idpurchase']);
+                    $ticket->setSeats(mapperDAO :: mapearSeat($row));
+                    $ticket->setUser(mapperDAO :: mapearUser($row));
+                    
+                }
+
+                return $ticket;
+
             }
             catch(Exception $ex){
                 throw $ex;

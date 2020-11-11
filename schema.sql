@@ -388,10 +388,8 @@ BEGIN
                 ON m.idroom = r.idroom 
                 INNER JOIN cinemas as c
                 ON c.idcinema = m.idcinema
-                INNER JOIN users as u
-                ON p.iduser = u.iduser
                 INNER JOIN typerooms as t 
-                ON r.idtyperoom = t.idtyperoom INNER JOIN seats as s ON p.idseat = s.idseat   WHERE accescode=access;
+                ON r.idtyperoom = t.idtyperoom INNER JOIN seats as s ON p.idseat = s.idseat INNER JOIN users as u ON u.iduser = p.iduser WHERE p.accescode=access;
 END;
 $$
 DROP PROCEDURE IF EXISTS addmovieshow;
