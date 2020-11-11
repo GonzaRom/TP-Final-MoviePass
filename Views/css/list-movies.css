@@ -5,28 +5,87 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
+    overflow-y: scroll;
     
 }
 
 
 .content-rgba-movie-list{
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,.3);
-    overflow-y: scroll;
+    min-height: 100vh;
+    background: rgba(0,0,0,.5);
+    
 }
 
 
-.button-reserve{
+.btn.btn-secondary.btn-sm{
     border: none;
     outline: none;
     padding: 10px;
-    font-size: 18px;
+    font-size: 15px;
     background:  rgb(55, 56, 58);
     color: #Fff;
+    letter-spacing: 1px;
 }
 
-.button-reserve:hover{
+.btn.btn-secondary.btn-sm:hover{
     background: rgb(133, 12, 12);
+}
+
+.card.mb-3{
+    background: rgba(0,0,0,.5);
+}
+.row.no-gutters{
+    margin: 20px;
+}
+
+.content-list-reserv{
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    border-radius: 0px 10px 10px 0px;
+    font-size: 25px;
+}
+
+.list-reserv{
+    height: 60%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-flow: column;
+}
+
+.fas.fa-star{
+    color: rgb(170, 30, 30);
+}
+
+.far.fa-star{
+    color:#000
+}
+
+.fas.fa-star-half-alt{
+    color: rgb(170, 30, 30);
+}
+
+.container{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+
+
+.container .filtros{
+    width: 100%;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
 }

@@ -1,5 +1,5 @@
 <?php
-use DAO\GenreDAO;
-$genreDAO = new GenreDAO();
+use DAO\GenreDAOMSQL as GenreDAOMSQL;
+$genreDAO = new GenreDAOMSQL();
 $listGenre = $genreDAO->getAll();
 ?>

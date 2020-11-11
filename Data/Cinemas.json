@@ -1,20 +1,37 @@
 [
     {
         "id": 1,
-        "name": "Cine Ambasador",
+        "name": "Ambasador",
         "adress": "Cordoba 1236",
-        "phonenumber": "2236745133"
+        "phonenumber": "2236745133",
+        "active": false
     },
     {
         "id": 2,
-        "name": "Gallegos",
+        "name": "Aldrey",
         "adress": "Sarmiento 2665",
-        "phonenumber": "2236745133"
+        "phonenumber": "2236745133",
+        "active": false
     },
     {
         "id": 3,
-        "name": "Aldrey",
-        "adress": "Sarmiento 2665",
-        "phonenumber": "2236745133"
+        "name": "gallegos",
+        "adress": "catamarca 5614",
+        "phonenumber": "2236745133",
+        "active": true
+    },
+    {
+        "id": 4,
+        "name": "Cine del Paseo",
+        "adress": "Diagonal pueyrredon",
+        "phonenumber": "+542234895625",
+        "active": false
+    },
+    {
+        "id": 5,
+        "name": "Prueba",
+        "adress": "casa",
+        "phonenumber": "123",
+        "active": true
     }
 ]

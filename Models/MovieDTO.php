@@ -12,6 +12,9 @@ class MovieDTO{
     private $voteAverage;
     private $background;
     private $poster;
+    private $runtime;
+    private $active;
+    private $trailer;
     
     public function __construct()
     {
@@ -125,5 +128,28 @@ class MovieDTO{
     public function setSynopsis($synopsis)
     {
         $this->synopsis = $synopsis;
+    }
+    public function setRunTime($runtime){
+        $this->runtime = $runtime;
+    }
+    public function getRunTime(){
+        return $this->runtime ;
+    }
+    public function setIsActive($active){
+        $this->active = $active;
+    }
+
+    public function getIsActive(){
+        return $this->active;
+    }
+
+    public function getTrailer()
+    {
+        return $this->trailer;
+    }
+
+    public function setTrailer($trailer)
+    {
+        $this->trailer = $trailer;
     }
 }

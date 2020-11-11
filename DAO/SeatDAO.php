@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace DAO;
 
 use Models\Seat;
@@ -76,5 +76,5 @@ class SeatDAO implements ISeatDAO{
     }
 }
 
-
+*/
 ?>

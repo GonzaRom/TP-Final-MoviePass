@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiflex</title>
-    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>login.css">	
+    <link rel="shortcut icon" href="<?php echo IMG_PATH; ?>iconfinder-camera-video-photography-photo-movie-4593196_122247.ico" type="image/x-icon">
+    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>login.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>nav.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-Room.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-MovieThreater.css">
@@ -16,32 +16,11 @@
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>detail-movie.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-movieShow.css">
     <link rel="stylesheet" href="<?php echo CSS_PATH; ?>list-movieShow.css">
-    <script type="text/javascript">
-    function selectCines(str){
-       var conexion;
-         if(str == ""){
-             document.getElementById("txtHint").innerHTML="";
-             return;
-         }
-
-         if(window.XMLHttpRequest){
-             conexion = new XMLHttpRequest();
-         }
-         
-         conexion.onreadystatechange= function(){
-             if(conexion.readyState==4 && conexion.status==200){
-                 document.getElementById("salas").innerHTML=conexion.responseText;
-             }
-         }
-
-         conexion.open("GET", "salas?cinema=" + str ,true);
-         conexion.send();
-    }
-        
-    
-    
-    </script>
-    <link rel="stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick.css" />
+    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>add-purchase.css">
+    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>loader.css">
+    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>sold-tickets.css">
+    <link rel="stylesheet" href="<?php echo CSS_PATH; ?>list-purchase.css">
+    <link rel=" stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo SLICK; ?>/slick-theme.css" />
     <link rel="stylesheet" href="<?php echo FONTAWESOME; ?>/css/all.css">
     <link rel="stylesheet" href="<?php echo FONTAWESOME; ?>/css/all.min.css">
@@ -49,7 +28,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    
 </head>
 
-<body>
-    
+<body class="hidden">

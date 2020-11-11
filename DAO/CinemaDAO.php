@@ -4,7 +4,7 @@
     use Models\Cinema as Cinema;
     use DAO\ICinemaDAO as ICinemaDAO;
     
-    class CinemaDAO implements ICinemaDAO{
+    class CinemaDAO  {
         private $cinemalist=array();
         private $filename;
 
@@ -34,7 +34,7 @@
             $this->saveData();
         } 
 
-        public function update($key, Cinema $cinema){
+        /*public function update(Cinema $cinema){
             $this->retrieveData();
             $flag = false;
             foreach ($this->cinemalist as $value) {
@@ -52,10 +52,17 @@
         }
 
         public function delete($key){
+            $success = false;
             $this->retrieveData();
-            unset($this->cinemalist[$key]);
-            $this->saveData();                       
-        }
+            foreach($this->cinemalist as $cinema){
+                if($cinema->getId() == $key){
+                    $cinema->setActive(false);
+                    $success = true;
+                } 
+            }
+            $this->saveData();
+            return $success;                       
+        }*/
 
         private function saveData(){
             $arrayToEncode=array();
@@ -65,6 +72,7 @@
                 $valuesArray["name"]=$cinema->getName();
                 $valuesArray["adress"]=$cinema->getAdress();
                 $valuesArray["phonenumber"]=$cinema->getPhonenumber();
+                $valuesArray['active']=$cinema->getActive();
                 array_push($arrayToEncode,$valuesArray);
             }
             $jsonContent=json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -84,7 +92,8 @@
                     $cinema->setId($valuesArray["id"]);
                     $cinema->setName($valuesArray["name"]);
                     $cinema->setAdress($valuesArray["adress"]);
-                    $cinema->setPhonenumber($valuesArray["phonenumber"]);                    
+                    $cinema->setPhonenumber($valuesArray["phonenumber"]);    
+                    $cinema->setActive($valuesArray['active']);                
                     array_push($this->cinemalist,$cinema);
                 }
             }

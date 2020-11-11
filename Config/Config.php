@@ -12,8 +12,12 @@ define("SLIDER_PATH", FRONT_ROOT.VIEWS_PATH . "Slider/");
 define("MOVIE_PATH", FRONT_ROOT.VIEWS_PATH . "peliculas/");
 define("SLICK", FRONT_ROOT.VIEWS_PATH . "slick/");
 define("FONTAWESOME", FRONT_ROOT.VIEWS_PATH . "fontawesome-free-5.15.1-web/");
-
-
+define("DB_HOST", "localhost");
+define("DB_NAME", "moviepass");
+define("DB_USER", "root");
+define("DB_PASS", "");
+define("FAPP_ID","421910515476004");
+define("FAPP_SECRET","43d4c2357f17caef7dfe906e2d328101");
 ?>
 
 

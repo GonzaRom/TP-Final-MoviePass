@@ -1,9 +1,8 @@
 <?php
-
+/*
 namespace DAO;
 
 use Models\MovieShow;
-use Models\Seat;
 
 class MovieShowDAO implements IMovieShowDAO
 {
@@ -38,6 +37,30 @@ class MovieShowDAO implements IMovieShowDAO
         return $this->getItem($id);
     }
 
+    public function getByMovie($idMovie)
+    {
+        $listByMovie = array();
+        $this->retriveData();
+        foreach ($this->listMovieShow as $movieShow) {
+            if ($movieShow->getMovie() == $idMovie) {
+                array_push($listByMovie, $movieShow);
+            }
+        }
+        return $listByMovie;
+    }
+
+    public function getByCinema($idCinema)
+    {
+        $movieShowByCinema = array();
+        $this->retriveData();
+        foreach ($this->listMovieShow as $movieShow) {
+            if ($movieShow->getCinema() == $idCinema) {
+                array_push($movieShowByCinema, $movieShow);
+            }
+        }
+        return $movieShowByCinema;
+    }
+
     private function retriveData()
     {
         $this->listMovieShow = array();
@@ -50,7 +73,7 @@ class MovieShowDAO implements IMovieShowDAO
                 $newMovieShow = new MovieShow();
                 $newMovieShow->setId($movieShow['id']);
                 $newMovieShow->setMovie($movieShow['movie']);
-                $newMovieShow->setCinema($movieShow['cinema']);
+                $newMovieShow->setBillBoard($movieShow['billBoard']);
                 $newMovieShow->setRoom($movieShow['room']);
                 $newMovieShow->setDate($movieShow['date']);
                 $newMovieShow->setTime($movieShow['time']);
@@ -68,7 +91,7 @@ class MovieShowDAO implements IMovieShowDAO
             $valuesMovieShow = array();
             $valuesMovieShow['id'] = $movieShow->getId();
             $valuesMovieShow['movie'] = $movieShow->getMovie();
-            $valuesMovieShow['cinema'] = $movieShow->getCinema();
+            $valuesMovieShow['billBoard'] = $movieShow->getBillBoard();
             $valuesMovieShow['room'] = $movieShow->getRoom();
             $valuesMovieShow['date'] = $movieShow->getDate();
             $valuesMovieShow['time'] = $movieShow->getTime();
@@ -99,5 +122,5 @@ class MovieShowDAO implements IMovieShowDAO
         }
         return $getMovieShow;
     }
-
 }
+*/

@@ -4,7 +4,7 @@
     use Models\TypeRoom as TypeRoom;
     use DAO\ITypeRoomDAO as ITypeRoomDAO;
     
-    class TypeRoomDAO implements ITypeRoomDAO{
+    class TypeRoomDAO {
         private $typeroomlist=array();
         private $filename;
 

@@ -1,0 +1,126 @@
+.add-puchase-content{
+    width: 100%;
+    height: 100vh;
+    background: url(../img/popcorn-box-with-cinema-tickets.jpg);
+    background-position: center;
+    background-size: cover;
+    overflow-y: scroll;
+}
+
+.add-puchase-content .rgba-add-puchase{
+    width: 100%;
+    height: 94.5%;
+    background: rgba(0, 0, 0 ,.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-add-puchase{
+    width: 70%;
+}
+
+.flex-add-puchase form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: column;
+    background: rgba(0, 0, 0 ,.5);
+    padding: 50px;
+    color: #fff;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px #000;
+}
+
+
+
+.flex-add-puchase form h2{
+    text-shadow: 2px 2px 2px #000;
+}
+
+.flex-add-puchase form .content-info-movieshow{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-add-puchase form .input-box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.flex-add-puchase form .input-box input{
+    padding: 5px;
+    width: 50%;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+}
+
+.flex-add-puchase form .input-box .input{
+    padding: 5px;
+    width: 50%;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    text-align: center;
+}
+
+.flex-add-puchase form .input-box select{
+    width: 50%;
+    padding: 5px;
+    outline: none;
+    border:none;
+}
+
+.flex-add-puchase form .input-box input:focus{
+    box-shadow: 5px 5px 10px rgb(2, 164, 170),-5px 5px 10px rgb(2, 164, 170);
+}
+
+.flex-add-puchase form .input-box select:focus{
+    box-shadow: 5px 5px 10px rgb(2, 164, 170),-5px 5px 10px rgb(2, 164, 170);
+}
+
+.flex-add-puchase form .input-box span{
+    color: #fff;
+    font-size: 25px;
+    text-shadow: 2px 2px 2px #000;
+}
+
+.submit-add-purchase{
+    width: 40%;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    margin-top: 20px;
+    box-shadow: 5px 10px 2px #000;
+    transition: .5s;
+    border-radius: 20px;
+}
+
+.submit-add-purchase:hover{
+background:rgb(105, 17, 17);
+color: #fff;
+transform: translateY(10px);
+transition: .5s;
+box-shadow: 0px 0px 5px #000;
+}
+
+
+input[type="checkbox"]{
+    display: none;
+}
+
+
+input[type="checkbox"]:checked + label{
+    color: rgb(12, 212, 162);
+
+}

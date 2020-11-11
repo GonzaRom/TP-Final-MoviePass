@@ -1,3 +1,8 @@
+<div class="body" id="onload">
+  <div class="container">
+    <div class="loader"><span></span></div>
+  </div>
+</div>
 <section class="Add-Room">
     <?php include("nav.php"); ?>
 
@@ -24,7 +29,7 @@
                             </span>
                             <select name="typeroom" id="" required>
                                 <option value="">Seleccione una opcion</option>
-                                <?php foreach($listtyperoom as $typeroom):?>
+                                <?php foreach($listTypeRoom as $typeroom):?>
                                     <option value="<?php echo $typeroom->getId();?>"><?php echo $typeroom->getName();?></option>
                                 <?php endforeach;?>
                             </select>
@@ -35,8 +40,12 @@
                             </span>
                             <input type="num" name="capacity" id="" required>
                         </div>
-
-                        
+                        <div class="input-room">
+                            <span>
+                                <b>Precio de sala:</b>
+                            </span>
+                            <input type="num" name="ticketcost" id="" required>
+                        </div>
                         <div class="contentButton">
                             <button class="button" type="submit">Agregar</button>
                         </div>
@@ -55,3 +64,4 @@
         </div>
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

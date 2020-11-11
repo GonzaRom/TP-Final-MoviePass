@@ -2,32 +2,17 @@
     namespace Models;
 
     class Seat{
-        private $id;
-        private $occupied;
+        private $numAsiento;
         private $movieShow;
 
-
-
-        public function getId()
+        public function getNumSeat()
         {
-            return $this->id;
+            return $this->numAsiento;
         }
 
-        public function setId($id)
+        public function setNumSeat($numAsiento)
         {
-            $this->id = $id;
-            return $this;
-        }
- 
-        public function getOccupied()
-        {
-            return $this->occupied;
-        }
-
-        public function setOccupied($occupied)
-        {
-            $this->occupied = $occupied;
-            
+            $this->numAsiento = $numAsiento;
         }
 
         public function setMovieShow($movieShow){

@@ -1,24 +1,27 @@
+<!--div class="body" id="onload">
+  <div class="container">
+    <div class="loader"><span></span></div>
+  </div>
+</div-->
 <div class="listMovieShow">
     <?php require_once("nav.php"); ?>
     <div class="rgba-content-listMovieShow">
-        <?php foreach ($listMovieShow as $movieShow) : ?>
+            <?php foreach ($cinemas as $cinema) : ?>
+            <?php $movieShows = $cinema->getBillBoard(); ?>
+            <?php foreach ($movieShows as $movieShow) : ?>
             <div class="infoMovieShow">
                 <div class="infoLocation">
                     <div class="tituloMovie">
                         <h2>
-                            <?php foreach ($listMovie as $movie) {
-                                if ($movieShow->getMovie() == $movie->getImdbId()) {
-                                    echo $movie->getName();
-                                }
-                            } ?>
+                            <?php echo $movieShow->getMovie()->getName(); ?>
                         </h2>
                     </div>
                     <div class="cinemaMovieShow">
-                        <h3><?php echo $movieShow->getCinema(); ?></h3>
+                        <h3><?php echo $cinema->getName(); ?></h3>
                     </div>
 
                     <div class="roomMovieShow">
-                        <h3><?php echo $movieShow->getRoom(); ?></h3>
+                        <h3><?php echo $movieShow->getRoom()->getName(); ?></h3>
                     </div>
                     <div class="dateMovieShow">
                         <h5><?php echo $movieShow->getDate(); ?></h5>
@@ -31,13 +34,13 @@
 
                 <div class="seatMovieShow">
                     <h3>Desocupados:</h3>
-                    <ul> <?php $listSeat = $movieShow->getSeat();
+                    <ul> <?php $listSeat = $movieShow->getSeats();
                             foreach ($listSeat as $seat) :
                             ?>
-                            <li> <?php if ($seat->getOccupied() == false) : ?>
-                                    <i class="fas fa-chair" style="color:#aaa;">( <?php echo $seat->getId(); ?>)</i>
+                            <li> <?php if ($seat->getMovieShow() == null) : ?>
+                                    <i class="fas fa-chair" style="color:#aaa;">( <?php echo $seat->getNumSeat(); ?>)</i>
                                 <?php else : ?>
-                                    <i class="fas fa-chair" style="color:red;">( <?php echo $seat->getId(); ?>)</i>
+                                    <i class="fas fa-chair" style="color:red;">( <?php echo $seat->getNumSeat(); ?>)</i>
                                 <?php endif; ?>
 
                             </li>
@@ -49,8 +52,10 @@
 
             </label>
         <?php endforeach; ?>
+        <?php endforeach; ?>
 
     </div>
 
 
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

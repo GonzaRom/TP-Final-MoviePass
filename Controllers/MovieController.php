@@ -1,54 +1,37 @@
 <?php
-
 namespace Controllers;
 
-use DAO\GenreDAO;
-use DAO\MovieDAO as MovieDAO;
+use DAO\GenreDAOMSQL as GenreDAOMSQL;
+use DAO\MovieDAOMSQL as MovieDAOMSQL;
+use Helpers\IsAuthorize as IsAuthorize;
 
 class MovieController
 {
-    private $movieDAO;
-    private $GenreDAO;
+    private $movieDAOMSQL;
 
     public function __construct()
     {
-        $this->movieDAO = new MovieDAO();
-        $this->GenreDAO = new GenreDAO();
+        $this->movieDAOMSQL = new MovieDAOMSQL();
+        $this->genreDAOMSQL = new GenreDAOMSQL();
     }
 
-    public function getall($message = "")
+    public function UpdateMoviesToDB()
     {
-        $nowPlayingMoviesList = array();
-        $genreList = array();
-        try {
-            $nowPlayingMoviesList = $this->movieDAO->getAll();
-            $genresList = $this->GenreDAO->getAll();
-            foreach ($nowPlayingMoviesList as $movie) {
-                $movieGenders = $movie->getGenreId();
-                foreach ($genresList as $genreApi) {
-                    if ($movieGenders === $genreApi->getId()) {
-                        $movie->setGenreName($genreApi->getName());
-                    }
-                }
+        if(IsAuthorize::isauthorize()){
+            try {
+                $this->genreDAOMSQL->updateFromApi();
+                $movies = $this->movieDAOMSQL->updateFromApi();
+                require_once(VIEWS_PATH . "home.php");
+            } catch (\Exception $e) {
+                //Por hacer:
+                //return require_once(VIEWS_PATH."error_404.php");
+                echo $e->getMessage();
             }
-            require_once(VIEWS_PATH . "list-movies.php");
-        } catch (\Exception $e) {
-            //Por hacer:
-            //return require_once(VIEWS_PATH."error_404.php");
-            $message = $e->getMessage();
         }
     }
 
-    public function get($movieId)
-    {
-        try {
-            $movieDTO = $this->movieDAO->get($movieId);
-            $genres = $movieDTO->getGenres();
-            require_once(VIEWS_PATH . "detail-movie.php");
-        } catch (\Exception $e) {
-            //Por hacer:
-            //return require_once(VIEWS_PATH."error_404.php");
-            echo $e->getMessage();
-        }
+    public function detailMovie($movie){
+        $movieDTO = $this->movieDAOMSQL->get($movie);
+         require_once(VIEWS_PATH . "detail-movie.php");
     }
 }

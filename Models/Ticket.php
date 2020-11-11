@@ -1,15 +1,17 @@
 <?php
     namespace Models;
-    use Models\Seat as Seat;
 
     class Ticket{
         private $id;
-        private $datetime;
-        private $discount;
-        private $seats;
+        private $movieshow;
+        private $user;
+        private $purchase;
+        private $seat;
+        private $ticketCost;
+        private $qrcode;
 
         public function __construct(){
-            $this->seats=array();
+            
         }
 
         public function getId()
@@ -23,37 +25,90 @@
             return $this;
         }
 
-        public function getDateTime()
+        public function getDate()
         {
-            return $this->datetime;
+            return $this->date;
         }
 
-        public function setDateTime($datetime)
+        public function setDate($date)
         {
-            $this->datetime = $datetime;
+            $this->date = $date;
+            return $this;
+        }
+
+        public function getTime()
+        {
+            return $this->time;
+        }
+
+        public function setTime($time)
+        {
+            $this->time = $time;
             return $this;
         }
  
-        public function getDiscount()
+        public function getMovieshow()
         {
-            return $this->discount;
+            return $this->movieshow;
         }
 
-        public function setDiscount($discount)
+        public function setMovieshow($movieshow)
         {
-            $this->discount = $discount;
+            $this->movieshow = $movieshow;
             return $this;
         }
 
-        public function getSeats()
+        public function getUser()
         {
-            return $this->seats;
+            return $this->user;
         }
 
-        public function setSeats($seats)
+        public function setUser($user)
         {
-            $this->seats = $seats;
+            $this->user = $user;
             return $this;
+        }
+
+        public function getPurchase()
+        {
+                return $this->purchase;
+        }
+ 
+        public function setPurchase($purchase)
+        {
+                $this->purchase = $purchase;
+
+                return $this;
+        }
+
+        public function getSeat()
+        {
+                return $this->seat;
+        }
+ 
+        public function setSeat($seat)
+        {
+                $this->seat = $seat;
+        }
+
+        public function getTicketCost()
+        {
+                return $this->ticketCost;
+        }
+ 
+        public function setTicketCost($ticketCost)
+        {
+                $this->ticketCost = $ticketCost;
+        }
+
+        public function getQrcode()
+        {
+            return $this->qrcode;
+        }
+
+        public function setQrcode($qrcode)
+        {
+            $this->qrcode = $qrcode;
         }
     }
 ?>

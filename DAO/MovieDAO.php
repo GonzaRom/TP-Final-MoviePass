@@ -52,6 +52,7 @@ class MovieDAO implements IMovieDAO
             $movieDTO->setGenres($apiMovieDecode["genres"]);
             $movieDTO->setBackground("http://image.tmdb.org/t/p/original" . $apiMovieDecode["backdrop_path"]);
             $movieDTO->setPoster("http://image.tmdb.org/t/p/original" . $apiMovieDecode["poster_path"]);
+            $movieDTO->setRunTime($apiMovieDecode["runtime"]);
 
             return $movieDTO;
         }
@@ -63,7 +64,7 @@ class MovieDAO implements IMovieDAO
     public function retriveNowPlayingFromApi()
     {
         $this->NowPlayingMovieList = array();
-        $endpointNowPlayingApi = "https://api.themoviedb.org/3/movie/now_playing?api_key=" . $this->KEY_PATH . "&language=es-ES&page=1";
+        $endpointNowPlayingApi = "https://api.themoviedb.org/3/movie/now_playing?api_key=" . $this->KEY_PATH . "&language=es-ES";
         $apiMovieContent = file_get_contents($endpointNowPlayingApi);
         $apiMovieDecode = ($apiMovieContent) ? json_decode($apiMovieContent, true) : array();
         if (count($apiMovieDecode) <= 0) {
@@ -81,6 +82,7 @@ class MovieDAO implements IMovieDAO
                 $movie->setBackground("http://image.tmdb.org/t/p/original" . $apiMovieData["backdrop_path"]);
                 $movie->setVoteAverage($apiMovieData["vote_average"]);
                 $movie->setImdbID($apiMovieData["id"]);
+                
                 array_push($this->NowPlayingMovieList, $movie);
             }
         }

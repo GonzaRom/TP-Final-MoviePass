@@ -6,6 +6,6 @@
         public function add(TypeRoom $typeroom);
         public function getAll();
         public function get($id);
-        public function delete($key);
+        public function getByName($nametyperoom);
     }
 ?>
