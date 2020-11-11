@@ -20,7 +20,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
     public function add(MovieShow $newMovieShow)
     {
         try {
-            $sql = "call addmovieshow(:idmovie, :idcinema, :idtypemovieshow, :idroom, :date_, :time_, :isactiveMovieShow)";
+            $sql = "call addmovieshow(:idmovie, :idcinema, :idtypemovieshow, :idroom, :date_, :time_, :end, :isactiveMovieShow)";
 
             $parameters['idmovie'] = $newMovieShow->getMovie();
             $parameters['idcinema'] = $newMovieShow->getCinema();
@@ -28,6 +28,7 @@ class MovieShowDAOMSQL implements IMovieShowDAO
             $parameters['idroom'] = $newMovieShow->getRoom();
             $parameters['date_'] = $newMovieShow->getDate();
             $parameters['time_'] = $newMovieShow->getTime();
+            $parameters['end']=$newMovieShow->getEndtime();
             $parameters['isactiveMovieShow'] = $newMovieShow->getIsActive();
             $this->conection = Connection::getInstance();
             $this->conection->ExecuteNonQuery($sql, $parameters);
@@ -247,25 +248,67 @@ class MovieShowDAOMSQL implements IMovieShowDAO
         return $listMovieShow;
     }
 
-    public function validateTime(){
-        try {
+    public function validateMovie($idmovie,$date){
+        try{
             $movieshowlist = array();
 
-            $query = "call validateTime();";/*aca tengo q seguir */
+            $query = "call validatemovie(:idmovie,:date);";
+            $parameters['idmovie']=$idmovie;
+            $parameters['date']=$date;
 
             $this->connection = Connection::getInstance();
 
-            $resultSet = $this->connection->execute($query);
+            $resultSet = $this->connection->execute($query,$parameters);
 
-            foreach ($resultSet as $row) {
-                $genre = new Genre();
-                $genre->setId($row["idgenre"]);
-                $genre->setName($row["namegenre"]);
-
-                array_push($genrelist, $genre);
+            foreach($resultSet as $row){
+                $newmovieshow=new movieshow();
+                $newmovieshow->setId($row['idmovieshow']);
+                $newmovieshow->setCinema($row['idcinema']);
+                $newmovieshow->setTypeMovieShow($row['idtypemovieshow']);
+                $newmovieshow->setMovie($row['movie']);
+                $newmovieshow->setRoom($row['idroom']);
+                $newmovieshow->setDate($row['date_']);
+                $newmovieshow->setTime($row['time_']);
+                $newmovieshow->setEndtime($row['endtime']);
+                array_push($movieshowlist,$newmovieshow);
             }
 
-            return $genrelist;
+            return $movieshowlist;
+        }
+        catch(Exeption $ex){
+            throw $ex;
+        }
+    }
+
+    public function validateTime($room,$start,$end,$date){
+        try {
+            $movieshowlist = array();
+
+            $query = "call validateTime(:room, :start, :end, :date);";
+            $parameters['room']=$room;
+            $parameters['date']=$date;
+            $parameters['start']=$start;
+            $parameters['end']=$end;
+
+            $this->connection = Connection::getInstance();
+
+            $resultSet = $this->connection->execute($query,$parameters);
+
+            foreach($resultSet as $row){
+                $newmovieshow=new movieshow();
+                $newmovieshow->setId($row['idmovieshow']);
+                $newmovieshow->setCinema($row['idcinema']);
+                $newmovieshow->setTypeMovieShow($row['idtypemovieshow']);
+                $newmovieshow->setMovie($row['movie']);
+                $newmovieshow->setRoom($row['idroom']);
+                $newmovieshow->setDate($row['date_']);
+                $newmovieshow->setTime($row['time_']);
+                $newmovieshow->setEndtime($row['endtime']);
+                array_push($movieshowlist,$newmovieshow);
+            }
+
+
+            return $movieshowlist;
         } catch (Exception $ex) {
             throw $ex;
         }

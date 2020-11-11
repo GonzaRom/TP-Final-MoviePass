@@ -54,11 +54,11 @@ class MovieShowController
             echo '</select>';
         }
     }
-    public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)
+    public function add($movie, $cinema, $room, $typeMovieShow, $date, $time)/* funcion q corrobora si se puede agregar una funcion*/
     {   
         if(IsAuthorize::isauthorize()){
             $add=false;
-            $listMS=$movieShowDAO->validateMovie($movie,$date);
+            $listMS=$this->movieShowDAO->validateMovie($movie,$date);
             if(empty($listMS)){
                 $add=true;
             }else{
@@ -69,14 +69,16 @@ class MovieShowController
                 }
             }
             if($add){
-                $listMShours=$this->validateTime($room,$time,$date);/* aca tengo q continuar*/ 
-                $this->addMs($movie, $cinema, $room, $typeMovieShow, $date, $time);
+                $auxmovie=$this->movieDAOMSQL->get($movie);
+                $end=$time+strtotime($auxmovie->getRuntime());/* aca hayq ver como sumar la hora en esta variable end... y la usamos como parametro*/
+                $listMShours=$this->validateTime($room,$time,$end,$date);
+                $this->addMs($movie, $cinema, $room, $typeMovieShow, $date, $time, $end);
             }
 
         }
     }
 
-    private function addMs($movie, $cinema, $room, $typeMovieShow, $date, $time)
+    private function addMs($movie, $cinema, $room, $typeMovieShow, $date, $time ,$end)//esta funcion es la q agrega, la anterior es la q chekea
     {   
         $this->movieDAOMSQL->upMovie($movie);
         $today = date('Y-m-d');
@@ -90,7 +92,7 @@ class MovieShowController
                 $newMovieShow->setTypeMovieShow($typeMovieShow);
                 $newMovieShow->setDate($date);
                 $newMovieShow->setTime($time);
-                $newMovieShow->setEndTime($time + $movie->getRunTime());
+                $newMovieShow->setEndTime($end);
                 $newMovieShow->setIsActive(true);
                 $this->movieShowDAO->add($newMovieShow);
                 $this->showAddMovieShowView();
