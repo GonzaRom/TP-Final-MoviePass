@@ -152,12 +152,23 @@ class PurchaseController
         require_once(VIEWS_PATH . 'listPurchase.php');
     }
 
+    public function getAllPurchase()
+    {
+        $purchases = $this->purchaseDAOMSQL->getAll();
+
+        foreach ($purchases as $purchase) {
+            $purchase->setTickets($this->ticketDAOMSQL->getByPurchase($purchase->getId()));
+        }
+
+        require_once(VIEWS_PATH . 'listPurchase.php');
+    }
+
     private function mailTickets($ticket)
     {
         $user = $this->userDAOMSQL->getById($_SESSION['loggedUser']);
         $email = $user->getEmail();
         $file = ($this->generateQr($ticket));
-        $this->ticketDAOMSQL->setQr($ticket->getId(), $file['temp_name']);
+        $this->ticketDAOMSQL->setQr($ticket->getId(), $file['temp_name'],$file['code']);
         $this->sendMailFromHere($ticket, $file, $email);
     }
 
@@ -167,10 +178,8 @@ class PurchaseController
         $filename = "qrnro" . $ticket->getId() . ".png";
         $ruta = dirname(__DIR__) . "\\Data\\temp\\";
         $temp_name = $ruta . "" . $filename;
-
-        $content = "Nro Ticket: " . $ticket->getId() . "/ Nombre Cine: " . $ticket->getMovieshow()->getCinema()->getName() . "/ Nombre Pelicula: " . $ticket->getMovieshow()->getMovie()->getName() .
-            "/ Nro Asiento: " . $ticket->getSeat()->getNumSeat() . "/ Fecha: " . $ticket->getMovieshow()->getDate() .
-            "/ Hora: " . $ticket->getMovieshow()->getTime() . "/ Costo Ticket: " . $ticket->getTicketCost();
+        $code = $this->createCodQR();
+        $content = "http://localhost/Projects/TP-Final-MoviePass/Ticket/deliverNewTicket?access=".$code;
         $type = "png";
         try {
             $qr = new QR_BarCode;
@@ -179,6 +188,7 @@ class PurchaseController
             $file['name'] = $filename;
             $file['temp_name'] = $temp_name;
             $file['size'] = filesize($temp_name);
+            $file['code'] = $code;
             return $file;
         } catch (Exception $ex) {
             throw $ex;

@@ -7,8 +7,9 @@
     use DAO\CinemaDAOMSQL;
     use DAO\SeatDAOMSQL;
     use DAO\TicketDAOMSQL as TicketDAOMSQL;
-    
-    class TicketController{
+use Exception;
+
+class TicketController{
 
         private $ticketDAO;
         private $movieShowDAOMSQL;
@@ -40,18 +41,8 @@
 
         }
 
-        public function showListTicket($idUser = 0){
-            if($idUser != 0){
-                $listTicket = $this->ticketDAO->getUser($idUser);
-            }
-            else{
-                $listTicket= $this->ticketDAO->getAll();
-            }
-
-        require_once(VIEWS_PATH."list-ticket.php");
-        }
-
         public function showHome($message=""){
+            
             require_once(VIEWS_PATH."ticket-delivered.php");
         }
 
@@ -67,7 +58,7 @@
                     }
                     $this->showHome($message);
                 }
-                catch (Exeption $ex){
+                catch (Exception $ex){
                     throw $ex;
                 }
             }

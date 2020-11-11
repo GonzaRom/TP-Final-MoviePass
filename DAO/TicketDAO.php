@@ -1,5 +1,5 @@
 <?php
-
+/*
 namespace DAO;
 
 use Models\Ticket;
@@ -94,5 +94,5 @@ class TicketDAO implements ITicketDAO{
         file_put_contents($jsonContent , $this->fileName);
     }
 }
-
+*/
 ?>

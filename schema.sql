@@ -334,14 +334,26 @@ BEGIN
 END;
 $$
 
-DROP PROCEDURE IF EXISTS update_qr;
-DELIMITER $$
-CREATE PROCEDURE update_qr(in id int,in img blob)
-comment "sube el codigo QR"
+use moviepass;
+DROP PROCEDURE IF EXISTS update_qr_accescode;
+
+CREATE PROCEDURE update_qr_accescode(in id int,in filename varchar(50),in accesco varchar(50))
+comment "sube el codigo QR y el codigo de acceso"
 BEGIN
-	UPDATE tickets SET qrcode=img WHERE idticket=id;
+	UPDATE tickets SET qrcode=filename , accescode=accesco WHERE idticket=id;
 END;
-$$
+
+
+DROP PROCEDURE IF EXISTS deliver_ticket;
+
+CREATE PROCEDURE deliver_ticket(in accesco varchar(50))
+comment "entrega el ticket"
+BEGIN
+	declare flag boolean default false;
+	UPDATE tickets SET isactiveticket=false  WHERE accescode=accesco;
+    select isactiveticket into flag WHERE accescode=accesco; 
+END;
+
 
 DROP PROCEDURE IF EXISTS add_ticket;
 DELIMITER $$

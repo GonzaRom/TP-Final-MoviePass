@@ -87,9 +87,9 @@ class PurchaseDAOMSQL implements IPurchaseDAO
 
     public function getAll()
     {
-        $purchase = null;
+        $listPurchase = array();
         try {
-            $sql = "SELECT * FROM " . $this->nameTable . " as p INNER JOIN tickets as t ON p.idpurchase = t.idpurchase";
+            $sql = "SELECT * FROM " . $this->nameTable ;
             $this->coneccion = Connection::getInstance();
 
             $result = $this->coneccion->Execute($sql);
@@ -106,9 +106,9 @@ class PurchaseDAOMSQL implements IPurchaseDAO
                 $newPurchase->setTime($purchase['time_']);
                 $newPurchase->setIdUser($purchase['iduser']);
 
-                $purchase =  $newPurchase;
+                array_push($listPurchase, $newPurchase);
             }
         }
-        return $purchase;
+        return $listPurchase;
     }
 }
