@@ -74,6 +74,11 @@ class PurchaseController
         $newPurchase = new Purchase;
         $newPurchase->setIdUser($idUser);
         $costPurchase = $movieshow->getRoom()->getTicketCost() * count($seats);
+        setlocale(LC_TIME, "spanish");
+        $currentDay = date("l");
+        if (($currentDay == "Wednesday" || $currentDay == "Tuesday") && count($seats)>=2) {
+            $costPurchase = $costPurchase*0.75; 
+        }
         $newPurchase->setCosto($costPurchase);
         foreach ($seats as $seat) {
             $newTicket = new Ticket();
@@ -93,8 +98,7 @@ class PurchaseController
         $tickets = $purchase->getTickets();
         $movieshow = $this->movieShowDAOMSQL->get($idMovieshow);
         $idUser = $_SESSION['loggedUser'];
-        $cost = ($movieshow->getRoom()->getTicketCost() * count($seats)) + $purchase->getCosto();
-        $purchase->setCosto($cost);
+        $cost =($movieshow->getRoom()->getTicketCost() * count($seats)) + $purchase->getCosto();
         foreach ($seats as $seat) {
             $newTicket = new Ticket();
             $newTicket->setMovieshow($movieshow);
@@ -105,24 +109,38 @@ class PurchaseController
         }
 
         $purchase->setTickets($tickets);
+
+        setlocale(LC_TIME, "spanish");
+        $currentDay = date("l");
+        if (($currentDay == "Wednesday" || $currentDay == "Tuesday") && count($purchase->getTickets())>=2) {
+            $cost = $cost*0.75;
+            $purchase->setCosto($cost); 
+        }
         $_SESSION['purchase'] = $purchase;
     }
 
-    private function validateCreditCard($creditnumber, $expire, $verifcod, $nombre){
-        $flag=true;
+    private function validateCreditCard($creditnumber, $expire, $verifcod, $nombre)
+    {
+        $flag = true;
         $today = date('Y-m-d');
-        if(strlen($creditnumber)!=16){
-            $flag=false;
-        }
-        else{
-            if($expire<$today){
-                $flag=false;
-            }else{
-                if(strlen($verifcod)!=3){
-                    $flag=false;
-                }else{
-                    if(empty($nombre)){
-                        $flag=false;
+        if (strlen($creditnumber) != 16) {
+            echo "1";
+            $flag = false;
+        } else {
+            if ($expire < $today) {
+                $flag = false;
+                echo "2";
+
+            } else {
+                if (strlen($verifcod) != 3) {
+                    $flag = false;
+                    echo "3";
+
+                } else {
+                    if (empty($nombre)) {
+                        $flag = false;
+                        echo "4";
+
                     }
                 }
             }
@@ -130,9 +148,9 @@ class PurchaseController
         return $flag;
     }
 
-    public function addPurchase($creditnumber, $expire, $verifcod, $nombre)
-    {   
-        if($this->validateCreditCard($creditnumber, $expire, $verifcod, $nombre)){
+    public function addPurchase($nombre, $creditnumber,$verifcod ,$expire )
+    {
+        if ($this->validateCreditCard($creditnumber, $expire, $verifcod, $nombre)) {
             $time = time();
             $today = date('Y-m-d');
             $timeNow = date('H:i:s', $time);
@@ -161,10 +179,9 @@ class PurchaseController
 
 
             require_once(VIEWS_PATH . "sold-tickets.php");
-        }else{
+        } else {
             $this->showAddPurchase();
         }
-
     }
 
     public function getByUser()
@@ -195,7 +212,7 @@ class PurchaseController
         $user = $this->userDAOMSQL->getById($_SESSION['loggedUser']);
         $email = $user->getEmail();
         $file = ($this->generateQr($ticket));
-        $this->ticketDAOMSQL->setQr($ticket->getId(), $file['temp_name'],$file['code']);
+        $this->ticketDAOMSQL->setQr($ticket->getId(), $file['temp_name'], $file['code']);
         $this->sendMailFromHere($ticket, $file, $email);
     }
 
@@ -206,7 +223,7 @@ class PurchaseController
         $ruta = dirname(__DIR__) . "\\Data\\temp\\";
         $temp_name = $ruta . "" . $filename;
         $code = $this->createCodQR();
-        $content = "http://localhost/Projects/TP-Final-MoviePass/Ticket/deliverNewTicket?access=".$code;
+        $content = "http://localhost/Projects/TP-Final-MoviePass/Ticket/deliverNewTicket?access=" . $code;
         $type = "png";
         try {
             $qr = new QR_BarCode;
@@ -222,7 +239,7 @@ class PurchaseController
         }
     }
 
-   
+
 
     public function sendMailFromHere($ticket, $file, $address)
     {
@@ -339,7 +356,6 @@ class PurchaseController
             </html>';
             $mail->addAttachment($file['temp_name'], $file['name']);
             $mail->send();
-            echo 'Mensaje exitoso';
         } catch (MailerExpetion $e) {
             echo "Mailer Error: {$mail->ErrorInfo}";
         }

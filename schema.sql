@@ -317,15 +317,6 @@ BEGIN
 END;
 $$
 
-<<<<<<< HEAD
-use moviepass;
-DROP PROCEDURE IF EXISTS update_qr_accescode;
-
-CREATE PROCEDURE update_qr_accescode(in id int,in filename varchar(50),in accesco varchar(50))
-comment "sube el codigo QR y el codigo de acceso"
-BEGIN
-	UPDATE tickets SET qrcode=filename , accescode=accesco WHERE idticket=id;
-=======
 DROP PROCEDURE IF EXISTS update_qr_accescode;
 DELIMITER $$
 CREATE PROCEDURE update_qr_accescode(in id int,in filename varchar(50),in accesco varchar(50))
@@ -343,7 +334,6 @@ BEGIN
 	declare flag boolean default false;
 	UPDATE tickets SET isactiveticket=false  WHERE accescode=accesco;
     select isactiveticket into flag WHERE accescode=accesco;
->>>>>>> origin/Matias
 END;
 
 use moviepass;

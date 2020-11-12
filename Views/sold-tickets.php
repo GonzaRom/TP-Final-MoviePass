@@ -18,7 +18,6 @@
                                 <th>Hora</th>
                                 <th>Butaca</th>
                                 <th>Costo</th>
-                                <th>Quitar</th>
                             </tr>
                         </thead>
                         <?php for ($i = 0; $i < count($listTickets); $i++) : ?>
@@ -31,7 +30,6 @@
                                     <td><?php echo $listTickets[$i]->getMovieshow()->getTime(); ?></td>
                                     <td><?php echo $listTickets[$i]->getSeat(); ?></td>
                                     <td><?php echo $listTickets[$i]->getTicketCost(); ?></td>
-                                    <td><i style="color: red; font-size:25px;" class="fas fa-times"></i></td>
                                 </tr>
                             </tbody>
                         <?php endfor; ?>
@@ -56,7 +54,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label class="text-white" for="verifcod">Codigo Verificacion</label>
-                                <input type="text" class="form-control" id="verifcod" name="verifcod" required>
+                                <input type="number" class="form-control" id="verifcod" name="verifcod" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="text-white" for="expire">Fecha Vencimiento</label>

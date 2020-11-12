@@ -31,7 +31,7 @@
                         <?php echo $ticket->getUser()->getFirstname() .' '. $ticket->getUser()->getLastName();?>
                     </th>
                     <td>
-                        <?php echo $ticket->getMovieshow()->getCinema()->getName();?>
+                        <?php echo $ticket->getMovieshow()->getMovie()->getName();?>
                     </td>
                     <td>
                         <?php echo $ticket->getMovieshow()->getRoom()->getName();?>
