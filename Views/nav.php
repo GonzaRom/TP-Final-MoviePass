@@ -60,6 +60,9 @@
                             <a class="dropdown-item" href="<?php echo FRONT_ROOT; ?>MovieShow/ShowListMovieShowView">Listar</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Purchase/getAllPurchase">Ventas totales</a>
+                    </li> 
                 <?php else : ?>
                     <li class="nav-item">
                         <a class="nav-link " href="<?php echo FRONT_ROOT; ?>Cinema/ShowListView">Cines</a>

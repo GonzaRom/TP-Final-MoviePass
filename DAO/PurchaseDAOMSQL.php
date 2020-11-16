@@ -45,7 +45,7 @@ class PurchaseDAOMSQL implements IPurchaseDAO
                 $newPurchase = new Purchase();
                 $newPurchase->setId($purchase['idpurchase']);
                 $newPurchase->setCosto($purchase['cost']);
-                $newPurchase->setDate($purchase['date_']);
+                $newPurchase->setDate(mapperDAO :: changeFormateDate($purchase['date_']));
                 $newPurchase->setTime($purchase['time_']);
                 $newPurchase->setIdUser($purchase['iduser']);
 
@@ -102,7 +102,34 @@ class PurchaseDAOMSQL implements IPurchaseDAO
                 $newPurchase = new Purchase();
                 $newPurchase->setId($purchase['idpurchase']);
                 $newPurchase->setCosto($purchase['cost']);
-                $newPurchase->setDate($purchase['date_']);
+                $newPurchase->setDate(mapperDAO :: changeFormateDate($purchase['date_']));
+                $newPurchase->setTime($purchase['time_']);
+                $newPurchase->setIdUser($purchase['iduser']);
+
+                array_push($listPurchase, $newPurchase);
+            }
+        }
+        return $listPurchase;
+    }
+
+    public function getByCinema($cinema){
+        $listPurchase = array();
+        try {
+            $sql = "SELECT * FROM " . $this->nameTable . " AS p INNER JOIN tickets as t ON t.idpurchase = p.idpurchase INNER JOIN movieshows AS ms ON ms.idmovieshow = t.idmovieshow WHERE ms.idcinema = :cinema group by p.idpurchase" ;
+            $parameters['cinema'] = $cinema;
+            $this->coneccion = Connection::getInstance();
+
+            $result = $this->coneccion->Execute($sql , $parameters);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+
+        if (!empty($result)) {
+            foreach ($result as $purchase) {
+                $newPurchase = new Purchase();
+                $newPurchase->setId($purchase['idpurchase']);
+                $newPurchase->setCosto($purchase['cost']);
+                $newPurchase->setDate(mapperDAO :: changeFormateDate($purchase['date_']));
                 $newPurchase->setTime($purchase['time_']);
                 $newPurchase->setIdUser($purchase['iduser']);
 

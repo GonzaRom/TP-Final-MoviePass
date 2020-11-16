@@ -2,6 +2,7 @@
 
 namespace DAO;
 
+use DateTime;
 use Models\Cinema;
 use Models\Genre;
 use Models\Movie;
@@ -39,7 +40,7 @@ class mapperDAO
             $newMovieShow->setMovie(mapperDAO::mapearMovie($value));
             $newMovieShow->setRoom(mapperDAO::mapearRoom($value));
             $newMovieShow->setTypeMovieShow(mapperDAO::mapearTypeMovieShow($value));
-            $newMovieShow->setDate($value['date_']);
+            $newMovieShow->setDate(mapperDAO :: changeFormateDate( $value['date_']));
             $newMovieShow->setTime($value['time_']);
             return $newMovieShow;
         }
@@ -55,7 +56,7 @@ class mapperDAO
             $newMovieShow->setRoom(mapperDAO::mapearRoom($value));
             $newMovieShow->setTypeMovieShow(mapperDAO::mapearTypeMovieShow($value));
             $newMovieShow->setCinema(mapperDAO::mapearCinema($value));
-            $newMovieShow->setDate($value['date_']);
+            $newMovieShow->setDate(mapperDAO :: changeFormateDate( $value['date_']));
             $newMovieShow->setTime($value['time_']);
             return $newMovieShow;
         }
@@ -67,7 +68,6 @@ class mapperDAO
         if (!empty($value)) {
             $newCinema = new Cinema();
             $newCinema->setName($value['namecinema']);
-            echo $value['namecinema'];
             return $newCinema;
         }
     }
@@ -171,5 +171,13 @@ class mapperDAO
             $user->setLastname($value['lastname']);
             return $user;
         }
+    }
+
+    public static function changeFormateDate($date){
+        $newDate = new DateTime($date);
+
+        $date = $newDate->format('d/m/Y');
+
+        return $date;
     }
 }

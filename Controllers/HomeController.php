@@ -105,7 +105,8 @@ class HomeController
                 echo '</div>';
                 echo '<div class="detalles">';
                 echo '<h2>' . $movie->getName() . '</h2>';
-                echo '<a href="">Reservar</a>';
+                echo '<a  href="'.FRONT_ROOT .'MovieShow/getByMovie?movie='.$movie->getId().'">Reservar</a>
+                <a href="'.FRONT_ROOT.'Movie/detailMovie?movie='.$movie->getId().'">Mas Info</a>';
                 echo '</div>';
                 echo '</div>';
             }

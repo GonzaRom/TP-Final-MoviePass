@@ -76,8 +76,8 @@ class PurchaseController
         $costPurchase = $movieshow->getRoom()->getTicketCost() * count($seats);
         setlocale(LC_TIME, "spanish");
         $currentDay = date("l");
-        if (($currentDay == "Wednesday" || $currentDay == "Tuesday") && count($seats)>=2) {
-            $costPurchase = $costPurchase*0.75; 
+        if (($currentDay == "Wednesday" || $currentDay == "Tuesday") && count($seats) >= 2) {
+            $costPurchase = $costPurchase * 0.75;
         }
         $newPurchase->setCosto($costPurchase);
         foreach ($seats as $seat) {
@@ -98,7 +98,7 @@ class PurchaseController
         $tickets = $purchase->getTickets();
         $movieshow = $this->movieShowDAOMSQL->get($idMovieshow);
         $idUser = $_SESSION['loggedUser'];
-        $cost =($movieshow->getRoom()->getTicketCost() * count($seats)) + $purchase->getCosto();
+        $cost = ($movieshow->getRoom()->getTicketCost() * count($seats)) + $purchase->getCosto();
         foreach ($seats as $seat) {
             $newTicket = new Ticket();
             $newTicket->setMovieshow($movieshow);
@@ -112,9 +112,9 @@ class PurchaseController
 
         setlocale(LC_TIME, "spanish");
         $currentDay = date("l");
-        if (($currentDay == "Wednesday" || $currentDay == "Tuesday") && count($purchase->getTickets())>=2) {
-            $cost = $cost*0.75;
-            $purchase->setCosto($cost); 
+        if (($currentDay == "Wednesday" || $currentDay == "Tuesday") && count($purchase->getTickets()) >= 2) {
+            $cost = $cost * 0.75;
+            $purchase->setCosto($cost);
         }
         $_SESSION['purchase'] = $purchase;
     }
@@ -130,17 +130,14 @@ class PurchaseController
             if ($expire < $today) {
                 $flag = false;
                 echo "2";
-
             } else {
                 if (strlen($verifcod) != 3) {
                     $flag = false;
                     echo "3";
-
                 } else {
                     if (empty($nombre)) {
                         $flag = false;
                         echo "4";
-
                     }
                 }
             }
@@ -148,7 +145,7 @@ class PurchaseController
         return $flag;
     }
 
-    public function addPurchase($nombre, $creditnumber,$verifcod ,$expire )
+    public function addPurchase($nombre, $creditnumber, $verifcod, $expire)
     {
         if ($this->validateCreditCard($creditnumber, $expire, $verifcod, $nombre)) {
             $time = time();
@@ -198,11 +195,35 @@ class PurchaseController
 
     public function getAllPurchase()
     {
+        $cinemas = $this->cinemaDAOMSQL->getAll();
         $purchases = $this->purchaseDAOMSQL->getAll();
 
         foreach ($purchases as $purchase) {
             $purchase->setTickets($this->ticketDAOMSQL->getByPurchase($purchase->getId()));
         }
+        $getAll = 1;
+
+        require_once(VIEWS_PATH . 'listPurchase.php');
+    }
+
+    public function getByCinema($cinema = null)
+    {
+        $cinemas = $this->cinemaDAOMSQL->getAll();
+        if ($cinema == 0) {
+            $purchases = $this->purchaseDAOMSQL->getAll();
+            foreach ($purchases as $purchase) {
+                $purchase->setTickets($this->ticketDAOMSQL->getByPurchase($purchase->getId()));
+            }
+        } else {
+            $purchases = $this->purchaseDAOMSQL->getByCinema($cinema);
+            foreach ($purchases as $purchase) {
+                $purchase->setTickets($this->ticketDAOMSQL->getByCinema($purchase->getId(), $cinema));
+            }
+        }
+
+
+
+        $getAll = 1;
 
         require_once(VIEWS_PATH . 'listPurchase.php');
     }

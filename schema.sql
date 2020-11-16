@@ -194,6 +194,15 @@ BEGIN
 END;
 $$
 
+DROP PROCEDURE IF EXISTS up_room;
+DELIMITER $$
+CREATE PROCEDURE up_room(in idr int)
+comment "activa logicamente la sala"
+BEGIN
+	update rooms set isactiver=true where idRoom=idr;
+END;
+$$
+
 DROP PROCEDURE IF EXISTS delete_movieshow;
 DELIMITER $$
 CREATE PROCEDURE delete_movieshow(in idm int)
@@ -401,11 +410,29 @@ CREATE PROCEDURE validateTime(in room int , in hrinicio time, in hrfin time, in 
 comment "devuelve los movieshows q coincidan en horario y dia"
 BEGIN
 	
-	SELECT * FROM movieshows WHERE  (hrinicio between time_ and endtime) and (date_=dia) and idroom=room
+	SELECT * FROM movieshows WHERE  (time_ between hrinicio and hrfin) and (date_=dia) and idroom=room
     
     UNION   /*aca hay q seguir*/
     
-    SELECT * FROM movieshows WHERE (hrfin between time_ and endtime) and (date_=dia) and idroom=room;
+    SELECT * FROM movieshows WHERE (endtime between hrinicio and hrfin) and (date_=dia) and idroom=room;
+END;
+$$
+
+DROP PROCEDURE IF EXISTS validateTime;
+DELIMITER $$
+CREATE PROCEDURE validateTime(in room int , in hrinicio time, in hrfin time, in dia date)
+comment "devuelve los movieshows q coincidan en horario y dia"
+BEGIN
+	
+	SELECT * FROM movieshows WHERE (time_ between hrinicio and hrfin) and (date_=dia) and idroom=room
+    
+    UNION   /*aca hay q seguir*/
+    
+    SELECT * FROM movieshows WHERE (hrinicio between time_ and endtime) and (date_=dia) and idroom=room
+
+    UNION
+
+    SELECT * FROM movieshows where (hrfin between time_ and endtime) and (date_ = dia) and idroom = room
 END;
 $$
 

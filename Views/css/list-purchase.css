@@ -67,3 +67,30 @@
     margin: 5px 10px;
     font-size: 20px;
 }
+
+.content-purchase-info table{
+    width: 100%;
+}
+
+.content-purchase-info table thead{
+    width: 100%;
+}
+
+.content-purchase-info table thead tr,.content-purchase-info table tbody tr{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.content-purchase-info table thead tr th , .content-purchase-info table tbody tr td{
+    width: 15%;
+    text-align: center;
+}
+
+
+.content-purchase-info table tbody tr{
+    border-bottom: 2px solid #000;
+    margin: 10px;
+
+}
